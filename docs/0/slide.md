@@ -103,5 +103,5 @@ class: inverse, center, middle
 
 class: center, middle
 
-<img src="../img/robot-ambassador.svg" style="width: 66%"/>
+<img src="../img/logo.svg" style="width: 66%"/>
 
