@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import * as func from '~/types/func'
 import * as actions from '~/actions'
-import { Button } from 'semantic-ui-react'
+import { Container, Button } from 'semantic-ui-react'
 import './index.css'
 
-class Main extends PureComponent {
+class MainPage extends PureComponent {
   static defaultProps = {
     className: '',
   }
@@ -14,7 +14,7 @@ class Main extends PureComponent {
     const { id, className, actions } = this.props
 
     return (
-      <div id={id} className={className}>
+      <Container text id={id} className={className}>
         <Button
           primary
           onClick={e => {
@@ -24,7 +24,7 @@ class Main extends PureComponent {
         >
           do nothing!
         </Button>
-      </div>
+      </Container>
     )
   }
 }
@@ -32,4 +32,5 @@ class Main extends PureComponent {
 export default connect(
   state => state,
   dispatch => ({ actions: func.map(dispatch, actions) })
-)(Main)
+)(MainPage)
+
