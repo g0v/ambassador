@@ -1,0 +1,14 @@
+.main {
+  margin-top: 12px;
+}
+
+.comment {
+  margin-bottom: 12px;
+}
+
+.avatar {
+  border-radius: 0.3em;
+  background-color: #e0e0e0;
+  height: 2.5em !important;
+}
+
