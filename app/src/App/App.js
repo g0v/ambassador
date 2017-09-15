@@ -1,11 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
+import cx from 'classnames'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import MainPage from '~/components/MainPage'
 import AnotherPage from '~/components/AnotherPage'
 
-import './App.css';
+import styles from './App.css'
 
 class App extends PureComponent {
   static defaultProps = {
@@ -28,8 +29,8 @@ class App extends PureComponent {
     return (
       <Provider store={store}>
         <Router>
-          <div id={id} className={className}>
-            <Menu inverted>
+          <div id={id} className={cx(styles.main, className)}>
+            <Menu inverted className={styles.menu}>
               <Menu.Item
                 as={Link}
                 to="/"

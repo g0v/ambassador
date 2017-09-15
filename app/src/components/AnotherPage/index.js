@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
+import cx from 'classnames'
 import { Container } from 'semantic-ui-react'
-import './index.css'
+import styles from './index.css'
 
 class AnotherPage extends PureComponent {
   static defaultProps = {
@@ -11,7 +12,7 @@ class AnotherPage extends PureComponent {
     const { id, className } = this.props
 
     return (
-      <Container text id={id} className={className}>
+      <Container text id={id} className={cx(styles.main, className)}>
         just another page
       </Container>
     )
