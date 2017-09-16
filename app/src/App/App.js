@@ -53,15 +53,6 @@ class App extends PureComponent {
               </Menu.Item>
               <Menu.Item
                 as={Link}
-                to="/comments"
-                name="comments"
-                active={activeItem === 'comments'}
-                onClick={this.handleClick}
-              >
-                Comments
-              </Menu.Item>
-              <Menu.Item
-                as={Link}
                 to="/editor"
                 name="editor"
                 active={activeItem === 'editor'}
@@ -82,8 +73,8 @@ class App extends PureComponent {
 
             <div className={styles.container}>
               <Route exact path="/" component={MainPage} />
-              <Route path="/issues" component={IssueListPage} />
-              <Route path="/comments" component={CommentListPage} />
+              <Route exact path="/issues" component={IssueListPage} />
+              <Route path="/issues/:id" component={CommentListPage} />
               <Route path="/editor" component={EditorPage} />
             </div>
           </div>

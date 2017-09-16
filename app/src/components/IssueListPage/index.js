@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
+import { withRouter } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
 import DummyIssue from '~/components/DummyIssue'
 import { map, range } from 'ramda'
@@ -11,15 +12,25 @@ class IssueListPage extends PureComponent {
   }
 
   render() {
-    const { id, className } = this.props
+    const { id, className, history } = this.props
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>{
-        map(i => <DummyIssue key={i} className={styles.issue} />, range(0, 5))
+        map(
+          i =>
+            <DummyIssue
+              key={i} className={styles.issue}
+              onClick={e => {
+                e.preventDefault()
+                history.push(`/issues/${i}`)
+              }}
+            />,
+          range(0, 5)
+        )
       }</Container>
     )
   }
 }
 
-export default IssueListPage
+export default withRouter(IssueListPage)
 

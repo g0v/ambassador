@@ -8,10 +8,13 @@ class DummyIssue extends PureComponent {
   }
 
   render() {
-    const { id, className } = this.props
+    const { id, className, onClick } = this.props
 
     return (
-      <div id={id} className={cx(styles.main, className)}>
+      <div
+        id={id} className={cx(styles.main, className)}
+        onClick={onClick}
+      >
       </div>
     )
   }
