@@ -193,11 +193,11 @@ module.exports = {
                       },
                     },
                   ],
-                  exclude: paths.appSrc,
                 },
                 extractTextPluginOptions
               )
             ),
+            exclude: paths.appSrc,
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           {
@@ -232,11 +232,11 @@ module.exports = {
                       },
                     },
                   ],
-                  include: paths.appSrc,
                 },
                 extractTextPluginOptions
               )
             ),
+            include: paths.appSrc,
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // "file" loader makes sure assets end up in the `build` folder.
