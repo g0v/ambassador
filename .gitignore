@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# development
+start.sh
+
 # production
 /build
 

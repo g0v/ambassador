@@ -1,7 +1,18 @@
+const path = require('path')
+// express
 const express = require('express')
 const bodyParser = require('body-parser')
 const axios = require('axios')
+const webpackMiddleware = require('webpack-dev-middleware')
+// webpack
+const webpack = require('webpack')
+const configPath = path.resolve(__dirname, '../config')
+const configMode = process.env.NODE_ENV === 'production' ? 'prod' : 'dev'
+const webpackConfig = require(path.resolve(configPath, 'webpack.config.' + configMode + '.js'))
+const paths = require(path.resolve(configPath, 'paths.js'))
 
+// variables
+const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
 const host = process.env.HOST || '0'
 const port = process.env.PORT || 80
 const client_id = process.env.GH_BASIC_CLIENT_ID
@@ -9,6 +20,24 @@ const client_secret = process.env.GH_BASIC_CLIENT_SECRET
 
 const app = express()
 app
+  .use(webpackMiddleware(webpack(webpackConfig), {
+    compress: true,
+    clientLogLevel: 'none',
+    contentBase: paths.appPublic,
+    watchContentBase: true,
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true,
+    watchOptions: {
+      ignore: /node_modules/
+    },
+    https: protocol === 'https',
+    host: host,
+    overlay: false,
+    historyApiFallback: {
+      disableDotRule: true
+    },
+    stats: { colors: true }
+  }))
   .use(bodyParser.json())
   .use(function(err, req, res, next) {
     console.error(err.stack)
