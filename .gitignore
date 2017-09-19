@@ -10,7 +10,8 @@
 start.sh
 
 # production
-/build
+# prebuild for middle2
+#/build
 
 # misc
 .DS_Store

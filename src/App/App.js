@@ -3,6 +3,7 @@ import cx from 'classnames'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
+import OAuthCallbackPage from '~/components/OAuthCallbackPage'
 import MainPage from '~/components/MainPage'
 import IssueListPage from '~/components/IssueListPage'
 import CommentListPage from '~/components/CommentListPage'
@@ -76,6 +77,7 @@ class App extends PureComponent {
               <Route exact path="/issues" component={IssueListPage} />
               <Route path="/issues/:id" component={CommentListPage} />
               <Route path="/editor" component={EditorPage} />
+              <Route path="/callback" component={OAuthCallbackPage} />
             </div>
           </div>
         </Router>
