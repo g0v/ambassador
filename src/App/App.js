@@ -8,6 +8,7 @@ import MainPage from '~/components/MainPage'
 import IssueListPage from '~/components/IssueListPage'
 import CommentListPage from '~/components/CommentListPage'
 import EditorPage from '~/components/EditorPage'
+import * as actions from '~/actions'
 
 import styles from './App.css'
 
@@ -65,7 +66,7 @@ class App extends PureComponent {
                 <Menu.Item
                   name="sign-in"
                   active={activeItem === 'sign-in'}
-                  onClick={this.handleClick}
+                  onClick={() => store.dispatch(actions.auth.login)()}
                 >
                   Sign In
                 </Menu.Item>
