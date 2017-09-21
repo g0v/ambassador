@@ -1,9 +1,11 @@
+import { getUrl } from '~/types'
 import {
   LoginRequest,
   LoginSuccess,
   LoginFailure
 } from '~/types/auth'
 
+const apiOrigin = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 let _loginPromise
 let _abortLogin = () => {}
 export const login = store => async () => {
@@ -18,7 +20,7 @@ export const login = store => async () => {
     const l = global.screen.width / 2 - w / 2
     const t = global.screen.height / 2 - h / 2
     let win = global.open(
-      process.env.PROTOCOL + '://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/auth',
+      apiOrigin + '/api/auth',
       'oauth',
       `width=${w},height=${h},top=${t},left=${l},toolbar=no,location=no,directories=nostatus=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no`
     )
@@ -32,7 +34,6 @@ export const login = store => async () => {
       }
       const handleLogin = (e) => {
         if (e.data.access_token) {
-          const apiOrigin = process.env.PROTOCOL + '://' + process.env.API_HOST + ':' + process.env.API_PORT
           if (e.origin !== apiOrigin) {
             reject(new Error('origin mismatched'))
           } else {

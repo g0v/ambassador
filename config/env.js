@@ -76,9 +76,9 @@ function getClientEnvironment(publicUrl) {
         PUBLIC_URL: publicUrl,
         PROTOCOL: process.env.HTTPS === 'true' ? 'https' : 'http',
         HOST: process.env.HOST || 'localhost',
-        PORT: +process.env.PORT || 80,
+        PORT: process.env.PORT || '80',
         API_HOST: process.env.API_HOST || 'localhost',
-        API_PORT: +process.env.API_PORT || 80
+        API_PORT: process.env.API_PORT || '80'
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin
