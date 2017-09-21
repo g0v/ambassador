@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { withRouter } from 'react-router-dom'
 import queryString from 'query-string'
+import logo from '~/images/g0v.jump.l.gif'
 import styles from './index.css'
 
 class OAuthCallbackPage extends PureComponent {
@@ -25,7 +26,7 @@ class OAuthCallbackPage extends PureComponent {
 
     return (
       <div id={id} className={cx(styles.main, className)}>
-        oauth callback page
+        <img src={logo} alt="loading..." />
       </div>
     )
   }

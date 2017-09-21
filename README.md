@@ -14,3 +14,7 @@ project hub 相關成果所需的程式也會放在此專案中。
 
 [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
 
+## References
+
+* 讀取圖示 `g0v.jump.l.gif` 取自 [g0v/style-guide](https://github.com/g0v/style-guide) ，以[ MIT 授權](https://github.com/g0v/style-guide/blob/gh-pages/LICENSE)釋出。
+
