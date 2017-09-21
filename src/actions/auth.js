@@ -17,7 +17,11 @@ export const login = store => async () => {
     const h = 640
     const l = global.screen.width / 2 - w / 2
     const t = global.screen.height / 2 - h / 2
-    let win = global.open('/api/auth', 'oauth', `width=${w},height=${h},top=${t},left=${l},toolbar=no,location=no,directories=nostatus=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no`)
+    let win = global.open(
+      process.env.PROTOCOL + '://' + process.env.API_HOST + ':' + process.env.API_PORT + '/api/auth',
+      'oauth',
+      `width=${w},height=${h},top=${t},left=${l},toolbar=no,location=no,directories=nostatus=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=no`
+    )
 
     // wait for the access_token
     _loginPromise = new Promise((resolve, reject) => {
@@ -28,7 +32,8 @@ export const login = store => async () => {
       }
       const handleLogin = (e) => {
         if (e.data.access_token) {
-          if (e.origin !== global.origin) {
+          const apiOrigin = process.env.PROTOCOL + '://' + process.env.API_HOST + ':' + process.env.API_PORT
+          if (e.origin !== apiOrigin) {
             reject(new Error('origin mismatched'))
           } else {
             resolve(e.data)

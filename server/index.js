@@ -8,8 +8,8 @@ const paths = require(path.resolve(__dirname, '../config/paths.js'))
 
 // variables
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
-const host = process.env.HOST || '0'
-const port = process.env.PORT || 80
+const host = process.env.API_HOST || 'localhost'
+const port = process.env.API_PORT || 80
 const client_id = process.env.GH_BASIC_CLIENT_ID
 const client_secret = process.env.GH_BASIC_CLIENT_SECRET
 
@@ -57,6 +57,6 @@ app
   .use(express.static(paths.appBuild))
   .use(fallback('index.html', { root: paths.appBuild }))
   .listen(port, function() {
-    console.log(`Server running at http://${host}:${port}`)
+    console.log(`Server running at ${protocol}://${host}:${port}`)
   })
 

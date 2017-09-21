@@ -12,10 +12,11 @@ class OAuthCallbackPage extends PureComponent {
   componentDidMount() {
     const { location } = this.props
     const auth = queryString.parse(location.search)
+    const origin = '*'
     if (global.opener) {
-      global.opener.postMessage(auth, '*')
+      global.opener.postMessage(auth, origin)
     } else {
-      global.parent.postMessage(auth, '*')
+      global.parent.postMessage(auth, origin)
     }
   }
 
