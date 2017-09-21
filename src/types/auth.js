@@ -6,3 +6,6 @@ export const LoginSuccess = (auth) => ({ type: LOGIN_SUCCESS, auth })
 
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 export const LoginFailure = (error) => ({ type: LOGIN_FAILURE, error })
+
+export const LOGOUT = 'LOGOUT'
+export const Logout = () => ({ type: LOGOUT })

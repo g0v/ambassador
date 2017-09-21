@@ -2,7 +2,8 @@ import { getUrl } from '~/types'
 import {
   LoginRequest,
   LoginSuccess,
-  LoginFailure
+  LoginFailure,
+  Logout
 } from '~/types/auth'
 
 const apiOrigin = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
@@ -65,4 +66,9 @@ export const login = store => async () => {
 
 export const abort = store => async () => {
   _abortLogin()
+}
+
+export const logout = store => async () => {
+  const { dispatch } = store
+  dispatch(Logout())
 }

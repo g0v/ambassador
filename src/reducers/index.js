@@ -4,7 +4,8 @@ import {
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  LOGOUT
 } from '~/types/auth'
 
 export const initialState = {
@@ -51,6 +52,12 @@ export default (state = initialState, action) => {
           ...state.ui,
           login: false
         }
+      }
+    }
+    case LOGOUT: {
+      return {
+        ...state,
+        auth: undefined
       }
     }
 

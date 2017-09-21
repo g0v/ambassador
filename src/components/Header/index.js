@@ -52,6 +52,7 @@ class Header extends PureComponent {
               </Menu.Item>
             : <Menu.Item
                 name="sign-out"
+                onClick={() => actions.auth.logout()}
               >
                 Sign Out
               </Menu.Item>
