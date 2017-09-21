@@ -31,7 +31,7 @@ class MainPage extends PureComponent {
 }
 
 export default connect(
-  state => state,
+  state => ({}),
   dispatch => ({ actions: func.map(dispatch, actions) })
 )(MainPage)
 

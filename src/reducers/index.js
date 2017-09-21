@@ -7,12 +7,21 @@ import {
   LOGIN_FAILURE,
   LOGOUT
 } from '~/types/auth'
+import {
+  PROFILE_REQUEST,
+  PROFILE_SUCCESS,
+  PROFILE_FAILURE
+} from '~/types/github'
 
 export const initialState = {
   ui: {
-    login: false
+    login: false,
+    profile: false
   },
-  auth: undefined
+  auth: undefined,
+  github: {
+    profile: undefined
+  }
 }
 
 export default (state = initialState, action) => {
@@ -33,8 +42,6 @@ export default (state = initialState, action) => {
     }
     case LOGIN_SUCCESS: {
       const { auth } = action
-
-      console.log('auth', auth)
 
       return {
         ...state,
@@ -57,7 +64,46 @@ export default (state = initialState, action) => {
     case LOGOUT: {
       return {
         ...state,
-        auth: undefined
+        auth: undefined,
+        github: {
+          ...state.github,
+          profile: undefined
+        }
+      }
+    }
+
+    case PROFILE_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          profile: true
+        }
+      }
+    }
+    case PROFILE_SUCCESS: {
+      const { profile } = action
+      console.log(profile)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          profile: false
+        },
+        github: {
+          ...state.github,
+          profile
+        }
+      }
+    }
+    case PROFILE_FAILURE: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          profile: false
+        }
       }
     }
 
