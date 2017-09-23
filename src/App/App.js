@@ -20,7 +20,7 @@ class App extends PureComponent {
         <Router>
           <div id={id} className={cx(styles.main, className)}>
             <Route exact path="/callback" component={OAuthCallbackPage} />
-            <Route exact path="/" component={Root} />
+            <Route path="/" component={Root} />
           </div>
         </Router>
       </Provider>
