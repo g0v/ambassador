@@ -52,6 +52,10 @@ class Header extends PureComponent {
                 onClick={async (e) => {
                   await actions.auth.login()
                   await actions.github.getProfile()
+                  const isMember = await actions.github.isMember('g0v')
+                  if (isMember) {
+                    await actions.github.getRepos('g0v')
+                  }
                 }}
               >
                 Sign In
