@@ -28,3 +28,32 @@ export const RepoListFailure = (error) => ({ type: REPO_LIST_FAILURE, error })
 export const getLoginName = (state) => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
 }
+
+export const isMember = (state) => {
+  return (state && state.github && state.github.isMember) || false
+}
+
+export const isRepoListLoading = (state) => {
+  return state && state.ui && state.ui.repos
+}
+
+export const getRepoList = (state) => {
+  return (state && state.github && state.github.repos) || []
+}
+
+export const dummyRepoList = [{
+  id: 0,
+  name: 'twbudget',
+  full_name: 'g0v/twbudget',
+  description: 'twbudget hacks for yahoo hackday tw 2012'
+}, {
+  id: 1,
+  name: 'moedict-webkit',
+  full_name: 'g0v/moedict-webkit',
+  description: '萌典網站'
+}, {
+  id: 2,
+  name: 'ly.g0v.tw',
+  full_name: 'g0v/ly.g0v.tw',
+  description: 'ly.g0v.tw - Congress Matters / 國會大代誌'
+}]

@@ -24,25 +24,16 @@ class Header extends PureComponent {
           as={Link}
           to="/"
           name="home"
-          active={location.pathname === '/'}
         >
           YA0H
         </Menu.Item>
         <Menu.Item
           as={Link}
-          to="/issues"
+          to="/repos"
           name="issues"
-          active={location.pathname === '/issues'}
+          active={location.pathname === '/repos'}
         >
-          Issues
-        </Menu.Item>
-        <Menu.Item
-          as={Link}
-          to="/editor"
-          name="editor"
-          active={location.pathname === '/editor'}
-        >
-          Editor
+          Repositories
         </Menu.Item>
         <Menu.Menu position="right">{
           unauthed
