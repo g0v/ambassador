@@ -1,3 +1,7 @@
+/* @flow */
+
+import type { Action } from '~/types'
+
 import {
   NOP
 } from '~/types'
@@ -19,7 +23,21 @@ import {
   REPO_LIST_FAILURE
 } from '~/types/github'
 
-export const initialState = {
+export type State = {
+  ui: {
+    login: boolean,
+    checkMember: boolean,
+    repos: boolean
+  },
+  auth: ?any,
+  github: {
+    profile: ?any,
+    isMember: ?boolean,
+    repos: any[]
+  }
+}
+
+export const initialState: State = {
   ui: {
     login: false,
     checkMember: false,
@@ -33,7 +51,7 @@ export const initialState = {
   }
 }
 
-export default (state = initialState, action) => {
+export default (state: State = initialState, action: Action): State => {
   switch(action.type) {
     case NOP: {
       console.log('no-op')

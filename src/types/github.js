@@ -1,47 +1,61 @@
+/* @flow */
+
+import type { State } from '~/reducers'
+
+export type ProfileRequestAction = { type: 'PROFILE_REQUEST' }
 export const PROFILE_REQUEST = 'PROFILE_REQUEST'
-export const ProfileRequest = () => ({ type: PROFILE_REQUEST })
+export const ProfileRequest = (): ProfileRequestAction => ({ type: PROFILE_REQUEST })
 
+export type ProfileSuccessAction = { type: 'PROFILE_SUCCESS', profile: any }
 export const PROFILE_SUCCESS = 'PROFILE_SUCCESS'
-export const ProfileSuccess = (profile) => ({ type: PROFILE_SUCCESS, profile })
+export const ProfileSuccess = (profile: any): ProfileSuccessAction => ({ type: PROFILE_SUCCESS, profile })
 
+export type ProfileFailureAction = { type: 'PROFILE_FAILURE', error: Error }
 export const PROFILE_FAILURE = 'PROFILE_FAILURE'
-export const ProfileFailure = (error) => ({ type: PROFILE_FAILURE })
+export const ProfileFailure = (error: Error): ProfileFailureAction => ({ type: PROFILE_FAILURE, error })
 
+export type MemberRequestAction = { type: 'MEMBER_REQUEST' }
 export const MEMBER_REQUEST = 'MEMBER_REQUEST'
-export const MemberRequest = () => ({ type: MEMBER_REQUEST })
+export const MemberRequest = (): MemberRequestAction => ({ type: MEMBER_REQUEST })
 
+export type MemberSuccessAction = { type: 'MEMBER_SUCCESS' }
 export const MEMBER_SUCCESS = 'MEMBER_SUCCESS'
-export const MemberSuccess = () => ({ type: MEMBER_SUCCESS })
+export const MemberSuccess = (): MemberSuccessAction => ({ type: MEMBER_SUCCESS })
 
-export const MEMBER_FAILURE = 'ORGANIZATION_FAILURE'
-export const MemberFailure = (error) => ({ type: MEMBER_FAILURE, error })
+export type MemberFailureAction = { type: 'MEMBER_FAILURE', error: Error }
+export const MEMBER_FAILURE = 'MEMBER_FAILURE'
+export const MemberFailure = (error: Error): MemberFailureAction => ({ type: MEMBER_FAILURE, error })
 
+export type RepoListRequestAction = { type: 'REPO_LIST_REQUEST' }
 export const REPO_LIST_REQUEST = 'REPO_LIST_REQUEST'
-export const RepoListRequest = () => ({ type: REPO_LIST_REQUEST })
+export const RepoListRequest = (): RepoListRequestAction => ({ type: REPO_LIST_REQUEST })
 
+// TODO: repos: Repo[]
+export type RepoListSuccessAction = { type: 'REPO_LIST_SUCCESS', repos: any[] }
 export const REPO_LIST_SUCCESS = 'REPO_LIST_SUCCESS'
-export const RepoListSuccess = (repos) => ({ type: REPO_LIST_SUCCESS, repos })
+export const RepoListSuccess = (repos: any[]): RepoListSuccessAction => ({ type: REPO_LIST_SUCCESS, repos })
 
+export type RepoListFailureAction = { type: 'REPO_LIST_FAILURE', error: Error }
 export const REPO_LIST_FAILURE = 'REPO_LIST_FAILURE'
-export const RepoListFailure = (error) => ({ type: REPO_LIST_FAILURE, error })
+export const RepoListFailure = (error: Error): RepoListFailureAction => ({ type: REPO_LIST_FAILURE, error })
 
-export const getLoginName = (state) => {
+export const getLoginName = (state: State): string => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
 }
 
-export const isMember = (state) => {
+export const isMember = (state: State): boolean => {
   return (state && state.github && state.github.isMember) || false
 }
 
-export const isRepoListLoading = (state) => {
+export const isRepoListLoading = (state: State): boolean => {
   return state && state.ui && state.ui.repos
 }
 
-export const getRepoList = (state) => {
+export const getRepoList = (state: State): any[] => {
   return (state && state.github && state.github.repos) || []
 }
 
-export const dummyRepoList = [{
+export const dummyRepoList: any[] = [{
   id: 0,
   name: 'twbudget',
   full_name: 'g0v/twbudget',
