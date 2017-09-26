@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import * as func from '~/types/func'
 import * as actions from '~/actions'
+import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import { Container, Item, Dimmer, Segment, Header } from 'semantic-ui-react'
@@ -58,6 +58,6 @@ export default compose(
 
       return { isLoggedIn, isMember, isLoading, repos }
     },
-    dispatch => ({ actions: func.map(dispatch, actions) })
+    mapDispatchToProps(actions)
   )
 )(RepoListPage)

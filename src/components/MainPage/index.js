@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
-import * as func from '~/types/func'
 import * as actions from '~/actions'
+import { mapDispatchToProps } from '~/types/action'
 import { Container, Button } from 'semantic-ui-react'
 import styles from './index.css'
 
@@ -32,6 +32,6 @@ class MainPage extends PureComponent {
 
 export default connect(
   state => ({}),
-  dispatch => ({ actions: func.map(dispatch, actions) })
+  mapDispatchToProps(actions)
 )(MainPage)
 

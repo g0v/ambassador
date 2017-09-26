@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import * as func from '~/types/func'
 import * as actions from '~/actions'
+import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import { Menu } from 'semantic-ui-react'
@@ -73,6 +73,6 @@ export default compose(
       const loginName = G.getLoginName(state)
       return { unauthed, isLoggingIn, loginName }
     },
-    dispatch => ({ actions: func.map(dispatch, actions) })
+    mapDispatchToProps(actions)
   )
 )(Header)

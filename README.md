@@ -8,6 +8,23 @@ project hub 相關成果所需的程式也會放在此專案中。
 
 [YA0H]: https://grants.g0v.tw/projects/5969ed35d60a0d001ed1f7f6
 
+## 開發
+
+先以 `npm install` 或 `yarn` 安裝套件。
+
+### 測試
+
+```
+npm run test
+```
+
+### 型別檢查
+
+```
+flow-typed install
+npm run flow
+```
+
 ## License
 
 [CC0][CC0]

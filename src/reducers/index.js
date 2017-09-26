@@ -1,10 +1,10 @@
 /* @flow */
 
-import type { Action } from '~/types'
+import type { PlainAction } from '~/types/action'
 
 import {
   NOP
-} from '~/types'
+} from '~/types/action'
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -51,7 +51,7 @@ export const initialState: State = {
   }
 }
 
-export default (state: State = initialState, action: Action): State => {
+export default (state: State = initialState, action: PlainAction): State => {
   switch(action.type) {
     case NOP: {
       console.log('no-op')
