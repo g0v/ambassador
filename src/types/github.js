@@ -2,6 +2,7 @@
 
 import type { State } from '~/reducers'
 
+// data
 export type ProfileRequestAction = { type: 'PROFILE_REQUEST' }
 export const PROFILE_REQUEST = 'PROFILE_REQUEST'
 export const ProfileRequest = (): ProfileRequestAction => ({ type: PROFILE_REQUEST })
@@ -39,6 +40,20 @@ export type RepoListFailureAction = { type: 'REPO_LIST_FAILURE', error: Error }
 export const REPO_LIST_FAILURE = 'REPO_LIST_FAILURE'
 export const RepoListFailure = (error: Error): RepoListFailureAction => ({ type: REPO_LIST_FAILURE, error })
 
+export type IssueListRequestAction = { type: 'ISSUE_LIST_REQUEST' }
+export const ISSUE_LIST_REQUEST = 'ISSUE_LIST_REQUEST'
+export const IssueListRequest = (): IssueListRequestAction => ({ type: ISSUE_LIST_REQUEST })
+
+// TODO: issues: Issue[]
+export type IssueListSuccessAction = { type: 'ISSUE_LIST_SUCCESS', issues: any[] }
+export const ISSUE_LIST_SUCCESS = 'ISSUE_LIST_SUCCESS'
+export const IssueListSuccess = (issues: any[]): IssueListSuccessAction => ({ type: ISSUE_LIST_SUCCESS, issues })
+
+export type IssueListFailureAction = { type: 'ISSUE_LIST_FAILURE', error: Error }
+export const ISSUE_LIST_FAILURE = 'ISSUE_LIST_FAILURE'
+export const IssueListFailure = (error: Error): IssueListFailureAction => ({ type: ISSUE_LIST_FAILURE, error })
+
+// functions
 export const getLoginName = (state: State): string => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
 }

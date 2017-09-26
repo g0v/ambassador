@@ -17,7 +17,7 @@ class RepoListPage extends PureComponent {
   }
 
   render() {
-    const { id, className, isLoggedIn, isMember, isLoading, repos } = this.props
+    const { id, className, actions, isLoggedIn, isMember, isLoading, repos } = this.props
     const dimmed = (!isLoggedIn || !isMember) && !isLoading
 
     // TODO: you don't have to be a member to browse g0v repos
@@ -35,7 +35,17 @@ class RepoListPage extends PureComponent {
 
         <Container text id={id} className={cx(styles.main, className)}>
           <Item.Group divided>{
-            map(data => <RepoItem key={data.id} data={data} />, repos)
+            map(
+              data =>
+                <RepoItem
+                  key={data.id}
+                  data={data}
+                  onClick={async e => {
+                    await actions.github.getIssues('g0v', data.name)
+                  }}
+                />,
+              repos
+            )
           }</Item.Group>
         </Container>
       </Dimmer.Dimmable>

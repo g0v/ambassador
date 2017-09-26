@@ -1,3 +1,7 @@
+/* @flow */
+
+import type { RawAction } from '~/types/action'
+
 import { getUrl } from '~/types'
 import {
   LoginRequest,
@@ -6,10 +10,11 @@ import {
   Logout
 } from '~/types/auth'
 
+// TODO: RawAction<[], Auth>
 const apiOrigin = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 let _loginPromise
 let _abortLogin = () => {}
-export const login = store => async () => {
+export const login: RawAction<[], any> = store => async () => {
   const { dispatch} = store
 
   dispatch(LoginRequest())
@@ -44,7 +49,7 @@ export const login = store => async () => {
         }
       }
       cleanup = () => {
-        win.close()
+        win && win.close()
         win = undefined
         _abortLogin = () => {}
         _loginPromise = undefined
@@ -57,6 +62,7 @@ export const login = store => async () => {
   try {
     const auth = await _loginPromise
     dispatch(LoginSuccess(auth))
+
     return auth
   } catch (error) {
     dispatch(LoginFailure(error))
@@ -64,11 +70,11 @@ export const login = store => async () => {
   }
 }
 
-export const abort = store => async () => {
+export const abort: RawAction<[], void> = store => async () => {
   _abortLogin()
 }
 
-export const logout = store => async () => {
+export const logout: RawAction<[], void> = store => async () => {
   const { dispatch } = store
   dispatch(Logout())
 }

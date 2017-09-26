@@ -20,20 +20,25 @@ import {
   MEMBER_FAILURE,
   REPO_LIST_REQUEST,
   REPO_LIST_SUCCESS,
-  REPO_LIST_FAILURE
+  REPO_LIST_FAILURE,
+  ISSUE_LIST_REQUEST,
+  ISSUE_LIST_SUCCESS,
+  ISSUE_LIST_FAILURE
 } from '~/types/github'
 
 export type State = {
   ui: {
     login: boolean,
     checkMember: boolean,
-    repos: boolean
+    repos: boolean,
+    issues: boolean
   },
   auth: ?any,
   github: {
     profile: ?any,
     isMember: ?boolean,
-    repos: any[]
+    repos: any[],
+    issues: any[]
   }
 }
 
@@ -41,13 +46,15 @@ export const initialState: State = {
   ui: {
     login: false,
     checkMember: false,
-    repos: false
+    repos: false,
+    issues: false
   },
   auth: undefined,
   github: {
     profile: undefined,
     isMember: undefined,
-    repos: []
+    repos: [],
+    issues: []
   }
 }
 
@@ -200,6 +207,41 @@ export default (state: State = initialState, action: PlainAction): State => {
         ui: {
           ...state.ui,
           repos: false
+        }
+      }
+    }
+
+    case ISSUE_LIST_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          issues: true
+        }
+      }
+    }
+    case ISSUE_LIST_SUCCESS: {
+      const { issues } = action
+      console.log('issues', issues)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          issues: false
+        },
+        github: {
+          ...state.github,
+          issues
+        }
+      }
+    }
+    case ISSUE_LIST_FAILURE: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          issues: false
         }
       }
     }

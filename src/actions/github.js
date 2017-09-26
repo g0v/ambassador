@@ -1,3 +1,7 @@
+/* @flow */
+
+import type { RawAction } from '~/types/action'
+
 import GitHub from 'github-api'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
@@ -10,10 +14,14 @@ import {
   MemberFailure,
   RepoListRequest,
   RepoListSuccess,
-  RepoListFailure
+  RepoListFailure,
+  IssueListRequest,
+  IssueListSuccess,
+  IssueListFailure
 } from '~/types/github'
 
-export const getProfile = store => async () => {
+// TODO: RawAction<[], Profile>
+export const getProfile: RawAction<[], any> = store => async () => {
   const { dispatch, getState } = store
 
   const token = A.getAccessToken(getState())
@@ -36,7 +44,7 @@ export const getProfile = store => async () => {
   }
 }
 
-export const isMember = store => async (name) => {
+export const isMember: RawAction<[string], boolean> = store => async (name) => {
   const { dispatch, getState } = store
   const state = getState()
 
@@ -60,7 +68,8 @@ export const isMember = store => async (name) => {
   }
 }
 
-export const getRepos = store => async (name) => {
+// TODO: RawAction<[string], Repo[]>
+export const getRepos: RawAction<[string], any[]> = store => async (name) => {
   const { dispatch, getState } = store
   const state = getState()
 
@@ -76,10 +85,33 @@ export const getRepos = store => async (name) => {
     const { data: repos } = await org.getRepos()
     dispatch(RepoListSuccess(repos))
 
-    return true
+    return repos
   } catch (error) {
     dispatch(RepoListFailure(error))
+    throw error
+  }
+}
 
-    return false
+// TODO: RawAction<[string, string], Issue[]>
+export const getIssues: RawAction<[string, string], any[]> = store => async (user, repo) => {
+  const { dispatch, getState } = store
+  const state = getState()
+
+  const token = A.getAccessToken(state)
+  if (!token) {
+    throw new Error('access token not found')
+  }
+
+  dispatch(IssueListRequest())
+  try {
+    const gh = new GitHub({ token })
+    const is = gh.getIssues(user, repo)
+    const { data: issues } = await is.listIssues({})
+    dispatch(IssueListSuccess(issues))
+
+    return issues
+  } catch (error) {
+    dispatch(IssueListFailure(error))
+    throw error
   }
 }

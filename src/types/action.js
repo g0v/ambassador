@@ -17,7 +17,10 @@ import type {
   MemberFailureAction,
   RepoListRequestAction,
   RepoListSuccessAction,
-  RepoListFailureAction
+  RepoListFailureAction,
+  IssueListRequestAction,
+  IssueListSuccessAction,
+  IssueListFailureAction
 } from './github'
 import { map as _map } from 'ramda'
 
@@ -32,11 +35,12 @@ export type PlainAction
   | ProfileRequestAction | ProfileSuccessAction | ProfileFailureAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
+  | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
 
-export type Action<A, B> = A => Promise<B>
-export type RawAction<A, B> = Store => Action<A, B>
-export type ActionMap = Action<any, any> | { [key: string]: ActionMap }
-export type RawActionMap = RawAction<any, any> | { [key: string]: RawActionMap }
+export type Action<As: $ReadOnlyArray<mixed>, B> = (...args: As) => Promise<B>
+export type RawAction<As: $ReadOnlyArray<mixed>, B> = Store => Action<As, B>
+export type ActionMap = Action<$ReadOnlyArray<mixed>, any> | { [key: string]: ActionMap }
+export type RawActionMap = RawAction<$ReadOnlyArray<mixed>, any> | { [key: string]: RawActionMap }
 
 const map = (f: RawActionMap => ActionMap, o: RawActionMap): ActionMap =>
   _map(

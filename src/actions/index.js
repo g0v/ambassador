@@ -9,7 +9,7 @@ import * as auth from './auth'
 import * as github from './github'
 export { auth, github }
 
-export const nop: RawAction<void, void> = store => async () => {
+export const nop: RawAction<[], void> = store => async () => {
   const { dispatch } = store
   dispatch(Nop())
 }
