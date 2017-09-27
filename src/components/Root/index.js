@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Header from '~/components/Header'
 import MainPage from '~/components/MainPage'
 import RepoListPage from '~/components/RepoListPage'
+import IssueListPage from '~/components/IssueListPage'
 
 import styles from './index.css'
 
@@ -21,6 +22,7 @@ class Root extends PureComponent {
         <div className={styles.container}>
           <Route exact path="/" component={MainPage} />
           <Route exact path="/repos" component={RepoListPage} />
+          <Route exact path="/repos/:repo" component={IssueListPage} />
         </div>
       </div>
     );

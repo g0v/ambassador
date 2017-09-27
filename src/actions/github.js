@@ -107,7 +107,7 @@ export const getIssues: RawAction<[string, string], any[]> = store => async (use
     const gh = new GitHub({ token })
     const is = gh.getIssues(user, repo)
     const { data: issues } = await is.listIssues({})
-    dispatch(IssueListSuccess(issues))
+    dispatch(IssueListSuccess(repo, issues))
 
     return issues
   } catch (error) {

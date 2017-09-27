@@ -38,7 +38,7 @@ export type State = {
     profile: ?any,
     isMember: ?boolean,
     repos: any[],
-    issues: any[]
+    issues: { [key: string]: any[] }
   }
 }
 
@@ -54,7 +54,7 @@ export const initialState: State = {
     profile: undefined,
     isMember: undefined,
     repos: [],
-    issues: []
+    issues: {}
   }
 }
 
@@ -221,8 +221,8 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case ISSUE_LIST_SUCCESS: {
-      const { issues } = action
-      console.log('issues', issues)
+      const { repo } = action
+      const issues = { ...state.github.issues, [repo]: action.issues }
 
       return {
         ...state,
