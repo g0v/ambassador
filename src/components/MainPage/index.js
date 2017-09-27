@@ -3,7 +3,7 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import { Container, Button } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import styles from './index.css'
 
 class MainPage extends PureComponent {
@@ -16,15 +16,6 @@ class MainPage extends PureComponent {
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
-        <Button
-          primary
-          onClick={e => {
-            e.preventDefault()
-            actions.nop()
-          }}
-        >
-          do nothing!
-        </Button>
       </Container>
     )
   }

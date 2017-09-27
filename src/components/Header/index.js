@@ -6,8 +6,11 @@ import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
-import { Menu } from 'semantic-ui-react'
+import * as L from '~/types/logbot'
+import { Menu, Icon } from 'semantic-ui-react'
+import CalendarModal from '~/components/CalendarModal'
 import { compose } from 'ramda'
+import moment from 'moment'
 import styles from './index.css'
 
 class Header extends PureComponent {
@@ -16,17 +19,26 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { id, className, actions, location, unauthed, isLoggingIn, loginName } = this.props
+    const { id, className, actions, location, unauthed, isLoggingIn, loginName, date } = this.props
 
     return (
       <Menu id={id} className={cx(styles.main, className)} inverted fixed="top">
-        <Menu.Item
-          as={Link}
-          to="/"
-          name="home"
-        >
-          YA0H
-        </Menu.Item>
+        <Menu.Item>YA0H</Menu.Item>
+        <CalendarModal
+          trigger={
+            <Menu.Item
+              as={Link}
+              to="/"
+              name="logbot"
+              active={location.pathname === '/'}
+            >
+              <Icon name="calendar" />
+              Logbot
+            </Menu.Item>
+          }
+          date={date}
+          onSelect={date => actions.logbot.setDate(moment(date).format(L.DATE_FORMAT))}
+        />
         <Menu.Item
           as={Link}
           to="/repos"
@@ -67,7 +79,9 @@ export default compose(
       const unauthed = !A.getAccessToken(state)
       const isLoggingIn = A.isLoggingIn(state)
       const loginName = G.getLoginName(state)
-      return { unauthed, isLoggingIn, loginName }
+      const date = L.getDate(state)
+
+      return { unauthed, isLoggingIn, loginName, date }
     },
     mapDispatchToProps(actions)
   )

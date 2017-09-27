@@ -3,9 +3,6 @@
 import type { PlainAction } from '~/types/action'
 
 import {
-  NOP
-} from '~/types/action'
-import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -25,6 +22,11 @@ import {
   ISSUE_LIST_SUCCESS,
   ISSUE_LIST_FAILURE
 } from '~/types/github'
+import {
+  DATE_FORMAT,
+  DATE_CHANGE
+} from '~/types/logbot'
+import moment from 'moment'
 
 export type State = {
   ui: {
@@ -39,6 +41,9 @@ export type State = {
     isMember: ?boolean,
     repos: any[],
     issues: { [key: string]: any[] }
+  },
+  logbot: {
+    date: string
   }
 }
 
@@ -55,16 +60,14 @@ export const initialState: State = {
     isMember: undefined,
     repos: [],
     issues: {}
+  },
+  logbot: {
+    date: moment().format(DATE_FORMAT)
   }
 }
 
 export default (state: State = initialState, action: PlainAction): State => {
   switch(action.type) {
-    case NOP: {
-      console.log('no-op')
-      return state
-    }
-
     case LOGIN_REQUEST: {
       return {
         ...state,
@@ -242,6 +245,18 @@ export default (state: State = initialState, action: PlainAction): State => {
         ui: {
           ...state.ui,
           issues: false
+        }
+      }
+    }
+
+    case DATE_CHANGE: {
+      const { date } = action
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          date
         }
       }
     }

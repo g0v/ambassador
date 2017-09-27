@@ -3,7 +3,7 @@ import cx from 'classnames'
 import styles from './index.css'
 
 class EditorPage extends PureComponent {
-  static defalutProps = {
+  static defaultProps = {
     className: '',
   }
 

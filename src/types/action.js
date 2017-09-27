@@ -22,20 +22,19 @@ import type {
   IssueListSuccessAction,
   IssueListFailureAction
 } from './github'
+import type {
+  DateChangeAction
+} from './logbot'
 import { map as _map } from 'ramda'
 
-export type NopAction = { type: 'NOP' }
-export const NOP = 'NOP'
-export const Nop = (): NopAction => ({ type: NOP })
-
 export type PlainAction
-  = NopAction
-  | LoginRequestAction | LoginSuccessAction | LoginFailureAction
+  = LoginRequestAction | LoginSuccessAction | LoginFailureAction
   | LogoutAction
   | ProfileRequestAction | ProfileSuccessAction | ProfileFailureAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
+  | DateChangeAction
 
 export type Action<As: $ReadOnlyArray<mixed>, B> = (...args: As) => Promise<B>
 export type RawAction<As: $ReadOnlyArray<mixed>, B> = Store => Action<As, B>
