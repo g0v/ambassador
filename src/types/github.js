@@ -45,7 +45,7 @@ export const ISSUE_LIST_REQUEST = 'ISSUE_LIST_REQUEST'
 export const IssueListRequest = (): IssueListRequestAction => ({ type: ISSUE_LIST_REQUEST })
 
 // TODO: issues: Issue[]
-export type IssueListSuccessAction = { type: 'ISSUE_LIST_SUCCESS', issues: any[] }
+export type IssueListSuccessAction = { type: 'ISSUE_LIST_SUCCESS', repo: string, issues: any[] }
 export const ISSUE_LIST_SUCCESS = 'ISSUE_LIST_SUCCESS'
 export const IssueListSuccess = (repo: string, issues: any[]): IssueListSuccessAction => ({ type: ISSUE_LIST_SUCCESS, repo, issues })
 
@@ -87,6 +87,6 @@ export const dummyRepoList: any[] = [{
   description: 'ly.g0v.tw - Congress Matters / 國會大代誌'
 }]
 
-export const getIssueMap = (state: State): any[] => {
+export const getIssueMap = (state: State): any => {
   return (state && state.github && state.github.issues) || {}
 }

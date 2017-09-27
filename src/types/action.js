@@ -1,7 +1,6 @@
 /* @flow */
 
-import type { Dispatch } from 'redux'
-import type { Store } from '~/store'
+import type { MiddlewareStore } from '~/store/app'
 import type {
   LoginRequestAction,
   LoginSuccessAction,
@@ -37,7 +36,7 @@ export type PlainAction
   | DateChangeAction
 
 export type Action<As: $ReadOnlyArray<mixed>, B> = (...args: As) => Promise<B>
-export type RawAction<As: $ReadOnlyArray<mixed>, B> = Store => Action<As, B>
+export type RawAction<As: $ReadOnlyArray<mixed>, B> = MiddlewareStore<As, B> => Action<As, B>
 export type ActionMap = Action<$ReadOnlyArray<mixed>, any> | { [key: string]: ActionMap }
 export type RawActionMap = RawAction<$ReadOnlyArray<mixed>, any> | { [key: string]: RawActionMap }
 
@@ -52,5 +51,5 @@ const map = (f: RawActionMap => ActionMap, o: RawActionMap): ActionMap =>
     o
   )
 
-export const mapDispatchToProps: (RawActionMap => Dispatch => ActionMap) =
+export const mapDispatchToProps: (RawActionMap => (RawActionMap => ActionMap) => ActionMap) =
   actions => dispatch => ({ actions: map(dispatch, actions) })
