@@ -1,19 +1,21 @@
 /* @flow */
 
-import type { Dispatch as ReduxDispatch, MiddlewareAPI, Middleware } from 'redux'
+import type { DispatchAPI, MiddlewareAPI, Middleware } from 'redux'
 import type { PlainAction, Action, RawAction } from '~/types/action'
 import type { State } from '~/reducers'
 
-export type Dispatch<A, B>
-  = ReduxDispatch<PlainAction>
-  | (RawAction<A, B> => Action<A, B>)
+// XXX: unable to inference function types in a union type:
+// https://github.com/facebook/flow/issues/1948
+type InjectStore<A, B> = RawAction<A, B> => Action<A, B>
+export type Dispatch
+  = DispatchAPI<PlainAction>
+  | InjectStore<*, *>
 
-export type MiddlewareStore<A, B> = MiddlewareAPI<State, PlainAction, Dispatch<A, B>>
+export type StoreAPI = MiddlewareAPI<State, PlainAction, Dispatch>
 
-//export type App<A, B> = Middleware<State, any, Dispatch<A, B>>
-export type App<A, B> = MiddlewareStore<A, B> => Dispatch<A, B> => Dispatch<A, B>
-
-const app: App<*, *> = store => next => action =>
+// $FlowFixMe: PlainAction is not a function type and RawAction is a function type
+export type App = Middleware<State, PlainAction, Dispatch>
+const app: App = store => next => action =>
   typeof action === 'function'
     ? action(store)
     : next(action)

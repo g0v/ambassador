@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { MiddlewareStore } from '~/store/app'
+import type { StoreAPI } from '~/store/app'
 import type {
   LoginRequestAction,
   LoginSuccessAction,
@@ -35,10 +35,10 @@ export type PlainAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | DateChangeAction
 
-export type Action<As: $ReadOnlyArray<mixed>, B> = (...args: As) => Promise<B>
-export type RawAction<As: $ReadOnlyArray<mixed>, B> = MiddlewareStore<As, B> => Action<As, B>
-export type ActionMap = Action<$ReadOnlyArray<mixed>, any> | { [key: string]: ActionMap }
-export type RawActionMap = RawAction<$ReadOnlyArray<mixed>, any> | { [key: string]: RawActionMap }
+export type Action<As, B> = (...args: As) => Promise<B>
+export type RawAction<As, B> = StoreAPI => Action<As, B>
+export type ActionMap = Action<*, *> | { [key: string]: ActionMap }
+export type RawActionMap = RawAction<*, *> | { [key: string]: RawActionMap }
 
 const map = (f: RawActionMap => ActionMap, o: RawActionMap): ActionMap =>
   _map(

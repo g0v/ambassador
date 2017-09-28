@@ -9,7 +9,7 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import app from './app'
 import reducer from '~/reducers'
 
-export type Store = ReduxStore<State, PlainAction, Dispatch<any, any>>
+export type Store = ReduxStore<State, PlainAction, Dispatch>
 
 const configureStore = (initialStore: State): Store => {
   const middlewares = [app]
