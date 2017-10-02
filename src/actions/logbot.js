@@ -1,10 +1,19 @@
 /* @flow */
 
 import type { RawAction } from '~/types/action'
+import type { Log, LogContent } from '~/types/logbot'
 
+import { getUrl } from '~/types'
 import {
-  DateChange
+  DateChange,
+  LogPush,
+  LogRequest,
+  LogSuccess,
+  LogFailure,
+  LogUpdate,
+  getLogContents
 } from '~/types/logbot'
+import axios from 'axios'
 
 export const setDate: RawAction<[string], string> = store => async (date) => {
   const { dispatch } = store
@@ -12,4 +21,52 @@ export const setDate: RawAction<[string], string> = store => async (date) => {
   dispatch(DateChange(date))
 
   return date
+}
+
+export const pushLog: RawAction<[string, number], Log> = store => async (date, index) => {
+  const { dispatch } = store
+
+  dispatch(LogPush(date, index))
+
+  return { date, index }
+}
+
+export const getLogs: RawAction<[string], LogContent[]> = store => async (date) => {
+  const { dispatch, getState } = store
+  const state = getState()
+  const logs = getLogContents(state, date)
+
+  if (logs !== undefined) {
+    return logs
+  }
+
+  dispatch(LogRequest(date))
+  try {
+    const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
+    const { data: logs } = await axios.get(`${apiUrl}/api/logbot/g0v.tw/${date}`)
+    dispatch(LogSuccess(date, logs))
+
+    return logs
+  } catch (error) {
+    dispatch(LogFailure(date, error))
+    throw error
+  }
+}
+
+export const updateLog: RawAction<[string, number, LogContent], Log> = store => async (date, index, log) => {
+  const { dispatch } = store
+
+  dispatch(LogUpdate(date, index, log))
+
+  return { date, index, ...log }
+}
+
+export const storeLog: RawAction<[string, number], Log> = store => async (date, index) => {
+  const { dispatch } = store
+
+  await dispatch(pushLog)(date, index)
+  const logs = await dispatch(getLogs)(date)
+  const log = await dispatch(updateLog)(date, index, logs[index])
+
+  return log
 }

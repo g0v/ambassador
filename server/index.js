@@ -1,10 +1,35 @@
 const path = require('path')
+const winston = require('winston')
+winston.level = 'silly'
 // express
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const fallback = require('express-history-api-fallback')
 const axios = require('axios')
+// database
+const { Pool } = require('pg')
+const db = require('./database')
+// config
 const paths = require(path.resolve(__dirname, '../config/paths.js'))
+
+// service status
+const status = {
+  database: false
+}
+
+const connectionString = process.env.DATABASE_URL || ''
+const pool = new Pool({ connectionString })
+db.test(pool, function(err, res) {
+  if (err) return winston.error(err)
+  winston.debug(res.rows)
+  winston.verbose('Database connected')
+  db.prepareTables(pool, function(err, res) {
+    if (err) return winston.error(err)
+    winston.verbose('Tables are ready')
+    status.database = true
+  })
+})
 
 // variables
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
@@ -15,9 +40,10 @@ const client_secret = process.env.GH_BASIC_CLIENT_SECRET
 
 const app = express()
 app
+  .use(cors())
   .use(bodyParser.json())
   .use(function(err, req, res, next) {
-    console.error(err.stack)
+    winston.error(err.stack)
     res.status(500)
   })
   .get('/api/auth', function(req, res) {
@@ -45,7 +71,7 @@ app
     })
       .then(function(result) {
         if (result.data.error) {
-          console.error(result.data)
+          winston.error(result.data)
           throw new Error(result.data.error)
         }
 
@@ -54,9 +80,26 @@ app
       })
       .catch(next)
   })
+  // return current API status
+  .get('/api/status', function(req, res, next) {
+    res.json(status)
+  })
+  // proxy Logbot API before we add the CORS header to that service
+  .get('/api/logbot/:channel/:date', function(req, res, next) {
+    axios.get(process.env.LOGBOT_URL + '/channel/' + req.params.channel + '/' + req.params.date + '/json')
+      .then(function(result) {
+        if (result.data.error) {
+          winston.error(result.data)
+          throw new Error(result.data.error)
+        }
+
+        res.json(result.data)
+      })
+      .catch(next)
+  })
   .use(express.static(paths.appBuild))
   .use(fallback('index.html', { root: paths.appBuild }))
   .listen(port, function() {
-    console.log(`Server running at ${protocol}://${host}:${port}`)
+    winston.info(`Running at ${protocol}://${host}:${port}`)
   })
 

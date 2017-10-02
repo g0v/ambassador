@@ -22,7 +22,11 @@ import type {
   IssueListFailureAction
 } from './github'
 import type {
-  DateChangeAction
+  DateChangeAction,
+  LogPushAction,
+  LogRequestAction,
+  LogSuccessAction,
+  LogFailureAction
 } from './logbot'
 import { map as _map } from 'ramda'
 
@@ -34,6 +38,8 @@ export type PlainAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | DateChangeAction
+  | LogPushAction
+  | LogRequestAction | LogSuccessAction | LogFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

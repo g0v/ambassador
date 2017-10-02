@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { PlainAction } from '~/types/action'
+import type { Log } from '~/types/logbot'
 
 import {
   LOGIN_REQUEST,
@@ -24,8 +25,15 @@ import {
 } from '~/types/github'
 import {
   DATE_FORMAT,
-  DATE_CHANGE
+  DATE_CHANGE,
+  LOG_PUSH,
+  LOG_REQUEST,
+  LOG_SUCCESS,
+  LOG_FAILURE,
+  LOG_UPDATE,
+  getLogs
 } from '~/types/logbot'
+import { findIndex } from 'ramda'
 import moment from 'moment'
 
 export type State = {
@@ -43,7 +51,9 @@ export type State = {
     issues: { [key: string]: any[] }
   },
   logbot: {
-    date: string
+    date: string,
+    logs: Log[],
+    contents: { [key: string]: Log[] }
   }
 }
 
@@ -62,7 +72,9 @@ export const initialState: State = {
     issues: {}
   },
   logbot: {
-    date: moment().format(DATE_FORMAT)
+    date: moment().format(DATE_FORMAT),
+    logs: [],
+    contents: {}
   }
 }
 
@@ -257,6 +269,86 @@ export default (state: State = initialState, action: PlainAction): State => {
         logbot: {
           ...state.logbot,
           date
+        }
+      }
+    }
+    case LOG_PUSH: {
+      const { date, index } = action
+      const log = { date, index }
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          logs: [...state.logbot.logs, log]
+        }
+      }
+    }
+    case LOG_REQUEST: {
+      const { date } = action
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          contents: {
+            ...state.logbot.contents,
+            [date]: []
+          }
+        }
+      }
+    }
+    case LOG_SUCCESS: {
+      const { date, logs } = action
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          contents: {
+            ...state.logbot.contents,
+            [date]: logs
+          }
+        }
+      }
+    }
+    case LOG_FAILURE: {
+      const { date, error } = action
+
+      console.error(error)
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          contents: {
+            ...state.logbot.contents,
+            [date]: undefined
+          }
+        }
+      }
+    }
+    case LOG_UPDATE: {
+      const { date, index, log } = action
+      const logs = getLogs(state)
+      const i = findIndex(l => l.date === date && l.index === index, logs)
+
+      if (i === -1) {
+        console.error(`log not found: ${date}#${index}`)
+        return state
+      }
+
+      const newLogs = [
+        ...logs.slice(0, i),
+        { ...logs[i], ...log },
+        ...logs.slice(i + 1)
+      ]
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          logs: newLogs
         }
       }
     }

@@ -13,9 +13,9 @@ class LogbotPage extends PureComponent {
   }
 
   handleLogbotAction = (e) => {
-    if (e.origin !== 'https://logbot.g0v.tw') return
+    if (e.origin !== process.env.LOGBOT_URL) return
 
-    const { actions } = this.props
+    const { date, actions } = this.props
 
     switch (e.data.type) {
       case 'LOGBOT_DATE': {
@@ -27,8 +27,8 @@ class LogbotPage extends PureComponent {
         return
       }
       case 'LOGBOT_MESSAGE': {
-        // TODO: push current message index and its content to a stack
-        console.log('message index', e.data.index)
+        actions.logbot.storeLog(date, e.data.index)
+        // TODO: notify user that the log has been pushed into the storage
         return
       }
       default:
@@ -52,7 +52,7 @@ class LogbotPage extends PureComponent {
         <iframe
           className={styles.iframe}
           title="g0v Logbot"
-          src={`https://logbot.g0v.tw/channel/g0v.tw/${date}`}
+          src={`${process.env.LOGBOT_URL}/channel/g0v.tw/${date}`}
         />
       </div>
     )

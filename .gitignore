@@ -11,6 +11,8 @@
 
 # development
 start.sh
+start-server.sh
+start-client.sh
 
 # production
 # prebuild for middle2

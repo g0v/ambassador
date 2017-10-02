@@ -47,6 +47,14 @@ class Header extends PureComponent {
         >
           Repositories
         </Menu.Item>
+        <Menu.Item
+          as={Link}
+          to="/storage"
+          name="storage"
+          active={location.pathname === '/storage'}
+        >
+          Storage
+        </Menu.Item>
         <Menu.Menu position="right">{
           unauthed
             ? <Menu.Item
