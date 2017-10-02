@@ -20,7 +20,6 @@ import {
   IssueListFailure
 } from '~/types/github'
 
-// TODO: RawAction<[], Profile>
 export const getProfile: RawAction<[], any> = store => async () => {
   const { dispatch, getState } = store
 
@@ -68,7 +67,6 @@ export const isMember: RawAction<[string], boolean> = store => async (name) => {
   }
 }
 
-// TODO: RawAction<[string], Repo[]>
 export const getRepos: RawAction<[string], any[]> = store => async (name) => {
   const { dispatch, getState } = store
   const state = getState()
@@ -92,7 +90,6 @@ export const getRepos: RawAction<[string], any[]> = store => async (name) => {
   }
 }
 
-// TODO: RawAction<[string, string], Issue[]>
 export const getIssues: RawAction<[string, string], any[]> = store => async (user, repo) => {
   const { dispatch, getState } = store
   const state = getState()

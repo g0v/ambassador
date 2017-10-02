@@ -36,7 +36,7 @@ export const getLogs: RawAction<[string], LogContent[]> = store => async (date) 
   const state = getState()
   const logs = getLogContents(state, date)
 
-  if (logs !== undefined) {
+  if (logs) {
     return logs
   }
 
@@ -64,8 +64,11 @@ export const updateLog: RawAction<[string, number, LogContent], Log> = store => 
 export const storeLog: RawAction<[string, number], Log> = store => async (date, index) => {
   const { dispatch } = store
 
+  // $FlowFixMe
   await dispatch(pushLog)(date, index)
+  // $FlowFixMe
   const logs = await dispatch(getLogs)(date)
+  // $FlowFixMe
   const log = await dispatch(updateLog)(date, index, logs[index])
 
   return log

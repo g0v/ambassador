@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { PlainAction } from '~/types/action'
-import type { Log } from '~/types/logbot'
+import type { Log, LogContent } from '~/types/logbot'
 
 import {
   LOGIN_REQUEST,
@@ -53,7 +53,7 @@ export type State = {
   logbot: {
     date: string,
     logs: Log[],
-    contents: { [key: string]: Log[] }
+    contents: { [key: string]: LogContent[] }
   }
 }
 

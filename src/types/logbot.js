@@ -33,11 +33,11 @@ export const LogRequest = (date: string): LogRequestAction => ({ type: LOG_REQUE
 
 export type LogSuccessAction = { type: 'LOG_SUCCESS', date: string, logs: LogContent[] }
 export const LOG_SUCCESS = 'LOG_SUCCESS'
-export const LogSuccess = (date: string, logs: LogContent[]) => ({ type: LOG_SUCCESS, date, logs })
+export const LogSuccess = (date: string, logs: LogContent[]): LogSuccessAction => ({ type: LOG_SUCCESS, date, logs })
 
 export type LogFailureAction = { type: 'LOG_FAILURE', date: string, error: Error }
 export const LOG_FAILURE = 'LOG_FAILURE'
-export const LogFailure = (date: string, error: Error) => ({ type: LOG_FAILURE, error })
+export const LogFailure = (date: string, error: Error): LogFailureAction => ({ type: LOG_FAILURE, date, error })
 
 export type LogUpdateAction = { type: 'LOG_UPDATE', date: string, index: number, log: LogContent }
 export const LOG_UPDATE = 'LOG_UPDATE'
@@ -52,6 +52,6 @@ export const getLogs = (state: State): Log[] => {
   return (state && state.logbot && state.logbot.logs) || []
 }
 
-export const getLogContents = (state: State, date: string): ?Log[] => {
+export const getLogContents = (state: State, date: string): ?LogContent[] => {
   return (state && state.logbot && state.logbot.contents && state.logbot.contents[date])
 }

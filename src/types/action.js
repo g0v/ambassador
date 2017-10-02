@@ -26,7 +26,8 @@ import type {
   LogPushAction,
   LogRequestAction,
   LogSuccessAction,
-  LogFailureAction
+  LogFailureAction,
+  LogUpdateAction
 } from './logbot'
 import { map as _map } from 'ramda'
 
@@ -40,6 +41,7 @@ export type PlainAction
   | DateChangeAction
   | LogPushAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
+  | LogUpdateAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

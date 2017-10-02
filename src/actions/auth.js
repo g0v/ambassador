@@ -10,7 +10,6 @@ import {
   Logout
 } from '~/types/auth'
 
-// TODO: RawAction<[], Auth>
 const apiOrigin = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 let _loginPromise
 let _abortLogin = () => {}
