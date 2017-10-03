@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { State } from '~/reducers'
+import type { DropdownOption } from './semantic-ui'
 
 export type Hashtag = {
   id: number,
@@ -28,3 +29,7 @@ export const getHashtags = (state: State): { [key: number]: Hashtag } => {
 export const getHashtag = (state: State, id: number): ?Hashtag => {
   return (state && state.hashtags && state.hashtags[id])
 }
+
+export const toDropdownOption = (hashtag: Hashtag): DropdownOption => ({
+  key: hashtag.content, value: hashtag.content, text: `#${hashtag.content}`
+})

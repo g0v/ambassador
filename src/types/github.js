@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { State } from '~/reducers'
+import type { DropdownOption } from './semantic-ui'
 
 // data
 export type ProfileRequestAction = { type: 'PROFILE_REQUEST' }
@@ -90,3 +91,7 @@ export const dummyRepoList: any[] = [{
 export const getIssueMap = (state: State): any => {
   return (state && state.github && state.github.issues) || {}
 }
+
+export const toDropdownOption = (repo: any): DropdownOption => ({
+  key: repo.full_name, value: repo.full_name, text: `#${repo.full_name}`
+})

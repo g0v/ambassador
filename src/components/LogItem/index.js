@@ -1,15 +1,16 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
-import { Item } from 'semantic-ui-react'
+import { Item, Dropdown } from 'semantic-ui-react'
 import styles from './index.css'
 
 class LogItem extends PureComponent {
   static defaultProps = {
-    className: ''
+    className: '',
+    options: []
   }
 
   render() {
-    const { id, className, data } = this.props
+    const { id, className, data, options } = this.props
     const { nick = '...', msg = '...' } = data
 
     return (
@@ -20,6 +21,13 @@ class LogItem extends PureComponent {
             { `${nick}> ` }
             <span dangerouslySetInnerHTML={{ __html: msg }} />
           </Item.Description>
+          <Item.Extra>
+            <Dropdown
+              fluid multiple search selection
+              placeholder="#hashtag"
+              options={options}
+            />
+          </Item.Extra>
         </Item.Content>
       </Item>
     )
