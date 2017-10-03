@@ -22,8 +22,7 @@ const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
 db.test(pool, function(err, res) {
   if (err) return winston.error(err)
-  winston.debug(res.rows)
-  winston.verbose('Database connected')
+  winston.verbose('Database connected at ' + res.rows[0].now)
   db.prepareTables(pool, function(err, res) {
     if (err) return winston.error(err)
     winston.verbose('Tables are ready')
@@ -42,28 +41,33 @@ const app = express()
 app
   .use(cors())
   .use(bodyParser.json())
+  // Handle errors
   .use(function(err, req, res, next) {
     winston.error(err.stack)
     res.status(500)
   })
+  // GitHub OAuth
   .get('/api/auth', function(req, res) {
     if (!client_id || !client_secret) {
-      throw new Error('Client ID or secret is not set.')
+      throw new Error('Client ID or secret is not set')
     }
 
+    winston.verbose('Redirect to GitHub login page')
     const endpoint = 'https://github.com/login/oauth/authorize?scope=user:email&client_id=' + client_id
     res.redirect(303, endpoint)
   })
+  // GitHub OAuth callback URL
   .get('/api/callback', function(req, res, next) {
     if (!client_id || !client_secret) {
-      throw new Error('Client ID or secret is not set.')
+      throw new Error('Client ID or secret is not set')
     }
 
     const { code } = req.query
     if (!code) {
-      throw new Error('OAuth code is missing.')
+      throw new Error('OAuth code is missing')
     }
 
+    winston.verbose('Exchange access token with code: ' + code)
     axios({
       method: 'post',
       url: 'https://github.com/login/oauth/access_token',
@@ -71,25 +75,50 @@ app
     })
       .then(function(result) {
         if (result.data.error) {
-          winston.error(result.data)
           throw new Error(result.data.error)
         }
 
+        winston.verbose('Access token: ' + result.data.access_token)
         const endpoint = '/callback?' + result.data
         res.redirect(303, endpoint)
       })
       .catch(next)
   })
-  // return current API status
+  // API status
   .get('/api/status', function(req, res, next) {
     res.json(status)
   })
+  // Create new hashtag
+  .post('/api/hashtag/:tag', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const tag = req.params.tag
+
+    winston.verbose('Check hashtag: #' + tag)
+    db.testHashtag(pool, tag, function(err, r0) {
+      if (err) return next(err)
+      if (r0.rows[0].exists) {
+        return res.status(409).send('Hashtag Exists')
+      }
+
+      winston.verbose('Create hashtag: #' + tag)
+      db.createHashtag(pool, tag, function(err, r1) {
+        if (err) return next(err)
+
+        winston.info('Hashtag: #' + tag + ' created')
+
+        res.json({ id: r1.rows[0].id })
+      })
+    })
+  })
   // proxy Logbot API before we add the CORS header to that service
   .get('/api/logbot/:channel/:date', function(req, res, next) {
+    winston.verbose('Fetch logs: ' + req.params.date)
     axios.get(process.env.LOGBOT_URL + '/channel/' + req.params.channel + '/' + req.params.date + '/json')
       .then(function(result) {
         if (result.data.error) {
-          winston.error(result.data)
           throw new Error(result.data.error)
         }
 
@@ -97,7 +126,35 @@ app
       })
       .catch(next)
   })
+  // Create log entry so we can link it with hashtags later
+  .post('/api/logbot/:channel/:date/:index', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const date = req.params.date
+    const index = +req.params.index
+
+    winston.verbose('Check log: ' + date + '#' + index)
+    db.testLog(pool, date, index, function(err, r0) {
+      if (err) return next(err)
+      if (r0.rows[0].exists) {
+        return res.status(409).send('Log Exists')
+      }
+
+      winston.verbose('Create log: ' + date + '#' + index)
+      db.createLog(pool, date, index, function(err, r1) {
+        if (err) return next(err)
+
+        winston.info('Log: ' + date + '#' + index + ' created')
+
+        res.json({ id: r1.rows[0].id })
+      })
+    })
+  })
+  // Serve client scripts
   .use(express.static(paths.appBuild))
+  // Fallback to index page as the client is a single page application
   .use(fallback('index.html', { root: paths.appBuild }))
   .listen(port, function() {
     winston.info(`Running at ${protocol}://${host}:${port}`)

@@ -32,7 +32,15 @@ function prepareHashtagTable(db, next) {
 
 function createHashtag(db, content, next) {
   return db.query(
-    'INSERT INTO hashtag (content) VALUES ($1)',
+    'INSERT INTO hashtag (content) VALUES ($1) RETURNING id;',
+    [content],
+    next
+  )
+}
+
+function testHashtag(db, content, next) {
+  return db.query(
+    'SELECT EXISTS(SELECT 1 FROM hashtag where content = $1);',
     [content],
     next
   )
@@ -55,7 +63,7 @@ function prepareLogTable(db, next) {
 
 function createLog(db, date, index, next) {
   return db.query(
-    'INSERT INTO log (date, index) VALUES ($1, $2);',
+    'INSERT INTO log (date, index) VALUES ($1, $2) RETURNING id;',
     [date, index],
     next
   )
@@ -78,7 +86,7 @@ function prepareLogHashtagTable(db, next) {
 
 function linkLogWithHashtag(db, log, hashtag, next) {
   return db.query(
-    'INSERT INTO logHashtag (log, hashtag) VALUES ($1, $2)',
+    'INSERT INTO logHashtag (log, hashtag) VALUES ($1, $2) RETURNING id;',
     [log, hashtag],
     next
   )
@@ -90,6 +98,7 @@ module.exports = {
   prepareTables,
   prepareHashtagTable,
   createHashtag,
+  testHashtag,
   getHashtag,
   prepareLogTable,
   createLog,
