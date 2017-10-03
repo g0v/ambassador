@@ -5,6 +5,7 @@ import type { State } from '~/reducers'
 export const DATE_FORMAT = 'YYYY-MM-DD'
 
 export type Log = {
+  id?: number,
   date: string,
   index: number,
   time?: string,

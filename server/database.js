@@ -2,14 +2,6 @@ function test(db, next) {
   return db.query('SELECT NOW();', next)
 }
 
-function checkTable(db, schema, table, next) {
-  return db.query(
-    'SELECT EXISTS (SELECT 1 FROM information_schema.tables WHERE table_schema = $1 AND table_name = $2);',
-    [schema, table],
-    next
-  )
-}
-
 function prepareTables(db, next) {
   return prepareHashtagTable(db, function(err, res) {
     if (err) return next(err)
@@ -30,6 +22,13 @@ function prepareHashtagTable(db, next) {
   )
 }
 
+function listHashtag(db, next) {
+  return db.query(
+    'SELECT * FROM hashtag;',
+    next
+  )
+}
+
 function createHashtag(db, content, next) {
   return db.query(
     'INSERT INTO hashtag (content) VALUES ($1) RETURNING id;',
@@ -40,7 +39,7 @@ function createHashtag(db, content, next) {
 
 function testHashtag(db, content, next) {
   return db.query(
-    'SELECT EXISTS(SELECT 1 FROM hashtag where content = $1);',
+    'SELECT EXISTS(SELECT 1 FROM hashtag WHERE content = $1);',
     [content],
     next
   )
@@ -48,7 +47,7 @@ function testHashtag(db, content, next) {
 
 function getHashtag(db, content, next) {
   return db.query(
-    'SELECT id FROM hashtag where content = $1',
+    'SELECT id FROM hashtag WHERE content = $1',
     [content],
     next
   )
@@ -71,7 +70,15 @@ function createLog(db, date, index, next) {
 
 function testLog(db, date, index, next) {
   return db.query(
-    'SELECT EXISTS(SELECT 1 FROM log where date = $1 AND index = $2);',
+    'SELECT EXISTS(SELECT 1 FROM log WHERE date = $1 AND index = $2);',
+    [date, index],
+    next
+  )
+}
+
+function getLog(db, date, index, next) {
+  return db.query(
+    'SELECT * FROM log WHERE date = $1 AND index = $2;'
     [date, index],
     next
   )
@@ -94,15 +101,16 @@ function linkLogWithHashtag(db, log, hashtag, next) {
 
 module.exports = {
   test,
-  checkTable,
   prepareTables,
   prepareHashtagTable,
+  listHashtag,
   createHashtag,
   testHashtag,
   getHashtag,
   prepareLogTable,
   createLog,
   testLog,
+  getLog,
   prepareLogHashtagTable,
   linkLogWithHashtag,
 }

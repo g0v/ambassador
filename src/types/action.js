@@ -29,6 +29,11 @@ import type {
   LogFailureAction,
   LogUpdateAction
 } from './logbot'
+import type {
+  HashtagListRequestAction,
+  HashtagListSuccessAction,
+  HashtagListFailureAction
+} from './hashtag'
 import { map as _map } from 'ramda'
 
 export type PlainAction
@@ -42,6 +47,7 @@ export type PlainAction
   | LogPushAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LogUpdateAction
+  | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

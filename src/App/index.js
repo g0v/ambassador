@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import * as actions from '~/actions'
 import Root from '~/components/Root'
 import OAuthCallbackPage from '~/components/OAuthCallbackPage'
 
@@ -10,6 +11,11 @@ import styles from './index.css'
 class App extends PureComponent {
   static defaultProps = {
     className: '',
+  }
+
+  async componentDidMount() {
+    const { store } = this.props
+    await actions.hashtag.getHashtags(store)()
   }
 
   render() {

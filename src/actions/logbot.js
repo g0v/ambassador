@@ -71,5 +71,12 @@ export const storeLog: RawAction<[string, number], Log> = store => async (date, 
   // $FlowFixMe
   const log = await dispatch(updateLog)(date, index, logs[index])
 
+  const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
+  let r
+  r = await axios.post(`${apiUrl}/api/logbot/g0v.tw/${date}/${index}`)
+  console.log('create log', r)
+  r = await axios.post(`${apiUrl}/api/hashtag/g0v%2FLogbot`)
+  console.log('create hashtag', r)
+
   return log
 }

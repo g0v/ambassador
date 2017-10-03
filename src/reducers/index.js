@@ -2,6 +2,7 @@
 
 import type { PlainAction } from '~/types/action'
 import type { Log, LogContent } from '~/types/logbot'
+import type { Hashtag } from '~/types/hashtag'
 
 import {
   LOGIN_REQUEST,
@@ -33,6 +34,11 @@ import {
   LOG_UPDATE,
   getLogs
 } from '~/types/logbot'
+import {
+  HASHTAG_LIST_REQUEST,
+  HASHTAG_LIST_SUCCESS,
+  HASHTAG_LIST_FAILURE
+} from '~/types/hashtag'
 import { findIndex } from 'ramda'
 import moment from 'moment'
 
@@ -54,7 +60,8 @@ export type State = {
     date: string,
     logs: Log[],
     contents: { [key: string]: LogContent[] }
-  }
+  },
+  hashtags: ?{ [key: number]: Hashtag }
 }
 
 export const initialState: State = {
@@ -75,7 +82,8 @@ export const initialState: State = {
     date: moment().format(DATE_FORMAT),
     logs: [],
     contents: {}
-  }
+  },
+  hashtags: undefined
 }
 
 export default (state: State = initialState, action: PlainAction): State => {
@@ -350,6 +358,31 @@ export default (state: State = initialState, action: PlainAction): State => {
           ...state.logbot,
           logs: newLogs
         }
+      }
+    }
+
+    case HASHTAG_LIST_REQUEST: {
+      return {
+        ...state,
+        hashtags: {}
+      }
+    }
+    case HASHTAG_LIST_SUCCESS: {
+      let hashtags = {}
+
+      for (let hashtag of action.hashtags) {
+        hashtags[hashtag.id] = hashtag
+      }
+
+      return {
+        ...state,
+        hashtags
+      }
+    }
+    case HASHTAG_LIST_FAILURE: {
+      return {
+        ...state,
+        hashtags: undefined
       }
     }
 

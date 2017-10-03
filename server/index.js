@@ -88,6 +88,36 @@ app
   .get('/api/status', function(req, res, next) {
     res.json(status)
   })
+  // Get all hashtags
+  .get('/api/hashtag', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    winston.verbose('Get all hasttags')
+    db.listHashtag(pool, function(err, r) {
+      if (err) return next(err)
+      res.json(r.rows)
+    })
+  })
+  // Get a hashtag
+  .get('/api/hashtag/:tag', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const tag = req.params.tag
+
+    winston.verbose('Get hashtag: #' + tag)
+    db.getHashtag(pool, tag, function(err, r) {
+      if (err) return next(err)
+      if (r.rows.length === 0) {
+        return res.status(404)
+      }
+
+      res.json(r.rows[0])
+    })
+  })
   // Create new hashtag
   .post('/api/hashtag/:tag', function(req, res, next) {
     if (!status.database) {
@@ -125,6 +155,25 @@ app
         res.json(result.data)
       })
       .catch(next)
+  })
+  // Get a log
+  .get('/api/logbot/:channel/:date/:index', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const date = req.params.date
+    const index = +req.params.index
+
+    winston.verbose('Get log:' + date + '#' + index)
+    db.getLog(pool, date, index, function(err, r) {
+      if (err) return next(err)
+      if (r.rows.length === 0) {
+        return res.status(404)
+      }
+
+      res.json(r.rows[0])
+    })
   })
   // Create log entry so we can link it with hashtags later
   .post('/api/logbot/:channel/:date/:index', function(req, res, next) {
