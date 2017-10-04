@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { PlainAction } from '~/types/action'
-import type { Log, LogContent } from '~/types/logbot'
+import type { Log } from '~/types/logbot'
 import type { Hashtag } from '~/types/hashtag'
 
 import {
@@ -27,11 +27,9 @@ import {
 import {
   DATE_FORMAT,
   DATE_CHANGE,
-  LOG_PUSH,
   LOG_REQUEST,
   LOG_SUCCESS,
   LOG_FAILURE,
-  LOG_UPDATE,
   getLogs
 } from '~/types/logbot'
 import {
@@ -58,8 +56,7 @@ export type State = {
   },
   logbot: {
     date: string,
-    logs: Log[],
-    contents: { [key: string]: LogContent[] }
+    logs: Log[]
   },
   hashtags: ?{ [key: number]: Hashtag }
 }
@@ -80,8 +77,7 @@ export const initialState: State = {
   },
   logbot: {
     date: moment().format(DATE_FORMAT),
-    logs: [],
-    contents: {}
+    logs: []
   },
   hashtags: undefined
 }
@@ -280,7 +276,7 @@ export default (state: State = initialState, action: PlainAction): State => {
         }
       }
     }
-    case LOG_PUSH: {
+    case LOG_REQUEST: {
       const { date, index } = action
       const log = { date, index }
 
@@ -292,51 +288,7 @@ export default (state: State = initialState, action: PlainAction): State => {
         }
       }
     }
-    case LOG_REQUEST: {
-      const { date } = action
-
-      return {
-        ...state,
-        logbot: {
-          ...state.logbot,
-          contents: {
-            ...state.logbot.contents,
-            [date]: []
-          }
-        }
-      }
-    }
     case LOG_SUCCESS: {
-      const { date, logs } = action
-
-      return {
-        ...state,
-        logbot: {
-          ...state.logbot,
-          contents: {
-            ...state.logbot.contents,
-            [date]: logs
-          }
-        }
-      }
-    }
-    case LOG_FAILURE: {
-      const { date, error } = action
-
-      console.error(error)
-
-      return {
-        ...state,
-        logbot: {
-          ...state.logbot,
-          contents: {
-            ...state.logbot.contents,
-            [date]: undefined
-          }
-        }
-      }
-    }
-    case LOG_UPDATE: {
       const { date, index, log } = action
       const logs = getLogs(state)
       const i = findIndex(l => l.date === date && l.index === index, logs)
@@ -357,6 +309,21 @@ export default (state: State = initialState, action: PlainAction): State => {
         logbot: {
           ...state.logbot,
           logs: newLogs
+        }
+      }
+    }
+    case LOG_FAILURE: {
+      const { error } = action
+      let logs = state.logbot.logs
+      logs = logs.slice(0, logs.length - 1)
+
+      console.error(error)
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          logs
         }
       }
     }

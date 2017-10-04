@@ -47,7 +47,7 @@ function testHashtag(db, content, next) {
 
 function getHashtag(db, content, next) {
   return db.query(
-    'SELECT id FROM hashtag WHERE content = $1',
+    'SELECT id FROM hashtag WHERE content = $1 LIMIT 1;',
     [content],
     next
   )
@@ -78,7 +78,7 @@ function testLog(db, date, index, next) {
 
 function getLog(db, date, index, next) {
   return db.query(
-    'SELECT * FROM log WHERE date = $1 AND index = $2;'
+    'SELECT l.id, l.date, l.index, array_remove(array_agg(h.hashtag), NULL) hashtags FROM log l LEFT JOIN logHashtag h ON l.id = h.log WHERE l.date = $1 AND l.index = $2 GROUP BY l.id LIMIT 1;',
     [date, index],
     next
   )

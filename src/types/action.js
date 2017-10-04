@@ -23,11 +23,9 @@ import type {
 } from './github'
 import type {
   DateChangeAction,
-  LogPushAction,
   LogRequestAction,
   LogSuccessAction,
-  LogFailureAction,
-  LogUpdateAction
+  LogFailureAction
 } from './logbot'
 import type {
   HashtagListRequestAction,
@@ -44,9 +42,7 @@ export type PlainAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | DateChangeAction
-  | LogPushAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
-  | LogUpdateAction
   | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>

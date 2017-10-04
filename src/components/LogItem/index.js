@@ -23,9 +23,12 @@ class LogItem extends PureComponent {
           </Item.Description>
           <Item.Extra>
             <Dropdown
-              fluid multiple search selection
+              fluid multiple search selection allowAdditions
               placeholder="#hashtag"
               options={options}
+              value={[]}
+              onAddItem={(e, data) => console.log('on add item', data)}
+              onChange={(e, data) => console.log('on change', data)}
             />
           </Item.Extra>
         </Item.Content>

@@ -18,6 +18,9 @@ const status = {
   database: false
 }
 
+const logs = {}
+const logId = function(date, index) { return date + '#' + index }
+
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
 db.test(pool, function(err, res) {
@@ -44,7 +47,7 @@ app
   // Handle errors
   .use(function(err, req, res, next) {
     winston.error(err.stack)
-    res.status(500)
+    res.status(500).send()
   })
   // GitHub OAuth
   .get('/api/auth', function(req, res) {
@@ -112,7 +115,7 @@ app
     db.getHashtag(pool, tag, function(err, r) {
       if (err) return next(err)
       if (r.rows.length === 0) {
-        return res.status(404)
+        return res.status(404).send()
       }
 
       res.json(r.rows[0])
@@ -143,19 +146,6 @@ app
       })
     })
   })
-  // proxy Logbot API before we add the CORS header to that service
-  .get('/api/logbot/:channel/:date', function(req, res, next) {
-    winston.verbose('Fetch logs: ' + req.params.date)
-    axios.get(process.env.LOGBOT_URL + '/channel/' + req.params.channel + '/' + req.params.date + '/json')
-      .then(function(result) {
-        if (result.data.error) {
-          throw new Error(result.data.error)
-        }
-
-        res.json(result.data)
-      })
-      .catch(next)
-  })
   // Get a log
   .get('/api/logbot/:channel/:date/:index', function(req, res, next) {
     if (!status.database) {
@@ -164,16 +154,33 @@ app
 
     const date = req.params.date
     const index = +req.params.index
+    const channel = req.params.channel
+    const id = logId(date, index)
 
-    winston.verbose('Get log:' + date + '#' + index)
-    db.getLog(pool, date, index, function(err, r) {
-      if (err) return next(err)
-      if (r.rows.length === 0) {
-        return res.status(404)
-      }
+    if (!logs[id]) {
+      const url = process.env.LOGBOT_URL + '/channel/' + channel + '/' + date + '/json'
+      winston.verbose('Fetch logs from ' + url)
+      logs[id] = axios.get(url).then(function(result) { return result.data || {} })
+    }
 
-      res.json(r.rows[0])
-    })
+    logs[id]
+      .then(function(ls) {
+        const log = ls[index]
+
+        if (log === undefined) {
+          return res.status(404).send()
+        }
+
+        winston.verbose('Get log:' + id)
+        db.getLog(pool, date, index, function(err, r) {
+          if (err) return next(err)
+          if (r.rows.length === 0) {
+            return res.json(log)
+          }
+
+          res.json(Object.assign({}, r.rows[0], log))
+        })
+      })
   })
   // Create log entry so we can link it with hashtags later
   .post('/api/logbot/:channel/:date/:index', function(req, res, next) {
