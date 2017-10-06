@@ -30,12 +30,21 @@ import {
   LOG_REQUEST,
   LOG_SUCCESS,
   LOG_FAILURE,
+  LOG_LINK_REQUEST,
+  LOG_LINK_SUCCESS,
+  LOG_LINK_FAILURE,
+  LOG_UNLINK_REQUEST,
+  LOG_UNLINK_SUCCESS,
+  LOG_UNLINK_FAILURE,
   getLogs
 } from '~/types/logbot'
 import {
   HASHTAG_LIST_REQUEST,
   HASHTAG_LIST_SUCCESS,
-  HASHTAG_LIST_FAILURE
+  HASHTAG_LIST_FAILURE,
+  HASHTAG_CREATE_REQUEST,
+  HASHTAG_CREATE_SUCCESS,
+  HASHTAG_CREATE_FAILURE
 } from '~/types/hashtag'
 import { findIndex } from 'ramda'
 import moment from 'moment'
@@ -278,13 +287,21 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
     case LOG_REQUEST: {
       const { date, index } = action
-      const log = { date, index }
+      const logs = getLogs(state)
+      let i = findIndex(l => l.date === date && l.index === index, logs)
+      i = i !== -1 ? i : logs.length
+
+      const newLogs = [
+        ...logs.slice(0, i),
+        { ...logs[i], date, index },
+        ...logs.slice(i + 1)
+      ]
 
       return {
         ...state,
         logbot: {
           ...state.logbot,
-          logs: [...state.logbot.logs, log]
+          logs: newLogs
         }
       }
     }
@@ -313,11 +330,22 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case LOG_FAILURE: {
-      const { error } = action
-      let logs = state.logbot.logs
-      logs = logs.slice(0, logs.length - 1)
+      const { date, index, error } = action
 
       console.error(error)
+
+      let logs = state.logbot.logs
+      const i = findIndex(l => l.date === date && l.index === index, logs)
+
+      if (i === -1) {
+        console.error(`log not found: ${date}#${index}`)
+        return state
+      }
+
+      logs = [
+        ...logs.slice(0, i),
+        ...logs.slice(i + 1)
+      ]
 
       return {
         ...state,
@@ -326,6 +354,24 @@ export default (state: State = initialState, action: PlainAction): State => {
           logs
         }
       }
+    }
+    case LOG_LINK_REQUEST: {
+      return state
+    }
+    case LOG_LINK_SUCCESS: {
+      return state
+    }
+    case LOG_LINK_FAILURE: {
+      return state
+    }
+    case LOG_UNLINK_REQUEST: {
+      return state
+    }
+    case LOG_UNLINK_SUCCESS: {
+      return state
+    }
+    case LOG_UNLINK_FAILURE: {
+      return state
     }
 
     case HASHTAG_LIST_REQUEST: {
@@ -350,6 +396,44 @@ export default (state: State = initialState, action: PlainAction): State => {
       return {
         ...state,
         hashtags: undefined
+      }
+    }
+    case HASHTAG_CREATE_REQUEST: {
+      const { tag } = action
+
+      return {
+        ...state,
+        hashtags: {
+          ...state.hashtags,
+          // insert the tag with a temporary id
+          [tag.id]: tag
+        }
+      }
+    }
+    case HASHTAG_CREATE_SUCCESS: {
+      const { id, tag } = action
+      let hashtags = {
+        ...state.hashtags,
+        // add the real tag
+        [tag.id]: tag
+      }
+      // remove the temporary tag
+      delete hashtags[id]
+
+      return {
+        ...state,
+        hashtags
+      }
+    }
+    case HASHTAG_CREATE_FAILURE: {
+      const { tag } = action
+      let hashtags = { ...state.hashtags }
+      // create failed, remove the temporary tag
+      delete hashtags[tag.id]
+
+      return {
+        ...state,
+        hashtags
       }
     }
 

@@ -10,8 +10,8 @@ class LogItem extends PureComponent {
   }
 
   render() {
-    const { id, className, data, options } = this.props
-    const { nick = '...', msg = '...' } = data
+    const { id, className, data, options, onAddItem, onChange } = this.props
+    const { nick = '...', msg = '...', hashtags } = data
 
     return (
       <Item id={id} className={cx(styles.main, className)} >
@@ -26,9 +26,9 @@ class LogItem extends PureComponent {
               fluid multiple search selection allowAdditions
               placeholder="#hashtag"
               options={options}
-              value={[]}
-              onAddItem={(e, data) => console.log('on add item', data)}
-              onChange={(e, data) => console.log('on change', data)}
+              value={hashtags}
+              onAddItem={onAddItem}
+              onChange={onChange}
             />
           </Item.Extra>
         </Item.Content>

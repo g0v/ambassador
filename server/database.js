@@ -47,7 +47,7 @@ function testHashtag(db, content, next) {
 
 function getHashtag(db, content, next) {
   return db.query(
-    'SELECT id FROM hashtag WHERE content = $1 LIMIT 1;',
+    'SELECT * FROM hashtag WHERE content = $1 LIMIT 1;',
     [content],
     next
   )
@@ -99,6 +99,14 @@ function linkLogWithHashtag(db, log, hashtag, next) {
   )
 }
 
+function unlinkLogWithHashtag(db, log, hashtag, next) {
+  return db.query(
+    'DELETE FROM logHashtag l WHERE l.log = $1 AND l.hashtag = $2 RETURNING l.id;',
+    [log, hashtag],
+    next
+  )
+}
+
 module.exports = {
   test,
   prepareTables,
@@ -113,4 +121,5 @@ module.exports = {
   getLog,
   prepareLogHashtagTable,
   linkLogWithHashtag,
+  unlinkLogWithHashtag
 }

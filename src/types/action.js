@@ -25,12 +25,21 @@ import type {
   DateChangeAction,
   LogRequestAction,
   LogSuccessAction,
-  LogFailureAction
+  LogFailureAction,
+  LinkRequestAction,
+  LinkSuccessAction,
+  LinkFailureAction,
+  UnlinkRequestAction,
+  UnlinkSuccessAction,
+  UnlinkFailureAction
 } from './logbot'
 import type {
   HashtagListRequestAction,
   HashtagListSuccessAction,
-  HashtagListFailureAction
+  HashtagListFailureAction,
+  HashtagCreateRequestAction,
+  HashtagCreateSuccessAction,
+  HashtagCreateFailureAction
 } from './hashtag'
 import { map as _map } from 'ramda'
 
@@ -43,7 +52,10 @@ export type PlainAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | DateChangeAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
+  | LinkRequestAction | LinkSuccessAction | LinkFailureAction
+  | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction
   | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
+  | HashtagCreateRequestAction | HashtagCreateSuccessAction | HashtagCreateFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

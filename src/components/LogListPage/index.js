@@ -3,12 +3,11 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import * as G from '~/types/github'
 import * as L from '~/types/logbot'
 import * as H from '~/types/hashtag'
 import { Container, Item } from 'semantic-ui-react'
 import LogItem from '../LogItem'
-import { map, uniq } from 'ramda'
+import { map, difference } from 'ramda'
 import styles from './index.css'
 
 class LogListPage extends PureComponent {
@@ -17,14 +16,38 @@ class LogListPage extends PureComponent {
   }
 
   render() {
-    const { id, className, logs, options } = this.props
+    const { id, className, actions, logs, options } = this.props
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         <Item.Group divided>{
           map(
             data =>
-              <LogItem key={`${data.date}#${data.index}`} data={data} options={options} />,
+              <LogItem
+                key={`${data.date}#${data.index}`}
+                data={data}
+                options={options}
+                onAddItem={async (e, item) => {
+                  await actions.hashtag.createHashtag(data.value)
+                  await actions.hashtag.getHashtags()
+                }}
+                onChange={async (e, dropdown) => {
+                  let ps = []
+                  let l
+
+                  const newLinks = difference(dropdown.value, data.hashtags)
+                  for (l of newLinks) {
+                    ps.push(actions.logbot.linkHashtag(data.id, l))
+                  }
+                  const goneLinks = difference(data.hashtags, dropdown.value)
+                  for (l of goneLinks) {
+                    ps.push(actions.logbot.unliknHashtag(data.id, l))
+                  }
+
+                  await Promise.all(ps)
+                  await actions.logbot.getLog(data.date, data.index)
+                }}
+              />,
             logs
           )
         }</Item.Group>
@@ -45,13 +68,9 @@ const hashtagsToOptions = (hashtags) => {
 
 export default connect(
   state => {
-    const logs = L.getLogs(state)
-    const repos = G.getRepoList(state)
     const hashtags = H.getHashtags(state)
-    const options = uniq([
-      ...map(G.toDropdownOption, repos),
-      ...hashtagsToOptions(hashtags)
-    ])
+    const options = hashtagsToOptions(hashtags)
+    const logs = L.getLogs(state)
 
     return { logs, options }
   },

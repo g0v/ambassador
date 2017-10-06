@@ -10,6 +10,10 @@ const axios = require('axios')
 // database
 const { Pool } = require('pg')
 const db = require('./database')
+// GitHub
+const GitHub = require('github-api')
+// utils
+const { map } = require('ramda')
 // config
 const paths = require(path.resolve(__dirname, '../config/paths.js'))
 
@@ -21,6 +25,40 @@ const status = {
 const logs = {}
 const logId = function(date, index) { return date + '#' + index }
 
+const createRepoHashtags = function(pool, org, names, next) {
+  const name = names[0]
+  const rest = names.slice(1)
+
+  if (name === undefined) {
+    return next()
+  }
+
+  winston.verbose('Check #' + name)
+  db.testHashtag(pool, name, function(err, r) {
+    if (err) return next(err)
+    if (r.rows[0].exists) {
+      return createRepoHashtags(pool, org, rest, next)
+    }
+
+    winston.verbose('Create hashtag #' + name)
+    db.createHashtag(pool, name, function(err, r) {
+      if (err) return next(err)
+
+      winston.info('Repo hashtag #' + name + ' is created')
+
+      return createRepoHashtags(pool, org, rest, next)
+    })
+  })
+}
+
+const prepareRepoHashtags = function(pool, org, next) {
+  org.getRepos(function(err, repos) {
+    const names = map(r => r.full_name, repos)
+
+    return createRepoHashtags(pool, org, names, next)
+  })
+}
+
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
 db.test(pool, function(err, res) {
@@ -28,8 +66,21 @@ db.test(pool, function(err, res) {
   winston.verbose('Database connected at ' + res.rows[0].now)
   db.prepareTables(pool, function(err, res) {
     if (err) return winston.error(err)
+
     winston.verbose('Tables are ready')
-    status.database = true
+
+    const gh = new GitHub()
+    // TODO: use process.env.GH_ORGANIZATION
+    const org = gh.getOrganization('g0v')
+
+    winston.verbose('Prepare repo hashtags')
+    prepareRepoHashtags(pool, org, function(err) {
+      if (err) return winston.error(err)
+
+      winston.verbose('Repo hashtags are ready')
+
+      status.database = true
+    })
   })
 })
 
@@ -206,6 +257,41 @@ app
 
         res.json({ id: r1.rows[0].id })
       })
+    })
+  })
+  // Link a log with a hashtag
+  .post('/api/log/:log_id/hashtag/:hashtag_id', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const log_id = +req.params.log_id
+    const hashtag_id = +req.params.hashtag_id
+
+    winston.verbose('Link log: ' + log_id + ' with hashtag: ' + hashtag_id)
+    db.linkLogWithHashtag(pool, log_id, hashtag_id, function(err, r) {
+      if (err) return next(err)
+
+      winston.info('Log: ' + log_id + ' is linked with hashtag: ' + hashtag_id)
+
+      res.json({ id: r.rows[0].id, log: log_id, hashtag: hashtag_id  })
+    })
+  })
+  .delete('/api/log/:log_id/hashtag/:hashtag_id', function(req, res, next) {
+    if (!status.database) {
+      throw new Error("Database isn't ready")
+    }
+
+    const log_id = +req.params.log_id
+    const hashtag_id = +req.params.hashtag_id
+
+    winston.verbose('Unlink log: ' + log_id + ' with hashtag: ' + hashtag_id)
+    db.unlinkLogWithHashtag(pool, log_id, hashtag_id, function(err, r) {
+      if (err) return next(err)
+
+      winston.info('Log: ' + log_id + ' is unlinked whith hashtag: ' + hashtag_id)
+
+      res.json({ id: r.rows[0].id, log: log_id, hashtag: hashtag_id })
     })
   })
   // Serve client scripts
