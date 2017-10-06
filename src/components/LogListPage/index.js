@@ -28,7 +28,7 @@ class LogListPage extends PureComponent {
                 data={data}
                 options={options}
                 onAddItem={async (e, item) => {
-                  await actions.hashtag.createHashtag(data.value)
+                  await actions.hashtag.createHashtag(item.value)
                   await actions.hashtag.getHashtags()
                 }}
                 onChange={async (e, dropdown) => {
