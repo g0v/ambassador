@@ -7,7 +7,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as L from '~/types/logbot'
 import * as H from '~/types/hashtag'
 import LogItem from '~/components/LogItem'
-import { map, uniq, difference } from 'ramda'
+import { map, uniq, difference, reverse } from 'ramda'
 import moment from 'moment'
 import styles from './index.css'
 
@@ -135,7 +135,7 @@ export default connect(
     const hashtags = H.getHashtags(state)
     const options = H.toDropdownOptions(hashtags)
     const date = L.getDate(state)
-    const logs = L.getLogs(state)
+    const logs = reverse(L.getLogs(state))
 
     return { date, logs, options }
   },
