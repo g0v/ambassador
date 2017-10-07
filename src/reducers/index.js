@@ -67,7 +67,7 @@ export type State = {
     date: string,
     logs: Log[]
   },
-  hashtags: ?{ [key: number]: Hashtag }
+  hashtags: { [key: number]: Hashtag }
 }
 
 export const initialState: State = {
@@ -88,7 +88,7 @@ export const initialState: State = {
     date: moment().format(DATE_FORMAT),
     logs: []
   },
-  hashtags: undefined
+  hashtags: {}
 }
 
 export default (state: State = initialState, action: PlainAction): State => {
@@ -375,10 +375,7 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
 
     case HASHTAG_LIST_REQUEST: {
-      return {
-        ...state,
-        hashtags: {}
-      }
+      return state
     }
     case HASHTAG_LIST_SUCCESS: {
       let hashtags = {}
@@ -393,10 +390,7 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case HASHTAG_LIST_FAILURE: {
-      return {
-        ...state,
-        hashtags: undefined
-      }
+      return state
     }
     case HASHTAG_CREATE_REQUEST: {
       const { tag } = action

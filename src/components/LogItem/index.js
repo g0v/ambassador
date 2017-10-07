@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { Item, Dropdown } from 'semantic-ui-react'
 import styles from './index.css'
+import { compose, uniq, filter } from 'ramda'
+
+const cleanup = compose(uniq, filter(h => typeof h === 'number'))
 
 class LogItem extends PureComponent {
   static defaultProps = {
@@ -26,7 +29,7 @@ class LogItem extends PureComponent {
               fluid multiple search selection allowAdditions
               placeholder="#hashtag"
               options={options}
-              value={hashtags}
+              value={cleanup(hashtags)}
               onAddItem={onAddItem}
               onChange={onChange}
             />

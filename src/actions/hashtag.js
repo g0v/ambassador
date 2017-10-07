@@ -10,12 +10,14 @@ import uuid from 'uuid'
 
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
+let lastHashtags = Promise.resolve({})
 export const getHashtags: RawAction<[], { [key: number]: Hashtag }> = store => async () => {
   const { dispatch, getState } = store
 
   dispatch(H.HashtagListRequest())
   try {
-    const { data: hashtags } = await axios.get(`${apiUrl}/api/hashtag`)
+    lastHashtags = axios.get(`${apiUrl}/api/hashtag`).then(r => r.data)
+    const hashtags = await lastHashtags
     dispatch(H.HashtagListSuccess(hashtags))
   } catch (error) {
     dispatch(H.HashtagListFailure(error))
@@ -25,6 +27,10 @@ export const getHashtags: RawAction<[], { [key: number]: Hashtag }> = store => a
   return H.getHashtags(getState())
 }
 
+export const getStoredHashtags: RawAction<[], { [key: number]: Hashtag }> = store => async () =>
+  lastHashtags
+
+let lastCreatedHashtag = Promise.resolve()
 export const createHashtag: RawAction<[string], Hashtag> = store => async (content) => {
   const { dispatch } = store
   const id = uuid.v4()
@@ -32,7 +38,8 @@ export const createHashtag: RawAction<[string], Hashtag> = store => async (conte
 
   dispatch(H.HashtagCreateRequest(tag))
   try {
-    const { data: tag } = await axios.post(`${apiUrl}/api/hashtag/${content}`)
+    lastCreatedHashtag = axios.post(`${apiUrl}/api/hashtag/${content}`).then(r => r.data)
+    const tag = await lastCreatedHashtag
     dispatch(H.HashtagCreateSuccess(id, { id: tag.id, content }))
 
     return tag
@@ -41,3 +48,6 @@ export const createHashtag: RawAction<[string], Hashtag> = store => async (conte
     throw error
   }
 }
+
+export const getLastCreatedHashtag: RawAction<[], ?Hashtag> = store => async () =>
+  lastCreatedHashtag

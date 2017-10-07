@@ -7,7 +7,7 @@ import * as L from '~/types/logbot'
 import * as H from '~/types/hashtag'
 import { Container, Item } from 'semantic-ui-react'
 import LogItem from '../LogItem'
-import { map, difference } from 'ramda'
+import { map, difference, uniq } from 'ramda'
 import styles from './index.css'
 
 class LogListPage extends PureComponent {
@@ -28,24 +28,46 @@ class LogListPage extends PureComponent {
                 data={data}
                 options={options}
                 onAddItem={async (e, item) => {
-                  await actions.hashtag.createHashtag(item.value)
-                  await actions.hashtag.getHashtags()
+                  try {
+                    await actions.hashtag.createHashtag(item.value)
+                    await actions.hashtag.getHashtags()
+                  } catch (err) {
+                    // TODO: deal with the 409 Conflict
+                    console.error(err)
+                  }
                 }}
                 onChange={async (e, dropdown) => {
-                  let ps = []
-                  let l
+                  try {
+                    const hashtags = uniq(data.hashtags || [])
+                    let ps = []
+                    let l
 
-                  const newLinks = difference(dropdown.value, data.hashtags)
-                  for (l of newLinks) {
-                    ps.push(actions.logbot.linkHashtag(data.id, l))
-                  }
-                  const goneLinks = difference(data.hashtags, dropdown.value)
-                  for (l of goneLinks) {
-                    ps.push(actions.logbot.unliknHashtag(data.id, l))
-                  }
+                    const newLinks = difference(dropdown.value, hashtags)
+                    for (l of newLinks) {
+                      if (typeof l === 'string') {
+                        // XXX: find a better way to wait the last `onAddItem` action
+                        try {
+                          await actions.hashtag.getLastCreatedHashtag()
+                        } catch (err) {}
+                        const hs = await actions.hashtag.getStoredHashtags()
+                        const h = H.findHashtagByContent(hs, l)
+                        if (h === undefined) {
+                          throw new Error(`Hashtag #${l} not found!`)
+                        }
+                        l = h.id
+                      }
+                      ps.push(actions.logbot.linkHashtag(data.id, l))
+                    }
+                    const goneLinks = difference(hashtags, dropdown.value)
+                    for (l of goneLinks) {
+                      ps.push(actions.logbot.unliknHashtag(data.id, l))
+                    }
 
-                  await Promise.all(ps)
-                  await actions.logbot.getLog(data.date, data.index)
+                    await Promise.all(ps)
+                    await actions.logbot.getLog(data.date, data.index)
+                  } catch (err) {
+                    console.error(err)
+                  }
                 }}
               />,
             logs

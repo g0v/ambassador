@@ -50,6 +50,16 @@ export const getHashtag = (state: State, id: number): ?Hashtag => {
   return (state && state.hashtags && state.hashtags[id])
 }
 
+export const findHashtagByContent = (hashtags: { [key: number]: Hashtag }, content: string): ?Hashtag => {
+  for (let k in hashtags) {
+    if (hashtags[+k].content === content) {
+      return hashtags[+k]
+    }
+  }
+
+  return undefined
+}
+
 export const toDropdownOption = (hashtag: Hashtag): HashtagOption => ({
   key: hashtag.id, value: hashtag.id, text: `#${hashtag.content}`
 })
