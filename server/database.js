@@ -1,111 +1,74 @@
-function test(db, next) {
-  return db.query('SELECT NOW();', next)
-}
+const test = (db) =>
+  db.query('SELECT NOW();')
+    .then(r => r.rows[0].now)
 
-function prepareTables(db, next) {
-  return prepareHashtagTable(db, function(err, res) {
-    if (err) return next(err)
-    return prepareLogTable(db, function(err, res) {
-      if (err) return next(err)
-      return prepareLogHashtagTable(db, function(err, res) {
-        if (err) return next(err)
-        return next(err, res)
-      })
-    })
-  })
-}
+const prepareTables = (db) =>
+  Promise.resolve()
+    .then(() => prepareHashtagTable(db))
+    .then(() => prepareLogTable(db))
+    .then(() => prepareLogHashtagTable(db))
 
-function prepareHashtagTable(db, next) {
-  return db.query(
-    'CREATE TABLE IF NOT EXISTS hashtag (id serial PRIMARY KEY, content text);',
-    next
-  )
-}
+const prepareHashtagTable = (db) =>
+  db.query('CREATE TABLE IF NOT EXISTS hashtag (id serial PRIMARY KEY, content text);')
 
-function listHashtag(db, next) {
-  return db.query(
-    'SELECT * FROM hashtag;',
-    next
-  )
-}
+const listHashtag = (db) =>
+  db.query('SELECT * FROM hashtag;')
 
-function createHashtag(db, content, next) {
-  return db.query(
+const createHashtag = (db, content) =>
+  db.query(
     'INSERT INTO hashtag (content) VALUES ($1) RETURNING id;',
-    [content],
-    next
+    [content]
   )
-}
 
-function testHashtag(db, content, next) {
-  return db.query(
+const testHashtag = (db, content) =>
+  db.query(
     'SELECT EXISTS(SELECT 1 FROM hashtag WHERE content = $1);',
-    [content],
-    next
+    [content]
   )
-}
 
-function getHashtag(db, content, next) {
-  return db.query(
+const getHashtag = (db, content) =>
+  db.query(
     'SELECT * FROM hashtag WHERE content = $1 LIMIT 1;',
-    [content],
-    next
+    [content]
   )
-}
 
-function prepareLogTable(db, next) {
-  return db.query(
-    'CREATE TABLE IF NOT EXISTS log (id serial PRIMARY KEY, date char(10), index integer);',
-    next
-  )
-}
+const prepareLogTable = (db) =>
+  db.query('CREATE TABLE IF NOT EXISTS log (id serial PRIMARY KEY, date char(10), index integer);')
 
-function createLog(db, date, index, next) {
-  return db.query(
+const createLog = (db, date, index) =>
+  db.query(
     'INSERT INTO log (date, index) VALUES ($1, $2) RETURNING id;',
-    [date, index],
-    next
+    [date, index]
   )
-}
 
-function testLog(db, date, index, next) {
-  return db.query(
+const testLog = (db, date, index) =>
+  db.query(
     'SELECT EXISTS(SELECT 1 FROM log WHERE date = $1 AND index = $2);',
-    [date, index],
-    next
+    [date, index]
   )
-}
 
-function getLog(db, date, index, next) {
-  return db.query(
+const getLog = (db, date, index) =>
+  db.query(
     'SELECT l.id, l.date, l.index, array_remove(array_agg(h.hashtag), NULL) hashtags FROM log l LEFT JOIN logHashtag h ON l.id = h.log WHERE l.date = $1 AND l.index = $2 GROUP BY l.id LIMIT 1;',
-    [date, index],
-    next
+    [date, index]
   )
-}
 
-function prepareLogHashtagTable(db, next) {
-  return db.query(
-    'CREATE TABLE IF NOT EXISTS logHashtag (id serial PRIMARY KEY, log serial, hashtag serial);',
-    next
-  )
-}
+const prepareLogHashtagTable = (db) =>
+  db.query('CREATE TABLE IF NOT EXISTS logHashtag (id serial PRIMARY KEY, log serial, hashtag serial);')
 
-function linkLogWithHashtag(db, log, hashtag, next) {
-  return db.query(
+// TODO: testLogWithHashtag = (db, log, hashtag) => {}
+
+const linkLogWithHashtag = (db, log, hashtag) =>
+  db.query(
     'INSERT INTO logHashtag (log, hashtag) VALUES ($1, $2) RETURNING id;',
-    [log, hashtag],
-    next
+    [log, hashtag]
   )
-}
 
-function unlinkLogWithHashtag(db, log, hashtag, next) {
-  return db.query(
+const unlinkLogWithHashtag = (db, log, hashtag) =>
+  db.query(
     'DELETE FROM logHashtag l WHERE l.log = $1 AND l.hashtag = $2 RETURNING l.id;',
-    [log, hashtag],
-    next
+    [log, hashtag]
   )
-}
 
 module.exports = {
   test,

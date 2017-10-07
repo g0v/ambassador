@@ -26,63 +26,59 @@ const status = {
 const logs = {}
 const logId = (date, index) => date + '#' + index
 
-const createRepoHashtags = (pool, org, names, next) => {
+const createRepoHashtags = (pool, org, names) => {
   const [name, ...rest] = names
 
-  if (name === undefined) {
-    return next()
-  }
+  if (name === undefined) return
 
   winston.verbose(`Check #${name}`)
-  db.testHashtag(pool, name, (err, r) => {
-    if (err) return next(err)
-    if (r.rows[0].exists) {
-      return createRepoHashtags(pool, org, rest, next)
-    }
 
-    winston.verbose(`Create hashtag #${name}`)
-    db.createHashtag(pool, name, (err, r) => {
-      if (err) return next(err)
+  return db.testHashtag(pool, name)
+    .then((r) => {
+      if (r.rows[0].exists) return createRepoHashtags(pool, org, rest)
 
-      winston.info(`Repo hashtag #${name} is created`)
+      winston.verbose(`Create hashtag #${name}`)
 
-      return createRepoHashtags(pool, org, rest, next)
+      return db.createHashtag(pool, name)
+        .then(r => {
+          winston.info(`Repo hashtag #${name} is created`)
+
+          return createRepoHashtags(pool, org, rest)
+        })
     })
-  })
 }
 
-const prepareRepoHashtags = (pool, org, next) => {
-  org.getRepos((err, repos) => {
-    const names = map(r => r.full_name, repos)
-
-    return createRepoHashtags(pool, org, names, next)
-  })
-}
+const prepareRepoHashtags = (pool, org) =>
+  org.getRepos()
+    .then(res => res.data)
+    .then(map(rs => rs.full_name))
+    .then(names => createRepoHashtags(pool, org, names))
 
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
-db.test(pool, (err, res) => {
-  if (err) return winston.error(err)
-  winston.verbose(`Database connected at ${res.rows[0].now}`)
-  db.prepareTables(pool, (err, res) => {
-    if (err) return winston.error(err)
+db.test(pool)
+  .then(now => {
+    winston.verbose(`Database connected at ${now}`)
 
-    winston.verbose('Tables are ready')
+    return db.prepareTables(pool)
+      .then(() => {
+        winston.verbose('Tables are ready')
 
-    const gh = new GitHub()
-    // TODO: use process.env.GH_ORGANIZATION
-    const org = gh.getOrganization('g0v')
+        const gh = new GitHub()
+        // TODO: use process.env.GH_ORGANIZATION
+        const org = gh.getOrganization('g0v')
 
-    winston.verbose('Prepare repo hashtags')
-    prepareRepoHashtags(pool, org, (err) => {
-      if (err) return winston.error(err)
+        winston.verbose('Prepare repo hashtags')
 
-      winston.verbose('Repo hashtags are ready')
+        return prepareRepoHashtags(pool, org)
+          .then(() => {
+            winston.verbose('Repo hashtags are ready')
 
-      status.database = true
-    })
+            status.database = true
+          })
+      })
   })
-})
+  .catch(winston.error)
 
 // variables
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
@@ -112,25 +108,20 @@ app
   })
   // GitHub OAuth callback URL
   .get('/api/callback', (req, res, next) => {
-    if (!client_id || !client_secret) {
-      throw new Error('Client ID or secret is not set')
-    }
+    if (!client_id || !client_secret) throw new Error('Client ID or secret is not set')
 
     const { code } = req.query
-    if (!code) {
-      throw new Error('OAuth code is missing')
-    }
+    if (!code) throw new Error('OAuth code is missing')
 
     winston.verbose(`Exchange access token with code: ${code}`)
+
     axios({
       method: 'post',
       url: 'https://github.com/login/oauth/access_token',
       data: { client_id, client_secret, code }
     })
       .then((result) => {
-        if (result.data.error) {
-          throw new Error(result.data.error)
-        }
+        if (result.data.error) throw new Error(result.data.error)
 
         winston.verbose(`Access token: ${result.data.access_token}`)
         const endpoint = `/callback?${result.data}`
@@ -144,64 +135,56 @@ app
   })
   // Get all hashtags
   .get('/api/hashtag', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
     winston.verbose('Get all hasttags')
-    db.listHashtag(pool, (err, r) => {
-      if (err) return next(err)
-      res.json(r.rows)
-    })
+
+    db.listHashtag(pool)
+      .then(r => res.json(r.rows))
+      .catch(next)
   })
   // Get a hashtag
   .get('/api/hashtag/:tag', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
-    const tag = req.params.tag
+    const { tag } = req.params
 
     winston.verbose(`Get hashtag #${tag}`)
-    db.getHashtag(pool, tag, (err, r) => {
-      if (err) return next(err)
-      if (r.rows.length === 0) {
-        return res.status(404).send()
-      }
 
-      res.json(r.rows[0])
-    })
+    db.getHashtag(pool, tag)
+      .then(r => {
+        if (r.rows.length === 0) return res.status(404).send()
+
+        res.json(r.rows[0])
+      })
+      .catch(next)
   })
   // Create new hashtag
   .post('/api/hashtag/:tag', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
-    const tag = req.params.tag
+    const { tag } = req.params
 
     winston.verbose(`Check hashtag #${tag}`)
-    db.testHashtag(pool, tag, (err, r) => {
-      if (err) return next(err)
-      if (r.rows[0].exists) {
-        return res.status(409).send('Hashtag Exists')
-      }
 
-      winston.verbose(`Create hashtag #${tag}`)
-      db.createHashtag(pool, tag, (err, r) => {
-        if (err) return next(err)
+    db.testHashtag(pool, tag)
+      .then(r => {
+        if (r.rows[0].exists) return res.status(409).send('Hashtag Exists')
 
-        winston.info(`Hashtag #${tag} created`)
+        winston.verbose(`Create hashtag #${tag}`)
 
-        res.json({ id: r.rows[0].id })
+        return db.createHashtag(pool, tag)
+          .then(r => {
+            winston.info(`Hashtag #${tag} created`)
+
+            res.json({ id: r.rows[0].id })
+          })
       })
-    })
+      .catch(next)
   })
   // Get a log
   .get('/api/logbot/:channel/:date/:index', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
     const { date, index, channel } = req.params
     const id = logId(date, index)
@@ -213,81 +196,75 @@ app
     }
 
     logs[id]
-      .then((ls) => {
+      .then(ls => {
         const log = ls[index]
 
-        if (log === undefined) {
-          return res.status(404).send()
-        }
+        if (log === undefined) return res.status(404).send()
 
         winston.verbose(`Get log ${id}`)
-        db.getLog(pool, date, +index, (err, r) => {
-          if (err) return next(err)
-          if (r.rows.length === 0) {
-            return res.json(log)
-          }
 
-          res.json({ ...r.rows[0], ...log })
-        })
+        return db.getLog(pool, date, +index)
+          .then(r => {
+            if (r.rows.length === 0) return res.json(log)
+
+            res.json({ ...r.rows[0], ...log })
+          })
       })
+      .catch(next)
   })
   // Create log entry so we can link it with hashtags later
   .post('/api/logbot/:channel/:date/:index', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
     const { date, index } = req.params
 
     winston.verbose(`Check log ${date}#${index}`)
-    db.testLog(pool, date, +index, (err, r) => {
-      if (err) return next(err)
-      if (r.rows[0].exists) {
-        return res.status(409).send('Log Exists')
-      }
 
-      winston.verbose(`Create log ${date}#${index}`)
-      db.createLog(pool, date, +index, (err, r) => {
-        if (err) return next(err)
+    db.testLog(pool, date, +index)
+      .then(r => {
+        if (r.rows[0].exists) return res.status(409).send('Log Exists')
 
-        winston.info(`Log ${date}#${index} created`)
+        winston.verbose(`Create log ${date}#${index}`)
 
-        res.json({ id: r.rows[0].id })
+        return db.createLog(pool, date, +index)
+          .then(r => {
+            winston.info(`Log ${date}#${index} created`)
+
+            res.json({ id: r.rows[0].id })
+          })
       })
-    })
+      .catch(next)
   })
   // Link a log with a hashtag
   .post('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
     const { log, hashtag } = req.params
 
     winston.verbose(`Link log ${log} with hashtag ${hashtag}`)
-    db.linkLogWithHashtag(pool, +log, +hashtag, (err, r) => {
-      if (err) return next(err)
 
-      winston.info(`Log ${log} is linked with hashtag ${hashtag}`)
+    db.linkLogWithHashtag(pool, +log, +hashtag)
+      .then(r => {
+        winston.info(`Log ${log} is linked with hashtag ${hashtag}`)
 
-      res.json({ id: r.rows[0].id, log, hashtag })
-    })
+        res.json({ id: r.rows[0].id, log: +log, hashtag })
+      })
+      .catch(next)
   })
   .delete('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
-    if (!status.database) {
-      throw new Error("Database isn't ready")
-    }
+    if (!status.database) throw new Error("Database isn't ready")
 
     const { log, hashtag } = req.params
 
     winston.verbose(`Unlink log ${log} with hashtag ${hashtag}`)
-    db.unlinkLogWithHashtag(pool, +log, +hashtag, (err, r) => {
-      if (err) return next(err)
 
-      winston.info(`Log ${log} is unlinked with hashtag ${hashtag}`)
+    db.unlinkLogWithHashtag(pool, +log, +hashtag)
+      .then(r => {
+        winston.info(`Log ${log} is unlinked with hashtag ${hashtag}`)
 
-      res.json({ id: r.rows[0].id, log, hashtag })
-    })
+        res.json({ id: r.rows[0].id, log: +log, hashtag })
+      })
+      .catch(next)
   })
   // Serve client scripts
   .use(express.static(paths.appBuild))
