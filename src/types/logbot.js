@@ -5,6 +5,8 @@ import type { HashtagId } from './hashtag'
 
 export const DATE_FORMAT = 'YYYY-MM-DD'
 
+export const TIME_FORMAT = 'HH:mm'
+
 export type LogId = number
 
 export type Log = {
@@ -63,6 +65,10 @@ export const UnlinkSuccess = (logId: LogId, hashtagId: HashtagId): UnlinkSuccess
 export type UnlinkFailureAction = { type: 'LOG_UNLINK_FAILURE', logId: LogId, hashtagId: HashtagId, error: Error }
 export const LOG_UNLINK_FAILURE = 'LOG_UNLINK_FAILURE'
 export const UnlinkFailure = (logId: LogId, hashtagId: HashtagId, error: Error): UnlinkFailureAction => ({ type: LOG_UNLINK_FAILURE, logId, hashtagId, error })
+
+export type HideAction = { type: 'LOG_HIDE', date: string, index: number }
+export const LOG_HIDE = 'LOG_HIDE'
+export const Hide = (date: string, index: number): HideAction => ({ type: LOG_HIDE, date, index })
 
 // functions
 export const getDate = (state: State): string => {

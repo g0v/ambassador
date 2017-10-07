@@ -7,7 +7,7 @@ import * as L from '~/types/logbot'
 import * as H from '~/types/hashtag'
 import { Container, Item } from 'semantic-ui-react'
 import LogItem from '../LogItem'
-import { map, difference, uniq } from 'ramda'
+import { map, difference, uniq, reverse } from 'ramda'
 import styles from './index.css'
 
 class LogListPage extends PureComponent {
@@ -69,6 +69,9 @@ class LogListPage extends PureComponent {
                     console.error(err)
                   }
                 }}
+                onHide={async (e) => {
+                  await actions.logbot.hide(data.date, data.index)
+                }}
               />,
             logs
           )
@@ -92,7 +95,7 @@ export default connect(
   state => {
     const hashtags = H.getHashtags(state)
     const options = hashtagsToOptions(hashtags)
-    const logs = L.getLogs(state)
+    const logs = reverse(L.getLogs(state))
 
     return { logs, options }
   },

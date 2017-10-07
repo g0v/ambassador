@@ -15,7 +15,8 @@ import {
   LinkFailure,
   UnlinkRequest,
   UnlinkSuccess,
-  UnlinkFailure
+  UnlinkFailure,
+  Hide
 } from '~/types/logbot'
 import axios from 'axios'
 
@@ -85,4 +86,10 @@ export const unliknHashtag: RawAction<[LogId, HashtagId], void> = store => async
     dispatch(UnlinkFailure(logId, hashtagId, error))
     throw error
   }
+}
+
+export const hide: RawAction<[string, number], void> = store => async(date, index) => {
+  const { dispatch } = store
+
+  dispatch(Hide(date, index))
 }

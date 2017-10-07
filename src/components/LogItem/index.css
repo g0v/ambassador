@@ -1,2 +1,10 @@
 .main {
 }
+
+.log {
+  font-family: monospace;
+
+  .nick {
+    font-weight: bold;
+  }
+}

@@ -36,6 +36,7 @@ import {
   LOG_UNLINK_REQUEST,
   LOG_UNLINK_SUCCESS,
   LOG_UNLINK_FAILURE,
+  LOG_HIDE,
   getLogs
 } from '~/types/logbot'
 import {
@@ -372,6 +373,30 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
     case LOG_UNLINK_FAILURE: {
       return state
+    }
+    case LOG_HIDE: {
+      const { date, index } = action
+
+      let logs = state.logbot.logs
+      const i = findIndex(l => l.date === date && l.index === index, logs)
+
+      if (i === -1) {
+        console.error(`log not found: ${date}#${index}`)
+        return state
+      }
+
+      logs = [
+        ...logs.slice(0, i),
+        ...logs.slice(i + 1)
+      ]
+
+      return {
+        ...state,
+        logbot: {
+          ...state.logbot,
+          logs
+        }
+      }
     }
 
     case HASHTAG_LIST_REQUEST: {

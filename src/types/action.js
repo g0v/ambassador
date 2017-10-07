@@ -31,7 +31,8 @@ import type {
   LinkFailureAction,
   UnlinkRequestAction,
   UnlinkSuccessAction,
-  UnlinkFailureAction
+  UnlinkFailureAction,
+  HideAction
 } from './logbot'
 import type {
   HashtagListRequestAction,
@@ -54,6 +55,7 @@ export type PlainAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LinkRequestAction | LinkSuccessAction | LinkFailureAction
   | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction
+  | HideAction
   | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
   | HashtagCreateRequestAction | HashtagCreateSuccessAction | HashtagCreateFailureAction
 
