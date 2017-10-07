@@ -60,7 +60,7 @@ class LogListPage extends PureComponent {
                     }
                     const goneLinks = difference(hashtags, dropdown.value)
                     for (l of goneLinks) {
-                      ps.push(actions.logbot.unliknHashtag(data.id, l))
+                      ps.push(actions.logbot.unlinkHashtag(data.id, l))
                     }
 
                     await Promise.all(ps)
@@ -81,20 +81,10 @@ class LogListPage extends PureComponent {
   }
 }
 
-const hashtagsToOptions = (hashtags) => {
-  let result = []
-
-  for (let k in hashtags) {
-    result.push(H.toDropdownOption(hashtags[k]))
-  }
-
-  return result
-}
-
 export default connect(
   state => {
     const hashtags = H.getHashtags(state)
-    const options = hashtagsToOptions(hashtags)
+    const options = H.toDropdownOptions(hashtags)
     const logs = reverse(L.getLogs(state))
 
     return { logs, options }

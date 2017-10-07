@@ -73,7 +73,7 @@ export const linkHashtag: RawAction<[LogId, HashtagId], HashtagLink> = store => 
   }
 }
 
-export const unliknHashtag: RawAction<[LogId, HashtagId], void> = store => async (logId, hashtagId) => {
+export const unlinkHashtag: RawAction<[LogId, HashtagId], void> = store => async (logId, hashtagId) => {
   const { dispatch } = store
 
   dispatch(UnlinkRequest(logId, hashtagId))

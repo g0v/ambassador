@@ -63,3 +63,13 @@ export const findHashtagByContent = (hashtags: { [key: number]: Hashtag }, conte
 export const toDropdownOption = (hashtag: Hashtag): HashtagOption => ({
   key: hashtag.id, value: hashtag.id, text: `#${hashtag.content}`
 })
+
+export const toDropdownOptions = (hashtags: { [key: number]: Hashtag }): HashtagOption[] => {
+  let result = []
+
+  for (let k in hashtags) {
+    result.push(toDropdownOption(hashtags[+k]))
+  }
+
+  return result
+}

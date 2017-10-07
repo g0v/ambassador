@@ -29,10 +29,10 @@ class LogItem extends PureComponent {
           </Item.Description>
           <Item.Extra>
             <Dropdown
-              fluid multiple search selection allowAdditions
+              fluid multiple search selection allowAdditions closeOnChange
               placeholder="#hashtag"
               options={options}
-              value={cleanup(hashtags)}
+              value={cleanup(hashtags || [])}
               onAddItem={onAddItem}
               onChange={onChange}
             />

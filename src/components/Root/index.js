@@ -5,7 +5,6 @@ import Header from '~/components/Header'
 import LogbotPage from '~/components/LogbotPage'
 import RepoListPage from '~/components/RepoListPage'
 import IssueListPage from '~/components/IssueListPage'
-import LogListPage from '~/components/LogListPage'
 
 import styles from './index.css'
 
@@ -24,7 +23,6 @@ class Root extends PureComponent {
           <Route exact path="/" component={LogbotPage} />
           <Route exact path="/repos" component={RepoListPage} />
           <Route exact path="/repos/:repo" component={IssueListPage} />
-          <Route exact path="/storage" component={LogListPage} />
         </div>
       </div>
     );
