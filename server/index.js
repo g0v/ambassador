@@ -207,7 +207,7 @@ app
           .then(r => {
             if (r.rows.length === 0) return res.json(log)
 
-            res.json({ ...r.rows[0], ...log })
+            res.json(Object.assign({}, r.rows[0], log))
           })
       })
       .catch(next)
