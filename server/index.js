@@ -34,14 +34,14 @@ const createRepoHashtags = (pool, org, names) => {
   winston.verbose(`Check #${name}`)
 
   return db.testHashtag(pool, name)
-    .then((r) => {
-      if (r.rows[0].exists) return createRepoHashtags(pool, org, rest)
+    .then(exists => {
+      if (exists) return createRepoHashtags(pool, org, rest)
 
       winston.verbose(`Create hashtag #${name}`)
 
       return db.createHashtag(pool, name)
-        .then(r => {
-          winston.info(`Repo hashtag #${name} is created`)
+        .then(tag => {
+          winston.info(`Repo hashtag #${tag.content} is created`)
 
           return createRepoHashtags(pool, org, rest)
         })
@@ -140,7 +140,7 @@ app
     winston.verbose('Get all hasttags')
 
     db.listHashtag(pool)
-      .then(r => res.json(r.rows))
+      .then(tags => res.json(tags))
       .catch(next)
   })
   // Get a hashtag
@@ -152,10 +152,10 @@ app
     winston.verbose(`Get hashtag #${tag}`)
 
     db.getHashtag(pool, tag)
-      .then(r => {
-        if (r.rows.length === 0) return res.status(404).send()
+      .then(tag => {
+        if (tag === undefined) return res.status(404).send()
 
-        res.json(r.rows[0])
+        res.json(tag)
       })
       .catch(next)
   })
@@ -168,16 +168,16 @@ app
     winston.verbose(`Check hashtag #${tag}`)
 
     db.testHashtag(pool, tag)
-      .then(r => {
-        if (r.rows[0].exists) return res.status(409).send('Hashtag Exists')
+      .then(exists => {
+        if (exists) return res.status(409).send('Hashtag Exists')
 
         winston.verbose(`Create hashtag #${tag}`)
 
         return db.createHashtag(pool, tag)
-          .then(r => {
-            winston.info(`Hashtag #${tag} created`)
+          .then(tag => {
+            winston.info(`Hashtag #${tag.content} created`)
 
-            res.json({ id: r.rows[0].id })
+            res.json(tag)
           })
       })
       .catch(next)
@@ -204,10 +204,10 @@ app
         winston.verbose(`Get log ${id}`)
 
         return db.getLog(pool, date, +index)
-          .then(r => {
-            if (r.rows.length === 0) return res.json(log)
+          .then(l => {
+            if (l === undefined) return res.json(log)
 
-            res.json(Object.assign({}, r.rows[0], log))
+            res.json(Object.assign({}, l, log))
           })
       })
       .catch(next)
@@ -221,16 +221,16 @@ app
     winston.verbose(`Check log ${date}#${index}`)
 
     db.testLog(pool, date, +index)
-      .then(r => {
-        if (r.rows[0].exists) return res.status(409).send('Log Exists')
+      .then(exists => {
+        if (exists) return res.status(409).send('Log Exists')
 
         winston.verbose(`Create log ${date}#${index}`)
 
         return db.createLog(pool, date, +index)
-          .then(r => {
-            winston.info(`Log ${date}#${index} created`)
+          .then(log => {
+            winston.info(`Log ${log.date}#${log.index} created`)
 
-            res.json({ id: r.rows[0].id })
+            res.json(log)
           })
       })
       .catch(next)
@@ -244,10 +244,10 @@ app
     winston.verbose(`Link log ${log} with hashtag ${hashtag}`)
 
     db.linkLogWithHashtag(pool, +log, +hashtag)
-      .then(r => {
-        winston.info(`Log ${log} is linked with hashtag ${hashtag}`)
+      .then(link => {
+        winston.info(`Log ${link.log} is linked with hashtag ${link.hashtag}`)
 
-        res.json({ id: r.rows[0].id, log: +log, hashtag })
+        res.json(link)
       })
       .catch(next)
   })
@@ -259,10 +259,10 @@ app
     winston.verbose(`Unlink log ${log} with hashtag ${hashtag}`)
 
     db.unlinkLogWithHashtag(pool, +log, +hashtag)
-      .then(r => {
-        winston.info(`Log ${log} is unlinked with hashtag ${hashtag}`)
+      .then(link => {
+        winston.info(`Log ${link.log} is unlinked with hashtag ${link.hashtag}`)
 
-        res.json({ id: r.rows[0].id, log: +log, hashtag })
+        res.json(link)
       })
       .catch(next)
   })
