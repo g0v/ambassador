@@ -39,6 +39,10 @@ const getHashtag = (db, content) =>
 const prepareLogTable = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS log (id serial PRIMARY KEY, date char(10), index integer);')
 
+const listLog = (db) =>
+  db.query('SELECT * FROM log;')
+    .then(r => r && r.rows)
+
 const createLog = (db, date, index) =>
   db.query(
     'INSERT INTO log (date, index) VALUES ($1, $2) RETURNING *;',
@@ -62,6 +66,10 @@ const getLog = (db, date, index) =>
 
 const prepareLogHashtagTable = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS logHashtag (id serial PRIMARY KEY, log serial, hashtag serial);')
+
+const listLogHashtagLink = (db) =>
+  db.query('SELECT * FROM logHashtag;')
+    .then(r => r && r.rows)
 
 // TODO: testLogWithHashtag = (db, log, hashtag) => {}
 
@@ -88,10 +96,12 @@ module.exports = {
   testHashtag,
   getHashtag,
   prepareLogTable,
+  listLog,
   createLog,
   testLog,
   getLog,
   prepareLogHashtagTable,
+  listLogHashtagLink,
   linkLogWithHashtag,
   unlinkLogWithHashtag
 }

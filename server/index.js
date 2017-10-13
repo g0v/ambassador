@@ -133,6 +133,25 @@ app
   .get('/api/status', (req, res, next) => {
     res.json(status)
   })
+  .get('/api/database/export', (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    winston.verbose('Export the database')
+
+    db.listHashtag(pool)
+      .then(hashtag =>
+        db.listLog(pool)
+          .then(log =>
+            db.listLogHashtagLink(pool)
+              .then(logHashtag => {
+                winston.info('Database exported')
+
+                res.json({ hashtag, log, logHashtag })
+              })
+          )
+      )
+      .catch(next)
+  })
   // Get all hashtags
   .get('/api/hashtag', (req, res, next) => {
     if (!status.database) throw new DatabaseError()
