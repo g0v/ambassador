@@ -15,6 +15,8 @@ const db = require('./database')
 const GitHub = require('github-api')
 // utils
 const { map } = require('ramda')
+// errors
+const { GitHubClientError, DatabaseError } = require('./error')
 // config
 const paths = require(path.resolve(__dirname, '../config/paths.js'))
 
@@ -98,9 +100,7 @@ app
   })
   // GitHub OAuth
   .get('/api/auth', (req, res) => {
-    if (!client_id || !client_secret) {
-      throw new Error('Client ID or secret is not set')
-    }
+    if (!client_id || !client_secret) throw new GitHubClientError()
 
     winston.verbose('Redirect to GitHub login page')
     const endpoint = `https://github.com/login/oauth/authorize?scope=user:email&client_id=${client_id}`
@@ -108,7 +108,7 @@ app
   })
   // GitHub OAuth callback URL
   .get('/api/callback', (req, res, next) => {
-    if (!client_id || !client_secret) throw new Error('Client ID or secret is not set')
+    if (!client_id || !client_secret) throw new GitHubClientError()
 
     const { code } = req.query
     if (!code) throw new Error('OAuth code is missing')
@@ -135,7 +135,7 @@ app
   })
   // Get all hashtags
   .get('/api/hashtag', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     winston.verbose('Get all hasttags')
 
@@ -145,7 +145,7 @@ app
   })
   // Get a hashtag
   .get('/api/hashtag/:tag', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { tag } = req.params
 
@@ -161,7 +161,7 @@ app
   })
   // Create new hashtag
   .post('/api/hashtag/:tag', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { tag } = req.params
 
@@ -184,7 +184,7 @@ app
   })
   // Get a log
   .get('/api/logbot/:channel/:date/:index', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { date, index, channel } = req.params
     const id = logId(date, index)
@@ -214,7 +214,7 @@ app
   })
   // Create log entry so we can link it with hashtags later
   .post('/api/logbot/:channel/:date/:index', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { date, index } = req.params
 
@@ -237,7 +237,7 @@ app
   })
   // Link a log with a hashtag
   .post('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
 
@@ -252,7 +252,7 @@ app
       .catch(next)
   })
   .delete('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
-    if (!status.database) throw new Error("Database isn't ready")
+    if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
 
