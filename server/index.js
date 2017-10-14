@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 // logger
 const winston = require('winston')
@@ -10,6 +11,13 @@ const fallback = require('express-history-api-fallback')
 const axios = require('axios')
 // database
 const { Pool } = require('pg')
+// Try to remove old `database.js` before requiring `database/index.js`
+// This might be a bug in middle2
+try {
+  fs.unlinkSync(path.resolve(__dirname, './database.js'))
+} catch (err) {
+  winston.warning(err)
+}
 const db = require('./database')
 // GitHub
 const GitHub = require('github-api')
