@@ -1,6 +1,9 @@
 const prepare = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS hashtag (id serial PRIMARY KEY, content text);')
 
+const drop = (db) =>
+  db.query('DROP TABLE IF EXISTS hashtag;')
+
 const list = (db) =>
   db.query('SELECT * FROM hashtag;')
     .then(r => r && r.rows)
@@ -28,6 +31,7 @@ const get = (db, content) =>
 
 module.exports = {
   prepare,
+  drop,
   list,
   create,
   test,

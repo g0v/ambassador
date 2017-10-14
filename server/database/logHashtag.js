@@ -1,6 +1,9 @@
 const prepare = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS logHashtag (id serial PRIMARY KEY, log serial, hashtag serial);')
 
+const drop = (db) =>
+  db.query('DROP TABLE IF EXISTS logHashtag;')
+
 const list = (db) =>
   db.query('SELECT * FROM logHashtag;')
     .then(r => r && r.rows)
@@ -23,6 +26,7 @@ const unlink = (db, log, hashtag) =>
 
 module.exports = {
   prepare,
+  drop,
   list,
   link,
   unlink

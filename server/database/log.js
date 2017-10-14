@@ -1,6 +1,9 @@
 const prepare = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS log (id serial PRIMARY KEY, date char(10), index integer);')
 
+const drop = (db) =>
+  db.query('DROP TABLE IF EXISTS log;')
+
 const list = (db) =>
   db.query('SELECT * FROM log;')
     .then(r => r && r.rows)
@@ -28,6 +31,7 @@ const get = (db, date, index) =>
 
 module.exports = {
   prepare,
+  drop,
   list,
   create,
   test,

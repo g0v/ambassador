@@ -13,6 +13,7 @@
 start.sh
 start-server.sh
 start-client.sh
+import.sh
 
 # production
 # prebuild for middle2

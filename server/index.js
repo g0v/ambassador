@@ -16,7 +16,7 @@ const { Pool } = require('pg')
 try {
   fs.unlinkSync(path.resolve(__dirname, './database.js'))
 } catch (err) {
-  winston.warning(err)
+  winston.warn(err.message)
 }
 const db = require('./database')
 // GitHub
