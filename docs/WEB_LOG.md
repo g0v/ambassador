@@ -86,3 +86,13 @@
 * [全民除黴計畫](https://g0v.hackpad.tw/APP4AM-0.5--YGd0FvMp9Vr)的 repo 似乎消失了。
 * 現在覺得 YA0H 會變成 fetch everything 然後加上 repo tag ，這算 linked data 吧？
 * 放棄一句一句上 tag ，先找 itaigi 相關的句子，該不會 itaigi 沒在 general 頻道上討論過？
+
+### 2017-10-20
+
+poga [曾經提過][minimum-viable-ownership]他不喜歡「擁有」這個概念。在該文中，他提到 ZeroMQ 的 Pieter Hintjens 曾整理了一份叫做 [Collective Code Construction Contract][C4] 的 RFC。
+
+除此之外，他還建議我可以去看 Rust 社群怎麼做 [Libz Blitz][libz-blitz] 。
+
+[minimum-viable-ownership]: https://medium.com/@poga/minimum-viable-ownership-7b0c976f7163
+[C4]: https://rfc.zeromq.org/spec:42/C4/
+[libz-blitz]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
