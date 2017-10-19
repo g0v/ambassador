@@ -26,7 +26,6 @@ import {
 } from '~/types/github'
 import {
   DATE_FORMAT,
-  DATE_CHANGE,
   LOG_REQUEST,
   LOG_SUCCESS,
   LOG_FAILURE,
@@ -65,7 +64,6 @@ export type State = {
     issues: { [key: string]: any[] }
   },
   logbot: {
-    date: string,
     logs: Log[]
   },
   hashtags: { [key: number]: Hashtag }
@@ -275,17 +273,6 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
 
-    case DATE_CHANGE: {
-      const { date } = action
-
-      return {
-        ...state,
-        logbot: {
-          ...state.logbot,
-          date
-        }
-      }
-    }
     case LOG_REQUEST: {
       const { date, index } = action
       const logs = getLogs(state)

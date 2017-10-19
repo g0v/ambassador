@@ -26,10 +26,6 @@ export type HashtagLink = {
 }
 
 // data
-export type DateChangeAction = { type: 'DATE_CHANGE', date: string }
-export const DATE_CHANGE = 'DATE_CHANGE'
-export const DateChange = (date: string): DateChangeAction => ({ type: DATE_CHANGE, date })
-
 export type LogRequestAction = { type: 'LOG_REQUEST', date: string, index: number }
 export const LOG_REQUEST = 'LOG_REQUEST'
 export const LogRequest = (date: string, index: number): LogRequestAction => ({ type: LOG_REQUEST, date, index })

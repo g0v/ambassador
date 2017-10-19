@@ -11,6 +11,8 @@ import { map, uniq, difference, reverse } from 'ramda'
 import moment from 'moment'
 import styles from './index.css'
 
+const getParams = (props) => (props && props.match && props.match.params) || {}
+
 class LogbotPage extends PureComponent {
   static defaultProps = {
     className: '',
@@ -19,7 +21,8 @@ class LogbotPage extends PureComponent {
   handleLogbotAction = (e) => {
     if (e.origin !== process.env.LOGBOT_URL) return
 
-    const { date, actions } = this.props
+    const { history, actions } = this.props
+    const { date: currentDate } = getParams(this.props)
 
     switch (e.data.type) {
       case 'LOGBOT_DATE': {
@@ -27,11 +30,13 @@ class LogbotPage extends PureComponent {
         if (date === 'today') {
           date = moment().format(L.DATE_FORMAT)
         }
-        actions.logbot.setDate(date)
+        if (date !== currentDate) {
+          history.push(`${date}`)
+        }
         return
       }
       case 'LOGBOT_MESSAGE': {
-        actions.logbot.storeLog(date, e.data.index)
+        actions.logbot.storeLog(currentDate, e.data.index)
         // TODO: notify user that the log has been pushed into the storage
         return
       }
@@ -49,7 +54,8 @@ class LogbotPage extends PureComponent {
   }
 
   render() {
-    const { id, className, actions, date, logs, options } = this.props
+    const { id, className, actions, logs, options } = this.props
+    const { channel, date } = getParams(this.props)
 
     return (
       <div id={id} className={cx(styles.main, className)}>
@@ -122,7 +128,7 @@ class LogbotPage extends PureComponent {
             className={styles.iframe}
             as="iframe"
             title="g0v Logbot"
-            src={`${process.env.LOGBOT_URL}/channel/g0v.tw/${date}`}
+            src={`${process.env.LOGBOT_URL}/channel/${channel}/${date}`}
           />
         </Sidebar.Pushable>
       </div>

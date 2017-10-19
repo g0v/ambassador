@@ -6,7 +6,6 @@ import type { HashtagId } from '~/types/hashtag'
 
 import { getUrl } from '~/types'
 import {
-  DateChange,
   LogRequest,
   LogSuccess,
   LogFailure,
@@ -21,14 +20,6 @@ import {
 import axios from 'axios'
 
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
-
-export const setDate: RawAction<[string], string> = store => async (date) => {
-  const { dispatch } = store
-
-  dispatch(DateChange(date))
-
-  return date
-}
 
 export const getLog: RawAction<[string, number], Log> = store => async (date, index) => {
   const { dispatch } = store

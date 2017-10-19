@@ -22,7 +22,6 @@ import type {
   IssueListFailureAction
 } from './github'
 import type {
-  DateChangeAction,
   LogRequestAction,
   LogSuccessAction,
   LogFailureAction,
@@ -51,7 +50,6 @@ export type PlainAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
-  | DateChangeAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LinkRequestAction | LinkSuccessAction | LinkFailureAction
   | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction

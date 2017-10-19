@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, Link, matchPath } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
@@ -19,7 +19,17 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { id, className, actions, location, unauthed, isLoggingIn, loginName, date } = this.props
+    const {
+      id, className, history, actions,
+      location, unauthed, isLoggingIn, loginName
+    } = this.props
+    const match = matchPath(
+      location.pathname,
+      { path: '/logbot/:channel/:date', exact: true }
+    )
+    let { channel, date } = (match && match.params) || {}
+    channel = channel || 'g0v.tw'
+    date = date || moment().format(L.DATE_FORMAT)
 
     return (
       <Menu id={id} className={cx(styles.main, className)} inverted fixed="top">
@@ -28,16 +38,16 @@ class Header extends PureComponent {
           trigger={
             <Menu.Item
               as={Link}
-              to="/"
+              to={`/logbot/${channel}/${date}`}
               name="logbot"
-              active={location.pathname === '/'}
+              active={location.pathname.startsWith('/logbot')}
             >
               <Icon name="calendar" />
               Logbot
             </Menu.Item>
           }
           date={date}
-          onSelect={date => actions.logbot.setDate(moment(date).format(L.DATE_FORMAT))}
+          onSelect={date => history.push((moment(date).format(L.DATE_FORMAT)))}
         />
         <Menu.Item
           as={Link}
