@@ -4,6 +4,7 @@ const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -58,7 +59,10 @@ module.exports = {
   // You can exclude the *.map files from the build during deployment.
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
-  entry: [require.resolve('./polyfills'), paths.appIndexJs],
+  entry: {
+    vendor: options.vendor,
+    bundle: [require.resolve('./polyfills'), paths.appIndexJs]
+  },
   output: {
     // The build folder.
     path: paths.appBuild,
@@ -271,6 +275,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       template: paths.appHtml,
+      title: 'YA0H',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -284,6 +289,11 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: Infinity
+    }),
+    new InlineManifestWebpackPlugin({ name: 'webpackManifest' }),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
     // It is absolutely essential that NODE_ENV was set to production here.
@@ -345,7 +355,7 @@ module.exports = {
       // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
       navigateFallbackWhitelist: [/^(?!\/(?:__|api)).*/],
       // Don't precache sourcemaps (they're large) and build asset manifest:
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      staticFileGlobsIgnorePatterns: [/manifest\.\w{8}\.js$/, /\.map$/, /asset-manifest\.json$/],
     }),
     // Moment.js is an extremely popular library that bundles large locale files
     // by default due to how Webpack interprets its code. This is a practical

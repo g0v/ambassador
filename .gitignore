@@ -18,6 +18,7 @@ import.sh
 # production
 # prebuild for middle2
 #/build
+/build/static/js/manifest.*
 
 # misc
 .DS_Store
