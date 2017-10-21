@@ -22,6 +22,7 @@ const db = require('./database')
 // GitHub
 const GitHub = require('github-api')
 // utils
+const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
 const { map } = require('ramda')
 // errors
 const { GitHubClientError, DatabaseError } = require('./error')
@@ -66,6 +67,11 @@ const prepareRepoHashtags = (pool, org) =>
 
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
+// Azure instance sleeps after 5 mins, so we poke the database every 5 mins
+const keepAwake = () =>
+  db.test(pool)
+    .then(delay(3000000)) // 300s, 5mins
+    .then(keepAwake)
 db.test(pool)
   .then(now => {
     winston.verbose(`Database connected at ${now}`)
@@ -88,6 +94,7 @@ db.test(pool)
           })
       })
   })
+  .then(keepAwake)
   .catch(winston.error)
 
 // variables
