@@ -67,10 +67,6 @@ export const LOG_HIDE = 'LOG_HIDE'
 export const Hide = (date: string, index: number): HideAction => ({ type: LOG_HIDE, date, index })
 
 // functions
-export const getDate = (state: State): string => {
-  return (state && state.logbot && state.logbot.date) || ''
-}
-
 export const getLogs = (state: State): Log[] => {
   return (state && state.logbot && state.logbot.logs) || []
 }

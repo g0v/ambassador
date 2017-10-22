@@ -89,9 +89,8 @@ export default compose(
       const unauthed = !A.getAccessToken(state)
       const isLoggingIn = A.isLoggingIn(state)
       const loginName = G.getLoginName(state)
-      const date = L.getDate(state)
 
-      return { unauthed, isLoggingIn, loginName, date }
+      return { unauthed, isLoggingIn, loginName }
     },
     mapDispatchToProps(actions)
   )

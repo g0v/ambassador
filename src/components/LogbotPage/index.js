@@ -140,10 +140,9 @@ export default connect(
   state => {
     const hashtags = H.getHashtags(state)
     const options = H.toDropdownOptions(hashtags)
-    const date = L.getDate(state)
     const logs = reverse(L.getLogs(state))
 
-    return { date, logs, options }
+    return { logs, options }
   },
   mapDispatchToProps(actions)
 )(LogbotPage)
