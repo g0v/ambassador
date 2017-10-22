@@ -15,7 +15,7 @@ class LogItem extends PureComponent {
   }
 
   render() {
-    const { id, className, data, options, onAddItem, onChange, onHide } = this.props
+    const { id, className, data, options, onChange, onHide } = this.props
     const { nick = '...', msg = '...', hashtags } = data
     const timeStr = moment(+data.time * 1000).format(`${L.DATE_FORMAT} ${L.TIME_FORMAT}`)
 
@@ -29,11 +29,10 @@ class LogItem extends PureComponent {
           </Item.Description>
           <Item.Extra>
             <Dropdown
-              fluid multiple search selection allowAdditions closeOnChange
+              fluid multiple search selection closeOnChange
               placeholder="#hashtag"
               options={options}
               value={cleanup(hashtags || [])}
-              onAddItem={onAddItem}
               onChange={onChange}
             />
           </Item.Extra>

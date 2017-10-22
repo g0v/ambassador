@@ -27,15 +27,6 @@ class LogListPage extends PureComponent {
                 key={`${data.date}#${data.index}`}
                 data={data}
                 options={options}
-                onAddItem={async (e, item) => {
-                  try {
-                    await actions.hashtag.createHashtag(item.value)
-                    await actions.hashtag.getHashtags()
-                  } catch (err) {
-                    // TODO: deal with the 409 Conflict
-                    console.error(err)
-                  }
-                }}
                 onChange={async (e, dropdown) => {
                   try {
                     const hashtags = uniq(data.hashtags || [])
@@ -45,16 +36,8 @@ class LogListPage extends PureComponent {
                     const newLinks = difference(dropdown.value, hashtags)
                     for (l of newLinks) {
                       if (typeof l === 'string') {
-                        // XXX: find a better way to wait the last `onAddItem` action
-                        try {
-                          await actions.hashtag.getLastCreatedHashtag()
-                        } catch (err) {}
-                        const hs = await actions.hashtag.getStoredHashtags()
-                        const h = H.findHashtagByContent(hs, l)
-                        if (h === undefined) {
-                          throw new Error(`Hashtag #${l} not found!`)
-                        }
-                        l = h.id
+                        console.warn('Hashtag creation has been disabled.')
+                        continue
                       }
                       ps.push(actions.logbot.linkHashtag(data.id, l))
                     }
