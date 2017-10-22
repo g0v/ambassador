@@ -42,7 +42,12 @@ export const storeLog: RawAction<[string, number], Log> = store => async (date, 
   try {
     await axios.post(`${apiUrl}/api/logbot/g0v.tw/${date}/${index}`)
   } catch (error) {
-    console.warn('Log exists')
+    if (error.response) {
+      const { status } = error.response
+      if (status !== 409) {
+        console.error(error)
+      }
+    }
   }
 
   // $FlowFixMe
