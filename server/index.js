@@ -37,7 +37,16 @@ const status = {
 const logs = {}
 const logId = (date, index) => date + '#' + index
 
-const createRepoHashtags = (pool, org, names) => {
+const civicHashtags = [
+  '開放政府',
+  '開放資料',
+  '社會參與',
+  '新媒體應用',
+  '政策共筆',
+  'g0v基礎建設'
+]
+
+const createHashtagsFromList = (pool, names) => {
   const [name, ...rest] = names
 
   if (name === undefined) return
@@ -46,7 +55,7 @@ const createRepoHashtags = (pool, org, names) => {
 
   return db.hashtag.test(pool, name)
     .then(exists => {
-      if (exists) return createRepoHashtags(pool, org, rest)
+      if (exists) return createHashtagsFromList(pool, rest)
 
       winston.verbose(`Create hashtag #${name}`)
 
@@ -54,7 +63,7 @@ const createRepoHashtags = (pool, org, names) => {
         .then(tag => {
           winston.info(`Repo hashtag #${tag.content} is created`)
 
-          return createRepoHashtags(pool, org, rest)
+          return createHashtagsFromList(pool, rest)
         })
     })
 }
@@ -63,7 +72,7 @@ const prepareRepoHashtags = (pool, org) =>
   org.getRepos()
     .then(res => res.data)
     .then(map(rs => rs.full_name))
-    .then(names => createRepoHashtags(pool, org, names))
+    .then(names => createHashtagsFromList(pool, names))
 
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
@@ -85,8 +94,12 @@ db.test(pool)
         const org = gh.getOrganization('g0v')
 
         winston.verbose('Prepare repo hashtags')
+        const ps = [
+          prepareRepoHashtags(pool, org),
+          createHashtagsFromList(pool, civicHashtags)
+        ]
 
-        return prepareRepoHashtags(pool, org)
+        return Promise.all(ps)
           .then(() => {
             winston.verbose('Repo hashtags are ready')
 
