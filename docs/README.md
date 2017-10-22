@@ -4,6 +4,70 @@
 
 是不是直接改名叫機器大使就好？ XD
 
+## we b logs
+
+### 2017-10-23
+
+加上了六類 hashtags ，並拿掉新增 hashtag 功能。
+
+Jcrt 很熱心地幫我挖了挖 itaigi 的歷史，發現他們的 [hackpad][itaigi-hackpad] 。 [moed7ct][moed7ct] 和 [moed8ct][moed8ct] 也有紀錄。
+
+他還翻到 au 提過 Liz [本來是台語字典的事務官][sayit-8585]，後來[自己跳坑][sayit-8586]，才有 itaigi 計畫。
+
+話說 Logbot 的資料格式是不是向 SayIt 看齊比較好？
+
+[itaigi-hackpad]: https://g0v.hackpad.tw/moed7ct-taigi-neologism#iTaigi-
+[moed7ct]: https://g0v.hackpad.tw/11-moed7ct#11-moed7ct
+[moed8ct]: https://g0v.hackpad.tw/1-moed8ct?r=3#1-moed8ct
+[sayit-8585]: https://sayit.archive.tw/speech/8585
+[sayit-8586]: https://sayit.archive.tw/speech/8586
+
+### 2017-10-21
+
+在基礎松問了問 ipa 她怎麼了解並介紹一個 g0v 專案，提到會先看三方面：
+
+* 解決什麼問題？
+* 現在用什麼方式解決？
+* 需要什麼樣的人？
+
+（和[專案介紹空白模板][project-template]關心的事情有點相似）
+
+接著就能推給專案主。
+
+我提到爬 log 時發現，有些人在 IRC/general 頻道求坑，被推了 project hub 或 awesome g0v 列表後就沒下文。 ipa 表示入坑有兩方面：
+
+* 對主題有興趣，比較可能入坑
+* 本來就有某種技能
+
+後者若都沒有有興趣的主題，就很吃緣分。也因為想讓後者更好找坑，之前 kirby 好像做過一個人找事事找人的 project hub （連結待捕）。
+
+向 ipa 展示了一下 YA0H dashboard ，她提到之前 project hub 的 hashtag 並沒有設限，結果一個人被加二三十個 tag ，反而讓 tag 失去效用，有鑑於此， grants 和現在 g0v.tw 官網統一使用六個分類，用了幾年，成效不錯：
+
+* 開放政府
+* 開放資料
+* 社會參與
+* 新媒體應用
+* 政策共筆
+* g0v基礎建設
+
+看來我可以把這六類加到我的 hashtag 中，並取消使用者新增 tag 的功能，把新增 tag 當成管理功能，甚至靠投票來決定新 tag 。
+
+ipa 還提到，如果新參者一開始就看到 issue 列表，被嚇走的機會很高（可能因為 issue 列表沒有馬上可見的脈絡，且太過技術導向）。
+
+最後還跟 ipa 提了提想做共筆訪談遇到的問題，像是我得先了解要訪問的專案的技術 stack ，才有辦法藉著訪談問出專案架構，看能不能幫助技術入坑者更好上手。
+
+[project-template]: http://beta.hackfoldr.org/g0v-hackath26n/https%253A%252F%252Fg0v.hackpad.tw%252FProject-Readme-aCZGg48I5pX
+
+### 2017-10-20
+
+poga [曾經提過][minimum-viable-ownership]他不喜歡「擁有」這個概念。在該文中，他提到 ZeroMQ 的 Pieter Hintjens 曾整理了一份叫做 [Collective Code Construction Contract][C4] 的 RFC。
+
+除此之外，他還建議我可以去看 Rust 社群怎麼做 [Libz Blitz][libz-blitz] 。
+
+[minimum-viable-ownership]: https://medium.com/@poga/minimum-viable-ownership-7b0c976f7163
+[C4]: https://rfc.zeromq.org/spec:42/C4/
+[libz-blitz]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
+
 ## 基礎建設松討論過的想法
 
 * [awesome g0v][awesome-g0v]
@@ -62,7 +126,7 @@
 
 * [g0v.tw 台灣零時政府 @ COSCUP 2014 網路攤位](https://g0v.hackpad.tw/g0v.tw-COSCUP-2014--gVkOW9b3FU8)
 
-## we b log
+## 其他
 
 * [g0v/reporter](https://github.com/g0v/reporter) 公民記者證 - 不知道還有多少案子是跟 318 有關的？可以說怎樣的故事？
 * [20140528 自經區溝通會逐字](https://g0v.hackpad.tw/ep/pad/static/Zw8BPf9G4oQ) - venev 手打的五萬字逐字稿。那時還沒有 SayIt ，現在適合放到 SayIt 上嗎？ g0v 的在哪裡呢？[ PDIS 的](https://sayit.pdis.nat.gov.tw/speeches)實在是了不起。
@@ -87,48 +151,3 @@
 * 現在覺得 YA0H 會變成 fetch everything 然後加上 repo tag ，這算 linked data 吧？
 * 放棄一句一句上 tag ，先找 itaigi 相關的句子，該不會 itaigi 沒在 general 頻道上討論過？
 
-### 2017-10-21
-
-在基礎松問了問 ipa 她怎麼了解並介紹一個 g0v 專案，提到會先看三方面：
-
-* 解決什麼問題？
-* 現在用什麼方式解決？
-* 需要什麼樣的人？
-
-（和[專案介紹空白模板][project-template]關心的事情有點相似）
-
-接著就能推給專案主。
-
-我提到爬 log 時發現，有些人在 IRC/general 頻道求坑，被推了 project hub 或 awesome g0v 列表後就沒下文。 ipa 表示入坑有兩方面：
-
-* 對主題有興趣，比較可能入坑
-* 本來就有某種技能
-
-後者若都沒有有興趣的主題，就很吃緣分。也因為想讓後者更好找坑，之前 kirby 好像做過一個人找事事找人的 project hub （連結待捕）。
-
-向 ipa 展示了一下 YA0H dashboard ，她提到之前 project hub 的 hashtag 並沒有設限，結果一個人被加二三十個 tag ，反而讓 tag 失去效用，有鑑於此， grants 和現在 g0v.tw 官網統一使用六個分類，用了幾年，成效不錯：
-
-* 開放政府
-* 開放資料
-* 社會參與
-* 新媒體應用
-* 政策共筆
-* g0v基礎建設
-
-看來我可以把這六類加到我的 hashtag 中，並取消使用者新增 tag 的功能，把新增 tag 當成管理功能，甚至靠投票來決定新 tag 。
-
-ipa 還提到，如果新參者一開始就看到 issue 列表，被嚇走的機會很高（可能因為 issue 列表沒有馬上可見的脈絡，且太過技術導向）。
-
-最後還跟 ipa 提了提想做共筆訪談遇到的問題，像是我得先了解要訪問的專案的技術 stack ，才有辦法藉著訪談問出專案架構，看能不能幫助技術入坑者更好上手。
-
-[project-template]: http://beta.hackfoldr.org/g0v-hackath26n/https%253A%252F%252Fg0v.hackpad.tw%252FProject-Readme-aCZGg48I5pX
-
-### 2017-10-20
-
-poga [曾經提過][minimum-viable-ownership]他不喜歡「擁有」這個概念。在該文中，他提到 ZeroMQ 的 Pieter Hintjens 曾整理了一份叫做 [Collective Code Construction Contract][C4] 的 RFC。
-
-除此之外，他還建議我可以去看 Rust 社群怎麼做 [Libz Blitz][libz-blitz] 。
-
-[minimum-viable-ownership]: https://medium.com/@poga/minimum-viable-ownership-7b0c976f7163
-[C4]: https://rfc.zeromq.org/spec:42/C4/
-[libz-blitz]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
