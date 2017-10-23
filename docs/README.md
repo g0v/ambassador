@@ -44,6 +44,19 @@
 [hypothesis/client]: https://github.com/hypothesis/client
 [WADM]: https://www.w3.org/TR/annotation-model/
 
+* * *
+
+Hypothesis 重用了來自 [Open Annotation][openannotation] 的成果。
+
+逛一逛會發現如果想自己搭 annotation 產品，可以用他們開發的 [Annotator][annotatorjs.org] 。而且 Annotator 上能開發 plugins 。如果想要畫框框上註解，目前有一個專門做圖片註解的 plugin 叫做 [annotator-imgselect][annotator-imgselect] ，還有個專門做圖片註解的服務叫做 [annotorious][annotorious] 。
+
+如果我得在 pdf viewer 上實現類似功能，大概會先疊上一層 Canvas ，再開始做和圖片註解一樣的事。
+
+[openannotation]: https://github.com/openannotation
+[annotatorjs.org]: http://annotatorjs.org/
+[annotator-imgselect]: https://github.com/emory-lits-labs/annotator-imgselect
+[annotorious]: https://github.com/annotorious/annotorious
+
 ### 2017-10-23
 
 加上了六類 hashtags ，並拿掉新增 hashtag 功能。
