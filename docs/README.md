@@ -6,6 +6,44 @@
 
 ## we b logs
 
+### 2017-10-24
+
+回到 web annotation 。除了 YA0H 以外， hychen 的 GGV 也用得上。 Hypothesis 的 [client][hypothesis/client] 在 pdf 上只支援附註與 highlight 。沒辦法畫框框，自然沒有辦法在未經過 OCR 的文件上註記。
+
+加上附註的 selectors 像這樣：
+
+```
+[{
+  type: 'TextPositionSelector',
+  start: 0,
+  end: 42
+}, {
+  type: 'TextQuoteSelector',
+  exact: 'A History of Haskell:Being Lazy With Class',
+  prefix: '  ↵        ↵↵        ↵          ',
+  suffix: 'April 16, 2007Paul HudakYale Uni'
+}]
+``` 
+
+和 html 上的附註不太一樣。 html 上會多一個 range selector ：
+
+```
+{
+  type: 'RangeSelector',
+  startContainer: '/div[2]/article[1]/div[1]/p[3]',
+  startOffset: 8,
+  endContainer: '/div[2]/article[1]/div[1]/p[3]',
+  endOffset: 12
+}
+```
+
+另外 Hypothesis 的 range selector 和 [web annotation data model][WADM] 中定義的不太一樣，不知道哪天會遇上按著 WADM 實作的版本？
+
+下一步是找看看有沒有辦法在 pdf 上，實現畫框框(fragment selector)上註解。
+
+[hypothesis/client]: https://github.com/hypothesis/client
+[WADM]: https://www.w3.org/TR/annotation-model/
+
 ### 2017-10-23
 
 加上了六類 hashtags ，並拿掉新增 hashtag 功能。
