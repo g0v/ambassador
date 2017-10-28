@@ -6,6 +6,27 @@
 
 ## we b logs
 
+### 2017-10-27
+
+itaigi 的技術特色：
+
+  * 一開始選用 LiveScript 來寫 React 網站，後來用 ES2015
+  * 丞宏（sih4sing5hong5）除了開發 API 功能外，也用 django-behave 管理功能需求
+    * 但後來沒用到，還是拿掉了
+  * API 先用 Apiary mock
+  * API server 的一開始採用 Angular
+  * 可以用中文的地方都用了中文，包含變數、 API routes 、 JSON field name
+  * API server 後來移到了[臺灣言語平台][tai5-uan5_gian5-gi2_phing5-tai5]
+  * 用 `react-transmit` 取得非同步資料，不知道後來有沒有換？
+  * 一開始選用 standard coding style ，後來換成 airbnb ，定期跑 jscs
+  * 留言外包給 Disqus
+
+快一週只掃過 3xx 個 commits ，放棄，看 code 就好。
+
+話說回來，真的看到專案架構底定就差不多了，後面都是加新功能。
+
+[tai5-uan5_gian5-gi2_phing5-tai5]: https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_phing5-tai5
+
 ### 2017-10-24
 
 回到 web annotation 。除了 YA0H 以外， hychen 的 GGV 也用得上。 Hypothesis 的 [client][hypothesis/client] 在 pdf 上只支援附註與 highlight 。沒辦法畫框框，自然沒有辦法在未經過 OCR 的文件上註記。
