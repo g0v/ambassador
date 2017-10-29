@@ -6,6 +6,16 @@
 
 ## we b logs
 
+### 2017-10-29
+
+專案架構訪問系列文，題目暫定為「沒有人一起看 g0v 專案」。第一彈是 itaigi ：
+
+  * [沒有人一起看 g0v 專案 - 愛台語 itaigi][arch-itaigi]
+
+雖然初衷寫著「沒有人一起讀 code 」，但可能的話還是希望這系列訪問不限於程式技術。
+
+[arch-itaigi]: https://g0v.hackpad.tw/-g0v-itaigi-V0pJpwxbfl2
+
 ### 2017-10-27
 
 itaigi 的技術特色：
