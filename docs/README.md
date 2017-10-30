@@ -6,6 +6,18 @@
 
 ## we b logs
 
+### 2017-10-31
+
+回到 web annotation 上來。知道怎麼把 `hypothesis/client` ，接著就要加功能了。
+
+現在需要找個地方放「在 pdf 上畫框框」按鈕，看來看去放在 sidebar 上最好。可是 sidebar 裡面的東西其實是由 `hypothesis/h` 管的，也就是 `https://hypothes.is/app.html` ，我可不能在那裡加按鈕。
+
+只剩下左邊的 toolbar 和 bucket 。 bucket 用來顯示可見範圍內有哪些 annotation 。 toolbar 當然就是最適合加功能的地方。
+
+打算加上一個畫著筆的按鈕，當該按鈕被點擊後， pdf 會蓋上一層薄薄的灰色，讓 pdf 變得不明顯。這灰色就是可以畫框框的區域。接著可以以滑鼠拖拉，加上註解。但是加註解的輸入框，仍由 `app.html` 負責，不知道 `client` 和 `h` 怎麼溝通？
+
+待新增成功後，再來煩惱怎麼呈現 PDF fragment 。
+
 ### 2017-10-29
 
 專案架構訪問系列文，題目暫定為「沒有人一起看 g0v 專案」。第一彈是 itaigi ：
