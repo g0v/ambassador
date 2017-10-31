@@ -6,6 +6,16 @@
 
 ## we b logs
 
+### 2017-11-01
+
+使用 pdf.js 時，頁面沒有 hypothesis-app 這個 element ，於是走的是 `bootHypothesisClient` 這條路，才會去用 `https://cdn.hypothes.is/hypothesis/1.48.0/build/scripts/app.bundle.js` 而不是 local 建好的 `app.bundle.js` 。
+
+也就是說， sidebar 還是跟 `hypothesis/h` 分開，我誤會了。
+
+接著得找工具讓它在看 pdf 時也用 local 的 `app.bundle.js` 。
+
+話說回來， YA0H 只會用到 web annotation data model 才對，看太多了 XD
+
 ### 2017-10-31
 
 回到 web annotation 上來。知道怎麼把 `hypothesis/client` ，接著就要加功能了。
