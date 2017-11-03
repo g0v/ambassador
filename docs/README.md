@@ -6,6 +6,33 @@
 
 ## we b logs
 
+### 2017-11-03
+
+期中前的小聚上， ttcat, clkao, ipa, kirby 給了許多[務實的建議][grant-1103]，點出重點：
+
+* ipa 提到不只我在做機器人，[上次基礎松 yutin 就展示了][g0ver-in-action] [g0ver][g0ver-box] 的新功能
+* 當專案沒有什麼 log 時，就得依靠閱讀 commits 跟訪問，才能整理出脈絡
+* ttcat 指出現在的 UI 只有開發者本人會用，也沒有誘因吸引別人來用
+* 上面的缺點，和 kirby 的提醒，表示最好可以有自動工具先搜尋出特定專案可能的脈絡，再手動調整無法自動化的部分
+* clkao 提到如果可以將產出（例如對專案的訪談問題）的結構定下來，可以讓 bot 主動詢問、讓坑主主動填寫(ael)
+* kirby 和 ttcat 提到期中發表時如果能做好視覺化，更有機會吸引人來協作
+* 決定每週五下午四點和 jothon 團一起 hangout
+
+另外也提到，各種基礎建設專案成果，該連結上 g0v.tw 。
+
+我覺得該按以下順序實作：
+
+1. 搜尋 log ，顯示結果包含前後三條句子，好快速查找是否該加上標籤的功能
+2. 從 log 跟 nickname 建議三個標籤的功能
+3. 結合線上訪問結果的入坑頁
+4. 二到三個視覺化圖表（貢獻者、討論者、時間軸）
+
+log 多選等需要深深整合 Logbot 與 dashboard 的功能，之後再加。
+
+[grant-1103]: https://hackmd.io/IbCmFYCMHYDYE4C0MBm1EBYUEZvIMawBMi284AHKEbKPACb7BA==
+[g0ver-in-action]: https://logbot.g0v.tw/channel/g0v.tw/2017-10-21#52
+[g0ver-box]: https://github.com/g0v/g0ver-box/
+
 ### 2017-11-01
 
 使用 pdf.js 時，頁面沒有 hypothesis-app 這個 element ，於是走的是 `bootHypothesisClient` 這條路，才會去用 `https://cdn.hypothes.is/hypothesis/1.48.0/build/scripts/app.bundle.js` 而不是 local 建好的 `app.bundle.js` 。
