@@ -19,6 +19,8 @@ try {
   winston.warn(err.message)
 }
 const db = require('./database')
+// search
+const elasticsearch = require('elasticsearch')
 // GitHub
 const GitHub = require('github-api')
 // utils
@@ -31,7 +33,8 @@ const paths = require(path.resolve(__dirname, '../config/paths.js'))
 
 // service status
 const status = {
-  database: false
+  database: false,
+  search: false
 }
 
 const logs = {}
@@ -76,10 +79,10 @@ const prepareRepoHashtags = (pool, org) =>
 
 const connectionString = process.env.DATABASE_URL || ''
 const pool = new Pool({ connectionString })
-// Azure instance sleeps after 5 mins, so we poke the database every 5 mins
+// Azure instance sleeps after 5 mins, so we poke the database every 4.5 mins
 const keepAwake = () =>
   db.test(pool)
-    .then(delay(3000000)) // 300s, 5mins
+    .then(delay(2700000)) // 270s, 4.5mins
     .then(keepAwake)
 db.test(pool)
   .then(now => {
@@ -108,6 +111,19 @@ db.test(pool)
       })
   })
   .then(keepAwake)
+  .catch(winston.error)
+
+const searchClient = new elasticsearch.Client({
+  host: process.env.SEARCH_URL || '',
+  log: 'trace'
+})
+
+searchClient.ping({ requestTimeout: 30000 })
+  .then(() => {
+    winston.verbose('ElasticSearch is ready')
+
+    status.search = true
+  })
   .catch(winston.error)
 
 // variables
