@@ -79,7 +79,8 @@ function getClientEnvironment(publicUrl) {
         PORT: process.env.PORT || '80',
         API_HOST: process.env.API_HOST || 'localhost',
         API_PORT: process.env.API_PORT || '80',
-        LOGBOT_URL: process.env.LOGBOT_HOST || 'https://logbot.g0v.tw'
+        LOGBOT_URL: process.env.LOGBOT_HOST || 'https://logbot.g0v.tw',
+        DDAY: process.env.DDAY || '1970-01-01'
       }
     );
   // Stringify all values so we can feed into Webpack DefinePlugin

@@ -11,8 +11,7 @@
 
 # development
 start.sh
-start-server.sh
-start-client.sh
+search.sh
 import.sh
 
 # production

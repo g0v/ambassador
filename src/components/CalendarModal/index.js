@@ -7,6 +7,8 @@ import theme from './theme'
 import moment from 'moment'
 import styles from './index.css'
 
+const minDate = moment(process.env.DDAY).toDate()
+
 class CalendarModal extends PureComponent {
   static defaultProps = {
     className: '',
@@ -14,7 +16,6 @@ class CalendarModal extends PureComponent {
 
   render() {
     const { id, className, trigger, date, onSelect } = this.props
-    const minDate = new Date(2013, 6, 26) // 2013-07-26
     const today = new Date()
     const selected = moment(date).toDate()
 

@@ -19,8 +19,6 @@ try {
   winston.warn(err.message)
 }
 const db = require('./database')
-// search
-const elasticsearch = require('elasticsearch')
 // GitHub
 const GitHub = require('github-api')
 // utils
@@ -33,8 +31,7 @@ const paths = require(path.resolve(__dirname, '../config/paths.js'))
 
 // service status
 const status = {
-  database: false,
-  search: false
+  database: false
 }
 
 const logs = {}
@@ -111,19 +108,6 @@ db.test(pool)
       })
   })
   .then(keepAwake)
-  .catch(winston.error)
-
-const searchClient = new elasticsearch.Client({
-  host: process.env.SEARCH_URL || '',
-  log: 'trace'
-})
-
-searchClient.ping({ requestTimeout: 30000 })
-  .then(() => {
-    winston.verbose('ElasticSearch is ready')
-
-    status.search = true
-  })
   .catch(winston.error)
 
 // variables
