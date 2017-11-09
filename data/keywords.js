@@ -3,30 +3,25 @@ const path = require('path')
 const axios = require('axios')
 const moment = require('moment')
 const jieba = require('nodejieba')
+const U = require('./utils')
 const R = require('ramda')
 
 const logbotUrl = process.env.LOGBOT_URL || 'http://example.com'
 const getUrl = (date) => `${logbotUrl}/channel/g0v.tw/${date}/json`
-const dataPath = path.resolve(__dirname, 'logs')
-
-const delay = t => o => new Promise(resolve => setTimeout(resolve, t, o))
-
-// XXX: duplicated
-const DATE_FORMAT = 'YYYY-MM-DD'
 
 const dates = function *(begin, end) {
   let m = moment(begin)
   let date
 
   do {
-    date = m.format(DATE_FORMAT)
+    date = m.format(U.config.DATE_FORMAT)
     yield date
     m.add(1, 'days')
   } while(date !== end)
 }
 
 const begin = process.env.DDAY
-const end = moment().format(DATE_FORMAT)
+const end = moment().format(U.config.DATE_FORMAT)
 
 const main = () => {
   const ds = dates(begin, end)
@@ -34,19 +29,19 @@ const main = () => {
   // XXX: `jieba.cut*` is unusable without traditional chinese dictionary
   jieba.load()
 
-  fs.ensureDir(dataPath)
+  fs.ensureDir(U.config.dataPath)
     .then(() => {
       let ps = []
 
       for (let d of ds) {
         // TODO: skip existing files
-        const outputPath = path.resolve(dataPath, `${d}.json`)
+        const outputPath = path.resolve(U.config.dataPath, `${d}.json`)
         const p = fs.exists(outputPath)
           .then(exists =>
             exists
               ? true
               : Promise.resolve()
-                  .then(delay(60000 * Math.random()))
+                  .then(U.delay(60000 * Math.random()))
                   .then(() => axios.get(getUrl(d)).then(d => d.data))
                   .then(R.map(extractKeywords))
                   .then(ls => {
