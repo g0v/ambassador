@@ -7,7 +7,9 @@ const R = require('ramda')
 
 const logbotUrl = process.env.LOGBOT_URL || 'http://example.com'
 const getUrl = (date) => `${logbotUrl}/channel/g0v.tw/${date}/json`
-const dataPath = path.resolve(__dirname, 'data')
+const dataPath = path.resolve(__dirname, 'logs')
+
+const delay = t => o => new Promise(resolve => setTimeout(resolve, t, o))
 
 // XXX: duplicated
 const DATE_FORMAT = 'YYYY-MM-DD'
@@ -43,8 +45,9 @@ const main = () => {
           .then(exists =>
             exists
               ? true
-              : axios.get(getUrl(d))
-                  .then(d => d.data)
+              : Promise.resolve()
+                  .then(delay(60000 * Math.random()))
+                  .then(() => axios.get(getUrl(d)).then(d => d.data))
                   .then(R.map(extractKeywords))
                   .then(ls => {
                     console.log(`extracting keywords of ${d} ...`)

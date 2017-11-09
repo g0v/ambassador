@@ -70,7 +70,7 @@
     "start:client": "node scripts/start.js",
     "start:server": "node server/index.js",
     "start:import": "node server/import.js",
-    "init:search": "node server/search.js",
+    "init:keywords": "node data/keywords.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "flow": "flow",

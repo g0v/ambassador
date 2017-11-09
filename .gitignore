@@ -10,6 +10,7 @@
 /flow-typed
 
 # development
+/data/logs
 start.sh
 search.sh
 import.sh
