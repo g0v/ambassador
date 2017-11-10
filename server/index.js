@@ -311,6 +311,26 @@ app
       })
       .catch(next)
   })
+  // Get a log
+  .get('/api/search', (req, res, next) => {
+    const { q = '' } = req.query
+
+    winston.verbose(`Search "${q}"`)
+
+    // TODO: spaces as AND operators
+
+    if (q) {
+      db.keyword.get(pool, q)
+        .then(r => {
+          winston.info(`Search "${q}", found ${r.logs.length} logs`)
+
+          res.json(r)
+        })
+        .catch(next)
+    } else {
+      res.status(400).send()
+    }
+  })
   // Serve client scripts
   .use(express.static(paths.appBuild))
   // Fallback to index page as the client is a single page application

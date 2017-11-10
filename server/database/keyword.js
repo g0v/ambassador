@@ -29,9 +29,11 @@ const get = (db, keyword) =>
     'SELECT array_remove(array_agg(date), NULL) dates, array_remove(array_agg(index), NULL) indices FROM keyword WHERE keyword LIKE $1;',
     [`%${keyword}%`]
   )
-    .then(r => (r && r.rows && r.rows[0]) || { dates: [], indices: [] })
+    .then(r => r && r.rows && r.rows[0])
     .then(o => {
-      const { dates, indices } = o
+      let { dates, indices } = o
+      dates = dates || [] // might be null
+      indices = indices || [] // might be null
       return { keyword, logs: zipLogs(dates, indices) }
     })
 

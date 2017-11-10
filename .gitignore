@@ -14,6 +14,7 @@
 start.sh
 search.sh
 import.sh
+import-keywords.sh
 
 # production
 # prebuild for middle2
