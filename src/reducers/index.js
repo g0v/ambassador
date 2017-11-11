@@ -29,6 +29,7 @@ import {
   LOG_REQUEST,
   LOG_SUCCESS,
   LOG_FAILURE,
+  LOG_STORE,
   LOG_LINK_REQUEST,
   LOG_LINK_SUCCESS,
   LOG_LINK_FAILURE,
@@ -54,7 +55,12 @@ export type State = {
     login: boolean,
     checkMember: boolean,
     repos: boolean,
-    issues: boolean
+    issues: boolean,
+    search: {
+      isLoading: false,
+      results: [],
+      value: ''
+    }
   },
   auth: ?any,
   github: {
@@ -87,7 +93,8 @@ export const initialState: State = {
     date: moment().format(DATE_FORMAT),
     logs: []
   },
-  hashtags: {}
+  hashtags: {},
+  logs: {}
 }
 
 export default (state: State = initialState, action: PlainAction): State => {
@@ -273,7 +280,7 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
 
-    case LOG_REQUEST: {
+    case LOG_STORE: {
       const { date, index } = action
       const logs = getLogs(state)
       let i = findIndex(l => l.date === date && l.index === index, logs)
@@ -293,54 +300,42 @@ export default (state: State = initialState, action: PlainAction): State => {
         }
       }
     }
-    case LOG_SUCCESS: {
-      const { date, index, log } = action
-      const logs = getLogs(state)
-      const i = findIndex(l => l.date === date && l.index === index, logs)
-
-      if (i === -1) {
-        console.error(`log not found: ${date}#${index}`)
-        return state
-      }
-
-      const newLogs = [
-        ...logs.slice(0, i),
-        { ...logs[i], ...log },
-        ...logs.slice(i + 1)
-      ]
+    case LOG_REQUEST: {
+      const { date, index } = action
+      const key = `${date}#${index}`
 
       return {
         ...state,
-        logbot: {
-          ...state.logbot,
-          logs: newLogs
+        logs: {
+          ...state.logs,
+          [key]: { date, index }
+        }
+      }
+    }
+    case LOG_SUCCESS: {
+      const { date, index, log } = action
+      const key = `${date}#${index}`
+
+      return {
+        ...state,
+        logs: {
+          ...state.logs,
+          [key]: log
         }
       }
     }
     case LOG_FAILURE: {
       const { date, index, error } = action
+      const key = `${date}#${index}`
 
       console.error(error)
 
-      let logs = state.logbot.logs
-      const i = findIndex(l => l.date === date && l.index === index, logs)
-
-      if (i === -1) {
-        console.error(`log not found: ${date}#${index}`)
-        return state
-      }
-
-      logs = [
-        ...logs.slice(0, i),
-        ...logs.slice(i + 1)
-      ]
+      const logMap = state.logs
+      delete logMap[key]
 
       return {
         ...state,
-        logbot: {
-          ...state.logbot,
-          logs
-        }
+        logs: logMap
       }
     }
     case LOG_LINK_REQUEST: {

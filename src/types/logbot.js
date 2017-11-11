@@ -38,6 +38,10 @@ export type LogFailureAction = { type: 'LOG_FAILURE', date: string, index: numbe
 export const LOG_FAILURE = 'LOG_FAILURE'
 export const LogFailure = (date: string, index: number, error: Error): LogFailureAction => ({ type: LOG_FAILURE, date, index, error })
 
+export type LogStoreAction = { type: 'LOG_STORE', date: string, index: number }
+export const LOG_STORE = 'LOG_STORE'
+export const LogStore = (date: string, index: number): LogStoreAction => ({ type: LOG_STORE, date, index })
+
 export type LinkRequestAction = { type: 'LOG_LINK_REQUEST', logId: LogId, hashtagId: HashtagId }
 export const LOG_LINK_REQUEST = 'LOG_LINK_REQUEST'
 export const LinkRequest = (logId: LogId, hashtagId: HashtagId): LinkRequestAction => ({ type: LOG_LINK_REQUEST, logId, hashtagId })
@@ -69,4 +73,8 @@ export const Hide = (date: string, index: number): HideAction => ({ type: LOG_HI
 // functions
 export const getLogs = (state: State): Log[] => {
   return (state && state.logbot && state.logbot.logs) || []
+}
+
+export const getLogMap = (state: State): { [key: string]: Log } => {
+  return (state && state.logs) || {}
 }

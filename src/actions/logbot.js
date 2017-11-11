@@ -9,6 +9,7 @@ import {
   LogRequest,
   LogSuccess,
   LogFailure,
+  LogStore,
   LinkRequest,
   LinkSuccess,
   LinkFailure,
@@ -50,6 +51,7 @@ export const storeLog: RawAction<[string, number], Log> = store => async (date, 
     }
   }
 
+  dispatch(LogStore(date, index))
   // $FlowFixMe
   return dispatch(getLog)(date, index)
 }

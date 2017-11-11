@@ -7,7 +7,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import * as L from '~/types/logbot'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon, Search } from 'semantic-ui-react'
 import CalendarModal from '~/components/CalendarModal'
 import { compose } from 'ramda'
 import moment from 'moment'
@@ -57,7 +57,14 @@ class Header extends PureComponent {
         >
           Repositories
         </Menu.Item>
-        <Menu.Menu position="right">{
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Search
+              loading={false}
+              onSearchChange={e => console.log(e.target.value)}
+            />
+          </Menu.Item>
+        {
           unauthed
             ? <Menu.Item
                 name="sign-in"
@@ -76,7 +83,8 @@ class Header extends PureComponent {
               >
                 { loginName || 'Sign Out' }
               </Menu.Item>
-        }</Menu.Menu>
+        }
+        </Menu.Menu>
       </Menu>
     )
   }

@@ -41,6 +41,12 @@ import type {
   HashtagCreateSuccessAction,
   HashtagCreateFailureAction
 } from './hashtag'
+import type {
+  SearchChangeAction,
+  SearchRequestAction,
+  SearchSuccessAction,
+  SearchFailureAction
+} from './search'
 import { map as _map } from 'ramda'
 
 export type PlainAction
@@ -56,6 +62,8 @@ export type PlainAction
   | HideAction
   | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
   | HashtagCreateRequestAction | HashtagCreateSuccessAction | HashtagCreateFailureAction
+  | SearchChangeAction
+  | SearchRequestAction | SearchSuccessAction | SearchFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>
