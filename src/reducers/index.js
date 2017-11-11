@@ -47,6 +47,15 @@ import {
   HASHTAG_CREATE_SUCCESS,
   HASHTAG_CREATE_FAILURE
 } from '~/types/hashtag'
+import {
+  SEARCH_CHANGE,
+  HINT_REQUEST,
+  HINT_SUCCESS,
+  HINT_FAILURE,
+  SEARCH_REQUEST,
+  SEARCH_SUCCESS,
+  SEARCH_FAILURE
+} from '~/types/search'
 import { findIndex } from 'ramda'
 import moment from 'moment'
 
@@ -57,9 +66,9 @@ export type State = {
     repos: boolean,
     issues: boolean,
     search: {
-      isLoading: false,
-      results: [],
-      value: ''
+      isLoading: boolean,
+      results: string[],
+      value: string
     }
   },
   auth: ?any,
@@ -72,7 +81,11 @@ export type State = {
   logbot: {
     logs: Log[]
   },
-  hashtags: { [key: number]: Hashtag }
+  hashtags: { [key: number]: Hashtag },
+  logs: { [key: string]: Log },
+  search: {
+    logs: Log[]
+  }
 }
 
 export const initialState: State = {
@@ -80,7 +93,12 @@ export const initialState: State = {
     login: false,
     checkMember: false,
     repos: false,
-    issues: false
+    issues: false,
+    search: {
+      isLoading: false,
+      results: [],
+      value: ''
+    }
   },
   auth: undefined,
   github: {
@@ -94,7 +112,10 @@ export const initialState: State = {
     logs: []
   },
   hashtags: {},
-  logs: {}
+  logs: {},
+  search: {
+    logs: []
+  }
 }
 
 export default (state: State = initialState, action: PlainAction): State => {
@@ -435,6 +456,93 @@ export default (state: State = initialState, action: PlainAction): State => {
       return {
         ...state,
         hashtags
+      }
+    }
+
+    case SEARCH_CHANGE: {
+      const { value } = action
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            value
+          }
+        }
+      }
+    }
+    case HINT_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            isLoading: true
+          }
+        }
+      }
+    }
+    case HINT_SUCCESS: {
+      const { hints } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            isLoading: false,
+            results: hints
+          }
+        }
+      }
+    }
+    case HINT_FAILURE: {
+      const { error } = action
+
+      console.error(error)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            isLoading: false,
+            results: []
+          }
+        }
+      }
+    }
+    case SEARCH_REQUEST: {
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          logs: []
+        }
+      }
+    }
+    case SEARCH_SUCCESS: {
+      const { logs } = action
+
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          logs
+        }
+      }
+    }
+    case SEARCH_FAILURE: {
+      return {
+        ...state,
+        search: {
+          ...state.search,
+          logs: []
+        }
       }
     }
 

@@ -37,6 +37,15 @@ export const getLog: RawAction<[string, number], Log> = store => async (date, in
   }
 }
 
+export const getLogs: RawAction<[Log[]], Log[]> = store => async (logs) => {
+  const { dispatch } = store
+  let ls = []
+
+  for (let l of logs) ls.push(await dispatch(getLog)(l.date, l.index))
+
+  return ls
+}
+
 export const storeLog: RawAction<[string, number], Log> = store => async (date, index) => {
   const { dispatch } = store
 

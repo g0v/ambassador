@@ -7,9 +7,11 @@ import { mapDispatchToProps } from '~/types/action'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import * as L from '~/types/logbot'
+import * as S from '~/types/search'
 import { Menu, Icon, Search } from 'semantic-ui-react'
 import CalendarModal from '~/components/CalendarModal'
-import { compose } from 'ramda'
+import { compose, map } from 'ramda'
+import debounce from 'lodash.debounce'
 import moment from 'moment'
 import styles from './index.css'
 
@@ -21,8 +23,10 @@ class Header extends PureComponent {
   render() {
     const {
       id, className, history, actions,
-      location, unauthed, isLoggingIn, loginName
+      location, unauthed, isLoggingIn, loginName,
+      search
     } = this.props
+    const hintAction = debounce(actions.search.hint, 1000)
     const match = matchPath(
       location.pathname,
       { path: '/logbot/:channel/:date', exact: true }
@@ -60,8 +64,18 @@ class Header extends PureComponent {
         <Menu.Menu position="right">
           <Menu.Item>
             <Search
-              loading={false}
-              onSearchChange={e => console.log(e.target.value)}
+              loading={search.isLoading}
+              value={search.value}
+              results={map(h => ({ title: h }), search.results)}
+              onSearchChange={e => {
+                actions.search.change(e.target.value)
+                hintAction()
+              }}
+              onResultSelect={(e, data) => {
+                const result = data.result.title
+                actions.search.change(result)
+                actions.search.search(result)
+              }}
             />
           </Menu.Item>
         {
@@ -97,8 +111,9 @@ export default compose(
       const unauthed = !A.getAccessToken(state)
       const isLoggingIn = A.isLoggingIn(state)
       const loginName = G.getLoginName(state)
+      const search = S.getSearch(state)
 
-      return { unauthed, isLoggingIn, loginName }
+      return { unauthed, isLoggingIn, loginName, search }
     },
     mapDispatchToProps(actions)
   )

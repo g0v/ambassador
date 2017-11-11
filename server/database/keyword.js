@@ -24,6 +24,14 @@ const test = (db, keyword, date, index) =>
   )
     .then(r => r && r.rows && r.rows[0] && r.rows[0].exists)
 
+const hint = (db, keyword) =>
+  db.query(
+    'SELECT DISTINCT keyword FROM keyword WHERE keyword LIKE $1;',
+    [`%${keyword}%`]
+  )
+    .then(r => r && r.rows)
+    .then(R.map(R.prop('keyword')))
+
 const get = (db, keyword) =>
   db.query(
     'SELECT array_remove(array_agg(date), NULL) dates, array_remove(array_agg(index), NULL) indices FROM keyword WHERE keyword LIKE $1;',
@@ -45,5 +53,6 @@ module.exports = {
   list,
   create,
   test,
+  hint,
   get
 }

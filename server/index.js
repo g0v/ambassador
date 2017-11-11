@@ -311,7 +311,24 @@ app
       })
       .catch(next)
   })
-  // Get a log
+  // Get search hints
+  .get('/api/hint', (req, res, next) => {
+    const { q = '' } = req.query
+
+    winston.verbose(`Search hint "${q}"`)
+
+    if (q) {
+      db.keyword.hint(pool, q)
+        .then(hints => {
+          winston.info(`Search hint "${q}":`, hints)
+
+          res.json(hints)
+        })
+    } else {
+      res.status(400).send()
+    }
+  })
+  // Search keywords
   .get('/api/search', (req, res, next) => {
     const { q = '' } = req.query
 

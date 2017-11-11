@@ -15,6 +15,7 @@ const vendor = [
   'classnames',
   'es6-error',
   'github-api',
+  'lodash.debounce',
   'moment',
   'query-string',
   'ramda',

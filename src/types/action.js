@@ -43,6 +43,9 @@ import type {
 } from './hashtag'
 import type {
   SearchChangeAction,
+  HintRequestAction,
+  HintSuccessAction,
+  HintFailureAction,
   SearchRequestAction,
   SearchSuccessAction,
   SearchFailureAction
@@ -63,6 +66,7 @@ export type PlainAction
   | HashtagListRequestAction | HashtagListSuccessAction | HashtagListFailureAction
   | HashtagCreateRequestAction | HashtagCreateSuccessAction | HashtagCreateFailureAction
   | SearchChangeAction
+  | HintRequestAction | HintSuccessAction | HintFailureAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
