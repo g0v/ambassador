@@ -53,6 +53,7 @@
     "react-infinite-calendar": "^2.3.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-visibility-sensor": "^3.11.0",
     "redux": "^3.7.2",
     "semantic-ui-react": "^0.75.1",
     "style-loader": "0.18.2",

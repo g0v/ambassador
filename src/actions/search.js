@@ -14,7 +14,6 @@ import {
   SearchFailure,
   getSearch
 } from '~/types/search'
-import * as logbot from './logbot'
 import axios from 'axios'
 
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
@@ -54,9 +53,6 @@ export const search: RawAction<[string], Log[]> = store => async (value) => {
   try {
     const { data: result } = await axios.get(`${apiUrl}/api/search?q=${value}`)
     dispatch(SearchSuccess(result.logs))
-
-    // XXX: we don't wait for this
-    dispatch(logbot.getLogs)(result.logs)
 
     return result.logs
   } catch (error) {

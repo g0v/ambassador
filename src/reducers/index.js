@@ -341,7 +341,7 @@ export default (state: State = initialState, action: PlainAction): State => {
         ...state,
         logs: {
           ...state.logs,
-          [key]: log
+          [key]: { date, index, ...log }
         }
       }
     }

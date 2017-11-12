@@ -24,6 +24,7 @@ const vendor = [
   'react-infinite-calendar',
   'react-redux',
   'react-router-dom',
+  'react-visibility-sensor',
   'redux',
   'semantic-ui-react',
   'whatwg-fetch'

@@ -32,20 +32,16 @@ const hint = (db, keyword) =>
     .then(r => r && r.rows)
     .then(R.map(R.prop('keyword')))
 
+// XXX: SELECT DISTINCT is slow
 const get = (db, keyword) =>
   db.query(
-    'SELECT array_remove(array_agg(date), NULL) dates, array_remove(array_agg(index), NULL) indices FROM keyword WHERE keyword LIKE $1;',
+    'SELECT DISTINCT date, index FROM keyword WHERE keyword LIKE $1;',
     [`%${keyword}%`]
   )
-    .then(r => r && r.rows && r.rows[0])
-    .then(o => {
-      let { dates, indices } = o
-      dates = dates || [] // might be null
-      indices = indices || [] // might be null
-      return { keyword, logs: zipLogs(dates, indices) }
+    .then(r => r && r.rows)
+    .then(logs => {
+      return { keyword, logs }
     })
-
-const zipLogs = R.zipWith((date, index) => ({ date, index }))
 
 module.exports = {
   prepare,

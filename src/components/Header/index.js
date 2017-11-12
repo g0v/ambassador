@@ -67,6 +67,7 @@ class Header extends PureComponent {
               loading={search.isLoading}
               value={search.value}
               results={map(h => ({ title: h }), search.results)}
+              size="mini"
               onSearchChange={e => {
                 actions.search.change(e.target.value)
                 hintAction()
@@ -75,6 +76,7 @@ class Header extends PureComponent {
                 const result = data.result.title
                 actions.search.change(result)
                 actions.search.search(result)
+                history.push('/search')
               }}
             />
           </Menu.Item>

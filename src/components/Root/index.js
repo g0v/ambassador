@@ -5,6 +5,7 @@ import Header from '~/components/Header'
 import LogbotPage from '~/components/LogbotPage'
 import RepoListPage from '~/components/RepoListPage'
 import IssueListPage from '~/components/IssueListPage'
+import SearchPage from '~/components/SearchPage'
 import * as L from '~/types/logbot'
 import moment from 'moment'
 
@@ -38,6 +39,7 @@ class Root extends PureComponent {
           <Route exact path="/logbot/:channel/:date" component={LogbotPage} />
           <Route exact path="/repos" component={RepoListPage} />
           <Route exact path="/repos/:repo" component={IssueListPage} />
+          <Route exact path="/search" component={SearchPage} />
         </div>
       </div>
     );
