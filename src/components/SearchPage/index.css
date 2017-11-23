@@ -1,3 +1,9 @@
 .main {
   margin-top: 12px;
+
+  .pagenator {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+  }
 }

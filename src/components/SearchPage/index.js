@@ -16,10 +16,16 @@ class SearchPage extends PureComponent {
   }
 
   async handlePageClick(page) {
-    const { value, actions } = this.props
+    const { value, page: currentPage, actions } = this.props
 
-    await actions.search.search(value, page)
-    await actions.search.page(page)
+    if (currentPage === page) return
+
+    try {
+      await actions.search.search(value, page)
+      await actions.search.page(page)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   render() {
@@ -32,6 +38,72 @@ class SearchPage extends PureComponent {
     // TODO: create a pagenation component
     return (
       <Container text id={id} className={cx(styles.main, className)}>
+        {
+          logs.length !== 0 &&
+            <Button.Group className={styles.pagenator}>
+              <Button
+                icon="triangle left"
+                disabled={page === 0}
+                onClick={() => this.handlePageClick(page - 1)}
+              />
+              {
+                totalPage > 1 &&
+                  <Button
+                    active={page === 0}
+                    onClick={() => this.handlePageClick(0)}
+                  >
+                    1
+                  </Button>
+              }
+              {
+                totalPage > 2
+                  ? (page === 0 || page === 1 || page === 2)
+                      ? <Button
+                          active={page === 1}
+                          onClick={() => this.handlePageClick(1)}
+                        >
+                          2
+                        </Button>
+                      : <Button disabled>&#8230;</Button>
+                  : null
+              }
+              {
+                totalPage > 3
+                  ? (page === 0 || page === 1)
+                      ? <Button onClick={() => this.handlePageClick(2)}>3</Button>
+                      : (page === (totalPage - 2) || page === (totalPage - 1))
+                          ? <Button onClick={() => this.handlePageClick(totalPage - 3)}>{ totalPage - 2 }</Button>
+                          : <Button className={styles.current} active>{ page + 1 }</Button>
+                  : null
+              }
+              {
+                totalPage > 4
+                  ? (page === (totalPage - 3) || page === (totalPage - 2) || page === (totalPage - 1))
+                      ? <Button
+                          active={page === (totalPage - 2)}
+                          onClick={() => this.handlePageClick(totalPage - 2)}
+                        >
+                          { totalPage - 1 }
+                        </Button>
+                      : <Button disabled>&#8230;</Button>
+                  : null
+              }
+              {
+                totalPage > 5 &&
+                  <Button
+                    active={page === (totalPage - 1)}
+                    onClick={() => this.handlePageClick(totalPage - 1)}
+                  >
+                    { totalPage }
+                  </Button>
+              }
+              <Button
+                icon="triangle right"
+                disabled={page >= (totalPage - 1)}
+                onClick={() => this.handlePageClick(page + 1)}
+              />
+            </Button.Group>
+        }
         <Item.Group divided>{
           map(
             data =>
@@ -51,69 +123,6 @@ class SearchPage extends PureComponent {
             logs
           )
         }</Item.Group>
-        <Button.Group>
-          <Button
-            icon="triangle left"
-            disabled={page === 0}
-            onClick={() => this.handlePageClick(page - 1)}
-          />
-          {
-            totalPage > 1 &&
-              <Button
-                disabled={page === 0}
-                onClick={() => this.handlePageClick(0)}
-              >
-                1
-              </Button>
-          }
-          {
-            totalPage > 2
-              ? (page === 0 || page === 1 || page === 2)
-                  ? <Button
-                      disabled={page === 1}
-                      onClick={() => this.handlePageClick(1)}
-                    >
-                      2
-                    </Button>
-                  : <Button disabled>&#8230;</Button>
-              : null
-          }
-          {
-            totalPage > 3
-              ? (page === 0 || page === 1)
-                  ? <Button onClick={() => this.handlePageClick(2)}>3</Button>
-                  : (page === (totalPage - 2) || page === (totalPage - 1))
-                      ? <Button onClick={() => this.handlePageClick(totalPage - 3)}>{ totalPage - 2 }</Button>
-                      : <Button disabled>{ page + 1 }</Button>
-              : null
-          }
-          {
-            totalPage > 4
-              ? (page === (totalPage - 3) || page === (totalPage - 2) || page === (totalPage - 1))
-                  ? <Button
-                      disabled={page === (totalPage - 2)}
-                      onClick={() => this.handlePageClick(totalPage - 2)}
-                    >
-                      { totalPage - 1 }
-                    </Button>
-                  : <Button disabled>&#8230;</Button>
-              : null
-          }
-          {
-            totalPage > 5 &&
-              <Button
-                disabled={page === (totalPage - 1)}
-                onClick={() => this.handlePageClick(totalPage - 1)}
-              >
-                { totalPage }
-              </Button>
-          }
-          <Button
-            icon="triangle right"
-            disabled={page >= (totalPage - 1)}
-            onClick={() => this.handlePageClick(page + 1)}
-          />
-        </Button.Group>
       </Container>
     )
   }
