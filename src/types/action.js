@@ -48,7 +48,8 @@ import type {
   HintFailureAction,
   SearchRequestAction,
   SearchSuccessAction,
-  SearchFailureAction
+  SearchFailureAction,
+  SearchPage
 } from './search'
 import { map as _map } from 'ramda'
 
@@ -68,6 +69,7 @@ export type PlainAction
   | SearchChangeAction
   | HintRequestAction | HintSuccessAction | HintFailureAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
+  | SearchPage
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

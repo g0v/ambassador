@@ -32,16 +32,24 @@ const hint = (db, keyword) =>
     .then(r => r && r.rows)
     .then(R.map(R.prop('keyword')))
 
-// XXX: SELECT DISTINCT is slow
-const get = (db, keyword) =>
-  db.query(
-    'SELECT DISTINCT date, index FROM keyword WHERE keyword LIKE $1;',
-    [`%${keyword}%`]
+const get = (db, keyword, options = {}) => {
+  const { limit = 10, offset = 0 } = options
+
+  // XXX: count should count distinct rows
+  return db.query(
+    'SELECT DISTINCT date, index, COUNT(*) OVER() AS total FROM keyword WHERE keyword LIKE $1 ORDER BY date LIMIT $2 OFFSET $3;',
+    [`%${keyword}%`, limit, offset]
   )
     .then(r => r && r.rows)
     .then(logs => {
-      return { keyword, logs }
+      let total = 0
+      if (logs.length) {
+        total = +logs[0].total
+      }
+      logs.forEach(l => delete l.total)
+      return { keyword, total, logs }
     })
+}
 
 module.exports = {
   prepare,

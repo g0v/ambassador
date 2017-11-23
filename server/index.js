@@ -331,15 +331,17 @@ app
   // Search keywords
   .get('/api/search', (req, res, next) => {
     const { q = '' } = req.query
+    const limit = +req.query.limit || 10
+    const offset = +req.query.offset || 0
 
-    winston.verbose(`Search "${q}"`)
+    winston.verbose(`Search "${q}" with limit ${limit}, offset ${offset}`)
 
     // TODO: spaces as AND operators
 
     if (q) {
-      db.keyword.get(pool, q)
+      db.keyword.get(pool, q, { limit, offset })
         .then(r => {
-          winston.info(`Search "${q}", found ${r.logs.length} logs`)
+          winston.info(`Search "${q}", found ${r.total} logs`)
 
           res.json(r)
         })

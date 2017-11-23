@@ -2,9 +2,11 @@
 
 import type { RawAction } from '~/types/action'
 import type { Log } from '~/types/logbot'
+import type { SearchResult } from '~/types/search'
 
 import { getUrl } from '~/types'
 import {
+  ROWS_PER_PAGE,
   SearchChange,
   HintRequest,
   HintSuccess,
@@ -12,6 +14,7 @@ import {
   SearchRequest,
   SearchSuccess,
   SearchFailure,
+  SearchPage,
   getSearch
 } from '~/types/search'
 import axios from 'axios'
@@ -46,17 +49,25 @@ export const hint: RawAction<[], string[]> = store => async () => {
   }
 }
 
-export const search: RawAction<[string], Log[]> = store => async (value) => {
+export const search: RawAction<[string, number], SearchResult> = store => async (value, page = 0) => {
   const { dispatch } = store
+  const limit = ROWS_PER_PAGE
+  const offset = page * ROWS_PER_PAGE
 
   dispatch(SearchRequest(value))
   try {
-    const { data: result } = await axios.get(`${apiUrl}/api/search?q=${value}`)
-    dispatch(SearchSuccess(result.logs))
+    const { data: result } = await axios.get(`${apiUrl}/api/search?q=${value}&limit=${limit}&offset=${offset}`)
+    dispatch(SearchSuccess(result.logs, result.total))
 
-    return result.logs
+    return result
   } catch (error) {
     dispatch(SearchFailure(error))
     throw error
   }
+}
+
+export const page: RawAction<[number], void> = store => async (page) => {
+  const { dispatch } = store
+
+  dispatch(SearchPage(page))
 }

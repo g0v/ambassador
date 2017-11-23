@@ -54,7 +54,8 @@ import {
   HINT_FAILURE,
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
-  SEARCH_FAILURE
+  SEARCH_FAILURE,
+  SEARCH_PAGE
 } from '~/types/search'
 import { findIndex } from 'ramda'
 import moment from 'moment'
@@ -68,7 +69,9 @@ export type State = {
     search: {
       isLoading: boolean,
       results: string[],
-      value: string
+      value: string,
+      total: number,
+      page: number
     }
   },
   auth: ?any,
@@ -97,7 +100,9 @@ export const initialState: State = {
     search: {
       isLoading: false,
       results: [],
-      value: ''
+      value: '',
+      total: 0,
+      page: 0
     }
   },
   auth: undefined,
@@ -517,19 +522,21 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case SEARCH_REQUEST: {
-      return {
-        ...state,
-        search: {
-          ...state.search,
-          logs: []
-        }
-      }
+      return state
     }
     case SEARCH_SUCCESS: {
-      const { logs } = action
+      const { logs, total } = action
 
       return {
         ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            total,
+            page: 0
+          }
+        },
         search: {
           ...state.search,
           logs
@@ -539,9 +546,31 @@ export default (state: State = initialState, action: PlainAction): State => {
     case SEARCH_FAILURE: {
       return {
         ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            total: 0,
+            page: 0
+          }
+        },
         search: {
           ...state.search,
           logs: []
+        }
+      }
+    }
+    case SEARCH_PAGE: {
+      const { page } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            page
+          }
         }
       }
     }
