@@ -1,7 +1,6 @@
 /* @flow */
 
 import type { RawAction } from '~/types/action'
-import type { Log } from '~/types/logbot'
 import type { SearchResult } from '~/types/search'
 
 import { getUrl } from '~/types'

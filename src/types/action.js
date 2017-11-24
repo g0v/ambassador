@@ -19,7 +19,10 @@ import type {
   RepoListFailureAction,
   IssueListRequestAction,
   IssueListSuccessAction,
-  IssueListFailureAction
+  IssueListFailureAction,
+  IntroRequest,
+  IntroSuccess,
+  IntroFailure
 } from './github'
 import type {
   LogRequestAction,
@@ -60,6 +63,7 @@ export type PlainAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
+  | IntroRequest | IntroSuccess | IntroFailure
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LinkRequestAction | LinkSuccessAction | LinkFailureAction
   | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction

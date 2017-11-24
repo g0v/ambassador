@@ -53,6 +53,18 @@ export type IssueListFailureAction = { type: 'ISSUE_LIST_FAILURE', error: Error 
 export const ISSUE_LIST_FAILURE = 'ISSUE_LIST_FAILURE'
 export const IssueListFailure = (error: Error): IssueListFailureAction => ({ type: ISSUE_LIST_FAILURE, error })
 
+export type IntroRequestAction = { type: 'INTRO_REQUEST', name: string }
+export const INTRO_REQUEST = 'INTRO_REQUEST'
+export const IntroRequest = (name: string): IntroRequestAction => ({ type: INTRO_REQUEST, name })
+
+export type IntroSuccessAction = { type: 'INTRO_SUCCESS', name: string, intro: string }
+export const INTRO_SUCCESS = 'INTRO_SUCCESS'
+export const IntroSuccess = (name: string, intro: string): IntroSuccessAction => ({ type: INTRO_SUCCESS, name, intro })
+
+export type IntroFailureAction = { type: 'INTRO_FAILURE', error: Error }
+export const INTRO_FAILURE = 'INTRO_FAILURE'
+export const IntroFailure = (error: Error): IntroFailureAction => ({ type: INTRO_FAILURE, error })
+
 // functions
 export const getLoginName = (state: State): string => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
@@ -89,4 +101,8 @@ export const dummyRepoList: any[] = [{
 
 export const getIssueMap = (state: State): any => {
   return (state && state.github && state.github.issues) || {}
+}
+
+export const getIntroMap = (state: State): any => {
+  return (state && state.intros) || {}
 }

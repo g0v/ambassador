@@ -2,7 +2,9 @@
 
 import type { RawAction } from '~/types/action'
 
+import axios from 'axios'
 import GitHub from 'github-api'
+import { getUrl } from '~/types'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import {
@@ -17,7 +19,10 @@ import {
   RepoListFailure,
   IssueListRequest,
   IssueListSuccess,
-  IssueListFailure
+  IssueListFailure,
+  IntroRequest,
+  IntroSuccess,
+  IntroFailure
 } from '~/types/github'
 
 export const getProfile: RawAction<[], any> = store => async () => {
@@ -109,6 +114,25 @@ export const getIssues: RawAction<[string, string], any[]> = store => async (use
     return issues
   } catch (error) {
     dispatch(IssueListFailure(error))
+    throw error
+  }
+}
+
+const url = getUrl(process.env.PROTOCOL, process.env.HOST, process.env.PORT)
+
+export const getIntro: RawAction<[string, string], string> = store => async (repo, branch = 'master') => {
+  const { dispatch } = store
+  const name = `${repo}/${branch}`
+
+  dispatch(IntroRequest(name))
+  try {
+    const { data: intro } = await axios.get(`${url}/data/${name}.md`)
+
+    dispatch(IntroSuccess(name, intro))
+
+    return intro
+  } catch (error) {
+    dispatch(IntroFailure(error))
     throw error
   }
 }

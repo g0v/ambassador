@@ -22,7 +22,10 @@ import {
   REPO_LIST_FAILURE,
   ISSUE_LIST_REQUEST,
   ISSUE_LIST_SUCCESS,
-  ISSUE_LIST_FAILURE
+  ISSUE_LIST_FAILURE,
+  INTRO_REQUEST,
+  INTRO_SUCCESS,
+  INTRO_FAILURE
 } from '~/types/github'
 import {
   DATE_FORMAT,
@@ -81,6 +84,7 @@ export type State = {
     repos: any[],
     issues: { [key: string]: any[] }
   },
+  intros: { [key: string]: string },
   logbot: {
     logs: Log[]
   },
@@ -112,6 +116,7 @@ export const initialState: State = {
     repos: [],
     issues: {}
   },
+  intros: {},
   logbot: {
     date: moment().format(DATE_FORMAT),
     logs: []
@@ -304,6 +309,22 @@ export default (state: State = initialState, action: PlainAction): State => {
           issues: false
         }
       }
+    }
+    case INTRO_REQUEST: {
+      return state
+    }
+    case INTRO_SUCCESS: {
+      const { name, intro } = action
+
+      return {
+        ...state,
+        intros: {
+          [name]: intro
+        }
+      }
+    }
+    case INTRO_FAILURE: {
+      return state
     }
 
     case LOG_STORE: {
