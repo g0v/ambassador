@@ -20,9 +20,9 @@ import type {
   IssueListRequestAction,
   IssueListSuccessAction,
   IssueListFailureAction,
-  IntroRequest,
-  IntroSuccess,
-  IntroFailure
+  IntroRequestAction,
+  IntroSuccessAction,
+  IntroFailureAction
 } from './github'
 import type {
   LogRequestAction,
@@ -52,7 +52,7 @@ import type {
   SearchRequestAction,
   SearchSuccessAction,
   SearchFailureAction,
-  SearchPage
+  SearchPageAction
 } from './search'
 import { map as _map } from 'ramda'
 
@@ -63,7 +63,7 @@ export type PlainAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
-  | IntroRequest | IntroSuccess | IntroFailure
+  | IntroRequestAction | IntroSuccessAction | IntroFailureAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LinkRequestAction | LinkSuccessAction | LinkFailureAction
   | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction
@@ -73,7 +73,7 @@ export type PlainAction
   | SearchChangeAction
   | HintRequestAction | HintSuccessAction | HintFailureAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
-  | SearchPage
+  | SearchPageAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

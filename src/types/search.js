@@ -1,5 +1,6 @@
 /* @flow */
 
+import type { State } from '~/reducers'
 import type { Log } from './logbot'
 
 export const ROWS_PER_PAGE = 10
@@ -39,7 +40,7 @@ export type SearchFailureAction = { type: 'SEARCH_FAILURE', error: Error }
 export const SEARCH_FAILURE = 'SEARCH_FAILURE'
 export const SearchFailure = (error: Error): SearchFailureAction => ({ type: SEARCH_FAILURE, error })
 
-export type SearchPageAction = { type: 'SERACH_PAGE', page: number }
+export type SearchPageAction = { type: 'SEARCH_PAGE', page: number }
 export const SEARCH_PAGE = 'SEARCH_PAGE'
 export const SearchPage = (page: number): SearchPageAction => ({ type: SEARCH_PAGE, page })
 
