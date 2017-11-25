@@ -227,6 +227,22 @@ app
       })
       .catch(next)
   })
+  // Get logs
+  .get('/api/hashtag/:tag/log', (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    const { tag } = req.params
+
+    winston.verbose(`Get logs by #${tag}`)
+
+    db.logHashtag.getLogs(pool, tag)
+      .then(logs => {
+        winston.info(`Get ${logs.length} logs by #${tag}`)
+
+        res.json(logs)
+      })
+      .catch(next)
+  })
   // Get a log
   .get('/api/logbot/:channel/:date/:index', (req, res, next) => {
     if (!status.database) throw new DatabaseError()

@@ -10,6 +10,13 @@ const list = (db) =>
 
 // TODO: test = (db, log, hashtag) => {}
 
+const getLogs = (db, hashtag) =>
+  db.query(
+    'SELECT l.* FROM logHashtag lh LEFT JOIN log l ON lh.log = l.id LEFT JOIN hashtag h ON lh.hashtag = h.id WHERE h.content = $1',
+    [hashtag]
+  )
+    .then(r => r && r.rows)
+
 const link = (db, log, hashtag) =>
   db.query(
     'INSERT INTO logHashtag (log, hashtag) VALUES ($1, $2) RETURNING *;',
@@ -27,6 +34,7 @@ const unlink = (db, log, hashtag) =>
 module.exports = {
   prepare,
   drop,
+  getLogs,
   list,
   link,
   unlink
