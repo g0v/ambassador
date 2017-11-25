@@ -4,6 +4,7 @@ import { Item, Dropdown, Button } from 'semantic-ui-react'
 import VisibilitySensor from 'react-visibility-sensor'
 import styles from './index.css'
 import * as L from '~/types/logbot'
+import * as C from '~/types/color'
 import { compose, uniq, filter } from 'ramda'
 import moment from 'moment'
 
@@ -25,15 +26,23 @@ class LogItem extends PureComponent {
   render() {
     const { id, className, data, options, disabled, onChange, onHide } = this.props
     const { nick = '...', msg = '...', hashtags } = data
-    const timeStr = moment(+data.time * 1000).format(`${L.DATE_FORMAT} ${L.TIME_FORMAT}`)
+    const timeStr = data.time
+      ? moment(+data.time * 1000).format(L.LOGBOT_TIME_FORMAT)
+      : '00:00:00'
+    const color = C.nickname(L.stripNickPrefix(nick))
 
     return (
       <Item id={id} className={cx(styles.main, className)} >
         <VisibilitySensor onChange={this.handleVisibility} />
         <Item.Content>
           <Item.Description className={styles.log}>
-            <span className={styles.nick} title={timeStr}>{`${nick}>`}</span>
-            &nbsp;
+            <span className={styles.time}>{ timeStr }</span>
+            <span
+              className={styles.nick}
+              style={{ color: C.styleFromHSL(color) }}
+            >
+              { nick }
+            </span>
             <span dangerouslySetInnerHTML={{ __html: msg }} />
           </Item.Description>
           {

@@ -4,7 +4,14 @@
 .log {
   font-family: monospace;
 
+  .time {
+    color: #888;
+  }
+
   .nick {
-    font-weight: bold;
+    display: inline-block;
+    width: 110px;
+    margin-right: 1rem;
+    text-align: right;
   }
 }

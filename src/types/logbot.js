@@ -7,6 +7,8 @@ export const DATE_FORMAT = 'YYYY-MM-DD'
 
 export const TIME_FORMAT = 'HH:mm'
 
+export const LOGBOT_TIME_FORMAT = 'HH:mm:ss'
+
 export type LogId = number
 
 export type Log = {
@@ -77,4 +79,12 @@ export const getLogs = (state: State): Log[] => {
 
 export const getLogMap = (state: State): { [key: string]: Log } => {
   return (state && state.logs) || {}
+}
+
+export const stripNickPrefix = (nickname: string): string => {
+  const prefix = nickname.charAt(0)
+
+  return (prefix === 'ⓢ' || prefix === '🅣')
+    ? nickname.substr(2)
+    : nickname
 }
