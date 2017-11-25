@@ -6,6 +6,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as L from '~/types/logbot'
 import * as S from '~/types/search'
 import { Container, Item, Button } from 'semantic-ui-react'
+import Pagenator from '../Pagenator'
 import LogItem from '../LogItem'
 import { map } from 'ramda'
 import styles from './index.css'
@@ -15,7 +16,7 @@ class SearchPage extends PureComponent {
     className: ''
   }
 
-  async handlePageClick(page) {
+  handlePageClick = async (page) => {
     const { value, page: currentPage, actions } = this.props
 
     if (currentPage === page) return
@@ -40,69 +41,12 @@ class SearchPage extends PureComponent {
       <Container text id={id} className={cx(styles.main, className)}>
         {
           logs.length !== 0 &&
-            <Button.Group className={styles.pagenator}>
-              <Button
-                icon="triangle left"
-                disabled={page === 0}
-                onClick={() => this.handlePageClick(page - 1)}
-              />
-              {
-                totalPage > 1 &&
-                  <Button
-                    active={page === 0}
-                    onClick={() => this.handlePageClick(0)}
-                  >
-                    1
-                  </Button>
-              }
-              {
-                totalPage > 2
-                  ? (page === 0 || page === 1 || page === 2)
-                      ? <Button
-                          active={page === 1}
-                          onClick={() => this.handlePageClick(1)}
-                        >
-                          2
-                        </Button>
-                      : <Button disabled>&#8230;</Button>
-                  : null
-              }
-              {
-                totalPage > 3
-                  ? (page === 0 || page === 1)
-                      ? <Button onClick={() => this.handlePageClick(2)}>3</Button>
-                      : (page === (totalPage - 2) || page === (totalPage - 1))
-                          ? <Button onClick={() => this.handlePageClick(totalPage - 3)}>{ totalPage - 2 }</Button>
-                          : <Button className={styles.current} active>{ page + 1 }</Button>
-                  : null
-              }
-              {
-                totalPage > 4
-                  ? (page === (totalPage - 3) || page === (totalPage - 2) || page === (totalPage - 1))
-                      ? <Button
-                          active={page === (totalPage - 2)}
-                          onClick={() => this.handlePageClick(totalPage - 2)}
-                        >
-                          { totalPage - 1 }
-                        </Button>
-                      : <Button disabled>&#8230;</Button>
-                  : null
-              }
-              {
-                totalPage > 5 &&
-                  <Button
-                    active={page === (totalPage - 1)}
-                    onClick={() => this.handlePageClick(totalPage - 1)}
-                  >
-                    { totalPage }
-                  </Button>
-              }
-              <Button
-                icon="triangle right"
-                disabled={page >= (totalPage - 1)}
-                onClick={() => this.handlePageClick(page + 1)}
-              />
-            </Button.Group>
+            <Pagenator
+              className={styles.pagenator}
+              page={page}
+              total={totalPage}
+              onChange={this.handlePageClick}
+            />
         }
         <Item.Group divided>{
           map(
@@ -123,6 +67,15 @@ class SearchPage extends PureComponent {
             logs
           )
         }</Item.Group>
+        {
+          logs.length !== 0 &&
+            <Pagenator
+              className={styles.pagenator}
+              page={page}
+              total={totalPage}
+              onChange={this.handlePageClick}
+            />
+        }
       </Container>
     )
   }
