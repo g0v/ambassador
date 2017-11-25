@@ -27,7 +27,7 @@ class RepoPage extends PureComponent {
   }
 
   render() {
-    const { id, className, match, isLoading, repos, intros } = this.props
+    const { id, className, match, intros } = this.props
     const { params: { repo } } = match
 
     let branch = 'master'
