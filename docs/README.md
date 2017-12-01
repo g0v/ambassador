@@ -6,6 +6,17 @@
 
 ## we b logs
 
+### 2017-12-01
+
+被抓到 OCF co-work XD
+
+* api.search.g0v.io 可以接，送的是 elasticsearch JSON query ，可惜搜的是整頁，不是一條條 log
+* Ronny 提到，怎麼把同一個案子的幾個 repo 整理起來，畢竟一個人認識的是「新聞小幫手」，而不是那些分離的前端、後端、資料 repos
+* 如果這樣的資料適合在揪松網呈現，那 YA0H 能否成為資料提供者？
+* 「這個專案和什麼相關？」
+* YA0H 與揪松網的 tags
+* Ronny 又提到，怎麼把資料匯出到 hackpad 或是 hackmd ，然後標記這些都是和某個專案，或是某個 tag 相關，這樣比逐條整理 log 有效率
+
 ### 2017-11-03
 
 期中前的小聚上， ttcat, clkao, ipa, kirby 給了許多[務實的建議][grant-1103]，點出重點：
