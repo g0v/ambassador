@@ -7,6 +7,7 @@ import RepoListPage from '~/components/RepoListPage'
 //import IssueListPage from '~/components/IssueListPage'
 import RepoPage from '~/components/RepoPage'
 import SearchPage from '~/components/SearchPage'
+import ConfigPage from '~/components/ConfigPage'
 import * as L from '~/types/logbot'
 import moment from 'moment'
 
@@ -41,6 +42,7 @@ class Root extends PureComponent {
           <Route exact path="/repos" component={RepoListPage} />
           <Route exact path="/repos/:repo" component={RepoPage} />
           <Route exact path="/search" component={SearchPage} />
+          <Route exact path="/config" component={ConfigPage} />
         </div>
       </div>
     );
