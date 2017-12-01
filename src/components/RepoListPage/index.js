@@ -17,38 +17,33 @@ class RepoListPage extends PureComponent {
   }
 
   async componentDidMount() {
-    const { actions, isLoggedIn } = this.props
-
-    if (!isLoggedIn) return
+    const { actions } = this.props
 
     await actions.github.getRepos('g0v')
   }
 
   async componentDidUpdate() {
-    const { actions, isLoggedIn, isLoading, repos } = this.props
+    const { actions, isLoading, repos } = this.props
 
-    if (!isLoggedIn || isLoading || repos.length !== 0) return
+    if (isLoading || repos.length !== 0) return
 
     await actions.github.getRepos('g0v')
   }
 
   render() {
-    const { id, className, isLoggedIn, isLoading } = this.props
-    const dimmed = !isLoggedIn && !isLoading
+    const { id, className, isLoading } = this.props
+    const dimmed = isLoading
     let repos = this.props.repos
     if (dimmed && repos.length === 0) {
       repos = G.dummyRepoList
     }
 
-    // TODO: you don't have to be a member to browse g0v repos
     return (
       <Dimmer.Dimmable className={styles.dimmable} as={Segment} blurring dimmed={dimmed}>
         <Dimmer active={dimmed}>
-          <Header as='h2' inverted>{
-            !isLoggedIn
-              ? 'Sign in to see g0v repos'
-              : ''
-          }</Header>
+          <Header as='h2' inverted>
+            Loading...
+          </Header>
         </Dimmer>
 
         <Container text id={id} className={cx(styles.main, className)}>
@@ -65,11 +60,10 @@ export default compose(
   withRouter,
   connect(
     state => {
-      const isLoggedIn = !!A.getAccessToken(state)
       const isLoading = G.isRepoListLoading(state)
       const repos = G.getRepoList(state)
 
-      return { isLoggedIn, isLoading, repos }
+      return { isLoading, repos }
     },
     mapDispatchToProps(actions)
   )

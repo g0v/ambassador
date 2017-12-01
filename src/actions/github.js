@@ -76,14 +76,9 @@ export const getRepos: RawAction<[string], any[]> = store => async (name) => {
   const { dispatch, getState } = store
   const state = getState()
 
-  const token = A.getAccessToken(state)
-  if (!token) {
-    throw new Error('access token not found')
-  }
-
   dispatch(RepoListRequest())
   try {
-    const gh = new GitHub({ token })
+    const gh = new GitHub()
     const org = gh.getOrganization(name)
     const { data: repos } = await org.getRepos()
     dispatch(RepoListSuccess(repos))
