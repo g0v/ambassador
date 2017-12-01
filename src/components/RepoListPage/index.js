@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import * as A from '~/types/auth'
 import * as G from '~/types/github'
-import { Container, Item, Dimmer, Segment, Header } from 'semantic-ui-react'
+import { Container, Dimmer, Segment, Header, Grid } from 'semantic-ui-react'
 import RepoItem from '../RepoItem'
-import { compose, map } from 'ramda'
+import { compose, map, addIndex } from 'ramda'
 import styles from './index.css'
+
+const COLUMN_NUM = 4
+const idxMap = addIndex(map)
 
 class RepoListPage extends PureComponent {
   static defaultProps = {
@@ -38,6 +40,25 @@ class RepoListPage extends PureComponent {
       repos = G.dummyRepoList
     }
 
+    const rowCount = Math.floor(repos.length / COLUMN_NUM)
+    const r = repos.length % COLUMN_NUM
+    let as = []
+    let i
+    let j
+    for (i = 0; i < rowCount; i++) {
+      let xs = []
+      for (j = 0; j < COLUMN_NUM; j++) {
+        xs.push(repos[i * COLUMN_NUM + j])
+      }
+      as.push(xs)
+    }
+    j = i * COLUMN_NUM
+    let bs = []
+    for (i = 0; i < r; i++) {
+      bs.push(repos[j + i])
+    }
+    if (bs.length) as.push(bs)
+
     return (
       <Dimmer.Dimmable className={styles.dimmable} as={Segment} blurring dimmed={dimmed}>
         <Dimmer active={dimmed}>
@@ -46,10 +67,24 @@ class RepoListPage extends PureComponent {
           </Header>
         </Dimmer>
 
-        <Container text id={id} className={cx(styles.main, className)}>
-          <Item.Group divided>{
-            map(data => <RepoItem key={data.id} data={data} />, repos)
-          }</Item.Group>
+        <Container id={id} className={cx(styles.main, className)}>
+          <Grid columns={COLUMN_NUM}>
+            {
+              idxMap(
+                (a, i) =>
+                  <Grid.Row key={i}>{
+                    idxMap(
+                      (aa, j) =>
+                        <Grid.Column key={j}>
+                          <RepoItem data={aa} />
+                        </Grid.Column>,
+                      a
+                    )
+                  }</Grid.Row>,
+                as
+              )
+            }
+          </Grid>
         </Container>
       </Dimmer.Dimmable>
     )

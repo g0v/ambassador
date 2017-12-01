@@ -13,13 +13,15 @@ class RepoItem extends PureComponent {
     const { id, className, data } = this.props
 
     return (
-      <Item id={id} className={cx(styles.main, className)} as={Link} to={`/repos/${data.name}`}>
-        <Item.Content>
-          <Item.Header>{ data.name }</Item.Header>
-          <Item.Meta>{ data.full_name }</Item.Meta>
-          <Item.Description>{ data.description }</Item.Description>
-        </Item.Content>
-      </Item>
+      <Item.Group>
+        <Item id={id} className={cx(styles.main, className)} as={Link} to={`/repos/${data.name}`}>
+          <Item.Content>
+            <Item.Header>{ data.name }</Item.Header>
+            <Item.Meta>{ data.full_name }</Item.Meta>
+            <Item.Description>{ data.description }</Item.Description>
+          </Item.Content>
+        </Item>
+      </Item.Group>
     )
   }
 }

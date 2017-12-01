@@ -73,8 +73,7 @@ export const isMember: RawAction<[string], boolean> = store => async (name) => {
 }
 
 export const getRepos: RawAction<[string], any[]> = store => async (name) => {
-  const { dispatch, getState } = store
-  const state = getState()
+  const { dispatch } = store
 
   dispatch(RepoListRequest())
   try {
