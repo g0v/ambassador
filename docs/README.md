@@ -25,6 +25,10 @@
 * 希望我可以回到**一開始提案的 dashboard**
 * Ronny 提到也許可以讓人來提供專案 FAQ 的 Q
 
+目前整理出來的 action items 在[11/3 g0v Grant 期中報告前小聊天 action items][action-items]。
+
+[action-items]: https://hackmd.io/s/BJtG5mQyz#ya0h-yet-another-g0v-hub-ttcat
+
 ### 2017-11-03
 
 期中前的小聚上， ttcat, clkao, ipa, kirby 給了許多[務實的建議][grant-1103]，點出重點：
