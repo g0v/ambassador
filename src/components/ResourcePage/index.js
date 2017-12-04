@@ -3,7 +3,7 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import { Container } from 'semantic-ui-react'
+import { Container, Form, Button, Dropdown, Divider } from 'semantic-ui-react'
 import styles from './index.css'
 
 class ResourcePage extends PureComponent {
@@ -11,12 +11,28 @@ class ResourcePage extends PureComponent {
     className: ''
   }
 
+  async componentDidMount() {
+    const { actions } = this.props
+
+    await actions.resource.list()
+  }
+
   render() {
     const { id, className } = this.props
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
-        resource page
+        <Form>
+          <Form.Input label="Resource URI" />
+          <Form.Field>
+            <Dropdown
+              fluid multiple search selection closeOnChange
+              placeholder="#hashtag"
+            />
+          </Form.Field>
+          <Button>Submit</Button>
+        </Form>
+        <Divider horizontal>Resources</Divider>
       </Container>
     )
   }

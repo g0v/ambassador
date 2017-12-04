@@ -340,9 +340,22 @@ app
 
           res.json(hints)
         })
+        .catch(next)
     } else {
       res.status(400).send()
     }
+  })
+  // Get resources
+  .get('/api/resource', (req, res, next) => {
+    winston.verbose('Get resources')
+
+    db.resource.list(pool)
+      .then(resources => {
+        winston.info('Get ${resource.length} resources')
+
+        res.json(resources)
+      })
+      .catch(next)
   })
   // Search keywords
   .get('/api/search', (req, res, next) => {
