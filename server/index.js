@@ -351,9 +351,23 @@ app
 
     db.resource.list(pool)
       .then(resources => {
-        winston.info('Get ${resource.length} resources')
+        winston.info('Get ' + resources.length + ' resources')
 
         res.json(resources)
+      })
+      .catch(next)
+  })
+  .post('/api/resource', (req, res, next) => {
+    const { uri } = req.body
+    // TODO: guard the URI here
+
+    winston.verbose('Create a resource with URI: ' + uri)
+
+    db.resource.create(pool, uri)
+      .then(resource => {
+        winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri)
+
+        res.json(resource)
       })
       .catch(next)
   })

@@ -7,7 +7,10 @@ import { getUrl } from '~/types'
 import {
   ResourceListRequest,
   ResourceListSuccess,
-  ResourceListFailure
+  ResourceListFailure,
+  ResourceCreateRequest,
+  ResourceCreateSuccess,
+  ResourceCreateFailure
 } from '~/types/resource'
 import axios from 'axios'
 
@@ -24,6 +27,21 @@ export const list: RawAction<[], Resource[]> = store => async () => {
     return resources
   } catch (error) {
     dispatch(ResourceListFailure(error))
+    throw error
+  }
+}
+
+export const create: RawAction<[string], Resource> = store => async (uri) => {
+  const { dispatch } = store
+
+  dispatch(ResourceCreateRequest())
+  try {
+    const { data: resource } = await axios.post(`${apiUrl}/api/resource`, { uri })
+    dispatch(ResourceCreateSuccess(resource))
+
+    return resource
+  } catch (error) {
+    dispatch(ResourceCreateFailure(error))
     throw error
   }
 }

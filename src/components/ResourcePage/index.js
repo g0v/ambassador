@@ -18,7 +18,7 @@ class ResourcePage extends PureComponent {
   }
 
   render() {
-    const { id, className } = this.props
+    const { id, className, actions } = this.props
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
@@ -30,7 +30,14 @@ class ResourcePage extends PureComponent {
               placeholder="#hashtag"
             />
           </Form.Field>
-          <Button>Submit</Button>
+          <Button
+            onClick={async (e) => {
+              e.preventDefault()
+              await actions.resource.create('http://g0v.tw')
+            }}
+          >
+            Submit
+          </Button>
         </Form>
         <Divider horizontal>Resources</Divider>
       </Container>
