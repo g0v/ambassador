@@ -67,7 +67,8 @@ import {
   RESOURCE_LIST_FAILURE,
   RESOURCE_CREATE_REQUEST,
   RESOURCE_CREATE_SUCCESS,
-  RESOURCE_CREATE_FAILURE
+  RESOURCE_CREATE_FAILURE,
+  RESOURCE_CREATE_DISMISS
 } from '~/types/resource'
 import { findIndex } from 'ramda'
 import moment from 'moment'
@@ -80,7 +81,8 @@ export type State = {
     issues: boolean,
     resources: {
       isLoading: boolean,
-      isCreating: boolean
+      isCreating: boolean,
+      error: ?Error
     },
     search: {
       isLoading: boolean,
@@ -118,6 +120,7 @@ export const initialState: State = {
     resources: {
       isLoading: false,
       isCreating: false,
+      error: undefined
     },
     search: {
       isLoading: false,
@@ -645,7 +648,7 @@ export default (state: State = initialState, action: PlainAction): State => {
     case RESOURCE_LIST_FAILURE: {
       const { error } = action
 
-      console.erorr(error)
+      console.error(error)
 
       return {
         ...state,
@@ -688,15 +691,26 @@ export default (state: State = initialState, action: PlainAction): State => {
     case RESOURCE_CREATE_FAILURE: {
       const { error } = action
 
-      console.error(error)
-
       return {
         ...state,
         ui: {
           ...state.ui,
           resources: {
             ...state.ui.resources,
-            isCreating: false
+            isCreating: false,
+            error
+          }
+        }
+      }
+    }
+    case RESOURCE_CREATE_DISMISS: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            error: undefined
           }
         }
       }

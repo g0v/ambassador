@@ -363,13 +363,18 @@ app
 
     winston.verbose('Create a resource with URI: ' + uri)
 
-    db.resource.create(pool, uri)
-      .then(resource => {
-        winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri)
+    db.resource.test(pool, uri)
+      .then(exists => {
+        if (exists) return res.status(409).send('Resource Exists')
 
-        res.json(resource)
+        db.resource.create(pool, uri)
+          .then(resource => {
+            winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri)
+
+            res.json(resource)
+          })
+          .catch(next)
       })
-      .catch(next)
   })
   // Search keywords
   .get('/api/search', (req, res, next) => {

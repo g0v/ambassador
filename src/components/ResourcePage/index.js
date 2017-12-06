@@ -4,7 +4,16 @@ import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as R from '~/types/resource'
-import { Container, Form, Button, Dropdown, Divider, Grid, Item } from 'semantic-ui-react'
+import {
+  Container,
+  Form,
+  Button,
+  Dropdown,
+  Divider,
+  Grid,
+  Item,
+  Popup
+} from 'semantic-ui-react'
 import { map, addIndex } from 'ramda'
 import styles from './index.css'
 
@@ -23,7 +32,48 @@ class ResourcePage extends PureComponent {
   }
 
   render() {
-    const { id, className, actions, isLoading, isCreating, resources } = this.props
+    const {
+      id, className, actions,
+      isLoading, isCreating, resources, error
+    } = this.props
+
+    let btn
+    if (error) {
+      const content = error.response.status === 409
+        ? 'URI exists!'
+        : 'Something is wrong!'
+      btn =
+        <Button
+          negative
+          disabled={isLoading || isCreating}
+          onClick={async (e) => {
+            e.preventDefault()
+            await actions.resource.dismiss()
+          }}
+        >
+          Error
+        </Button>
+      btn =
+        <Popup
+          inverted
+          trigger={btn}
+          content={content}
+          on="hover"
+          position="right center"
+        />
+    } else {
+      btn =
+        <Button
+          primary
+          disabled={isLoading || isCreating}
+          onClick={async (e) => {
+            e.preventDefault()
+            await actions.resource.create('http://g0v.tw')
+          }}
+        >
+          Submit
+        </Button>
+    }
 
     const rowCount = Math.floor(resources.length / COLUMN_NUM)
     const r = resources.length % COLUMN_NUM
@@ -56,15 +106,7 @@ class ResourcePage extends PureComponent {
               disabled={isLoading || isCreating}
             />
           </Form.Field>
-          <Button
-            disabled={isLoading || isCreating}
-            onClick={async (e) => {
-              e.preventDefault()
-              await actions.resource.create('http://g0v.tw')
-            }}
-          >
-            Submit
-          </Button>
+          { btn }
         </Form>
         <Divider horizontal>Resources</Divider>
         <Grid columns={COLUMN_NUM}>{
@@ -96,8 +138,9 @@ export default connect(
     const isLoading = R.isLoading(state)
     const isCreating = R.isCreating(state)
     const resources = R.getResources(state)
+    const error = R.getError(state)
 
-    return { isLoading, isCreating, resources }
+    return { isLoading, isCreating, resources, error }
   },
   mapDispatchToProps(actions)
 )(ResourcePage)

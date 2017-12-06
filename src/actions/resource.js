@@ -10,7 +10,8 @@ import {
   ResourceListFailure,
   ResourceCreateRequest,
   ResourceCreateSuccess,
-  ResourceCreateFailure
+  ResourceCreateFailure,
+  ResourceCreateDismiss
 } from '~/types/resource'
 import axios from 'axios'
 
@@ -44,4 +45,10 @@ export const create: RawAction<[string], Resource> = store => async (uri) => {
     dispatch(ResourceCreateFailure(error))
     throw error
   }
+}
+
+export const dismiss: RawAction<[], void> = store => async () => {
+  const { dispatch } = store
+
+  dispatch(ResourceCreateDismiss())
 }

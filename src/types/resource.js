@@ -32,6 +32,10 @@ export type ResourceCreateFailureAction = { type: 'RESOURCE_CREATE_FAILURE', err
 export const RESOURCE_CREATE_FAILURE = 'RESOURCE_CREATE_FAILURE'
 export const ResourceCreateFailure = (error: Error): ResourceCreateFailureAction => ({ type: RESOURCE_CREATE_FAILURE, error })
 
+export type ResourceCreateDismissAction = { type: 'RESOURCE_CREATE_DISMISS' }
+export const RESOURCE_CREATE_DISMISS = 'RESOURCE_CREATE_DISMISS'
+export const ResourceCreateDismiss = (): ResourceCreateDismissAction => ({ type: RESOURCE_CREATE_DISMISS })
+
 // functions
 export const isLoading = (state: State): boolean =>
   (state && state.ui && state.ui.resources && state.ui.resources.isLoading)
@@ -41,3 +45,6 @@ export const isCreating = (state: State): boolean =>
 
 export const getResources = (state: State): Resource[] =>
   (state && state.resources) || []
+
+export const getError = (state: State): ?Error =>
+  (state && state.ui && state.ui.resources && state.ui.resources.error)
