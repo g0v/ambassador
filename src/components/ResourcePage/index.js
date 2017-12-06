@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as R from '~/types/resource'
+import * as H from '~/types/hashtag'
 import {
   Container,
   Form,
@@ -34,7 +35,8 @@ class ResourcePage extends PureComponent {
   render() {
     const {
       id, className, actions,
-      isLoading, isCreating, resources, error
+      isLoading, isCreating, resources, error,
+      value, options
     } = this.props
 
     let btn
@@ -102,8 +104,16 @@ class ResourcePage extends PureComponent {
             <Dropdown
               fluid multiple search selection closeOnChange
               placeholder="#hashtag"
-              options={[]}
+              options={options}
+              value={value}
               disabled={isLoading || isCreating}
+              onChange={async (e, dropdown) => {
+                try {
+                  await actions.resource.createLink(dropdown.value)
+                } catch (err) {
+                  console.error(err)
+                }
+              }}
             />
           </Form.Field>
           { btn }
@@ -139,8 +149,11 @@ export default connect(
     const isCreating = R.isCreating(state)
     const resources = R.getResources(state)
     const error = R.getError(state)
+    const value = R.getHashtags(state)
+    const hashtags = H.getHashtags(state)
+    const options = H.toDropdownOptions(hashtags)
 
-    return { isLoading, isCreating, resources, error }
+    return { isLoading, isCreating, resources, error, value, options }
   },
   mapDispatchToProps(actions)
 )(ResourcePage)

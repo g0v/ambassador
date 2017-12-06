@@ -68,7 +68,8 @@ import {
   RESOURCE_CREATE_REQUEST,
   RESOURCE_CREATE_SUCCESS,
   RESOURCE_CREATE_FAILURE,
-  RESOURCE_CREATE_DISMISS
+  RESOURCE_CREATE_DISMISS,
+  RESOURCE_CREATE_LINK
 } from '~/types/resource'
 import { findIndex } from 'ramda'
 import moment from 'moment'
@@ -82,7 +83,8 @@ export type State = {
     resources: {
       isLoading: boolean,
       isCreating: boolean,
-      error: ?Error
+      error: ?Error,
+      hashtags: $PropertyType<Hashtag, 'id'>[]
     },
     search: {
       isLoading: boolean,
@@ -711,6 +713,20 @@ export default (state: State = initialState, action: PlainAction): State => {
           resources: {
             ...state.ui.resources,
             error: undefined
+          }
+        }
+      }
+    }
+    case RESOURCE_CREATE_LINK: {
+      const { hashtags } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            hashtags
           }
         }
       }

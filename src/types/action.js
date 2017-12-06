@@ -61,7 +61,8 @@ import type {
   ResourceCreateRequestAction,
   ResourceCreateSuccessAction,
   ResourceCreateFailureAction,
-  ResourceCreateDismissAction
+  ResourceCreateDismissAction,
+  ResourceCreateLinkAction
 } from './resource'
 import { map as _map } from 'ramda'
 
@@ -85,6 +86,7 @@ export type PlainAction
   | SearchPageAction
   | ResourceListRequestAction | ResourceListSuccessAction | ResourceListFailureAction
   | ResourceCreateRequestAction | ResourceCreateSuccessAction | ResourceCreateFailureAction | ResourceCreateDismissAction
+  | ResourceCreateLinkAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

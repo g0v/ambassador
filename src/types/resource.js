@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { State } from '~/reducers'
+import type { Hashtag } from '~/hashtag'
 
 export type Resource = {
   id: number,
@@ -36,6 +37,10 @@ export type ResourceCreateDismissAction = { type: 'RESOURCE_CREATE_DISMISS' }
 export const RESOURCE_CREATE_DISMISS = 'RESOURCE_CREATE_DISMISS'
 export const ResourceCreateDismiss = (): ResourceCreateDismissAction => ({ type: RESOURCE_CREATE_DISMISS })
 
+export type ResourceCreateLinkAction = { type: 'RESOURCE_CREATE_LINK', hashtags: $PropertyType<Hashtag, 'id'>[] }
+export const RESOURCE_CREATE_LINK = 'RESOURCE_CREATE_LINK'
+export const ResourceCreateLink = (hashtags): ResourceCreateLinkAction => ({ type: RESOURCE_CREATE_LINK, hashtags })
+
 // functions
 export const isLoading = (state: State): boolean =>
   (state && state.ui && state.ui.resources && state.ui.resources.isLoading)
@@ -48,3 +53,6 @@ export const getResources = (state: State): Resource[] =>
 
 export const getError = (state: State): ?Error =>
   (state && state.ui && state.ui.resources && state.ui.resources.error)
+
+export const getHashtags = (state: State): $PropertyType<Hashtag, 'id'>[] =>
+  (state && state.ui && state.ui.resources && state.ui.resources.hashtags) || []

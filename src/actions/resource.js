@@ -2,6 +2,7 @@
 
 import type { RawAction } from '~/types/action'
 import type { Resource } from '~/types/resource'
+import type { Hashtag } from '~/types/hashtag'
 
 import { getUrl } from '~/types'
 import {
@@ -11,7 +12,8 @@ import {
   ResourceCreateRequest,
   ResourceCreateSuccess,
   ResourceCreateFailure,
-  ResourceCreateDismiss
+  ResourceCreateDismiss,
+  ResourceCreateLink
 } from '~/types/resource'
 import axios from 'axios'
 
@@ -51,4 +53,10 @@ export const dismiss: RawAction<[], void> = store => async () => {
   const { dispatch } = store
 
   dispatch(ResourceCreateDismiss())
+}
+
+export const createLink: RawAction<[$PropertyType<Hashtag, 'id'>[]], void> = store => async (hashtags) => {
+  const { dispatch } = store
+
+  dispatch(ResourceCreateLink(hashtags))
 }
