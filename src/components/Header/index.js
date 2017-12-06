@@ -64,7 +64,7 @@ class Header extends PureComponent {
         <Menu.Item
           as={Link}
           to="/resources"
-          names="resources"
+          name="resources"
           active={location.pathname === '/resources'}
         >
           Resources

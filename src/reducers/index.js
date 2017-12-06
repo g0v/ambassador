@@ -3,6 +3,7 @@
 import type { PlainAction } from '~/types/action'
 import type { Log } from '~/types/logbot'
 import type { Hashtag } from '~/types/hashtag'
+import type { Resource } from '~/types/resource'
 
 import {
   LOGIN_REQUEST,
@@ -60,6 +61,14 @@ import {
   SEARCH_FAILURE,
   SEARCH_PAGE
 } from '~/types/search'
+import {
+  RESOURCE_LIST_REQUEST,
+  RESOURCE_LIST_SUCCESS,
+  RESOURCE_LIST_FAILURE,
+  RESOURCE_CREATE_REQUEST,
+  RESOURCE_CREATE_SUCCESS,
+  RESOURCE_CREATE_FAILURE
+} from '~/types/resource'
 import { findIndex } from 'ramda'
 import moment from 'moment'
 
@@ -69,6 +78,10 @@ export type State = {
     checkMember: boolean,
     repos: boolean,
     issues: boolean,
+    resources: {
+      isLoading: boolean,
+      isCreating: boolean
+    },
     search: {
       isLoading: boolean,
       results: string[],
@@ -90,6 +103,7 @@ export type State = {
   },
   hashtags: { [key: number]: Hashtag },
   logs: { [key: string]: Log },
+  resources: Resource[],
   search: {
     logs: Log[]
   }
@@ -101,6 +115,10 @@ export const initialState: State = {
     checkMember: false,
     repos: false,
     issues: false,
+    resources: {
+      isLoading: false,
+      isCreating: false,
+    },
     search: {
       isLoading: false,
       results: [],
@@ -123,6 +141,7 @@ export const initialState: State = {
   },
   hashtags: {},
   logs: {},
+  resources: [],
   search: {
     logs: []
   }
@@ -591,6 +610,93 @@ export default (state: State = initialState, action: PlainAction): State => {
           search: {
             ...state.ui.search,
             page
+          }
+        }
+      }
+    }
+
+    case RESOURCE_LIST_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isLoading: true
+          }
+        }
+      }
+    }
+    case RESOURCE_LIST_SUCCESS: {
+      const { resources } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isLoading: false
+          }
+        },
+        resources
+      }
+    }
+    case RESOURCE_LIST_FAILURE: {
+      const { error } = action
+
+      console.erorr(error)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isLoading: false
+          }
+        }
+      }
+    }
+    case RESOURCE_CREATE_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isCreating: true
+          }
+        }
+      }
+    }
+    case RESOURCE_CREATE_SUCCESS: {
+      const { resource } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isCreating: false
+          }
+        },
+        resources: [...state.resources, resource]
+      }
+    }
+    case RESOURCE_CREATE_FAILURE: {
+      const { error } = action
+
+      console.error(error)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            isCreating: false
           }
         }
       }

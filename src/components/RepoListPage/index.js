@@ -68,23 +68,21 @@ class RepoListPage extends PureComponent {
         </Dimmer>
 
         <Container id={id} className={cx(styles.main, className)}>
-          <Grid columns={COLUMN_NUM}>
-            {
-              idxMap(
-                (a, i) =>
-                  <Grid.Row key={i}>{
-                    idxMap(
-                      (aa, j) =>
-                        <Grid.Column key={j}>
-                          <RepoItem data={aa} />
-                        </Grid.Column>,
-                      a
-                    )
-                  }</Grid.Row>,
-                as
-              )
-            }
-          </Grid>
+          <Grid columns={COLUMN_NUM}>{
+            idxMap(
+              (a, i) =>
+                <Grid.Row key={i}>{
+                  idxMap(
+                    (aa, j) =>
+                      <Grid.Column key={j}>
+                        <RepoItem data={aa} />
+                      </Grid.Column>,
+                    a
+                  )
+                }</Grid.Row>,
+              as
+            )
+          }</Grid>
         </Container>
       </Dimmer.Dimmable>
     )

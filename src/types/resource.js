@@ -1,5 +1,7 @@
 /* @flow */
 
+import type { State } from '~/reducers'
+
 export type Resource = {
   id: number,
   uri: string
@@ -29,3 +31,13 @@ export const ResourceCreateSuccess = (resource: Resource): ResourceCreateSuccess
 export type ResourceCreateFailureAction = { type: 'RESOURCE_CREATE_FAILURE', error: Error }
 export const RESOURCE_CREATE_FAILURE = 'RESOURCE_CREATE_FAILURE'
 export const ResourceCreateFailure = (error: Error): ResourceCreateFailureAction => ({ type: RESOURCE_CREATE_FAILURE, error })
+
+// functions
+export const isLoading = (state: State): boolean =>
+  (state && state.ui && state.ui.resources && state.ui.resources.isLoading)
+
+export const isCreating = (state: State): boolean =>
+  (state && state.ui && state.ui.resources && state.ui.resources.isCreating)
+
+export const getResources = (state: State): Resource[] =>
+  (state && state.resources) || []

@@ -3,8 +3,13 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import { Container, Form, Button, Dropdown, Divider } from 'semantic-ui-react'
+import * as R from '~/types/resource'
+import { Container, Form, Button, Dropdown, Divider, Grid, Item } from 'semantic-ui-react'
+import { map, addIndex } from 'ramda'
 import styles from './index.css'
+
+const COLUMN_NUM = 2
+const idxMap = addIndex(map)
 
 class ResourcePage extends PureComponent {
   static defaultProps = {
@@ -18,19 +23,41 @@ class ResourcePage extends PureComponent {
   }
 
   render() {
-    const { id, className, actions } = this.props
+    const { id, className, actions, isLoading, isCreating, resources } = this.props
+
+    const rowCount = Math.floor(resources.length / COLUMN_NUM)
+    const r = resources.length % COLUMN_NUM
+    let as = []
+    let i
+    let j
+    for (i = 0; i < rowCount; i++) {
+      let bs = []
+      for (j = 0; j < COLUMN_NUM; j++) {
+        bs.push(resources[i * COLUMN_NUM + j])
+      }
+      as.push(bs)
+    }
+    j = i * COLUMN_NUM
+    let cs = []
+    for (i = 0; i < r; i++) {
+      cs.push(resources[j + i])
+    }
+    if (cs.length) as.push(cs)
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         <Form>
-          <Form.Input label="Resource URI" />
+          <Form.Input label="Resource URI" disabled={isLoading || isCreating} />
           <Form.Field>
             <Dropdown
               fluid multiple search selection closeOnChange
               placeholder="#hashtag"
+              options={[]}
+              disabled={isLoading || isCreating}
             />
           </Form.Field>
           <Button
+            disabled={isLoading || isCreating}
             onClick={async (e) => {
               e.preventDefault()
               await actions.resource.create('http://g0v.tw')
@@ -40,12 +67,37 @@ class ResourcePage extends PureComponent {
           </Button>
         </Form>
         <Divider horizontal>Resources</Divider>
+        <Grid columns={COLUMN_NUM}>{
+          idxMap(
+            (a, i) =>
+              <Grid.Row key={i}>{
+                idxMap(
+                  (aa, j) =>
+                    <Grid.Column key={j}>
+                      <Item>
+                        <Item.Content>
+                          <Item.Header>{ aa.uri }</Item.Header>
+                        </Item.Content>
+                      </Item>
+                    </Grid.Column>,
+                  a
+                )
+              }</Grid.Row>,
+            as
+          )
+        }</Grid>
       </Container>
     )
   }
 }
 
 export default connect(
-  state => ({}),
+  state => {
+    const isLoading = R.isLoading(state)
+    const isCreating = R.isCreating(state)
+    const resources = R.getResources(state)
+
+    return { isLoading, isCreating, resources }
+  },
   mapDispatchToProps(actions)
 )(ResourcePage)
