@@ -2,7 +2,7 @@
 
 import type { RawAction } from '~/types/action'
 import type { Resource } from '~/types/resource'
-import type { Hashtag } from '~/types/hashtag'
+import type { HashtagId } from '~/types/hashtag'
 
 import { getUrl } from '~/types'
 import {
@@ -55,7 +55,7 @@ export const dismiss: RawAction<[], void> = store => async () => {
   dispatch(ResourceCreateDismiss())
 }
 
-export const createLink: RawAction<[$PropertyType<Hashtag, 'id'>[]], void> = store => async (hashtags) => {
+export const createLink: RawAction<[HashtagId[]], void> = store => async (hashtags) => {
   const { dispatch } = store
 
   dispatch(ResourceCreateLink(hashtags))

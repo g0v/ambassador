@@ -122,7 +122,8 @@ export const initialState: State = {
     resources: {
       isLoading: false,
       isCreating: false,
-      error: undefined
+      error: undefined,
+      hashtags: []
     },
     search: {
       isLoading: false,
