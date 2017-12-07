@@ -17,6 +17,9 @@ import {
   RepoListRequest,
   RepoListSuccess,
   RepoListFailure,
+  RepoContributorListRequest,
+  RepoContributorListSuccess,
+  RepoContributorListFailure,
   IssueListRequest,
   IssueListSuccess,
   IssueListFailure,
@@ -85,6 +88,23 @@ export const getRepos: RawAction<[string], any[]> = store => async (name) => {
     return repos
   } catch (error) {
     dispatch(RepoListFailure(error))
+    throw error
+  }
+}
+
+export const getContributors: RawAction<[string, string], any[]> = store => async (name, repo) => {
+  const { dispatch } = store
+
+  dispatch(RepoContributorListRequest())
+  try {
+    const gh = new GitHub()
+    const r = gh.getRepo(name, repo)
+    const { data: contributors } = await r.getContributors()
+    dispatch(RepoContributorListSuccess(contributors))
+
+    return []
+  } catch (error) {
+    dispatch(RepoContributorListFailure(error))
     throw error
   }
 }

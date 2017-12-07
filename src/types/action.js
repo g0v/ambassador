@@ -17,6 +17,9 @@ import type {
   RepoListRequestAction,
   RepoListSuccessAction,
   RepoListFailureAction,
+  RepoContributorListRequestAction,
+  RepoContributorListSuccessAction,
+  RepoContributorListFailureAction,
   IssueListRequestAction,
   IssueListSuccessAction,
   IssueListFailureAction,
@@ -72,6 +75,7 @@ export type PlainAction
   | ProfileRequestAction | ProfileSuccessAction | ProfileFailureAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
+  | RepoContributorListRequestAction | RepoContributorListSuccessAction | RepoContributorListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | IntroRequestAction | IntroSuccessAction | IntroFailureAction
   | LogRequestAction | LogSuccessAction | LogFailureAction

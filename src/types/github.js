@@ -31,6 +31,18 @@ export type RepoListRequestAction = { type: 'REPO_LIST_REQUEST' }
 export const REPO_LIST_REQUEST = 'REPO_LIST_REQUEST'
 export const RepoListRequest = (): RepoListRequestAction => ({ type: REPO_LIST_REQUEST })
 
+export type RepoContributorListRequestAction = { type: 'REPO_CONTRIBUTOR_LIST_REQUEST' }
+export const REPO_CONTRIBUTOR_LIST_REQUEST = 'REPO_CONTRIBUTOR_LIST_REQUEST'
+export const RepoContributorListRequest = (): RepoContributorListRequestAction => ({ type: REPO_CONTRIBUTOR_LIST_REQUEST })
+
+export type RepoContributorListSuccessAction = { type: 'REPO_CONTRIBUTOR_LIST_SUCCESS', contributors: any[] }
+export const REPO_CONTRIBUTOR_LIST_SUCCESS = 'REPO_CONTRIBUTOR_LIST_SUCCESS'
+export const RepoContributorListSuccess = (contributors: any[]): RepoContributorListSuccessAction => ({ type: REPO_CONTRIBUTOR_LIST_SUCCESS, contributors })
+
+export type RepoContributorListFailureAction = { type: 'REPO_CONTRIBUTOR_LIST_FAILURE', error: Error  }
+export const REPO_CONTRIBUTOR_LIST_FAILURE = 'REPO_CONTRIBUTOR_LIST_FAILURE'
+export const RepoContributorListFailure = (error: Error): RepoContributorListFailureAction => ({ type: REPO_CONTRIBUTOR_LIST_FAILURE, error })
+
 // TODO: repos: Repo[]
 export type RepoListSuccessAction = { type: 'REPO_LIST_SUCCESS', repos: any[] }
 export const REPO_LIST_SUCCESS = 'REPO_LIST_SUCCESS'
