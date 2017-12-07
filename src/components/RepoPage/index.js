@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container } from 'semantic-ui-react'
+import { Container, Divider } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-import { compose } from 'ramda'
+import { compose, find } from 'ramda'
 import styles from './index.css'
 
 class RepoPage extends PureComponent {
@@ -19,6 +19,8 @@ class RepoPage extends PureComponent {
     const { actions, match } = this.props
     const { params: { repo } } = match
 
+    await actions.github.getRepos('g0v')
+
     if (repo === 'moedict-webkit') {
       await actions.github.getIntro(repo, 'amis-react')
     } else if (repo === 'itaigi') {
@@ -27,8 +29,10 @@ class RepoPage extends PureComponent {
   }
 
   render() {
-    const { id, className, match, intros } = this.props
+    const { id, className, match, repos, intros } = this.props
     const { params: { repo } } = match
+
+    const r = find(it => it.name === repo, repos)
 
     let branch = 'master'
     if (repo === 'moedict-webkit') {
@@ -40,9 +44,17 @@ class RepoPage extends PureComponent {
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         <h1>{ repo }</h1>
-        <h2>專案狀態</h2>
-        <p>...</p>
-        <hr />
+        <h2>專案網址</h2>
+        { r && <p><a href={r.html_url}>{ r.html_url }</a></p> }
+        <h2>專案介紹</h2>
+        { r && <p>{ r.description }</p> }
+        <h2>想解決什麼問題</h2>
+        <h2>用什麼方式解決</h2>
+        <h2>人</h2>
+        <h2>相關 GitHub repos</h2>
+        <h2>GitHub issues</h2>
+        <h2>社群動態</h2>
+        <Divider />
         <ReactMarkdown source={intro} />
       </Container>
     )
