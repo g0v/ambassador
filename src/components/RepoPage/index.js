@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, Divider } from 'semantic-ui-react'
+import { Container, List, Divider } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-import { compose, find } from 'ramda'
+import { compose, find, map } from 'ramda'
 import styles from './index.css'
 
 class RepoPage extends PureComponent {
@@ -16,17 +16,20 @@ class RepoPage extends PureComponent {
   }
 
   async componentDidMount() {
-    const { actions, match } = this.props
+    const { actions, match, repos } = this.props
     const { params: { repo } } = match
 
     try {
-      await actions.github.getRepos('g0v')
-      await actions.github.getContributors('g0v', repo)
-
       if (repo === 'moedict-webkit') {
         await actions.github.getIntro(repo, 'amis-react')
       } else if (repo === 'itaigi') {
         await actions.github.getIntro(repo)
+      }
+
+      await actions.github.g0vJson('g0v', repo)
+      // XXX: should keep the promise
+      if (repos.length !== 0) {
+        await actions.github.getRepos('g0v')
       }
     } catch (error) {
       console.error(error)
@@ -34,8 +37,10 @@ class RepoPage extends PureComponent {
   }
 
   render() {
-    const { id, className, match, repos, intros } = this.props
+    const { id, className, match, repos, intros, g0vJsonMap } = this.props
     const { params: { repo } } = match
+    const fullname = G.fullName('g0v', repo)
+    const g0vJson = g0vJsonMap[fullname] || {}
 
     const r = find(it => it.name === repo, repos)
 
@@ -56,6 +61,17 @@ class RepoPage extends PureComponent {
         <h2>想解決什麼問題</h2>
         <h2>用什麼方式解決</h2>
         <h2>人</h2>
+        <List horizontal>{
+          map(
+            user =>
+              <List.Item key={user}>
+                <List.Content>
+                  <List.Header>{ user }</List.Header>
+                </List.Content>
+              </List.Item>,
+            g0vJson.contributors || []
+          )
+        }</List>
         <h2>相關 GitHub repos</h2>
         <h2>GitHub issues</h2>
         <h2>社群動態</h2>
@@ -73,8 +89,9 @@ export default compose(
       const isLoading = G.isRepoListLoading(state)
       const repos = G.getRepoList(state)
       const intros = G.getIntroMap(state)
+      const g0vJsonMap = G.g0vJsonMap(state)
 
-      return { isLoading, repos, intros }
+      return { isLoading, repos, intros, g0vJsonMap }
     },
     mapDispatchToProps(actions)
   )

@@ -398,6 +398,24 @@ app
       res.status(400).send()
     }
   })
+  // Proxy g0v.json@GitHub
+  .get('/api/github/:name/:repo/g0v.json', (req, res, next) => {
+    const { name, repo } = req.params
+
+    winston.verbose(`Fetch https://github.com/${name}/${repo}/master/g0v.json`)
+
+    axios.get(`https://raw.githubusercontent.com/${name}/${repo}/master/g0v.json`)
+      .then(({ data }) => {
+        winston.info(`https://github.com/${name}/${repo}/master/g0v.json fetched`)
+
+        res.json(data)
+      })
+      .catch(error => {
+        console.error(error)
+
+        res.status(404).send()
+      })
+  })
   // Serve client scripts
   .use(express.static(paths.appBuild))
   // Fallback to index page as the client is a single page application

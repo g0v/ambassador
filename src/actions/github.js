@@ -25,7 +25,10 @@ import {
   IssueListFailure,
   IntroRequest,
   IntroSuccess,
-  IntroFailure
+  IntroFailure,
+  g0vJsonRequest,
+  g0vJsonSuccess,
+  g0vJsonFailure
 } from '~/types/github'
 
 export const getProfile: RawAction<[], any> = store => async () => {
@@ -147,6 +150,24 @@ export const getIntro: RawAction<[string, string], string> = store => async (rep
     return intro
   } catch (error) {
     dispatch(IntroFailure(error))
+    throw error
+  }
+}
+
+const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
+
+export const g0vJson: RawAction<[string, string], any> = store => async (name, repo) => {
+  const { dispatch } = store
+
+  dispatch(g0vJsonRequest(name, repo))
+  try {
+    const { data: json } = await axios.get(`${apiUrl}/api/github/${name}/${repo}/g0v.json`)
+
+    dispatch(g0vJsonSuccess(name, repo, json))
+
+    return json
+  } catch (error) {
+    dispatch(g0vJsonFailure(name, repo, error))
     throw error
   }
 }

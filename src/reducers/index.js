@@ -26,7 +26,11 @@ import {
   ISSUE_LIST_FAILURE,
   INTRO_REQUEST,
   INTRO_SUCCESS,
-  INTRO_FAILURE
+  INTRO_FAILURE,
+  G0V_JSON_REQUEST,
+  G0V_JSON_SUCCESS,
+  G0V_JSON_FAILURE,
+  fullName
 } from '~/types/github'
 import {
   DATE_FORMAT,
@@ -99,7 +103,8 @@ export type State = {
     profile: ?any,
     isMember: ?boolean,
     repos: any[],
-    issues: { [key: string]: any[] }
+    issues: { [key: string]: any[] },
+    g0v: { [key: string]: any }
   },
   intros: { [key: string]: string },
   logbot: {
@@ -138,7 +143,8 @@ export const initialState: State = {
     profile: undefined,
     isMember: undefined,
     repos: [],
-    issues: {}
+    issues: {},
+    g0v: {}
   },
   intros: {},
   logbot: {
@@ -349,6 +355,26 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case INTRO_FAILURE: {
+      return state
+    }
+    case G0V_JSON_REQUEST: {
+      return state
+    }
+    case G0V_JSON_SUCCESS: {
+      const { name, repo, json } = action
+
+      return {
+        ...state,
+        github: {
+          ...state.github,
+          g0v: {
+            ...state.github.g0v,
+            [fullName(name, repo)]: json
+          }
+        }
+      }
+    }
+    case G0V_JSON_FAILURE: {
       return state
     }
 
