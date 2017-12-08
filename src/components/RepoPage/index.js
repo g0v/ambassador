@@ -54,10 +54,36 @@ class RepoPage extends PureComponent {
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         <h1>{ repo }</h1>
+        {
+          g0vJson && g0vJson.thumbnail && g0vJson.thumbnail[0] &&
+            <img class="g0v-thumbnail" src={g0vJson.thumbnail[0]} alt={`${repo} thumbnail`} />
+        }
         <h2>專案網址</h2>
-        { r && <p><a href={r.html_url}>{ r.html_url }</a></p> }
+        <ul className="url-list">
+        {
+          r && r.homepage &&
+            <li className="github-homepage">首頁：<a href={r.homepage}>{ r.homepage }</a></li>
+        }
+        {
+          (r && r.html_url)
+            ? <li className="github-html_url">源碼：<a href={r.html_url}>{ r.html_url }</a></li>
+            : (g0vJson && g0vJson.repository && g0vJson.repository.url) &&
+                <li className="g0v-repository-url">源碼：<a href={g0vJson.repository.url}>{ g0vJson.repository.url }</a></li>
+        }
+        </ul>
         <h2>專案介紹</h2>
-        { r && <p>{ r.description }</p> }
+        {
+          r &&
+            <p className="github-description">{ r.description }</p>
+        }
+        {
+          g0vJson && g0vJson.description &&
+            <p className="g0v-description">{ g0vJson.description }</p>
+        }
+        {
+          g0vJson && g0vJson.description_zh &&
+            <p className="g0v-description_zh">{ g0vJson.description_zh }</p>
+        }
         <h2>想解決什麼問題</h2>
         <h2>用什麼方式解決</h2>
         <h2>人</h2>
