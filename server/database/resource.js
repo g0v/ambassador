@@ -22,10 +22,18 @@ const test = (db, uri) =>
   )
     .then(r => r && r.rows && r.rows[0] && r.rows[0].exists)
 
+const get = (db, id) =>
+  db.query(
+    'SELECT r.id, r.uri, array_remove(array_agg(h.hashtag), NULL) hashtags FROM resource r LEFT JOIN resourceHashtag h ON r.id = h.resource WHERE r.id = $1 GROUP BY r.id LIMIT 1;',
+    [id]
+  )
+    .then(r => r && r.rows && r.rows[0])
+
 module.exports = {
   prepare,
   drop,
   list,
   create,
-  test
+  test,
+  get
 }

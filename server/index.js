@@ -358,23 +358,44 @@ app
       .catch(next)
   })
   .post('/api/resource', (req, res, next) => {
-    const { uri } = req.body
+    const { uri, hashtags = [] } = req.body
     // TODO: guard the URI here
 
-    winston.verbose('Create a resource with URI: ' + uri)
+    winston.verbose('Create a resource with URI: ' + uri + ' and hashtags: ' + hashtags)
 
     db.resource.test(pool, uri)
       .then(exists => {
         if (exists) return res.status(409).send('Resource Exists')
 
         db.resource.create(pool, uri)
-          .then(resource => {
-            winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri)
+          .then(resource =>
+            db.resourceHashtag.linkAll(pool, resource.id, hashtags)
+              .then(hashtags => {
+                winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri + ' and hashtags: ' + hashtags)
 
-            res.json(resource)
-          })
+                resource.hashtags = hashtags
+
+                res.json(resource)
+              })
+          )
           .catch(next)
       })
+  })
+  // Get a resource
+  .get('/api/resource/:id', (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    const { id } = req.params
+
+    winston.verbose(`Get resource ${id}`)
+
+    db.resource.get(pool, +id)
+      .then(r => {
+        if (r === undefined) return res.status(404).send()
+
+        res.json(r)
+      })
+      .catch(next)
   })
   // Search keywords
   .get('/api/search', (req, res, next) => {

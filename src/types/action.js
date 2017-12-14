@@ -64,11 +64,15 @@ import type {
   ResourceListRequestAction,
   ResourceListSuccessAction,
   ResourceListFailureAction,
+  ResourceRequestAction,
+  ResourceSuccessAction,
+  ResourceFailureAction,
   ResourceCreateRequestAction,
   ResourceCreateSuccessAction,
   ResourceCreateFailureAction,
   ResourceCreateDismissAction,
-  ResourceCreateLinkAction
+  ResourceCreateLinkAction,
+  ResourceChangeAction
 } from './resource'
 import { map as _map } from 'ramda'
 
@@ -93,8 +97,10 @@ export type PlainAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
   | SearchPageAction
   | ResourceListRequestAction | ResourceListSuccessAction | ResourceListFailureAction
+  | ResourceRequestAction | ResourceSuccessAction | ResourceFailureAction
   | ResourceCreateRequestAction | ResourceCreateSuccessAction | ResourceCreateFailureAction | ResourceCreateDismissAction
   | ResourceCreateLinkAction
+  | ResourceChangeAction
 
 export type Action<As, B> = (...args: As) => Promise<B>
 export type RawAction<As, B> = StoreAPI => Action<As, B>

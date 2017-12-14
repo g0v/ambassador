@@ -69,11 +69,15 @@ import {
   RESOURCE_LIST_REQUEST,
   RESOURCE_LIST_SUCCESS,
   RESOURCE_LIST_FAILURE,
+  RESOURCE_REQUEST,
+  RESOURCE_SUCCESS,
+  RESOURCE_FAILURE,
   RESOURCE_CREATE_REQUEST,
   RESOURCE_CREATE_SUCCESS,
   RESOURCE_CREATE_FAILURE,
   RESOURCE_CREATE_DISMISS,
-  RESOURCE_CREATE_LINK
+  RESOURCE_CREATE_LINK,
+  RESOURCE_CHANGE
 } from '~/types/resource'
 import { findIndex } from 'ramda'
 import moment from 'moment'
@@ -88,6 +92,7 @@ export type State = {
       isLoading: boolean,
       isCreating: boolean,
       error: ?Error,
+      uri: string,
       hashtags: $PropertyType<Hashtag, 'id'>[]
     },
     search: {
@@ -128,6 +133,7 @@ export const initialState: State = {
       isLoading: false,
       isCreating: false,
       error: undefined,
+      uri: '',
       hashtags: []
     },
     search: {
@@ -690,6 +696,26 @@ export default (state: State = initialState, action: PlainAction): State => {
         }
       }
     }
+    case RESOURCE_REQUEST: {
+      return state
+    }
+    case RESOURCE_SUCCESS: {
+      const { resource } = action
+      const { resources = [] } = state
+      const i = findIndex(r => r.id === resource.id, resources)
+
+      return {
+        ...state,
+        resources: [
+          ...resources.slice(0, i),
+          resource,
+          ...resources.slice(i + 1)
+        ]
+      }
+    }
+    case RESOURCE_FAILURE: {
+      return state
+    }
     case RESOURCE_CREATE_REQUEST: {
       return {
         ...state,
@@ -754,6 +780,20 @@ export default (state: State = initialState, action: PlainAction): State => {
           resources: {
             ...state.ui.resources,
             hashtags
+          }
+        }
+      }
+    }
+    case RESOURCE_CHANGE: {
+      const { uri } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          resources: {
+            ...state.ui.resources,
+            uri
           }
         }
       }

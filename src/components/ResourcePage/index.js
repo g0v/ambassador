@@ -12,9 +12,10 @@ import {
   Dropdown,
   Divider,
   Grid,
-  Item,
-  Popup
+  Popup,
+  Input
 } from 'semantic-ui-react'
+import ResourceItem from '../ResourceItem'
 import { map, addIndex } from 'ramda'
 import styles from './index.css'
 
@@ -36,7 +37,7 @@ class ResourcePage extends PureComponent {
     const {
       id, className, actions,
       isLoading, isCreating, resources, error,
-      value, options
+      uri, value, options
     } = this.props
 
     let btn
@@ -70,7 +71,7 @@ class ResourcePage extends PureComponent {
           disabled={isLoading || isCreating}
           onClick={async (e) => {
             e.preventDefault()
-            await actions.resource.create('http://g0v.tw')
+            await actions.resource.create(uri, value)
           }}
         >
           Submit
@@ -99,7 +100,17 @@ class ResourcePage extends PureComponent {
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         <Form>
-          <Form.Input label="Resource URI" disabled={isLoading || isCreating} />
+          <Form.Field>
+            <label>Resource URI</label>
+            <Input
+              label="http(s)://"
+              value={uri}
+              disabled={isLoading || isCreating}
+              onChange={(e, data) => {
+                actions.resource.change(data.value)
+              }}
+            />
+          </Form.Field>
           <Form.Field>
             <Dropdown
               fluid multiple search selection closeOnChange
@@ -126,11 +137,18 @@ class ResourcePage extends PureComponent {
                 idxMap(
                   (aa, j) =>
                     <Grid.Column key={j}>
-                      <Item>
-                        <Item.Content>
-                          <Item.Header>{ aa.uri }</Item.Header>
-                        </Item.Content>
-                      </Item>
+                      <ResourceItem
+                        data={aa}
+                        options={options}
+                        onVisible={async () => {
+                          if (aa.hashtags !== undefined) return
+                          try {
+                            await actions.resource.get(aa.id)
+                          } catch (error) {
+                            console.error(error)
+                          }
+                        }}
+                      />
                     </Grid.Column>,
                   a
                 )
@@ -149,11 +167,12 @@ export default connect(
     const isCreating = R.isCreating(state)
     const resources = R.getResources(state)
     const error = R.getError(state)
+    const uri = R.getResourceURI(state)
     const value = R.getHashtags(state)
     const hashtags = H.getHashtags(state)
     const options = H.toDropdownOptions(hashtags)
 
-    return { isLoading, isCreating, resources, error, value, options }
+    return { isLoading, isCreating, resources, error, uri, value, options }
   },
   mapDispatchToProps(actions)
 )(ResourcePage)

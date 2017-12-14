@@ -3,9 +3,12 @@
 import type { State } from '~/reducers'
 import type { HashtagId } from './hashtag'
 
+export type ResourceId = number
+
 export type Resource = {
-  id: number,
-  uri: string
+  id: ResourceId,
+  uri: string,
+  hashtags?: HashtagId[]
 }
 
 // data
@@ -20,6 +23,18 @@ export const ResourceListSuccess = (resources: Resource[]): ResourceListSuccessA
 export type ResourceListFailureAction = { type: 'RESOURCE_LIST_FAILURE', error: Error }
 export const RESOURCE_LIST_FAILURE = 'RESOURCE_LIST_FAILURE'
 export const ResourceListFailure = (error: Error): ResourceListFailureAction => ({ type: RESOURCE_LIST_FAILURE, error })
+
+export type ResourceRequestAction = { type: 'RESOURCE_REQUEST', id: ResourceId }
+export const RESOURCE_REQUEST = 'RESOURCE_REQUEST'
+export const ResourceRequest = (id: ResourceId): ResourceRequestAction => ({ type: RESOURCE_REQUEST, id })
+
+export type ResourceSuccessAction = { type: 'RESOURCE_SUCCESS', resource: Resoruce }
+export const RESOURCE_SUCCESS = 'RESOURCE_SUCCESS'
+export const ResourceSuccess = (resource: Resource): ResourceSuccessAction => ({ type: RESOURCE_SUCCESS, resource })
+
+export const ResourceFailureAction = { type: 'RESOURCE_FAILURE', error: Error }
+export const RESOURCE_FAILURE = 'RESOURCE_FAILURE'
+export const ResourceFailure = (error: Error): ResourceFailureAction => ({ type: RESOURCE_FAILURE, error })
 
 export type ResourceCreateRequestAction = { type: 'RESOURCE_CREATE_REQUEST' }
 export const RESOURCE_CREATE_REQUEST = 'RESOURCE_CREATE_REQUEST'
@@ -41,6 +56,10 @@ export type ResourceCreateLinkAction = { type: 'RESOURCE_CREATE_LINK', hashtags:
 export const RESOURCE_CREATE_LINK = 'RESOURCE_CREATE_LINK'
 export const ResourceCreateLink = (hashtags: HashtagId[]): ResourceCreateLinkAction => ({ type: RESOURCE_CREATE_LINK, hashtags })
 
+export type ResourceChangeAction = { type: 'RESOURCE_CHANGE_ACTION', uri: string }
+export const RESOURCE_CHANGE = 'RESOURCE_CHANGE'
+export const ResourceChange = (uri: string): ResourceChangeAction => ({ type: RESOURCE_CHANGE, uri })
+
 // functions
 export const isLoading = (state: State): boolean =>
   (state && state.ui && state.ui.resources && state.ui.resources.isLoading)
@@ -53,6 +72,9 @@ export const getResources = (state: State): Resource[] =>
 
 export const getError = (state: State): ?Error =>
   (state && state.ui && state.ui.resources && state.ui.resources.error)
+
+export const getResourceURI = (state: State): string =>
+  (state && state.ui && state.ui.resources && state.ui.resources.uri)
 
 export const getHashtags = (state: State): HashtagId[] =>
   (state && state.ui && state.ui.resources && state.ui.resources.hashtags) || []

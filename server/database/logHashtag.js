@@ -12,7 +12,7 @@ const list = (db) =>
 
 const getLogs = (db, hashtag) =>
   db.query(
-    'SELECT l.* FROM logHashtag lh LEFT JOIN log l ON lh.log = l.id LEFT JOIN hashtag h ON lh.hashtag = h.id WHERE h.content = $1',
+    'SELECT l.* FROM logHashtag lh LEFT JOIN log l ON lh.log = l.id LEFT JOIN hashtag h ON lh.hashtag = h.id WHERE h.content = $1;',
     [hashtag]
   )
     .then(r => r && r.rows)

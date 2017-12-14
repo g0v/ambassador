@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { RawAction } from '~/types/action'
-import type { Resource } from '~/types/resource'
+import type { ResourceId, Resource } from '~/types/resource'
 import type { HashtagId } from '~/types/hashtag'
 
 import { getUrl } from '~/types'
@@ -9,11 +9,15 @@ import {
   ResourceListRequest,
   ResourceListSuccess,
   ResourceListFailure,
+  ResourceRequest,
+  ResourceSuccess,
+  ResourceFailure,
   ResourceCreateRequest,
   ResourceCreateSuccess,
   ResourceCreateFailure,
   ResourceCreateDismiss,
-  ResourceCreateLink
+  ResourceCreateLink,
+  ResourceChange
 } from '~/types/resource'
 import axios from 'axios'
 
@@ -34,12 +38,27 @@ export const list: RawAction<[], Resource[]> = store => async () => {
   }
 }
 
-export const create: RawAction<[string], Resource> = store => async (uri) => {
+export const get: RawAction<[ResourceId], Resource> = store => async (id) => {
+  const { dispatch } = store
+
+  dispatch(ResourceRequest(id))
+  try {
+    const { data: resource } = await axios.get(`${apiUrl}/api/resource/${id}`)
+    dispatch(ResourceSuccess(resource))
+
+    return resource
+  } catch (error) {
+    dispatch(ResourceFailure(error))
+    throw error
+  }
+}
+
+export const create: RawAction<[string, HashtagId[]], Resource> = store => async (uri, hashtags) => {
   const { dispatch } = store
 
   dispatch(ResourceCreateRequest())
   try {
-    const { data: resource } = await axios.post(`${apiUrl}/api/resource`, { uri })
+    const { data: resource } = await axios.post(`${apiUrl}/api/resource`, { uri, hashtags })
     dispatch(ResourceCreateSuccess(resource))
 
     return resource
@@ -59,4 +78,10 @@ export const createLink: RawAction<[HashtagId[]], void> = store => async (hashta
   const { dispatch } = store
 
   dispatch(ResourceCreateLink(hashtags))
+}
+
+export const change: RawAction<[string], void> = store => async (uri) => {
+  const { dispatch } = store
+
+  dispatch(ResourceChange(uri))
 }

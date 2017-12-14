@@ -3,6 +3,7 @@ const log = require('./log')
 const logHashtag = require('./logHashtag')
 const keyword = require('./keyword')
 const resource = require('./resource')
+const resourceHashtag = require('./resourceHashtag')
 
 const test = (db) =>
   db.query('SELECT NOW();')
@@ -15,6 +16,7 @@ const prepare = (db) =>
     .then(() => logHashtag.prepare(db))
     .then(() => keyword.prepare(db))
     .then(() => resource.prepare(db))
+    .then(() => resourceHashtag.prepare(db))
 
 module.exports = {
   hashtag,
@@ -23,5 +25,6 @@ module.exports = {
   keyword,
   resource,
   test,
-  prepare
+  prepare,
+  resourceHashtag
 }
