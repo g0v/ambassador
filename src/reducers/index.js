@@ -317,8 +317,8 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case ISSUE_LIST_SUCCESS: {
-      const { repo } = action
-      const issues = { ...state.github.issues, [repo]: action.issues }
+      const { user, repo } = action
+      const issues = { ...state.github.issues, [fullName(user, repo)]: action.issues }
 
       return {
         ...state,

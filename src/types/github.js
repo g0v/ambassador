@@ -57,9 +57,9 @@ export const ISSUE_LIST_REQUEST = 'ISSUE_LIST_REQUEST'
 export const IssueListRequest = (): IssueListRequestAction => ({ type: ISSUE_LIST_REQUEST })
 
 // TODO: issues: Issue[]
-export type IssueListSuccessAction = { type: 'ISSUE_LIST_SUCCESS', repo: string, issues: any[] }
+export type IssueListSuccessAction = { type: 'ISSUE_LIST_SUCCESS', user: string, repo: string, issues: any[] }
 export const ISSUE_LIST_SUCCESS = 'ISSUE_LIST_SUCCESS'
-export const IssueListSuccess = (repo: string, issues: any[]): IssueListSuccessAction => ({ type: ISSUE_LIST_SUCCESS, repo, issues })
+export const IssueListSuccess = (user: string, repo: string, issues: any[]): IssueListSuccessAction => ({ type: ISSUE_LIST_SUCCESS, user, repo, issues })
 
 export type IssueListFailureAction = { type: 'ISSUE_LIST_FAILURE', error: Error }
 export const ISSUE_LIST_FAILURE = 'ISSUE_LIST_FAILURE'
