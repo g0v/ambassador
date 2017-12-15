@@ -358,9 +358,11 @@ app
       .catch(next)
   })
   .post('/api/resource', (req, res, next) => {
-    const { uri, hashtags = [] } = req.body
+    const { hashtags = [] } = req.body
+    let { uri } = req.body
     // TODO: guard the URI here
 
+    if (!/^https?:\/\//.test(uri)) uri = 'http://' + uri
     winston.verbose('Create a resource with URI: ' + uri + ' and hashtags: ' + hashtags)
 
     db.resource.test(pool, uri)
