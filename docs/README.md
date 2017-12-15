@@ -6,6 +6,18 @@
 
 ## we b logs
 
+### 2017-12-14
+
+補充一下 1 號之後的發展：
+
+* 12/8 覺得我沒有把 repo page 做出來，而把「整理資料」交給他人處理的「新增 URL 」功能做一半，是沒有達成 12/1 的承諾
+* 覺得訪談 QQ 大集並沒有我想的那麼單純（把 Q 列出來就好）
+* 12/12 的[ YA0H 工作項目檢驗與下半獎助金撥款標準][YA0H-review]表明了揪松團對此計劃的看法
+
+不管怎樣，想想的 g0v.json 更適合新需求吧。
+
+[YA0H-review]: https://docs.google.com/document/d/17irUC8UUR9EIN2rqbf1-ZbeR8HExMLhRBqZM7l-0wZ0/edit
+
 ### 2017-12-01
 
 被抓到 OCF co-work XD
