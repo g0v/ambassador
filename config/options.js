@@ -27,6 +27,7 @@ const vendor = [
   'react-visibility-sensor',
   'redux',
   'semantic-ui-react',
+  'store',
   'whatwg-fetch'
 ]
 

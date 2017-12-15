@@ -80,6 +80,7 @@ import {
   RESOURCE_CHANGE
 } from '~/types/resource'
 import { findIndex } from 'ramda'
+import store from 'store'
 import moment from 'moment'
 
 export type State = {
@@ -178,6 +179,7 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
     case LOGIN_SUCCESS: {
       const { auth } = action
+      store.set('auth', auth)
 
       return {
         ...state,
@@ -198,6 +200,8 @@ export default (state: State = initialState, action: PlainAction): State => {
       }
     }
     case LOGOUT: {
+      store.remove('auth')
+
       return {
         ...state,
         auth: undefined,
@@ -219,7 +223,6 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
     case PROFILE_SUCCESS: {
       const { profile } = action
-      console.log(profile)
 
       return {
         ...state,

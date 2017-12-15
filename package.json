@@ -58,6 +58,7 @@
     "react-visibility-sensor": "^3.11.0",
     "redux": "^3.7.2",
     "semantic-ui-react": "^0.75.1",
+    "store": "^2.0.12",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.5.9",
