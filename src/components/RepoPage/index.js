@@ -5,11 +5,12 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, List, Grid, Segment, Rail } from 'semantic-ui-react'
+import { Container, List, Grid, Segment, Rail, Image } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
 import ProductListItem from '../ProductListItem'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
+import thumbnail from '~/images/thumbnail.png'
 
 class RepoPage extends PureComponent {
   static defaultProps = {
@@ -88,10 +89,11 @@ class RepoPage extends PureComponent {
               </Segment>
               <Segment>
                 <h2>參與者</h2>
-                <List horizontal>{
+                <List>{
                   map(
                     user =>
                       <List.Item key={user}>
+                        <Image avatar src={thumbnail} />
                         <List.Content>
                           <List.Header>{ user }</List.Header>
                         </List.Content>
