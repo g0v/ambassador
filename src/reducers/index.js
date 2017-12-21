@@ -15,6 +15,9 @@ import {
   PROFILE_REQUEST,
   PROFILE_SUCCESS,
   PROFILE_FAILURE,
+  USER_REQUEST,
+  USER_SUCCESS,
+  USER_FAILURE,
   MEMBER_REQUEST,
   MEMBER_SUCCESS,
   MEMBER_FAILURE,
@@ -109,6 +112,7 @@ export type State = {
     profile: ?any,
     isMember: ?boolean,
     repos: any[],
+    users: { [key: string]: any },
     issues: { [key: string]: any[] },
     g0v: { [key: string]: any }
   },
@@ -150,6 +154,7 @@ export const initialState: State = {
     profile: undefined,
     isMember: undefined,
     repos: [],
+    users: {},
     issues: {},
     g0v: {}
   },
@@ -242,6 +247,49 @@ export default (state: State = initialState, action: PlainAction): State => {
         ui: {
           ...state.ui,
           profile: false
+        }
+      }
+    }
+
+    case USER_REQUEST: {
+      const { user } = action
+
+      return {
+        ...state,
+        github: {
+          ...state.github,
+          users: {
+            ...state.github.users,
+            [user]: null
+          }
+        }
+      }
+    }
+    case USER_SUCCESS: {
+      const { user, data } = action
+
+      return {
+        ...state,
+        github: {
+          ...state.github,
+          users: {
+            ...state.github.users,
+            [user]: data
+          }
+        }
+      }
+    }
+    case USER_FAILURE: {
+      const { user } = action
+      let users = state.github.users
+
+      delete users[user]
+
+      return {
+        ...state,
+        github: {
+          ...state.github,
+          users
         }
       }
     }

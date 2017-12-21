@@ -11,6 +11,9 @@ import type {
   ProfileRequestAction,
   ProfileSuccessAction,
   ProfileFailureAction,
+  UserRequestAction,
+  UserSuccessAction,
+  UserFailureAction,
   MemberRequestAction,
   MemberSuccessAction,
   MemberFailureAction,
@@ -83,6 +86,7 @@ export type PlainAction
   = LoginRequestAction | LoginSuccessAction | LoginFailureAction
   | LogoutAction
   | ProfileRequestAction | ProfileSuccessAction | ProfileFailureAction
+  | UserRequestAction | UserSuccessAction | UserFailureAction
   | MemberRequestAction | MemberSuccessAction | MemberFailureAction
   | RepoListRequestAction | RepoListSuccessAction | RepoListFailureAction
   | RepoContributorListRequestAction | RepoContributorListSuccessAction | RepoContributorListFailureAction

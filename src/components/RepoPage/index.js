@@ -40,7 +40,7 @@ class RepoPage extends PureComponent {
   }
 
   render() {
-    const { id, className, match, repos, intros, g0vJsonMap, issueMap } = this.props
+    const { id, className, match, repos, intros, g0vJsonMap, issueMap, userMap } = this.props
     const { params: { repo } } = match
     const fullname = G.fullName('g0v', repo)
     const g0vJson = g0vJsonMap[fullname] || {}
@@ -54,6 +54,7 @@ class RepoPage extends PureComponent {
     }
 
     const intro = intros[`${repo}/${branch}`] || ''
+    const sourceUrl = (r && r.html_url) || (g0vJson && g0vJson.repository && g0vJson.repository.url)
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
@@ -67,25 +68,35 @@ class RepoPage extends PureComponent {
                     map(
                       p => typeof p === 'string'
                         ? <List.Item key={p} content={p} />
-                        : <ProductListItem data={p} />,
+                        : <ProductListItem key={p.name} data={p} />,
                       g0vJson.products
                     )
                 }</List>
               </Segment>
               <Segment>
                 <h2>重要文件和資訊</h2>
-                <ul>
+                <List>
                 {
                   r && r.homepage &&
-                    <li className="github-homepage">首頁：<a href={r.homepage}>{ r.homepage }</a></li>
+                    <List.Item className="github-homepage">
+                      <List.Icon name="globe" />
+                      <List.Content>
+                        <List.Header>首頁</List.Header>
+                        <a href={r.homepage}>{ r.homepage }</a>
+                      </List.Content>
+                    </List.Item>
                 }
                 {
-                  (r && r.html_url)
-                    ? <li className="github-html_url">源碼：<a href={r.html_url}>{ r.html_url }</a></li>
-                    : (g0vJson && g0vJson.repository && g0vJson.repository.url) &&
-                        <li className="g0v-repository-url">源碼：<a href={g0vJson.repository.url}>{ g0vJson.repository.url }</a></li>
+                  sourceUrl &&
+                    <List.Item className="github-source">
+                      <List.Icon name="code" />
+                      <List.Content>
+                        <List.Header>源碼</List.Header>
+                        <a href={sourceUrl}>{ sourceUrl }</a>
+                      </List.Content>
+                    </List.Item>
                 }
-                </ul>
+                </List>
               </Segment>
               <Segment>
                 <h2>參與者</h2>
@@ -93,9 +104,15 @@ class RepoPage extends PureComponent {
                   map(
                     user =>
                       <List.Item key={user}>
-                        <Image avatar src={thumbnail} />
+                        <Image avatar src={(userMap[user] && userMap[user].avatar_url) || thumbnail} />
                         <List.Content>
                           <List.Header>{ user }</List.Header>
+                          {
+                            userMap[user] && userMap[user].html_url &&
+                              <a href={userMap[user].html_url || '#'} target="_blank">
+                                { userMap[user].html_url }
+                              </a>
+                          }
                         </List.Content>
                       </List.Item>,
                     g0vJson.contributors || []
@@ -175,8 +192,9 @@ export default compose(
       const intros = G.getIntroMap(state)
       const g0vJsonMap = G.g0vJsonMap(state)
       const issueMap = G.getIssueMap(state)
+      const userMap = G.getUserMap(state)
 
-      return { isLoading, repos, intros, g0vJsonMap, issueMap }
+      return { isLoading, repos, intros, g0vJsonMap, issueMap, userMap }
     },
     mapDispatchToProps(actions)
   )

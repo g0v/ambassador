@@ -16,6 +16,18 @@ export type ProfileFailureAction = { type: 'PROFILE_FAILURE', error: Error }
 export const PROFILE_FAILURE = 'PROFILE_FAILURE'
 export const ProfileFailure = (error: Error): ProfileFailureAction => ({ type: PROFILE_FAILURE, error })
 
+export type UserRequestAction = { type: 'USER_REQUEST', user: string }
+export const USER_REQUEST = 'USER_REQUEST'
+export const UserRequest = (user: string): UserRequestAction => ({ type: USER_REQUEST, user })
+
+export type UserSuccessAction = { type: 'USER_SUCCESS', user: string, data: any }
+export const USER_SUCCESS = 'USER_SUCCESS'
+export const UserSuccess = (user: string, data: any): UserSuccessAction => ({ type: USER_SUCCESS, user, data })
+
+export type UserFailureAction = { type: 'USER_FAILURE', user: string, error: Error }
+export const USER_FAILURE = 'USER_FAILURE'
+export const UserFailure = (user: string, error: Error): UserFailureAction => ({ type: USER_FAILURE, user, error })
+
 export type MemberRequestAction = { type: 'MEMBER_REQUEST' }
 export const MEMBER_REQUEST = 'MEMBER_REQUEST'
 export const MemberRequest = (): MemberRequestAction => ({ type: MEMBER_REQUEST })
@@ -137,6 +149,10 @@ export const dummyRepoList: any[] = [{
 }]
 
 export const fullName = (name: string, repo: string): string => `${name}/${repo}`
+
+export const getUserMap = (state: State): any => {
+  return (state && state.github && state.github.users) || {}
+}
 
 export const getIssueMap = (state: State): any => {
   return (state && state.github && state.github.issues) || {}

@@ -11,6 +11,9 @@ import {
   ProfileRequest,
   ProfileSuccess,
   ProfileFailure,
+  UserRequest,
+  UserSuccess,
+  UserFailure,
   MemberRequest,
   MemberSuccess,
   MemberFailure,
@@ -34,6 +37,7 @@ import {
   g0vPatchFailure
 } from '~/types/github'
 
+// XXX: should use getUser action with no user name
 export const getProfile: RawAction<[], any> = store => async () => {
   const { dispatch, getState } = store
 
@@ -53,6 +57,28 @@ export const getProfile: RawAction<[], any> = store => async () => {
     return profile
   } catch (error) {
     dispatch(ProfileFailure(error))
+    throw error
+  }
+}
+
+export const getUser: RawAction<[string], any> = store => async (username) => {
+  const { dispatch, getState } = store
+
+  const token = A.getAccessToken(getState())
+  if (!token) {
+    throw new Error('access token not found')
+  }
+
+  dispatch(UserRequest(username))
+  try {
+    const gh = new GitHub({ token })
+    const user = gh.getUser(username)
+    const { data } = await user.getProfile()
+    dispatch(UserSuccess(username, data))
+
+    return data
+  } catch (error) {
+    dispatch(ProfileFailure(username, error))
     throw error
   }
 }
@@ -160,17 +186,25 @@ export const getIntro: RawAction<[string, string], string> = store => async (rep
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 export const g0vJson: RawAction<[string, string], any> = store => async (name, repo) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
 
   dispatch(g0vJsonRequest(name, repo))
   try {
     const { data: json } = await axios.get(`${apiUrl}/api/github/${name}/${repo}/g0v.json`)
     // $FlowFixMe
     const patch = await dispatch(g0vPatch)(name, repo).catch(() => ({}))
+    const userMap = G.getUserMap(getState())
     const result = { ...json, ...patch }
-    console.log(json, patch)
 
     dispatch(g0vJsonSuccess(name, repo, result))
+
+    if (result.contributors) {
+      for (const u of result.contributors) {
+        if (userMap[u] === undefined) {
+          dispatch(getUser)(u)
+        }
+      }
+    }
 
     return result
   } catch (error) {
