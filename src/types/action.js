@@ -29,8 +29,8 @@ import type {
   G0vJsonRequestAction,
   G0vJsonSuccessAction,
   G0vJsonFailureAction,
-  G0vPatchRequsetAction,
-  G0vPatchSuccessAciton,
+  G0vPatchRequestAction,
+  G0vPatchSuccessAction,
   G0vPatchFailureAction
 } from './github'
 import type {

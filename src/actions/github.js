@@ -165,6 +165,7 @@ export const g0vJson: RawAction<[string, string], any> = store => async (name, r
   dispatch(g0vJsonRequest(name, repo))
   try {
     const { data: json } = await axios.get(`${apiUrl}/api/github/${name}/${repo}/g0v.json`)
+    // $FlowFixMe
     const patch = await dispatch(g0vPatch)(name, repo).catch(() => ({}))
     const result = { ...json, ...patch }
     console.log(json, patch)

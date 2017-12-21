@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { State } from '~/reducers'
+import type { Project } from './metadata'
 
 // data
 export type ProfileRequestAction = { type: 'PROFILE_REQUEST' }
@@ -81,21 +82,21 @@ export type G0vJsonRequestAction = { type: 'G0V_JSON_REQUEST', name: string, rep
 export const G0V_JSON_REQUEST = 'G0V_JSON_REQUEST'
 export const g0vJsonRequest = (name: string, repo: string): G0vJsonRequestAction => ({ type: G0V_JSON_REQUEST, name, repo })
 
-export type G0vJsonSuccessAction = { type: 'G0V_JSON_SUCCESS', name: string, repo: string, json: any }
+export type G0vJsonSuccessAction = { type: 'G0V_JSON_SUCCESS', name: string, repo: string, json: Project }
 export const G0V_JSON_SUCCESS = 'G0V_JSON_SUCCESS'
-export const g0vJsonSuccess = (name: string, repo: string, json: any): G0vJsonSuccessAction => ({ type: G0V_JSON_SUCCESS, name, repo, json })
+export const g0vJsonSuccess = (name: string, repo: string, json: Project): G0vJsonSuccessAction => ({ type: G0V_JSON_SUCCESS, name, repo, json })
 
 export type G0vJsonFailureAction = { type: 'G0V_JSON_FAILURE', name: string, repo: string, error: Error }
 export const G0V_JSON_FAILURE = 'G0V_JSON_FAILURE'
-export const g0vJsonFailure = (name, repo, error): G0vJsonFailureAction => ({ type: G0V_JSON_FAILURE, name, repo, error })
+export const g0vJsonFailure = (name: string, repo: string, error: Error): G0vJsonFailureAction => ({ type: G0V_JSON_FAILURE, name, repo, error })
 
 export type G0vPatchRequestAction = { type: 'G0V_PATCH_REQUEST', name: string, repo: string, branch: string }
 export const G0V_PATCH_REQUEST = 'G0V_PATCH_REQUEST'
 export const g0vPatchRequest = (name: string, repo: string, branch: string): G0vPatchRequestAction => ({ type: G0V_PATCH_REQUEST, name, repo, branch })
 
-export type G0vPatchSuccessAction = { type: 'G0V_PATCH_SUCCESS', name: string, repo: string, branch: string, json: any }
+export type G0vPatchSuccessAction = { type: 'G0V_PATCH_SUCCESS', name: string, repo: string, branch: string, json: Project }
 export const G0V_PATCH_SUCCESS = 'G0V_PATCH_SUCCESS'
-export const g0vPatchSuccess = (name: string, repo: string, branch: string, json: any): G0vPatchSuccessAction => ({ type: G0V_PATCH_SUCCESS, name, repo, branch, json })
+export const g0vPatchSuccess = (name: string, repo: string, branch: string, json: Project): G0vPatchSuccessAction => ({ type: G0V_PATCH_SUCCESS, name, repo, branch, json })
 
 export type G0vPatchFailureAction = { type: 'G0V_PATCH_FAILURE', name: string, repo: string, branch: string, error: Error }
 export const G0V_PATCH_FAILURE = 'G0V_PATCH_FAILURE'

@@ -28,11 +28,11 @@ export type ResourceRequestAction = { type: 'RESOURCE_REQUEST', id: ResourceId }
 export const RESOURCE_REQUEST = 'RESOURCE_REQUEST'
 export const ResourceRequest = (id: ResourceId): ResourceRequestAction => ({ type: RESOURCE_REQUEST, id })
 
-export type ResourceSuccessAction = { type: 'RESOURCE_SUCCESS', resource: Resoruce }
+export type ResourceSuccessAction = { type: 'RESOURCE_SUCCESS', resource: Resource }
 export const RESOURCE_SUCCESS = 'RESOURCE_SUCCESS'
 export const ResourceSuccess = (resource: Resource): ResourceSuccessAction => ({ type: RESOURCE_SUCCESS, resource })
 
-export const ResourceFailureAction = { type: 'RESOURCE_FAILURE', error: Error }
+export type ResourceFailureAction = { type: 'RESOURCE_FAILURE', error: Error }
 export const RESOURCE_FAILURE = 'RESOURCE_FAILURE'
 export const ResourceFailure = (error: Error): ResourceFailureAction => ({ type: RESOURCE_FAILURE, error })
 
@@ -56,7 +56,7 @@ export type ResourceCreateLinkAction = { type: 'RESOURCE_CREATE_LINK', hashtags:
 export const RESOURCE_CREATE_LINK = 'RESOURCE_CREATE_LINK'
 export const ResourceCreateLink = (hashtags: HashtagId[]): ResourceCreateLinkAction => ({ type: RESOURCE_CREATE_LINK, hashtags })
 
-export type ResourceChangeAction = { type: 'RESOURCE_CHANGE_ACTION', uri: string }
+export type ResourceChangeAction = { type: 'RESOURCE_CHANGE', uri: string }
 export const RESOURCE_CHANGE = 'RESOURCE_CHANGE'
 export const ResourceChange = (uri: string): ResourceChangeAction => ({ type: RESOURCE_CHANGE, uri })
 
