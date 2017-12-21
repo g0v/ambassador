@@ -7,6 +7,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Container, List, Grid, Segment, Rail } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
+import ProductListItem from '../ProductListItem'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
 
@@ -60,17 +61,15 @@ class RepoPage extends PureComponent {
             <Grid.Column>
               <Segment>
                 <h2>專案成果</h2>
-                <ul className="url-list">{
+                <List className="url-list">{
                   g0vJson && g0vJson.products &&
                     map(
                       p => typeof p === 'string'
-                        ? <li key={p}>{ p }</li>
-                        : <li key={p.name}>
-                            <a href={p.url} target="_blank">{ p.name }</a>
-                          </li>,
+                        ? <List.Item key={p} content={p} />
+                        : <ProductListItem data={p} />,
                       g0vJson.products
                     )
-                }</ul>
+                }</List>
               </Segment>
               <Segment>
                 <h2>重要文件和資訊</h2>
@@ -128,26 +127,30 @@ class RepoPage extends PureComponent {
               <Rail close="very" position="right">
                 <Segment>
                   <h2>相關 repos</h2>
-                  <ul>{
+                  <List>{
                     g0vJson && g0vJson.projects &&
                       map(
                         p => typeof p === 'string'
-                          ? <li key={p}>{ p }</li>
-                          : <li key={p.name}>
-                              <a href={p.url} target="_blank">{ p.name }</a>
-                            </li>,
+                          ? <List.Item key={p} content={p} />
+                          : <ProductListItem key={p.name} data={p} />,
                         g0vJson.projects
                       )
-                  }</ul>
+                  }</List>
                 </Segment>
                 <Segment>
                   <h2>相關 issues</h2>
-                  <ul>{
+                  <List>{
                     map(
-                      i => <li key={i.id}><a href={i.url}>{ i.title }</a></li>,
+                      i =>
+                        <List.Item key={i.id}>
+                          <List.Icon name="github" />
+                          <List.Content>
+                            <a href={i.url} target="_blank">{ i.title }</a>
+                          </List.Content>
+                        </List.Item>,
                       issues
                     )
-                  }</ul>
+                  }</List>
                 </Segment>
                 <Segment>
                   <h2>社群動態</h2>
