@@ -32,10 +32,7 @@ class G0vSearchPage extends PureComponent {
   }
 
   render() {
-    const {
-      id, className,
-      total, page, logs, actions
-    } = this.props
+    const { id, className, total, page, logs } = this.props
     const totalPage = Math.ceil(total / S.ROWS_PER_PAGE)
 
     return (
@@ -78,7 +75,7 @@ class G0vSearchPage extends PureComponent {
                   <List.Icon name={icon} />
                   <List.Content>
                     <List.Header as="a" href={url} target="_blank" title={datetime}>
-                      { data.title }
+                      { title }
                     </List.Header>
                     <List.Description>
                       { take(140, content) }

@@ -76,7 +76,7 @@ class ProductListItem extends PureComponent {
     }
 
     return (
-      <List.Item>
+      <List.Item id={id} className={cx(styles.main, className)}>
         <List.Icon name={icon} />
         <List.Content>
           <a href={url} target="_blank">{ name }</a>

@@ -73,7 +73,7 @@ export const search: RawAction<[string, number], SearchResult> = store => async 
 export const g0vSearch: RawAction<[string, number], any[]> = store => async (text, page = 0) => {
   const { dispatch } = store
   const offset = page * ROWS_PER_PAGE
-  const q = query(text, page)
+  const q = query(text, offset)
 
   dispatch(G0vSearchRequest(text))
   try {
