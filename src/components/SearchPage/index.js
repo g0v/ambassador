@@ -36,7 +36,6 @@ class SearchPage extends PureComponent {
     } = this.props
     const totalPage = Math.ceil(total / S.ROWS_PER_PAGE)
 
-    // TODO: create a pagenation component
     return (
       <Container text id={id} className={cx(styles.main, className)}>
         {

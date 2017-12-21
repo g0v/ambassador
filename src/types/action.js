@@ -64,6 +64,9 @@ import type {
   SearchRequestAction,
   SearchSuccessAction,
   SearchFailureAction,
+  G0vSearchRequestAction,
+  G0vSearchSuccessAction,
+  G0vSearchFailureAction,
   SearchPageAction
 } from './search'
 import type {
@@ -103,6 +106,7 @@ export type PlainAction
   | SearchChangeAction
   | HintRequestAction | HintSuccessAction | HintFailureAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
+  | G0vSearchRequestAction | G0vSearchSuccessAction | G0vSearchFailureAction
   | SearchPageAction
   | ResourceListRequestAction | ResourceListSuccessAction | ResourceListFailureAction
   | ResourceRequestAction | ResourceSuccessAction | ResourceFailureAction

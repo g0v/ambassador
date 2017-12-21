@@ -4,6 +4,7 @@ import type { PlainAction } from '~/types/action'
 import type { Log } from '~/types/logbot'
 import type { Hashtag } from '~/types/hashtag'
 import type { Resource } from '~/types/resource'
+import type { G0vSearchResult } from '~/types/search'
 
 import {
   LOGIN_REQUEST,
@@ -66,6 +67,9 @@ import {
   SEARCH_REQUEST,
   SEARCH_SUCCESS,
   SEARCH_FAILURE,
+  G0V_SEARCH_REQUEST,
+  G0V_SEARCH_SUCCESS,
+  G0V_SEARCH_FAILURE,
   SEARCH_PAGE
 } from '~/types/search'
 import {
@@ -124,7 +128,8 @@ export type State = {
   logs: { [key: string]: Log },
   resources: Resource[],
   search: {
-    logs: Log[]
+    logs: Log[],
+    g0v: G0vSearchResult[]
   }
 }
 
@@ -167,7 +172,8 @@ export const initialState: State = {
   logs: {},
   resources: [],
   search: {
-    logs: []
+    logs: [],
+    g0v: []
   }
 }
 
@@ -686,6 +692,56 @@ export default (state: State = initialState, action: PlainAction): State => {
         search: {
           ...state.search,
           logs: []
+        }
+      }
+    }
+    case G0V_SEARCH_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            isLoading: true
+          }
+        }
+      }
+    }
+    case G0V_SEARCH_SUCCESS: {
+      const { result, total } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            total,
+            page: 0,
+            isLoading: false
+          }
+        },
+        search: {
+          ...state.search,
+          g0v: result
+        }
+      }
+    }
+    case G0V_SEARCH_FAILURE: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          search: {
+            ...state.ui.search,
+            total: 0,
+            page: 0,
+            isLoading: false
+          }
+        },
+        search: {
+          ...state.search,
+          g0v: []
         }
       }
     }

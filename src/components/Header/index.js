@@ -26,7 +26,6 @@ class Header extends PureComponent {
       location, unauthed, isLoggingIn, loginName,
       search
     } = this.props
-    const hintAction = debounce(actions.search.hint, 1000)
     const match = matchPath(
       location.pathname,
       { path: '/logbot/:channel/:date', exact: true }
@@ -73,17 +72,12 @@ class Header extends PureComponent {
           <Menu.Item>
             <Search
               loading={search.isLoading}
-              value={search.value}
-              results={map(h => ({ title: h }), search.results)}
               size="mini"
-              onSearchChange={e => {
+              value={search.value}
+              showNoResults={false}
+              onSearchChange={(e) => {
                 actions.search.change(e.target.value)
-                hintAction()
-              }}
-              onResultSelect={(e, data) => {
-                const result = data.result.title
-                actions.search.change(result)
-                actions.search.search(result)
+                actions.search.g0vSearch(e.target.value)
                 history.push('/search')
               }}
             />
@@ -125,6 +119,12 @@ export default compose(
 
       return { unauthed, isLoggingIn, loginName, search }
     },
-    mapDispatchToProps(actions)
+    dispatch => {
+      const r = mapDispatchToProps(actions)(dispatch)
+      // TODO: make a debounce function that returns a promise
+      r.actions.search.g0vSearch = debounce(r.actions.search.g0vSearch, 3000)
+
+      return r
+    }
   )
 )(Header)

@@ -78,7 +78,7 @@ export const getUser: RawAction<[string], any> = store => async (username) => {
 
     return data
   } catch (error) {
-    dispatch(ProfileFailure(username, error))
+    dispatch(UserFailure(username, error))
     throw error
   }
 }

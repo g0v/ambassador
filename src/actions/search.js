@@ -13,9 +13,14 @@ import {
   SearchRequest,
   SearchSuccess,
   SearchFailure,
+  G0vSearchRequest,
+  G0vSearchSuccess,
+  G0vSearchFailure,
   SearchPage,
-  getSearch
+  getSearch,
+  query
 } from '~/types/search'
+import { map } from 'ramda'
 import axios from 'axios'
 
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
@@ -61,6 +66,26 @@ export const search: RawAction<[string, number], SearchResult> = store => async 
     return result
   } catch (error) {
     dispatch(SearchFailure(error))
+    throw error
+  }
+}
+
+export const g0vSearch: RawAction<[string, number], any[]> = store => async (text, page = 0) => {
+  const { dispatch } = store
+  const offset = page * ROWS_PER_PAGE
+  const q = query(text, page)
+
+  dispatch(G0vSearchRequest(text))
+  try {
+    let { data: { hits: { hits: result, total } } } =
+      await axios.get(`http://api.search.g0v.io/query.php?query=${encodeURIComponent(JSON.stringify(q))}`)
+    result = map(e => e._source, result)
+
+    dispatch(G0vSearchSuccess(text, result, total))
+
+    return result
+  } catch (error) {
+    dispatch(G0vSearchFailure(text, error))
     throw error
   }
 }
