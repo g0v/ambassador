@@ -26,9 +26,12 @@ import type {
   IntroRequestAction,
   IntroSuccessAction,
   IntroFailureAction,
-  g0vJsonRequestAction,
-  g0vJsonSuccessAction,
-  g0vJsonFailureAction
+  G0vJsonRequestAction,
+  G0vJsonSuccessAction,
+  G0vJsonFailureAction,
+  G0vPatchRequsetAction,
+  G0vPatchSuccessAciton,
+  G0vPatchFailureAction
 } from './github'
 import type {
   LogRequestAction,
@@ -85,7 +88,8 @@ export type PlainAction
   | RepoContributorListRequestAction | RepoContributorListSuccessAction | RepoContributorListFailureAction
   | IssueListRequestAction | IssueListSuccessAction | IssueListFailureAction
   | IntroRequestAction | IntroSuccessAction | IntroFailureAction
-  | g0vJsonRequestAction | g0vJsonSuccessAction | g0vJsonFailureAction
+  | G0vJsonRequestAction | G0vJsonSuccessAction | G0vJsonFailureAction
+  | G0vPatchRequestAction | G0vPatchSuccessAction | G0vPatchFailureAction
   | LogRequestAction | LogSuccessAction | LogFailureAction
   | LinkRequestAction | LinkSuccessAction | LinkFailureAction
   | UnlinkRequestAction | UnlinkSuccessAction | UnlinkFailureAction

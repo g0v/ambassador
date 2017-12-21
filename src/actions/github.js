@@ -28,7 +28,10 @@ import {
   IntroFailure,
   g0vJsonRequest,
   g0vJsonSuccess,
-  g0vJsonFailure
+  g0vJsonFailure,
+  g0vPatchRequest,
+  g0vPatchSuccess,
+  g0vPatchFailure
 } from '~/types/github'
 
 export const getProfile: RawAction<[], any> = store => async () => {
@@ -162,12 +165,32 @@ export const g0vJson: RawAction<[string, string], any> = store => async (name, r
   dispatch(g0vJsonRequest(name, repo))
   try {
     const { data: json } = await axios.get(`${apiUrl}/api/github/${name}/${repo}/g0v.json`)
+    const patch = await dispatch(g0vPatch)(name, repo).catch(() => ({}))
+    const result = { ...json, ...patch }
+    console.log(json, patch)
 
-    dispatch(g0vJsonSuccess(name, repo, json))
+    dispatch(g0vJsonSuccess(name, repo, result))
+
+    return result
+  } catch (error) {
+    dispatch(g0vJsonFailure(name, repo, error))
+    throw error
+  }
+}
+
+export const g0vPatch: RawAction<[string, string, string], any> = store => async (name, repo, branch = 'master') => {
+  const { dispatch } = store
+
+  dispatch(g0vPatchRequest(name, repo, branch))
+  try {
+    const { data: json } = await axios.get(`${url}/data/${repo}/${branch}.patch.json`)
+
+    dispatch(g0vPatchSuccess(name, repo, branch, json))
 
     return json
   } catch (error) {
-    dispatch(g0vJsonFailure(name, repo, error))
+    dispatch(g0vPatchFailure(name, repo, branch, error))
+    console.error(error)
     throw error
   }
 }

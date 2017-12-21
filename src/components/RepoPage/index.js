@@ -63,7 +63,11 @@ class RepoPage extends PureComponent {
                 <ul className="url-list">{
                   g0vJson && g0vJson.products &&
                     map(
-                      p => <li key={p}>{ p }</li>,
+                      p => typeof p === 'string'
+                        ? <li key={p}>{ p }</li>
+                        : <li key={p.name}>
+                            <a href={p.url} target="_blank">{ p.name }</a>
+                          </li>,
                       g0vJson.products
                     )
                 }</ul>
@@ -127,7 +131,11 @@ class RepoPage extends PureComponent {
                   <ul>{
                     g0vJson && g0vJson.projects &&
                       map(
-                        p => <li key={p}>{ p }</li>,
+                        p => typeof p === 'string'
+                          ? <li key={p}>{ p }</li>
+                          : <li key={p.name}>
+                              <a href={p.url} target="_blank">{ p.name }</a>
+                            </li>,
                         g0vJson.projects
                       )
                   }</ul>
