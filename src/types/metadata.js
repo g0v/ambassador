@@ -2,7 +2,11 @@
 
 // g0v.json 2.0
 //   * old spec: https://g0v.hackpad.tw/g0v.json-spec-c07sSfauWSc
+// 這個版本新增了 `group` 和 `dependencies` 欄位，移除了 `projects` 欄位。
+// 詳情請見 `Product` 和 `Dependency` types 。
 export type Project = {
+  // g0v.json 版本
+  g0v_json: '2.0',
   // 主要作者
   author: string,
   // 專案狀況
@@ -37,13 +41,12 @@ export type Project = {
   keywords: string[],
   // 這個專案的目標群
   audience: Audience[],
-  // 主專案
-  //   * 專案自己就是主要專案時，可以為 null 或不填寫
-  parent?: ?Product,
+  // 主專案，自己就是主要專案時，請填上自己的 url
+  group: Url
   // 這個專案的產出
   products: Product[],
   // 同計畫相關專案
-  projects: Product[],
+  dependencies: Dependency[],
   // 參與者
   contributors: string[],
   // 需要哪種人、技術支援
@@ -67,62 +70,64 @@ export type RepoType = 'git' | 'hg' | 'svn' | 'cvs' | 'svk'
 export type Audience = 'contributor' | 'public'
 
 export type License = {
-  // should be one of the SPDX listed licenses: https://spdx.org/licenses/
+  // TODO: should be one of the SPDX listed licenses: https://spdx.org/licenses/
   type: string
 }
 
+// Product 描述專案成果
+// 成果不見得是程式碼，現在分成五類：
+//   * string:           兼容舊版 g0v.json
+//   * WebsiteProduct:   網站
+//   * AppProduct:       應用程式
+//   * ExtensionProduct: 擴充套件
+//   * DevProduct:       程式工具
+// 有些 type 有 subtype ，方便在 YA0H 這樣的 project hub 上挑選適當的 icon 來呈現。
 export type Product
   = string
   | WebsiteProduct
   | AppProduct
   | ExtensionProduct
-  | LibraryProduct
-  | ApiProduct
-  | DataProduct
-  | ScriptProduct
+  | DevProduct
 
 export type WebsiteProduct = {
   type: 'website',
   name: string,
-  url?: Url
+  url?: Url,
+  source?: Url
 }
 
 export type AppProduct = {
   type: 'app',
+  // mobile app 分成 Android, iOS, Firefox 三類， desktop app 先不細分
   subtype: 'android' | 'ios' | 'firefox' | 'desktop',
   name: string,
-  url?: Url
+  url?: Url,
+  source?: Url
 }
 
 export type ExtensionProduct = {
   type: 'extension',
+  // 包含瀏覽器套件和開發工具套件
   subtype: 'chrome' | 'firefox' | 'safari' | 'visualstudio' | 'vscode' | 'sublime' | 'atom' | 'vim' | 'emacs',
   name: string,
-  url?: Url
+  url?: Url,
+  source?: Url
 }
 
-export type LibraryProduct = {
-  type: 'library',
+export type DevProduct = {
+  type: 'dev',
+  // 承襲 g0v.json 1.0 的 product type
+  subtype: 'api' | 'data' | 'script' | 'library',
   name: string,
-  url?: Url
+  url?: Url,
+  source?: Url
 }
 
-export type ApiProduct = {
-  type: 'api',
-  name: string,
-  url?: Url
+// Dependency type 描述專案在開發上的相依性，不像 package.json 那樣把所有的套件都列出來，只列出依賴的 g0v 專案。
+// 專案間的依賴關係圖可以在爬完 g0v.json 後離線產生，但 YA0H repo dashboard 還沒有準備好呈現這樣的資訊。
+export type Dependency = {
+  url: Url
 }
 
-export type DataProduct = {
-  type: 'data',
-  name: string,
-  url?: Url
-}
-
-export type ScriptProduct = {
-  type: 'script',
-  name: string,
-  url?: Url
-}
-
+// 需求清單，最好和尚未決定的「通用 GitHub issue labels」通用，才有機會以 needs 列表找出重要的 issues 。
 export type Skill = 'designer' | 'writer' | 'programmer' | 'money'
