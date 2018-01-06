@@ -19,9 +19,12 @@ try {
   winston.warn(err.message)
 }
 const db = require('./database')
+// session map
+const S = require('./session')
 // GitHub
 const GitHub = require('github-api')
 // utils
+const qs = require('query-string')
 const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
 const { map } = require('ramda')
 // errors
@@ -151,7 +154,11 @@ app
       .then((result) => {
         if (result.data.error) throw new Error(result.data.error)
 
-        winston.verbose(`Access token: ${result.data.access_token}`)
+        const o = qs.parse(result.data)
+        winston.verbose(`Access token: ${o.access_token}`)
+        S.create(o.access_token)
+          .then((s) => winston.verbose('Current session:', s))
+
         const endpoint = `/callback?${result.data}`
         res.redirect(303, endpoint)
       })
