@@ -12,6 +12,118 @@ project hub 相關成果所需的程式也會放在此專案中。
 
 先以 `npm install` 或 `yarn` 安裝套件。
 
+### web server 參數
+
+#### GH_BASIC_CLIENT_ID & GH_BASIC_SECRET
+
+The GitHub OAuth client ID and secret. The application backend(`/server/index.js`) uses it to handle OAuth logins.
+
+```sh
+GH_BASIC_CLIENT_ID=2222f1ffb522f6bb4480 GH_BASIC_CLIENT_SECRET=9eee00006da733b22cb1234339301cc67d943eff
+```
+
+#### DATABASE_URL
+
+The PostgreSQL DB URL.
+
+```sh
+DATABASE_URL=pgsql://localhost/ambassador
+```
+
+#### LOGBOT_URL
+
+The location of [Logbot][Logbot]. The application backend uses it to fetch information from Logbot.
+
+```sh
+LOGBOT_URL=https://logbot.g0v.tw
+```
+
+#### HTTPS
+
+The protocol of the application backend. It defaults to nothing.
+
+```sh
+HTTPS=true
+```
+
+#### API_HOST: the web server hostname
+
+The hostname of the application backend. It defaults to `localhost`.
+
+```sh
+API_HOST=localhost
+```
+
+#### API_PORT: the web server port
+
+The port number of the application backend. It defaults to `80`.
+
+```sh
+API_PORT=8081
+```
+
+### web client 參數
+
+#### LOGBOT_URL
+
+The location of [Logbot][Logbot]. The application frontend uses it to embed the page.
+
+```sh
+LOGBOT_URL=https://logbot.g0v.tw
+```
+
+#### HTTPS
+
+The procotol of the application frontend. It defaults to nothing.
+
+```sh
+HTTPS=true
+```
+
+#### HOST
+
+The hostname of the web frontend. It defaults to `localhost`.
+
+```sh
+HOST=localhost
+```
+
+#### PORT
+
+The port number of the web frontend. It defaults to `80`.
+
+```sh
+PORT=8080
+```
+
+#### API_HOST
+
+The hostname of the application backend. It defaults to `localhost`. The web frontend uses it to communicate with the backend service.
+
+```sh
+API_HOST=localhost
+```
+
+#### API_PORT
+
+The port number of the application backend. It defaults to `80`. The web frontend uses it to communicate with the backend service.
+
+```sh
+API_PORT=8081
+```
+
+#### DDAY
+
+The date that logs begin. It defaults to `1970-01-01`.
+
+```sh
+DDAY=2013-07-26
+```
+
+[Logbot]: https://github.com/g0v/Logbot
+
+## 其他
+
 ### 測試
 
 ```
