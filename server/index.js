@@ -28,9 +28,10 @@ const qs = require('query-string')
 const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
 const { map } = require('ramda')
 // errors
-const { GitHubClientError, DatabaseError } = require('./error')
-// config
+const { DatabaseError } = require('./error')
+// configs
 const paths = require(path.resolve(__dirname, '../config/paths.js'))
+const env = require('./env.js')
 
 // service status
 const status = {
@@ -77,7 +78,7 @@ const prepareRepoHashtags = (pool, org) =>
     .then(map(rs => rs.full_name))
     .then(names => createHashtagsFromList(pool, names))
 
-const connectionString = process.env.DATABASE_URL || ''
+const connectionString = env.DATABASE_URL
 const pool = new Pool({ connectionString })
 // Azure instance sleeps after 5 mins, so we poke the database every 4.5 mins
 const keepAwake = () =>
@@ -93,7 +94,7 @@ db.test(pool)
         winston.verbose('Tables are ready')
 
         const gh = new GitHub()
-        // TODO: use process.env.GH_ORGANIZATION
+        // TODO: use env.GH_ORGANIZATION
         const org = gh.getOrganization('g0v')
 
         winston.verbose('Prepare repo hashtags')
@@ -114,11 +115,8 @@ db.test(pool)
   .catch(winston.error)
 
 // variables
-const protocol = process.env.HTTPS === 'true' ? 'https' : 'http'
-const host = process.env.API_HOST || 'localhost'
-const port = process.env.API_PORT || 80
-const client_id = process.env.GH_BASIC_CLIENT_ID
-const client_secret = process.env.GH_BASIC_CLIENT_SECRET
+const client_id = env.GH_BASIC_CLIENT_ID
+const client_secret = env.GH_BASIC_CLIENT_SECRET
 
 const app = express()
 app
@@ -131,16 +129,12 @@ app
   })
   // GitHub OAuth
   .get('/api/auth', (req, res) => {
-    if (!client_id || !client_secret) throw new GitHubClientError()
-
     winston.verbose('Redirect to GitHub login page')
     const endpoint = `https://github.com/login/oauth/authorize?scope=user:email&client_id=${client_id}`
     res.redirect(303, endpoint)
   })
   // GitHub OAuth callback URL
   .get('/api/callback', (req, res, next) => {
-    if (!client_id || !client_secret) throw new GitHubClientError()
-
     const { code } = req.query
     if (!code) throw new Error('OAuth code is missing')
 
@@ -258,7 +252,7 @@ app
     const id = logId(date, index)
 
     if (!logs[id]) {
-      const url = `${process.env.LOGBOT_URL}/channel/${channel}/${date}/json`
+      const url = `${env.LOGBOT_URL}/channel/${channel}/${date}/json`
       winston.verbose(`Fetch logs from ${url}`)
       logs[id] = axios.get(url).then((result) => result.data || {})
     }
@@ -450,7 +444,7 @@ app
   .use(express.static(paths.appBuild))
   // Fallback to index page as the client is a single page application
   .use(fallback('index.html', { root: paths.appBuild }))
-  .listen(port, function() {
-    winston.info(`Running at ${protocol}://${host}:${port}`)
+  .listen(env.API_PORT, function() {
+    winston.info(`Running at ${env.PROTOCOL}://${env.API_HOST}:${env.API_PORT}`)
   })
 
