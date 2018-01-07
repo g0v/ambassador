@@ -10,7 +10,8 @@ const envs = {
   LOGBOT_URL: process.env.LOGBOT_URL || 'https://logbot.g0v.tw',
   PROTOCOL: process.env.HTTPS === 'true' ? 'https' : 'http',
   API_HOST: process.env.API_HOST || 'localhost',
-  API_PORT: process.env.API_PORT || '80'
+  API_PORT: process.env.API_PORT || '80',
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL || 'admin@example.com'
 }
 
 if (!envs.GH_BASIC_CLIENT_ID || !envs.GH_BASIC_CLIENT_SECRET) {

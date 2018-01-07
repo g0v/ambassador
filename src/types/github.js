@@ -3,6 +3,14 @@
 import type { State } from '~/reducers'
 import type { Project } from './metadata'
 
+// type
+type EMail = {
+  email: string,
+  primary: boolean,
+  verified: boolean,
+  visibility: ?string
+}
+
 // data
 export type ProfileRequestAction = { type: 'PROFILE_REQUEST' }
 export const PROFILE_REQUEST = 'PROFILE_REQUEST'
@@ -119,6 +127,10 @@ export const getLoginName = (state: State): string => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
 }
 
+export const getEmail = (state: State): string => {
+  return (state && state.github && state.github.profile && state.github.profile.email) || ''
+}
+
 export const isMember = (state: State): boolean => {
   return (state && state.github && state.github.isMember) || false
 }
@@ -164,4 +176,14 @@ export const getIntroMap = (state: State): any => {
 
 export const g0vJsonMap = (state: State, name:string, repo: string): { [key: string]: any } => {
   return (state && state.github && state.github.g0v) || {}
+}
+
+// XXX: duplicated
+export const findFirstValidMail = (emails: EMail[]): ?string => {
+  for (let i = 0; i < emails.length; i++) {
+    const m = emails[i]
+    if (m.email && m.primary && m.verified && m.visibility === 'public') {
+      return m.email
+    }
+  }
 }

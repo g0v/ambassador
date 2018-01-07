@@ -28,7 +28,7 @@ const qs = require('query-string')
 const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
 const { map } = require('ramda')
 // errors
-const { DatabaseError } = require('./error')
+const { DatabaseError, AdminError } = require('./error')
 // configs
 const paths = require(path.resolve(__dirname, '../config/paths.js'))
 const env = require('./env.js')
@@ -90,10 +90,15 @@ db.test(pool)
     winston.verbose(`Database connected at ${now}`)
 
     return db.prepare(pool)
-      .then(() => {
-        winston.verbose('Tables are ready')
+      .then(() => db.config.get(pool, 'access token'))
+      .then(({ value }) => {
+        let token = value
 
-        const gh = new GitHub()
+        winston.verbose('Tables are ready')
+        winston.verbose(token ? `The access token is ${token}` : 'Admin token not found')
+        if (!token) token = undefined
+
+        const gh = new GitHub({ token })
         // TODO: use env.GH_ORGANIZATION
         const org = gh.getOrganization('g0v')
 
@@ -161,6 +166,26 @@ app
   // API status
   .get('/api/status', (req, res, next) => {
     res.json(status)
+  })
+  // Setup the admin token for GitHub API
+  .post('/api/config/token', (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    const { email, token } = req.body
+
+    if (email !== env.ADMIN_EMAIL) {
+      const err = new AdminError(email)
+      winston.error(err)
+      return res.status(403).send(err.message)
+    }
+
+    winston.verbose(`Set the admin token to ${token}`)
+    db.config.create(pool, 'access token', token)
+      .then(({ key, value }) => {
+        winston.info(`The admin token is set to ${value}`)
+
+        res.status(200).send()
+      })
   })
   .get('/api/database/export', (req, res, next) => {
     if (!status.database) throw new DatabaseError()

@@ -14,7 +14,7 @@ const apiOrigin = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env
 let _loginPromise
 let _abortLogin = () => {}
 export const login: RawAction<[], any> = store => async () => {
-  const { dispatch} = store
+  const { dispatch } = store
 
   dispatch(LoginRequest())
 

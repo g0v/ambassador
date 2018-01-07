@@ -3,7 +3,9 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
-import { Container } from 'semantic-ui-react'
+import * as A from '~/types/auth'
+import * as G from '~/types/github'
+import { Container, Form, Popup, Button } from 'semantic-ui-react'
 import styles from './index.css'
 
 class ConfigPage extends PureComponent {
@@ -11,18 +13,51 @@ class ConfigPage extends PureComponent {
     className: ''
   }
 
+  onSetToken = (e) => {
+    const { actions, token, email } = this.props
+
+    e.preventDefault()
+
+    try {
+      actions.config.token(email, token)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   render() {
-    const { id, className } = this.props
+    const { id, className, token, email } = this.props
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
-        config page
+        <h1>Config</h1>
+        <Form>
+          <Form.Field>
+            <label>Email </label>
+            <input value={email} disabled />
+          </Form.Field>
+          <Form.Field>
+            <label>GitHub Access Token</label>
+            <input value={token} disabled />
+          </Form.Field>
+          <Popup
+            position="bottom left"
+            trigger={<Button negative onClick={this.onSetToken}>Use my token to access GitHub</Button>}
+          >
+            Let the backend service uses your token to access GitHub APIs. Only works when you are the administrator.
+          </Popup>
+        </Form>
       </Container>
     )
   }
 }
 
 export default connect(
-  state => ({}),
+  state => {
+    const token = A.getAccessToken(state)
+    const email = G.getEmail(state)
+
+    return { token, email }
+  },
   mapDispatchToProps(actions)
 )(ConfigPage)

@@ -22,6 +22,14 @@ The GitHub OAuth client ID and secret. The application backend(`/server/index.js
 GH_BASIC_CLIENT_ID=2222f1ffb522f6bb4480 GH_BASIC_CLIENT_SECRET=9eee00006da733b22cb1234339301cc67d943eff
 ```
 
+#### ADMIN_EMAIL
+
+The administrator email address. The application backend uses it to set the GitHub access token. It defaults to `admin@example.com`.
+
+```
+ADMIN_EMAIL=admin@example.com
+```
+
 #### DATABASE_URL
 
 The PostgreSQL DB URL.

@@ -8,7 +8,12 @@ class DatabaseError extends ExtError {
   constructor() { super("Database isn't ready") }
 }
 
+class AdminError extends ExtError {
+  constructor(email) { super(`${email} isn't an administrator`) }
+}
+
 module.exports = {
   GitHubClientError,
-  DatabaseError
+  DatabaseError,
+  AdminError
 }

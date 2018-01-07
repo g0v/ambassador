@@ -1,3 +1,4 @@
+const config = require('./config')
 const hashtag = require('./hashtag')
 const log = require('./log')
 const logHashtag = require('./logHashtag')
@@ -11,6 +12,7 @@ const test = (db) =>
 
 const prepare = (db) =>
   Promise.resolve()
+    .then(() => config.prepare(db))
     .then(() => hashtag.prepare(db))
     .then(() => log.prepare(db))
     .then(() => logHashtag.prepare(db))
@@ -19,6 +21,7 @@ const prepare = (db) =>
     .then(() => resourceHashtag.prepare(db))
 
 module.exports = {
+  config,
   hashtag,
   log,
   logHashtag,

@@ -52,6 +52,12 @@ export const getProfile: RawAction<[], any> = store => async () => {
     const gh = new GitHub({ token })
     const user = gh.getUser()
     const { data: profile } = await user.getProfile()
+    const { data: emails } = await user.getEmails()
+    const email = G.findFirstValidMail(emails)
+
+    // override the profile email, its usually null
+    profile.email = email
+
     dispatch(ProfileSuccess(profile))
 
     return profile

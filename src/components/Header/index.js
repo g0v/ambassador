@@ -8,7 +8,7 @@ import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import * as L from '~/types/logbot'
 import * as S from '~/types/search'
-import { Menu, Icon, Search } from 'semantic-ui-react'
+import { Menu, Icon, Search, Dropdown } from 'semantic-ui-react'
 import CalendarModal from '~/components/CalendarModal'
 import { compose } from 'ramda'
 import debounce from 'lodash.debounce'
@@ -94,13 +94,24 @@ class Header extends PureComponent {
               >
                 Sign In
               </Menu.Item>
-            : <Menu.Item
-                name="sign-out"
-                disabled={!loginName}
-                onClick={() => actions.auth.logout()}
-              >
-                { loginName || 'Sign Out' }
-              </Menu.Item>
+            : <Dropdown item text={ loginName || '...' }>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    as={Link}
+                    to="/config"
+                    name="config"
+                  >
+                    Config
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    name="sign-out"
+                    disabled={!loginName}
+                    onClick={() => actions.auth.logout()}
+                  >
+                    Sign Out
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
         }
         </Menu.Menu>
       </Menu>
