@@ -86,24 +86,17 @@
     "subtype": "chrome",
     "name": "萌典 Chrome 延伸套件",
     "url": "https://chrome.google.com/webstore/detail/%E8%90%8C%E5%85%B8-moedict/aihifbidnaepclhnfppjnpbmeonhhloa"
-  }],
-  "parent": null,
-  "projects": [{
-    "type": "data",
-    "name": "常用國字標準字體筆劃 XML 資料檔",
-    "url": "https://github.com/c9s/zh-stroke-data"
   }, {
     "type": "website",
     "name": "萌典啄木鳥",
     "url": "https://github.com/g0v/moedict-dodo"
+  }],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "dependencies": [{
+    "url": "https://github.com/c9s/zh-stroke-data"
   }, {
-    "type": "data",
-    "name": "教育部重編國語辭典 資料檔",
     "url": "https://github.com/g0v/moedict-data"
   }, {
-    "type": "data",
-    "name": "教育部重編國語辭典 資料處理",
     "url": "https://github.com/g0v/moedict-process"
-  }],
-  "tags": ["3du"]
+  }]
 }
