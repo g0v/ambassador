@@ -7,6 +7,11 @@ import type { Resource } from '~/types/resource'
 import type { G0vSearchResult } from '~/types/search'
 
 import {
+  CONFIG_TOKEN_REQUEST,
+  CONFIG_TOKEN_SUCCESS,
+  CONFIG_TOKEN_FAILURE
+} from '~/types/config'
+import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -92,6 +97,9 @@ import moment from 'moment'
 
 export type State = {
   ui: {
+    config: {
+      isLoading: boolean
+    },
     login: boolean,
     checkMember: boolean,
     repos: boolean,
@@ -135,6 +143,9 @@ export type State = {
 
 export const initialState: State = {
   ui: {
+    config: {
+      isLoading: false
+    },
     login: false,
     checkMember: false,
     repos: false,
@@ -179,6 +190,43 @@ export const initialState: State = {
 
 export default (state: State = initialState, action: PlainAction): State => {
   switch(action.type) {
+    case CONFIG_TOKEN_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          config: {
+            ...state.ui.config,
+            isLoading: true
+          }
+        }
+      }
+    }
+    case CONFIG_TOKEN_SUCCESS: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          config: {
+            ...state.ui.config,
+            isLoading: false
+          }
+        }
+      }
+    }
+    case CONFIG_TOKEN_FAILURE: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          config: {
+            ...state.ui.config,
+            isLoading: false
+          }
+        }
+      }
+    }
+
     case LOGIN_REQUEST: {
       return {
         ...state,

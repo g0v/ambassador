@@ -15,6 +15,13 @@ const create = (db, key, value) =>
   )
     .then(r => r && r.rows && r.rows[0])
 
+const update = (db, key, value) =>
+  db.query(
+    'UPDATE config SET value = $1 WHERE key = $2 RETURNING *;',
+    [value, key]
+  )
+    .then(r => r && r.rows && r.rows[0])
+
 const get = (db, key) =>
   db.query(
     'SELECT * FROM config WHERE key = $1 LIMIT 1;',
@@ -27,5 +34,6 @@ module.exports = {
   drop,
   list,
   create,
+  update,
   get
 }

@@ -168,7 +168,7 @@ app
     res.json(status)
   })
   // Setup the admin token for GitHub API
-  .post('/api/config/token', (req, res, next) => {
+  .put('/api/config/token', (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { email, token } = req.body
@@ -180,11 +180,24 @@ app
     }
 
     winston.verbose(`Set the admin token to ${token}`)
-    db.config.create(pool, 'access token', token)
-      .then(({ key, value }) => {
-        winston.info(`The admin token is set to ${value}`)
+    db.config.get(pool, 'access token')
+      .then(({ value }) => {
+        // XXX
+        if (value) {
+          return db.config.update(pool, 'access token', token)
+            .then(({ value }) => {
+              winston.info(`The admin token is updated to ${value}`)
 
-        res.status(200).send()
+              res.status(200).send()
+            })
+        } else {
+          return db.config.create(pool, 'access token', token)
+            .then(({ value }) => {
+              winston.info(`The admin token is set to ${value}`)
+
+              res.status(200).send()
+            })
+        }
       })
   })
   .get('/api/database/export', (req, res, next) => {

@@ -17,7 +17,7 @@ export const token: RawAction<[string, string], void> = store => async (email, t
 
   dispatch(ConfigTokenRequest(email, token))
   try {
-    await axios.post(`${apiUrl}/api/config/token`, { email, token })
+    await axios.put(`${apiUrl}/api/config/token`, { email, token })
     dispatch(ConfigTokenSuccess(email, token))
 
     return
