@@ -14,14 +14,17 @@ class App extends PureComponent {
     className: '',
   }
 
-  getHashtags() {
+  getHashtags = () => {
     const { store } = this.props
 
     // TODO: notify the user when fetching failed
     return actions.hashtag.getHashtags(store)()
-      .catch(err => console.error(err))
-      .then(T.delay(100000)) // wait 10s
-      .then(this.getHashtags.bind(this))
+      .catch(err => {
+        console.error(err)
+        return Promise.resolve()
+          .then(T.delay(100000))
+          .then(this.getHashtags)
+      })
   }
 
   async componentDidMount() {
