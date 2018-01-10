@@ -15,6 +15,9 @@ const create = (db, type, email, login, time, fields) =>
   )
     .then(r => r && r.rows && r.rows[0])
 
+const createFromEntry = (db, entry) =>
+  create(db, entry.type, entry.email, entry.login, entry.time, entry.fields)
+
 const getByMail = (db, email) =>
   db.query(
     'SELECT * FROM activity WHERE email = $1;',
@@ -27,5 +30,6 @@ module.exports = {
   drop,
   list,
   create,
+  createFromEntry,
   getByMail
 }

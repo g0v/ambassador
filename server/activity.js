@@ -80,96 +80,96 @@ type ActivityEntry = {
 const UNKNOWN_ACTIVITY = 'UNKNOWN_ACTIVITY'
 const TOKEN_SET_ACTIVITY = 'TOKEN_SET_ACTIVITY'
 const TOKEN_UPDATE_ACTIVITY = 'TOKEN_UPDATE_ACTIVITY'
-const LOG_CREATE_ACTIVITY = 'LOG_CREATE_ACTIVITY'
 const HASHTAG_CREATE_ACTIVITY = 'HASHTAG_CREATE_ACTIVITY'
+const LOG_CREATE_ACTIVITY = 'LOG_CREATE_ACTIVITY'
 const LINK_ACTIVITY = 'LINK_ACTIVITY'
 const UNLINK_ACTIVITY = 'UNLINK_ACTIVITY'
 const RESOURCE_CREATE_ACTIVITY = 'RESOURCE_CREATE_ACTIVITY'
 
-const fromEntry = (entry /*: ActivityEntry */): /* Activity */ {
+const Base =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  ) /*: BaseActivity */ =>
+    ({ type: UNKNOWN_ACTIVITY, email, login, time })
+const TokenSet =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , token /*: string */
+  ) /*: TokenSetActivity */ =>
+    ({ type: TOKEN_SET_ACTIVITY, email, login, time, token })
+const TokenUpdate =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , token /*: string */
+  ) /*: TokenUpdateActivity */ =>
+    ({ type: TOKEN_UPDATE_ACTIVITY, email, login, time, token })
+const HashtagCreate =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , tag /*: string */
+  ) /*: HashtagCreate */ =>
+    ({ type: HASHTAG_CREATE_ACTIVITY, email, login, time, tag })
+const LogCreate =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , date /*: string */
+  , index /*: number */
+  ) /*: LogCreateActivity */ =>
+    ({ type: LOG_CREATE_ACTIVITY, email, login, time, date, index })
+const Link =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , date /*: string */
+  , index /*: number */
+  , tag /*: string */
+  ) /*: LinkActivity */ =>
+    ({ type: LINK_ACTIVITY, email, login, time, date, index, tag })
+const Unlink =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , date /*: string */
+  , index /*: number */
+  , tag /*: string */
+  ) /*: UnlinkActivity */ =>
+    ({ type: UNLINK_ACTIVITY, email, login, time, date, index, tag })
+const ResourceCreate =
+  ( email /*: string */
+  , login /*: string */
+  , time /*: number */
+  , uri /*: string */
+  , tags /*: string[] */
+  ) /*: ResourceCreateActivity */ =>
+    ({ type: RESOURCE_CREATE_ACTIVITY, email, login, time, uri, tags })
+
+const fromEntry = (entry /*: ActivityEntry */) /*: Activity */ => {
   switch (entry.type) {
-    case TOKEN_SET_ACTIVITY: {
-      return {
-        type: TOKEN_SET_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        token: entry.fields[0]
-      }
-    }
-    case TOKEN_UPDATE_ACTIVITY: {
-      return {
-        type: TOKEN_UPDATE_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        token: entry.fields[0]
-      }
-    }
-    case HASHTAG_CREATE_ACTIVITY: {
-      return {
-        type: HASHTAG_CREATE_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        tag: entry.fields[0]
-      }
-    }
-    case LOG_CREATE_ACTIVITY: {
-      return {
-        type: LOG_CREATE_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        date: entry.fields[0],
-        index: +entry.fields[1]
-      }
-    }
-    case LINK_ACTIVITY: {
-      return {
-        type: LINK_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        date: entry.fields[0],
-        index: +entry.fields[1],
-        tag: entry.fields[2]
-      }
-    }
-    case UNLINK_ACTIVITY: {
-      return {
-        type: UNLINK_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        date: entry.fields[0],
-        index: +entry.fields[1],
-        tag: entry.fields[2]
-      }
-    }
-    case RESOURCE_CREATE_ACTIVITY: {
-      return {
-        type: RESOURCE_CREATE_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time,
-        uri: entry.fields[0],
-        tags: entry.fields.slice(1)
-      }
-    }
-    default: {
-      // BaseActivity
-      return {
-        type: UNKNOWN_ACTIVITY,
-        email: entry.email,
-        login: entry.login,
-        time: entry.time
-      }
-    }
+    case TOKEN_SET_ACTIVITY:
+      return TokenSet(entry.email, entry.login, entry.time, entry.fields[0])
+    case TOKEN_UPDATE_ACTIVITY:
+      return TokenUpdate(entry.email, entry.login, entry.time, entry.fields[0])
+    case HASHTAG_CREATE_ACTIVITY:
+      return HashtagCreate(entry.email, entry.login, entry.time, entry.fields[0])
+    case LOG_CREATE_ACTIVITY:
+      return LogCreate(entry.email, entry.login, entry.time, entry.fields[0], +entry.fields[1])
+    case LINK_ACTIVITY:
+      return Link(entry.email, entry.login, entry.time, entry.fields[0], +entry.fields[1], entry.fields[2])
+    case UNLINK_ACTIVITY:
+      return Unlink(entry.email, entry.login, entry.time, entry.fields[0], +entry.fields[1], entry.fields[2])
+    case RESOURCE_CREATE_ACTIVITY:
+      return ResourceCreate(entry.email, entry.login, entry.time, entry.fields[0], entry.fields.slice(1))
+    default:
+      return Base(entry.email, entry.login, entry.time)
   }
 }
 
-const toEntry = (activity /*: Activity */): /* ActivityEntry */ {
+const toEntry = (activity /*: Activity */) /*: ActivityEntry */ => {
   switch (activity.type) {
     case TOKEN_SET_ACTIVITY: {
       return {
@@ -245,4 +245,17 @@ const toEntry = (activity /*: Activity */): /* ActivityEntry */ {
       }
     }
   }
+}
+
+module.exports = {
+  Base,
+  TokenSet,
+  TokenUpdate,
+  HashtagCreate,
+  LogCreate,
+  Link,
+  Unlink,
+  ResourceCreate,
+  fromEntry,
+  toEntry
 }

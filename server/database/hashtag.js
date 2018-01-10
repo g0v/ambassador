@@ -29,11 +29,19 @@ const get = (db, content) =>
   )
     .then(r => r && r.rows && r.rows[0])
 
+const getById = (db, id) =>
+  db.query(
+    'SELECT * FROM hashtag WHERE id = $1 LIMIT 1;',
+    [id]
+  )
+    .then(r => r && r.rows && r.rows[0])
+
 module.exports = {
   prepare,
   drop,
   list,
   create,
   test,
-  get
+  get,
+  getById
 }

@@ -21,9 +21,12 @@ try {
 const db = require('./database')
 // session map
 const S = require('./session')
+// activities
+const A = require('./activity')
 // GitHub
 const GitHub = require('github-api')
 // utils
+const moment = require('moment')
 const qs = require('query-string')
 const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
 const { map } = require('ramda')
@@ -171,8 +174,7 @@ app
   .put('/api/config/token', (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
-    const { email, token } = req.body
-    //const { login, email, token } = req.body
+    const { email, login, token } = req.body
 
     if (email !== env.ADMIN_EMAIL) {
       const err = new AdminError(email)
@@ -188,7 +190,12 @@ app
           return db.config.update(pool, 'access token', token)
             .then(({ value }) => {
               winston.info(`The admin token is updated to ${value}`)
-              // XXX: should log activities here
+
+              // log this activity
+              db.activity.createFromEntry(
+                pool,
+                A.toEntry(A.TokenUpdate(email, login, +moment(), token))
+              ).catch(next)
 
               res.status(200).send()
             })
@@ -196,7 +203,12 @@ app
           return db.config.create(pool, 'access token', token)
             .then(({ value }) => {
               winston.info(`The admin token is set to ${value}`)
-              // XXX: should log activities here
+
+              // log this activity
+              db.activity.createFromEntry(
+                pool,
+                A.toEntry(A.TokenSet(email, login, +moment(), token))
+              ).catch(next)
 
               res.status(200).send()
             })
@@ -252,7 +264,7 @@ app
     if (!status.database) throw new DatabaseError()
 
     const { tag } = req.params
-    //const { login, email } = req.body
+    const { email, login } = req.body
 
     winston.verbose(`Check hashtag #${tag}`)
 
@@ -265,7 +277,12 @@ app
         return db.hashtag.create(pool, tag)
           .then(tag => {
             winston.info(`Hashtag #${tag.content} created`)
-            // XXX: should log activities here
+
+            // log this activity
+            db.activity.createFromEntry(
+              pool,
+              A.toEntry(A.HashtagCreate(email, login, +moment(), tag))
+            ).catch(next)
 
             res.json(tag)
           })
@@ -323,7 +340,7 @@ app
     if (!status.database) throw new DatabaseError()
 
     const { date, index } = req.params
-    //const { login, email } = req.body
+    const { email, login } = req.body
 
     winston.verbose(`Check log ${date}#${index}`)
 
@@ -336,7 +353,12 @@ app
         return db.log.create(pool, date, +index)
           .then(log => {
             winston.info(`Log ${log.date}#${log.index} created`)
-            // XXX: should log activities here
+
+            // log this activity
+            db.activity.createFromEntry(
+              pool,
+              A.toEntry(A.LogCreate(email, login, +moment(), date, index))
+            ).catch(next)
 
             res.json(log)
           })
@@ -348,14 +370,26 @@ app
     if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
-    //const { login, email } = req.body
+    const { email, login } = req.body
 
     winston.verbose(`Link log ${log} with hashtag ${hashtag}`)
 
     db.logHashtag.link(pool, +log, +hashtag)
       .then(link => {
         winston.info(`Log ${link.log} is linked with hashtag ${link.hashtag}`)
-        // XXX: should log activities here
+
+        // log this activity here
+        db.log.getById(pool, +log)
+          .then(({ date, index }) =>
+            db.hashtag.getById(pool, +hashtag)
+              .then(({ content }) =>
+                db.activity.createFromEntry(
+                  pool,
+                  A.toEntry(A.Link(email, login, +moment(), date, index, content))
+                )
+              )
+          )
+          .catch(next)
 
         res.json(link)
       })
@@ -365,14 +399,26 @@ app
     if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
-    //const { login, email } = req.body
+    const { email, login } = req.body
 
     winston.verbose(`Unlink log ${log} with hashtag ${hashtag}`)
 
     db.logHashtag.unlink(pool, +log, +hashtag)
       .then(link => {
         winston.info(`Log ${link.log} is unlinked with hashtag ${link.hashtag}`)
-        // XXX: should log activities here
+
+        // log this activity here
+        db.log.getById(pool, +log)
+          .then(({ date, index }) =>
+            db.hashtag.getById(pool, +hashtag)
+              .then(({ content }) =>
+                db.activity.createFromEntry(
+                  pool,
+                  A.toEntry(A.Unlink(email, login, +moment(), date, index, content))
+                )
+              )
+          )
+          .catch(next)
 
         res.json(link)
       })
@@ -426,7 +472,12 @@ app
             db.resourceHashtag.linkAll(pool, resource.id, hashtags)
               .then(hashtags => {
                 winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri + ' and hashtags: ' + hashtags)
-                // XXX: should log activities here
+
+                // log this activity
+                db.activity.createFromEntry(
+                  pool,
+                  A.toEntry(A.ResourceCreate(email, login, +moment(), hashtags))
+                ).catch(next)
 
                 resource.hashtags = hashtags
 
