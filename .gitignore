@@ -10,7 +10,6 @@
 /flow-typed
 
 # development
-/data/logs
 start.sh
 search.sh
 import.sh
@@ -22,6 +21,7 @@ import-keywords.sh
 /build/static/js/manifest.*
 
 # misc
+*.swp
 .DS_Store
 .env.local
 .env.development.local
