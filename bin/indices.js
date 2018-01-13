@@ -1,25 +1,27 @@
-const fs = require('fs-extra')
-const path = require('path')
-const U = require('./utils')
-const R = require('ramda')
+import fs from 'fs-extra'
+import path from 'path'
+import { map, is } from 'ramda'
+
+import * as paths from './paths'
 
 let indices = {}
 
 const main = () => {
-  fs.readdir(U.config.dataPath)
-    .then(R.map(fillIndices))
+  fs.readdir(paths.logs)
+    .then(map(fillIndices))
     .then(ps => Promise.all(ps))
-    .then(() => fs.writeJson(path.resolve(U.config.dataPath, 'index.json'), indices, { spaces: 2 }))
+    .then(() => fs.writeJson(path.resolve(paths.logs, 'index.json'), indices, { spaces: 2 }))
     .then(() => process.stdout.write('\n'))
+    .catch(e => console.error(e))
 }
 
 const fillIndices = (filename) => {
-  const date = filename.replace(/.json$/, '')
-  const filePath = path.resolve(U.config.dataPath, filename)
+  const date = filename.replace(/\.json$/, '')
+  const filePath = path.resolve(paths.logs, filename)
 
   return fs.readJson(filePath)
     .then(ls => {
-      if (!ls || !R.is(Number, ls.length)) return
+      if (!ls || !is(Number, ls.length)) return
 
       for (let index in ls) {
         const l = ls[index]
