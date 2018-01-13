@@ -86,6 +86,7 @@ export type Product
   = string
   | WebsiteProduct
   | AppProduct
+  | BotProduct
   | ExtensionProduct
   | DevProduct
 
@@ -100,6 +101,14 @@ export type AppProduct = {
   type: 'app',
   // mobile app 分成 Android, iOS, Firefox 三類， desktop app 先不細分
   subtype: 'android' | 'ios' | 'firefox' | 'desktop',
+  name: string,
+  url?: Url,
+  source?: Url
+}
+
+export type BotProduct = {
+  type: 'bot',
+  subtype: 'facebook' | 'line' | 'slack' | 'telegram' | 'wechat',
   name: string,
   url?: Url,
   source?: Url

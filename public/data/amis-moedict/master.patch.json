@@ -1,0 +1,49 @@
+{
+  "products": [{
+    "type": "website",
+    "name": "阿美語萌典",
+    "url": "https://amis.moedict.tw"
+  }, {
+    "type": "app",
+    "subtype": "android",
+    "name": "萌典-蔡中涵阿美語大辭典",
+    "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_s"
+  }, {
+    "type": "app",
+    "subtype": "android",
+    "name": "萌典-方敏英阿美語字典",
+    "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_p"
+  }, {
+    "type": "app",
+    "subtype": "android",
+    "name": "萌典-潘世光阿美語法語字典",
+    "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_m"
+  }, {
+    "type": "app",
+    "subtype": "ios",
+    "name": "阿美語萌典",
+    "url": "https://itunes.apple.com/tw/app/%E9%98%BF%E7%BE%8E%E8%AA%9E%E8%90%8C%E5%85%B8/id963236813?mt=8"
+  }, {
+    "type": "bot",
+    "subtype": "line",
+    "name": "阿美語萌典 LINE BOT",
+    "url": "https://github.com/miaoski/amis-linebot"
+  }, {
+    "type": "bot",
+    "subtype": "telegram",
+    "name": "阿美語萌典 Telegram BOT",
+    "url": "https://github.com/miaoski/amis-tgbot"
+  }],
+  "group": "https://github.com/g0v/amis-moedict",
+  "dependencies": [{
+    "url": "https://github.com/miaoski/amis-data.git"
+  }, {
+    "url": "https://github.com/miaoski/amis-francais.git"
+  }, {
+    "url": "https://github.com/miaoski/amis-safolu.git"
+  }, {
+    "url": "https://github.com/miaoski/amis-chinese-poinsot"
+  }, {
+    "url": "https://github.com/miaoski/moedict-amis-app-makefile"
+  }]
+}

@@ -35,6 +35,27 @@ class ProductListItem extends PureComponent {
             icon = 'window maximize'
         }
         break
+      case 'bot':
+        switch (subtype) {
+          case 'facebook':
+            icon = 'facebook official'
+            break
+          case 'line':
+            icon = 'commenting'
+            break
+          case 'slack':
+            icon = 'slack'
+            break
+          case 'telegram':
+            icon = 'telegram'
+            break
+          case 'wechat':
+            icon = 'weixin'
+            break
+          default:
+            icon = 'commenting'
+        }
+        break
       case 'extension':
         switch (subtype) {
           case 'chrome':
