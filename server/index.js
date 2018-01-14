@@ -1,16 +1,16 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 // logger
-const winston = require('winston')
+import winston from 'winston'
 winston.level = 'silly'
 // express
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const fallback = require('express-history-api-fallback')
-const axios = require('axios')
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import fallback from 'express-history-api-fallback'
+import axios from 'axios'
 // database
-const { Pool } = require('pg')
+import { Pool } from 'pg'
 // Try to remove old `database.js` before requiring `database/index.js`
 // This might be a bug in middle2
 try {
@@ -18,23 +18,23 @@ try {
 } catch (err) {
   winston.warn(err.message)
 }
-const db = require('./database')
+import db from './database'
 // session map
-const S = require('./session')
+import S from './session'
 // activities
-const A = require('./activity')
+import A from './activity'
 // GitHub
-const GitHub = require('github-api')
+import GitHub from 'github-api'
 // utils
-const moment = require('moment')
-const qs = require('query-string')
-const delay = t => v => new Promise(resolve => setTimeout(resolve, t, v)) // duplicated
+import moment from 'moment'
+import qs from 'query-string'
+import { delay } from '../src/types/time'
 const { map } = require('ramda')
 // errors
-const { DatabaseError, AdminError } = require('./error')
+import { DatabaseError, AdminError } from './error'
 // configs
-const paths = require('../config/paths.js')
-const env = require('./env.js')
+import paths from '../config/paths.js'
+import env from './env.js'
 
 // service status
 const status = {
@@ -53,33 +53,28 @@ const civicHashtags = [
   'g0v基礎建設'
 ]
 
-const createHashtagsFromList = (pool, names) => {
+const createHashtagsFromList = async (pool, names) => {
   const [name, ...rest] = names
 
-  if (name === undefined) return
+  if (!name) return
 
   winston.verbose(`Check #${name}`)
 
-  return db.hashtag.test(pool, name)
-    .then(exists => {
-      if (exists) return createHashtagsFromList(pool, rest)
+  const exists = await db.hashtag.test(pool, name)
+  if (!exists) {
+    winston.verbose(`Create hashtag #${name}`)
+    const tag = await db.hashtag.create(pool, name)
+    winston.info(`Hashtag #${tag.content} is created`)
+  }
 
-      winston.verbose(`Create hashtag #${name}`)
-
-      return db.hashtag.create(pool, name)
-        .then(tag => {
-          winston.info(`Repo hashtag #${tag.content} is created`)
-
-          return createHashtagsFromList(pool, rest)
-        })
-    })
+  return createHashtagsFromList(pool, rest)
 }
 
-const prepareRepoHashtags = (pool, org) =>
-  org.getRepos()
-    .then(res => res.data)
-    .then(map(rs => rs.full_name))
-    .then(names => createHashtagsFromList(pool, names))
+const prepareRepoHashtags = async (pool, org) => {
+  const { data } = await org.getRepos()
+  const names = map(rs => rs.full_name, data)
+  return createHashtagsFromList(pool, names)
+}
 
 const connectionString = env.DATABASE_URL
 const pool = new Pool({ connectionString })
@@ -89,35 +84,28 @@ const keepAwake = () =>
     .then(delay(2700000)) // 270s, 4.5mins
     .then(keepAwake)
 db.test(pool)
-  .then(now => {
+  .then(async now => {
     winston.verbose(`Database connected at ${now}`)
 
-    return db.prepare(pool)
-      .then(() => db.config.get(pool, 'access token'))
-      .then(({ value }) => {
-        let token = value
+    await db.prepare(pool)
+    let { value: token } = await db.config.get(pool, 'access token')
 
-        winston.verbose('Tables are ready')
-        winston.verbose(token ? `The access token is ${token}` : 'Admin token not found')
-        if (!token) token = undefined
+    winston.verbose('Tables are ready')
+    winston.verbose(token ? `The access token is ${token}` : 'Admin token not found')
+    if (!token) token = undefined
 
-        const gh = new GitHub({ token })
-        // TODO: use env.GH_ORGANIZATION
-        const org = gh.getOrganization('g0v')
+    const gh = new GitHub({ token })
+    // TODO: use env.GH_ORGANIZATION
+    const org = gh.getOrganization('g0v')
 
-        winston.verbose('Prepare repo hashtags')
-        const ps = [
-          prepareRepoHashtags(pool, org),
-          createHashtagsFromList(pool, civicHashtags)
-        ]
+    winston.verbose('Prepare repo hashtags')
+    // start them parallelly
+    const p0 = prepareRepoHashtags(pool, org)
+    const p1 = createHashtagsFromList(pool, civicHashtags)
+    await p0, await p1
 
-        return Promise.all(ps)
-          .then(() => {
-            winston.verbose('Repo hashtags are ready')
-
-            status.database = true
-          })
-      })
+    winston.verbose('Repo hashtags are ready')
+    status.database = true
   })
   .then(keepAwake)
   .catch(winston.error)
@@ -142,36 +130,38 @@ app
     res.redirect(303, endpoint)
   })
   // GitHub OAuth callback URL
-  .get('/api/callback', (req, res, next) => {
+  .get('/api/callback', async (req, res, next) => {
     const { code } = req.query
     if (!code) throw new Error('OAuth code is missing')
 
     winston.verbose(`Exchange access token with code: ${code}`)
 
-    axios({
-      method: 'post',
-      url: 'https://github.com/login/oauth/access_token',
-      data: { client_id, client_secret, code }
-    })
-      .then((result) => {
-        if (result.data.error) throw new Error(result.data.error)
-
-        const o = qs.parse(result.data)
-        winston.verbose(`Access token: ${o.access_token}`)
-        S.create(o.access_token)
-          .then((s) => winston.verbose('Current session:', s))
-
-        const endpoint = `/callback?${result.data}`
-        res.redirect(303, endpoint)
+    try {
+      const result = await axios({
+        method: 'post',
+        url: 'https://github.com/login/oauth/access_token',
+        data: { client_id, client_secret, code }
       })
-      .catch(next)
+
+      if (result.data.error) throw new Error(result.data.error)
+
+      const o = qs.parse(result.data)
+      winston.verbose(`Access token: ${o.access_token}`)
+      S.create(o.access_token)
+        .then((s) => winston.verbose('Current session:', s))
+
+      const endpoint = `/callback?${result.data}`
+      res.redirect(303, endpoint)
+    } catch (err) {
+      next(err)
+    }
   })
   // API status
   .get('/api/status', (req, res, next) => {
     res.json(status)
   })
   // Setup the admin token for GitHub API
-  .put('/api/config/token', (req, res, next) => {
+  .put('/api/config/token', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { email, login, token } = req.body
@@ -182,39 +172,35 @@ app
       return res.status(403).send(err.message)
     }
 
-    winston.verbose(`Set the admin token to ${token}`)
-    db.config.get(pool, 'access token')
-      .then(({ value }) => {
-        // XXX
-        if (value) {
-          return db.config.update(pool, 'access token', token)
-            .then(({ value }) => {
-              winston.info(`The admin token is updated to ${value}`)
+    try {
+      winston.verbose(`New admin token is ${token}`)
+      const { value } = await db.config.get(pool, 'access token')
+      winston.verbose(`Current admin token is ${value}`)
 
-              // log this activity
-              db.activity.createFromEntry(
-                pool,
-                A.toEntry(A.TokenUpdate(email, login, +moment(), token))
-              ).catch(next)
+      if (value) {
+        const { value } = await db.config.update(pool, 'access token', token)
+        winston.info(`The admin token is updated to ${value}`)
 
-              res.status(200).send()
-            })
-        } else {
-          return db.config.create(pool, 'access token', token)
-            .then(({ value }) => {
-              winston.info(`The admin token is set to ${value}`)
+        // log this activity
+        db.activity.createFromEntry(
+          pool,
+          A.toEntry(A.TokenUpdate(email, login, +moment(), token))
+        ).catch(next)
+      } else {
+        const { value } = db.config.create(pool, 'access token', token)
+        winston.info(`The admin token is set to ${value}`)
 
-              // log this activity
-              db.activity.createFromEntry(
-                pool,
-                A.toEntry(A.TokenSet(email, login, +moment(), token))
-              ).catch(next)
+        // log this activity
+        db.activity.createFromEntry(
+          pool,
+          A.toEntry(A.TokenSet(email, login, +moment(), token))
+        ).catch(next)
+      }
 
-              res.status(200).send()
-            })
-        }
-      })
-      .catch(next)
+      res.status(200).send()
+    } catch (err) {
+      next(err)
+    }
   })
   .get('/api/database/export', (req, res, next) => {
     if (!status.database) throw new DatabaseError()
