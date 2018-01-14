@@ -6,7 +6,7 @@ const drop = (db) =>
 
 const list = (db) =>
   db.query('SELECT * FROM config;')
-    .then(r && r.rows)
+    .then(r => r && r.rows)
 
 const create = (db, key, value) =>
   db.query(

@@ -33,7 +33,7 @@ const { map } = require('ramda')
 // errors
 const { DatabaseError, AdminError } = require('./error')
 // configs
-const paths = require(path.resolve(__dirname, '../config/paths.js'))
+const paths = require('../config/paths.js')
 const env = require('./env.js')
 
 // service status
@@ -456,7 +456,7 @@ app
   })
   .post('/api/resource', (req, res, next) => {
     const { hashtags = [] } = req.body
-    //const { login, email } = req.body
+    const { email, login } = req.body
     let { uri } = req.body
     // TODO: guard the URI here
 
