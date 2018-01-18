@@ -74,7 +74,7 @@
   "scripts": {
     "start": "npm-run-all -p start:server start:client",
     "start:client": "node scripts/start.js",
-    "start:server": "NODE_ENV=test npx babel-node server/index.js",
+    "start:server": "NODE_ENV=test `npm bin`/babel-node server/index.js",
     "start:import": "node server/import.js",
     "init:keywords": "node data/keywords.js",
     "build:server": "node scripts/build-server.js",
