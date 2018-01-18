@@ -8,13 +8,10 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import fallback from 'express-history-api-fallback'
 import axios from 'axios'
-// database
-import { Pool } from 'pg'
-import * as db from './database'
 // session map
-import * as S from './session'
+import S from './session'
 // activities
-import * as A from './activity'
+import A from './activity'
 // GitHub
 import GitHub from 'github-api'
 // utils
@@ -25,16 +22,20 @@ import { map } from 'ramda'
 // errors
 import { DatabaseError, AdminError } from './error'
 // configs
-import * as paths from '../config/paths.js'
-import * as env from './env.js'
+import paths from '../config/paths.js'
+import env from './env.js'
 
-// Try to remove old `database.js` before requiring `database/index.js`
-// This might be a bug in middle2
+// database
+// Try to remove old `database.js` before requiring `database/index.js`.
+// This might be a bug of middle2.
 try {
   fs.unlinkSync(path.resolve(__dirname, './database.js'))
 } catch (err) {
   winston.warn(err.message)
 }
+// Can't import from here, fallback to require
+const { Pool } = require('pg')
+const db = require('./database')
 
 winston.level = 'silly'
 
