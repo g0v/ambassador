@@ -95,7 +95,6 @@ db.test(pool)
 
     winston.verbose('Tables are ready')
     winston.verbose(token ? `The access token is ${token}` : 'Admin token not found')
-    if (!token) token = undefined
 
     const gh = new GitHub({ token })
     // TODO: use env.GH_ORGANIZATION

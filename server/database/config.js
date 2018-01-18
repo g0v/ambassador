@@ -27,7 +27,7 @@ const get = (db, key) =>
     'SELECT * FROM config WHERE key = $1 LIMIT 1;',
     [key]
   )
-    .then(r => r && r.rows && r.rows[0])
+    .then(r => (r && r.rows && r.rows[0]) || {})
 
 module.exports = {
   prepare,
