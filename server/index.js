@@ -10,11 +10,11 @@ import fallback from 'express-history-api-fallback'
 import axios from 'axios'
 // database
 import { Pool } from 'pg'
-import db from './database'
+import * as db from './database'
 // session map
-import S from './session'
+import * as S from './session'
 // activities
-import A from './activity'
+import * as A from './activity'
 // GitHub
 import GitHub from 'github-api'
 // utils
@@ -25,8 +25,8 @@ import { map } from 'ramda'
 // errors
 import { DatabaseError, AdminError } from './error'
 // configs
-import paths from '../config/paths.js'
-import env from './env.js'
+import * as paths from '../config/paths.js'
+import * as env from './env.js'
 
 // Try to remove old `database.js` before requiring `database/index.js`
 // This might be a bug in middle2
