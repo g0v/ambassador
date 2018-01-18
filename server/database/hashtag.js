@@ -1,3 +1,5 @@
+const { map } = require('ramda')
+
 const prepare = (db) =>
   db.query('CREATE TABLE IF NOT EXISTS hashtag (id serial PRIMARY KEY, content text);')
 
@@ -36,6 +38,9 @@ const getById = (db, id) =>
   )
     .then(r => r && r.rows && r.rows[0])
 
+const getByIds = (db, ids) =>
+  Promise.all(map(id => getById(db, id), ids))
+
 module.exports = {
   prepare,
   drop,
@@ -43,5 +48,6 @@ module.exports = {
   create,
   test,
   get,
-  getById
+  getById,
+  getByIds
 }

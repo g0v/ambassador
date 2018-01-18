@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 // logger
 import winston from 'winston'
-winston.level = 'silly'
 // express
 import express from 'express'
 import cors from 'cors'
@@ -11,13 +10,6 @@ import fallback from 'express-history-api-fallback'
 import axios from 'axios'
 // database
 import { Pool } from 'pg'
-// Try to remove old `database.js` before requiring `database/index.js`
-// This might be a bug in middle2
-try {
-  fs.unlinkSync(path.resolve(__dirname, './database.js'))
-} catch (err) {
-  winston.warn(err.message)
-}
 import db from './database'
 // session map
 import S from './session'
@@ -29,12 +21,22 @@ import GitHub from 'github-api'
 import moment from 'moment'
 import qs from 'query-string'
 import { delay } from '../src/types/time'
-const { map } = require('ramda')
+import { map } from 'ramda'
 // errors
 import { DatabaseError, AdminError } from './error'
 // configs
 import paths from '../config/paths.js'
 import env from './env.js'
+
+// Try to remove old `database.js` before requiring `database/index.js`
+// This might be a bug in middle2
+try {
+  fs.unlinkSync(path.resolve(__dirname, './database.js'))
+} catch (err) {
+  winston.warn(err.message)
+}
+
+winston.level = 'silly'
 
 // service status
 const status = {
@@ -164,7 +166,16 @@ app
   .put('/api/config/token', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
-    const { email, login, token } = req.body
+    const { token } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
 
     if (email !== env.ADMIN_EMAIL) {
       const err = new AdminError(email)
@@ -246,11 +257,20 @@ app
       .catch(next)
   })
   // Create new hashtag
-  .post('/api/hashtag/:tag', (req, res, next) => {
+  .post('/api/hashtag/:tag', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { tag } = req.params
-    const { email, login } = req.body
+    const { token } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
 
     winston.verbose(`Check hashtag #${tag}`)
 
@@ -322,11 +342,20 @@ app
       .catch(next)
   })
   // Create log entry so we can link it with hashtags later
-  .post('/api/logbot/:channel/:date/:index', (req, res, next) => {
+  .post('/api/logbot/:channel/:date/:index', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { date, index } = req.params
-    const { email, login } = req.body
+    const { token } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
 
     winston.verbose(`Check log ${date}#${index}`)
 
@@ -352,11 +381,20 @@ app
       .catch(next)
   })
   // Link a log with a hashtag
-  .post('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
+  .post('/api/log/:log/hashtag/:hashtag', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
-    const { email, login } = req.body
+    const { token } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
 
     winston.verbose(`Link log ${log} with hashtag ${hashtag}`)
 
@@ -381,11 +419,21 @@ app
       })
       .catch(next)
   })
-  .delete('/api/log/:log/hashtag/:hashtag', (req, res, next) => {
+  .delete('/api/log/:log/hashtag/:hashtag', async (req, res, next) => {
     if (!status.database) throw new DatabaseError()
 
     const { log, hashtag } = req.params
-    const { email, login } = req.body
+    // One can use the data config field in axios.delete to set the request body.
+    const { token } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
 
     winston.verbose(`Unlink log ${log} with hashtag ${hashtag}`)
 
@@ -440,9 +488,18 @@ app
       })
       .catch(next)
   })
-  .post('/api/resource', (req, res, next) => {
-    const { hashtags = [] } = req.body
-    const { email, login } = req.body
+  .post('/api/resource', async (req, res, next) => {
+    const { token, hashtags = [] } = req.body
+
+    let email
+    let login
+    try {
+      ({ email, login } = await S.query(token))
+    } catch (err) {
+      winston.error(err)
+      return res.status(500)
+    }
+
     let { uri } = req.body
     // TODO: guard the URI here
 
@@ -456,14 +513,25 @@ app
         return db.resource.create(pool, uri)
           .then(resource =>
             db.resourceHashtag.linkAll(pool, resource.id, hashtags)
-              .then(hashtags => {
+              .then(ids => {
                 winston.info('Resource ' + resource.id + ' created with URI: ' + resource.uri + ' and hashtags: ' + hashtags)
 
-                // log this activity
-                db.activity.createFromEntry(
-                  pool,
-                  A.toEntry(A.ResourceCreate(email, login, +moment(), hashtags))
-                ).catch(next)
+                // log this activity with hashtag contents instead of ids
+                db.hashtag.getByIds(pool, ids)
+                  .then(map(h => h.content))
+                  .then(hashtags =>
+                    db.activity.createFromEntry(
+                      pool,
+                      A.toEntry(A.ResourceCreate(
+                        email,
+                        login,
+                        +moment(),
+                        uri,
+                        hashtags
+                      ))
+                    )
+                  )
+                  .catch(next)
 
                 resource.hashtags = hashtags
 
@@ -488,6 +556,19 @@ app
         res.json(r)
       })
       .catch(next)
+  })
+  .get('/api/activity', async (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    winston.verbose('Get activities')
+
+    try {
+      let acts = await db.activity.list(pool)
+      acts = map(A.fromEntry, acts)
+      res.json(acts)
+    } catch (error) {
+      next(error)
+    }
   })
   // Search keywords
   .get('/api/search', (req, res, next) => {

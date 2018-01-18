@@ -26,7 +26,7 @@ type EMail = {
 
 let sessionMap /*: SessionMap */ = {}
 
-function create(token /*: Token */) /*: Session */ {
+function create(token /*: Token */) /*: Promise<Session> */ {
   const gh = new GitHub({ token })
   const user = gh.getUser()
 
@@ -41,6 +41,7 @@ function create(token /*: Token */) /*: Session */ {
             email: findFirstValidMail(emails),
             created: +moment()
           }
+          // XXX: should keep the promise
           sessionMap[token] = session
 
           return session
@@ -57,11 +58,18 @@ function findFirstValidMail(emails /*: Email[] */) /*: ?string */ {
   }
 }
 
-function query(token /*: Token */) /*: Session */ {
-  return sessionMap[token]
+function query(token /*: Token */) /*: Promise<Session> */ {
+  let s = sessionMap[token]
+  console.log(token)
+
+  if (s) {
+    return Promise.resolve(s)
+  } else {
+    return create(token)
+  }
 }
 
-function remove(token /*: Token */) /*: Session */ {
+function remove(token /*: Token */) /*: Promise<Session> */ {
   const result = sessionMap[token]
 
   delete sessionMap[token]

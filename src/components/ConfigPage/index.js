@@ -15,12 +15,12 @@ class ConfigPage extends PureComponent {
   }
 
   onSetToken = (e) => {
-    const { actions, token, email } = this.props
+    const { actions, token } = this.props
 
     e.preventDefault()
 
     try {
-      actions.config.token(email, token)
+      actions.config.token(token)
     } catch (error) {
       console.error(error)
     }

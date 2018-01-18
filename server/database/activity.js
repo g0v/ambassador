@@ -4,8 +4,9 @@ const prepare = (db) =>
 const drop = (db) =>
   db.query('DROP TABLE IF EXISTS activity;')
 
+// select without emails
 const list = (db) =>
-  db.query('SELECT * FROM activity;')
+  db.query('SELECT id, type, login, time, fields FROM activity;')
     .then(r => r && r.rows)
 
 const create = (db, type, email, login, time, fields) =>

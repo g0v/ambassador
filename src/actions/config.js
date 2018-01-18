@@ -12,17 +12,17 @@ import axios from 'axios'
 
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
-export const token: RawAction<[string, string], void> = store => async (email, token) => {
+export const token: RawAction<[string], void> = store => async (token) => {
   const { dispatch } = store
 
-  dispatch(ConfigTokenRequest(email, token))
+  dispatch(ConfigTokenRequest(token))
   try {
-    await axios.put(`${apiUrl}/api/config/token`, { email, token })
-    dispatch(ConfigTokenSuccess(email, token))
+    await axios.put(`${apiUrl}/api/config/token`, { token })
+    dispatch(ConfigTokenSuccess(token))
 
     return
   } catch (error) {
-    dispatch(ConfigTokenFailure(email, token, error))
+    dispatch(ConfigTokenFailure(token, error))
     throw error
   }
 }

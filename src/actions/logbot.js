@@ -4,6 +4,7 @@ import type { RawAction } from '~/types/action'
 import type { LogId, Log, HashtagLink } from '~/types/logbot'
 import type { HashtagId } from '~/types/hashtag'
 
+import * as A from '~/types/auth'
 import { getUrl } from '~/types'
 import {
   LogRequest,
@@ -38,10 +39,15 @@ export const getLog: RawAction<[string, number], Log> = store => async (date, in
 }
 
 export const storeLog: RawAction<[string, number], Log> = store => async (date, index) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
+
+  const token = A.getAccessToken(getState())
+  if (!token) {
+    throw new Error('access token not found')
+  }
 
   try {
-    await axios.post(`${apiUrl}/api/logbot/g0v.tw/${date}/${index}`)
+    await axios.post(`${apiUrl}/api/logbot/g0v.tw/${date}/${index}`, { token })
   } catch (error) {
     if (error.response) {
       const { status } = error.response
@@ -57,11 +63,16 @@ export const storeLog: RawAction<[string, number], Log> = store => async (date, 
 }
 
 export const linkHashtag: RawAction<[LogId, HashtagId], HashtagLink> = store => async (logId, hashtagId) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
+
+  const token = A.getAccessToken(getState())
+  if (!token) {
+    throw new Error('access token not found')
+  }
 
   dispatch(LinkRequest(logId, hashtagId))
   try {
-    const { data: link } = await axios.post(`${apiUrl}/api/log/${logId}/hashtag/${hashtagId}`)
+    const { data: link } = await axios.post(`${apiUrl}/api/log/${logId}/hashtag/${hashtagId}`, { token })
     dispatch(LinkSuccess(logId, hashtagId))
 
     return link
@@ -72,11 +83,21 @@ export const linkHashtag: RawAction<[LogId, HashtagId], HashtagLink> = store => 
 }
 
 export const unlinkHashtag: RawAction<[LogId, HashtagId], void> = store => async (logId, hashtagId) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
+
+  const token = A.getAccessToken(getState())
+  if (!token) {
+    throw new Error('access token not found')
+  }
 
   dispatch(UnlinkRequest(logId, hashtagId))
   try {
-    const { data: link } = await axios.delete(`${apiUrl}/api/log/${logId}/hashtag/${hashtagId}`)
+    const { data: link } =
+      await axios.delete(
+        `${apiUrl}/api/log/${logId}/hashtag/${hashtagId}`,
+        // use data to set the DELETE request body
+        { data: { token } }
+      )
     dispatch(UnlinkSuccess(logId, hashtagId))
 
     return link

@@ -5,6 +5,7 @@ import type { ResourceId, Resource } from '~/types/resource'
 import type { HashtagId } from '~/types/hashtag'
 
 import { getUrl } from '~/types'
+import * as A from '~/types/auth'
 import {
   ResourceListRequest,
   ResourceListSuccess,
@@ -54,11 +55,16 @@ export const get: RawAction<[ResourceId], Resource> = store => async (id) => {
 }
 
 export const create: RawAction<[string, HashtagId[]], Resource> = store => async (uri, hashtags) => {
-  const { dispatch } = store
+  const { dispatch, getState } = store
+
+  const token = A.getAccessToken(getState())
+  if (!token) {
+    throw new Error('access token not found')
+  }
 
   dispatch(ResourceCreateRequest())
   try {
-    const { data: resource } = await axios.post(`${apiUrl}/api/resource`, { uri, hashtags })
+    const { data: resource } = await axios.post(`${apiUrl}/api/resource`, { token, uri, hashtags })
     dispatch(ResourceCreateSuccess(resource))
 
     return resource
