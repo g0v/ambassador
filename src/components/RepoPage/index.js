@@ -22,9 +22,7 @@ class RepoPage extends PureComponent {
     const { params: { repo } } = match
 
     try {
-      if (repo === 'moedict-webkit') {
-        await actions.github.getIntro(repo, 'amis-react')
-      } else if (repo === 'itaigi') {
+      if (repo === 'amis-moedict' || repo === 'itaigi') {
         await actions.github.getIntro(repo)
       }
 
