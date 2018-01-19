@@ -1,0 +1,29 @@
+{
+  "g0v_json": "2.0",
+  "author": "racklin",
+  "status": "stable",
+  "name": "moedict-desktop",
+  "name_zh": "3du.tw (教育部重編國語辭典) Moe Dictionary App",
+  "description": "MoeDict Desktop For MacOSX / Linux / Windows",
+  "description_zh": "響應 3du.tw @g0v hackath1n | 台灣零時政府第壹次公地放領黑客松, 將教育部重編國語辭典製作為跨平台且未來可擴充及線上昇級之桌面端離線應用程式。",
+  "homepage": "https://racklin.github.io/moedict-desktop/",
+  "thumbnail": "https://racklin.github.io/moedict-desktop/images/screenshot_main.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/racklin/moedict-desktop"
+  },
+  "licenses": [{ "type": "MPL-2.0" }],
+  "keywords": [],
+  "audience": ["public"],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [],
+  "dependencies": [{
+    "url": "https://github.com/g0v/moedict-app"
+  }],
+  "contributors": [
+    "racklin",
+    "Vdragon",
+    "littlebtc"
+  ],
+  "needs": []
+}
