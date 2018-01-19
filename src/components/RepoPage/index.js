@@ -66,7 +66,7 @@ class RepoPage extends PureComponent {
                     map(
                       p => typeof p === 'string'
                         ? <List.Item key={p} content={p} />
-                        : <ProductListItem key={p.name} data={p} />,
+                        : <ProductListItem key={p.url} data={p} />,
                       g0vJson.products
                     )
                 }</List>
