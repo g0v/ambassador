@@ -6,6 +6,23 @@
 
 ## we b logs
 
+### 2018-01-18
+
+應該先準備好 repo 列表，從中得知該抓什麼 g0v.json ，再算出有哪些 group 。
+
+repo 列表應該長這樣：
+
+```
+racklin/moedict-desktop
+ronnywang/jobhelper
+g0v/*
+orgnization/repo
+```
+
+db 中的 hashtags 也該從此列表產生，而不是每次都去 GitHub 抓來檢查。
+
+還要寫清楚從頭開始的話，先有什麼資料，才能建立更多資料。
+
 ### 2018-01-13
 
 日前和朋友提到資料整理的難處，後來對方貼了[用深度學習（CNN RNN Attention）解決大規模文本分類問題 - 綜述和實踐](https://www.hksilicon.com/articles/1459305)給我。這篇應該對我這種沒有基礎的人比較有用， 3/17 成果發表後來讀。
