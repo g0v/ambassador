@@ -86,17 +86,17 @@ export type IssueListFailureAction = { type: 'ISSUE_LIST_FAILURE', error: Error 
 export const ISSUE_LIST_FAILURE = 'ISSUE_LIST_FAILURE'
 export const IssueListFailure = (error: Error): IssueListFailureAction => ({ type: ISSUE_LIST_FAILURE, error })
 
-export type IntroRequestAction = { type: 'INTRO_REQUEST', name: string }
+export type IntroRequestAction = { type: 'INTRO_REQUEST', user: string, repo: string, branch: string }
 export const INTRO_REQUEST = 'INTRO_REQUEST'
-export const IntroRequest = (name: string): IntroRequestAction => ({ type: INTRO_REQUEST, name })
+export const IntroRequest = (user: string, repo: string, branch: string): IntroRequestAction => ({ type: INTRO_REQUEST, user, repo, branch })
 
-export type IntroSuccessAction = { type: 'INTRO_SUCCESS', name: string, intro: string }
+export type IntroSuccessAction = { type: 'INTRO_SUCCESS', user: string, repo: string, branch: string, intro: string }
 export const INTRO_SUCCESS = 'INTRO_SUCCESS'
-export const IntroSuccess = (name: string, intro: string): IntroSuccessAction => ({ type: INTRO_SUCCESS, name, intro })
+export const IntroSuccess = (user: string, repo: string, branch: string, intro: string): IntroSuccessAction => ({ type: INTRO_SUCCESS, user, repo, branch, intro })
 
-export type IntroFailureAction = { type: 'INTRO_FAILURE', error: Error }
+export type IntroFailureAction = { type: 'INTRO_FAILURE', user: string, repo: string, branch: string, error: Error }
 export const INTRO_FAILURE = 'INTRO_FAILURE'
-export const IntroFailure = (error: Error): IntroFailureAction => ({ type: INTRO_FAILURE, error })
+export const IntroFailure = (user: string, repo: string, branch: string, error: Error): IntroFailureAction => ({ type: INTRO_FAILURE, user, repo, branch, error })
 
 export type G0vJsonRequestAction = { type: 'G0V_JSON_REQUEST', name: string, repo: string }
 export const G0V_JSON_REQUEST = 'G0V_JSON_REQUEST'

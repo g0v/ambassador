@@ -172,19 +172,19 @@ export const getIssues: RawAction<[string, string], any[]> = store => async (use
 
 const url = getUrl(process.env.PROTOCOL, process.env.HOST, process.env.PORT)
 
-export const getIntro: RawAction<[string, string], string> = store => async (repo, branch = 'master') => {
+export const getIntro: RawAction<[string, string, string], string> = store => async (user, repo, branch = 'master') => {
   const { dispatch } = store
-  const name = `${repo}/${branch}`
+  const name = `${G.fullName(user, repo)}/${branch}`
 
-  dispatch(IntroRequest(name))
+  dispatch(IntroRequest(user, repo, branch))
   try {
     const { data: intro } = await axios.get(`${url}/data/${name}.md`)
 
-    dispatch(IntroSuccess(name, intro))
+    dispatch(IntroSuccess(user, repo, branch, intro))
 
     return intro
   } catch (error) {
-    dispatch(IntroFailure(error))
+    dispatch(IntroFailure(user, repo, branch, error))
     throw error
   }
 }
@@ -224,7 +224,7 @@ export const g0vPatch: RawAction<[string, string, string], any> = store => async
 
   dispatch(g0vPatchRequest(name, repo, branch))
   try {
-    const { data: json } = await axios.get(`${url}/data/${repo}/${branch}.patch.json`)
+    const { data: json } = await axios.get(`${url}/data/${name}/${repo}/${branch}.patch.json`)
 
     dispatch(g0vPatchSuccess(name, repo, branch, json))
 

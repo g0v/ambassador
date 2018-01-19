@@ -456,12 +456,12 @@ export default (state: State = initialState, action: PlainAction): State => {
       return state
     }
     case INTRO_SUCCESS: {
-      const { name, intro } = action
+      const { user, repo, branch, intro } = action
 
       return {
         ...state,
         intros: {
-          [name]: intro
+          [`${fullName(user, repo)}/${branch}`]: intro
         }
       }
     }

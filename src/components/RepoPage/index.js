@@ -23,7 +23,7 @@ class RepoPage extends PureComponent {
 
     try {
       if (repo === 'amis-moedict' || repo === 'itaigi') {
-        await actions.github.getIntro(repo)
+        await actions.github.getIntro('g0v', repo)
       }
 
       await actions.github.g0vJson('g0v', repo)
@@ -46,12 +46,7 @@ class RepoPage extends PureComponent {
 
     const r = find(it => it.name === repo, repos)
 
-    let branch = 'master'
-    if (repo === 'moedict-webkit') {
-      branch = 'amis-react'
-    }
-
-    const intro = intros[`${repo}/${branch}`] || ''
+    const intro = intros[`${fullname}/master`] || ''
     const sourceUrl = (r && r.html_url) || (g0vJson && g0vJson.repository && g0vJson.repository.url)
 
     return (
@@ -117,9 +112,12 @@ class RepoPage extends PureComponent {
                   )
                 }</List>
               </Segment>
-              <Segment>
-                <ReactMarkdown source={intro} />
-              </Segment>
+              {
+                intro &&
+                  <Segment>
+                    <ReactMarkdown source={intro} />
+                  </Segment>
+              }
 
               <Rail close="very" position="left">
                 <h1>{ repo }</h1>
