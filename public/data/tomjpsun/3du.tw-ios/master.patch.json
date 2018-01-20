@@ -1,0 +1,23 @@
+{
+  "g0v_json": "2.0",
+  "author": "tomjpsun",
+  "status": "alpha",
+  "name": "3du.tw-ios",
+  "description": "An ios client for the 3du.tw project.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomjpsun/3du.tw-ios"
+  },
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "keywords": [],
+  "audience": ["public"],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [],
+  "dependencies": [{
+    "url": "https://github.com/g0v/moedict-webkit"
+  }],
+  "contributors": ["tomjpsun"],
+  "needs": []
+}
