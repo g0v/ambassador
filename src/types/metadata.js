@@ -5,8 +5,8 @@
 // 這個版本新增了 `group` 和 `dependencies` 欄位，移除了 `projects` 欄位。
 // 詳情請見 `Product` 和 `Dependency` types 。
 export type Project = {
-  // g0v.json 版本
-  g0v_json: '2.0',
+  // g0v.json 版本，省略時視為 1.0 版
+  g0v_json?: '2.0',
   // 主要作者
   author: string,
   // 專案狀況
@@ -14,17 +14,17 @@ export type Project = {
   // 英文名, 一般為簡短的代號 (不含 .#$[] 等符號)
   name: string,
   // 中文名
-  name_zh: string,
+  name_zh?: string,
   // 英文描述
   description: string,
   // 中文描述
-  description_zh: string,
+  description_zh?: string,
   // 網頁
-  homepage: Url,
+  homepage?: Url,
   // 縮圖 (TODO 建議大小?)
-  thumbnail: Url,
+  thumbnail?: Url,
   // 說明這個 project 的文件、網頁、或 hackpad
-  document: Url,
+  document?: Url,
   // 工作資料區
   //   * 這欄位主要是給程式專案使用, 表示 code 公開的 url
   //   * 其他類型的專案也許是 google doc 或是 dropbox folder 之類. 譬如的圖庫、照片、資料檔
@@ -42,7 +42,7 @@ export type Project = {
   // 這個專案的目標群
   audience: Audience[],
   // 主專案，自己就是主要專案時，請填上自己的 url
-  group: Url
+  group: Url,
   // 這個專案的產出
   products: Product[],
   // 同計畫相關專案
@@ -71,7 +71,8 @@ export type Audience = 'contributor' | 'public'
 
 export type License = {
   // TODO: should be one of the SPDX listed licenses: https://spdx.org/licenses/
-  type: string
+  type: SPDXLicense | 'custom',
+  url?: string,
 }
 
 // Product 描述專案成果
@@ -140,3 +141,120 @@ export type Dependency = {
 
 // 需求清單，最好和尚未決定的「通用 GitHub issue labels」通用，才有機會以 needs 列表找出重要的 issues 。
 export type Skill = 'designer' | 'writer' | 'programmer' | 'money'
+
+// https://spdx.org/licenses/
+export type SPDXLicense
+  = '0BSD'
+  | 'AAL'
+  | 'Abstyles'
+  | 'Adobe-2006'
+  | 'Adobe-Glyph'
+  | 'ADSL'
+  | 'AFL-1.1'
+  | 'AFL-1.2'
+  | 'AFL-2.0'
+  | 'AFL-2.1'
+  | 'AFL-3.0'
+  | 'Afmparse'
+  | 'AGPL-1.0'
+  | 'AGPL-3.0-only'
+  | 'AGPL-3.0-or-later'
+  | 'Aladdin'
+  | 'AMDPLPA'
+  | 'AML'
+  | 'AMPAS'
+  | 'ANTLR-PD'
+  | 'Apache-1.0'
+  | 'Apache-1.1'
+  | 'Apache-2.0'
+  | 'APAFML'
+  | 'APL-1.0'
+  | 'APSL-1.0'
+  | 'APSL-1.1'
+  | 'APSL-1.2'
+  | 'APSL-2.0'
+  | 'Artistic-1.0-cl8'
+  | 'Artistic-1.0-Perl'
+  | 'Artistic-1.0'
+  | 'Artistic-2.0'
+  | 'Bahyph'
+  | 'Barr'
+  | 'Beerware'
+  | 'BitTorrent-1.0'
+  | 'BitTorrent-1.1'
+  | 'Borceux'
+  | 'BSD-1-Clause'
+  | 'BSD-2-Clause-FreeBSD'
+  | 'BSD-2-Clause-NetBSD'
+  | 'BSD-2-Clause-Patent'
+  | 'BSD-2-Clause'
+  | 'BSD-3-Clause-Attribution'
+  | 'BSD-3-Clause-Clear'
+  | 'BSD-3-Clause-LBNL'
+  | 'BSD-3-Clause-No-Nuclear-License-2014'
+  | 'BSD-3-Clause-No-Nuclear-License'
+  | 'BSD-3-Clause-No-Nuclear-Warranty'
+  | 'BSD-3-Clause'
+  | 'BSD-4-Clause-UC'
+  | 'BSD-4-Clause'
+  | 'BSD-Protection'
+  | 'BSD-Source-Code'
+  | 'BSL-1.0'
+  | 'bzip2-1.0.5'
+  | 'bzip2-1.0.6'
+  | 'Caldera'
+  | 'CATOSL-1.1'
+  | 'CC-BY-1.0'
+  | 'CC-BY-2.0'
+  | 'CC-BY-2.5'
+  | 'CC-BY-3.0'
+  | 'CC-BY-4.0'
+  | 'CC-BY-NC-1.0'
+  | 'CC-BY-NC-2.0'
+  | 'CC-BY-NC-2.5'
+  | 'CC-BY-NC-3.0'
+  | 'CC-BY-NC-4.0'
+  | 'CC-BY-NC-ND-1.0'
+  | 'CC-BY-NC-ND-2.0'
+  | 'CC-BY-NC-ND-2.5'
+  | 'CC-BY-NC-ND-3.0'
+  | 'CC-BY-NC-ND-4.0'
+  | 'CC-BY-NC-SA-1.0'
+  | 'CC-BY-NC-SA-2.0'
+  | 'CC-BY-NC-SA-2.5'
+  | 'CC-BY-NC-SA-3.0'
+  | 'CC-BY-NC-SA-4.0'
+  | 'CC-BY-ND-1.0'
+  | 'CC-BY-ND-2.0'
+  | 'CC-BY-ND-2.5'
+  | 'CC-BY-ND-3.0'
+  | 'CC-BY-ND-4.0'
+  | 'CC-BY-SA-1.0'
+  | 'CC-BY-SA-2.0'
+  | 'CC-BY-SA-2.5'
+  | 'CC-BY-SA-3.0'
+  | 'CC-BY-SA-4.0'
+  | 'CC0-1.0'
+  | 'CDDL-1.0'
+  | 'CDDL-1.1'
+  | 'CDLA-Permissive-1.0'
+  | 'CDLA-Sharing-1.0'
+  | 'CECILL-1.0'
+  | 'CECILL-1.1'
+  | 'CECILL-2.0'
+  | 'CECILL-2.1'
+  | 'CECILL-B'
+  | 'CECILL-C'
+  | 'ClArtistic'
+  | 'CNRI-Jython'
+  | 'CNRI-Python-GPL-Compatible'
+  | 'CNRI-Python'
+  | 'Condor-1.1'
+  | 'CPAL-1.0'
+  | 'CPL-1.0'
+  | 'CPOL-1.02'
+  | 'Crossword'
+  | 'CrystalStacker'
+  | 'CUA-OPL-1.0'
+  | 'Cube'
+  | 'curl'
