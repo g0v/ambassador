@@ -17,3 +17,7 @@ It requires `LOGBOT_URL` and `DDAY` to fetch chat logs.
 ## indices
 
 `indicies.js` builds reverse indices from `data/logs/*.json` and save it to `data/logs/index.json`. 
+
+## listrepos
+
+`listrepos.js` create a repo list from the `repos.list` file. If one gives `(user or organization)/*` instead of a specific repo name, it will fetch all repos from GitHub using the access token from `DATABASE_URL`.

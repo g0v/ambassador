@@ -30,11 +30,8 @@ const fetchJsonFromList = (names) => {
 db.test(pool)
   // try to use the stored access token to access GitHub
   .then(now => db.config.get(pool, 'access token'))
-  .then(({ value }) => {
-    let token = value
-
+  .then(({ value: token }) => {
     console.log(token ? `The access token is ${token}` : 'Admin token not found')
-    if (!token) token = undefined
 
     const gh = new GitHub({ token })
     const org = gh.getOrganization('g0v')
