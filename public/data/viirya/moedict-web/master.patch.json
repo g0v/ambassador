@@ -1,0 +1,24 @@
+{
+  "g0v_json": "2.0",
+  "author": "viirya",
+  "status": "alpha",
+  "name": "MoeDict Web Client and REST API",
+  "name_zh": "萌典 Web Client 與 REST API (MoeDict Web Client and REST API)",
+  "description": "This is a simple web dictionary and REST API for http://3du.tw/.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viirya/moedict-web"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "keywords": [],
+  "audience": "public",
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [],
+  "dependencies": [{
+    "url": "https://github.com/g0v/moedict-webkit"
+  }],
+  "contributors": ["viirya"],
+  "needs": []
+}
