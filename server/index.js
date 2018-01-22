@@ -12,8 +12,6 @@ import axios from 'axios'
 import S from './session'
 // activities
 import A from './activity'
-// GitHub
-import GitHub from 'github-api'
 // utils
 import moment from 'moment'
 import qs from 'query-string'
@@ -24,6 +22,7 @@ import { DatabaseError, AdminError } from './error'
 // configs
 import paths from '../config/paths.js'
 import env from './env.js'
+import repos from '../data/repos.json'
 
 // database
 // Try to remove old `database.js` before requiring `database/index.js`.
@@ -73,12 +72,6 @@ const createHashtagsFromList = async (pool, names) => {
   return createHashtagsFromList(pool, rest)
 }
 
-const prepareRepoHashtags = async (pool, org) => {
-  const { data } = await org.getRepos()
-  const names = map(rs => rs.full_name, data)
-  return createHashtagsFromList(pool, names)
-}
-
 const connectionString = env.DATABASE_URL
 const pool = new Pool({ connectionString })
 // Azure instance sleeps after 5 mins, so we poke the database every 4.5 mins
@@ -96,13 +89,9 @@ db.test(pool)
     winston.verbose('Tables are ready')
     winston.verbose(token ? `The access token is ${token}` : 'Admin token not found')
 
-    const gh = new GitHub({ token })
-    // TODO: use env.GH_ORGANIZATION
-    const org = gh.getOrganization('g0v')
-
     winston.verbose('Prepare repo hashtags')
     // start them parallelly
-    const p0 = prepareRepoHashtags(pool, org)
+    const p0 = createHashtagsFromList(pool, repos)
     const p1 = createHashtagsFromList(pool, civicHashtags)
     await p0, await p1
 
