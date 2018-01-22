@@ -10,6 +10,7 @@ const SLASH = '/'
 const ANY = '*'
 
 const RepoList = P.createLanguage({
+  // TODO: comments
   Symbol: r => P.regexp(/[a-zA-Z0-9-._]+/),
   Slash: r => P.string(SLASH),
   Any: r => P.string(ANY),
@@ -52,7 +53,7 @@ rl.on('close', async () => {
   let repos = []
   for (const it of ast) {
     if (it.repo !== ANY) {
-      repos.push(it)
+      repos.push(`${it.user}/${it.repo}`)
       continue
     }
 
@@ -64,10 +65,10 @@ rl.on('close', async () => {
     }
 
     forEach(
-      (r => repos.push({ user: it.user, repo: r.name })),
+      (r => repos.push(`${it.user}/${r.name}`)),
       res.data
     )
   }
 
-  console.log(JSON.stringify(repos, null, 2))
+  console.log(JSON.stringify(repos))
 })
