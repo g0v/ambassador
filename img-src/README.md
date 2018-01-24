@@ -6,8 +6,8 @@ g0v 大使圖，原圖與討論可以在[此處][skill-system]找到。[口頭][
 [skill-system]: https://g0v.hackpad.tw/V7mVAWYkCuA
 [license]: https://logbot.g0v.tw/channel/g0v.tw/2017-07-15#26
 
-`robot-ambassador.afdesign` 由私有軟體 [Affinity Designer][affinity-designer] 製作。
-`robot-ambassador.svg` 是它的 SVG 匯出版本。以 CC0 授權釋出。
+`*.afdesign` 由私有軟體 [Affinity Designer][affinity-designer] 製作。
+對應的 `*.svg` 是它們的 SVG 匯出版本。以 CC0 授權釋出。
 
 [affinity-designer]: https://affinity.serif.com/
 
