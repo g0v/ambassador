@@ -1,0 +1,11 @@
+{
+  "g0v_json": "2.0",
+  "products": [{
+    "type": "website",
+    "name": "公有地大行動",
+    "url": "http://g0v.github.io/POPonFire/",
+    "source": "https://github.com/g0v/POPonFire"
+  }],
+  "group": "https://github.com/g0v/POPonFire",
+  "dependencies": []
+}
