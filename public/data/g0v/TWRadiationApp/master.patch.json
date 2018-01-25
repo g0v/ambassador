@@ -1,0 +1,11 @@
+{
+  "g0v_json": "2.0",
+  "group": "https://github.com/g0v/TWRadiationApp",
+  "licenses": [{ "type": "CC-BY-SA-3.0" }],
+  "products": [{
+    "type": "app",
+    "subtype": "ios",
+    "name": "台灣輻射地圖"
+  }],
+  "dependencies": []
+}
