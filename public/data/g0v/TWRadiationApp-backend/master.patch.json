@@ -1,0 +1,12 @@
+{
+  "g0v_json": "2.0",
+  "licenses": [{ "type": "LGPL-3.0-or-later" }],
+  "group": "https://github.com/g0v/TWRadiationApp",
+  "products": [{
+    "type": "dev",
+    "subtype": "api",
+    "name": "台灣輻射地圖APP backend",
+    "source": "https://github.com/g0v/TWRadiationApp-backend"
+  }],
+  "dependencies": []
+}

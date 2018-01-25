@@ -7,5 +7,7 @@
     "subtype": "ios",
     "name": "台灣輻射地圖"
   }],
-  "dependencies": []
+  "dependencies": [{
+    "url": "https://github.com/g0v/TWRadiationApp-backend"
+  }]
 }
