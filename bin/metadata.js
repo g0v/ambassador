@@ -1,48 +1,28 @@
 import fs from 'fs-extra'
 import path from 'path'
 import * as paths from './paths'
-
-import GitHub from 'github-api'
-import { Pool } from 'pg'
-import db from '../server/database'
-
+import repos from '../data/repos.json'
 import axios from 'axios'
-import { map, zipObj, zip, take } from 'ramda'
-import { getUrl } from '../src/types'
-
-const connectionString = process.env.DATABASE_URL
-const pool = new Pool({ connectionString })
-
-const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
+import { map, zip, take } from 'ramda'
 
 const fetchJsonFromList = (names) => {
   const [name, ...rest] = names
 
   if (name === undefined) return Promise.resolve([])
 
-  console.log(`Fetch #${name}`)
-  return axios.get(`${apiUrl}/api/github/${name}/g0v.json`)
+  console.log(`#${name}: fetching`)
+  return axios.get(`https://raw.githubusercontent.com/${name}/master/g0v.json`)
     .then(({ data }) => fetchJsonFromList(rest).then(jsons => [data, ...jsons]))
     .catch(error => fetchJsonFromList(rest).then(jsons => [null, ...jsons]))
 }
 
-// main
-db.test(pool)
-  // try to use the stored access token to access GitHub
-  .then(now => db.config.get(pool, 'access token'))
-  .then(({ value: token }) => {
-    console.log(token ? `The access token is ${token}` : 'Admin token not found')
+const pairWith = f => a => f(a).then(b => [a, b])
 
-    const gh = new GitHub({ token })
-    const org = gh.getOrganization('g0v')
-    return org.getRepos()
-      .then(res => res.data)
-      .then(map(rs => rs.full_name))
-      .then(take(10))
-      .then(names => fetchJsonFromList(names)
-        .then(jsons => zip(names, jsons))
-      )
-  })
+// main
+Promise.resolve(repos)
+  //.then(take(10))
+  .then(pairWith(fetchJsonFromList))
+  .then(([names, jsons]) => zip(names, jsons))
   .then(map(([name, json]) => {
     // 404 not found
     if (json === null) {
