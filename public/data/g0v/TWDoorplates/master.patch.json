@@ -1,0 +1,11 @@
+{
+  "g0v_json": "2.0",
+  "group": "https://github.com/g0v/TWDoorplates",
+  "products": [{
+    "type": "website",
+    "name": "台灣內政部戶政司地址查詢器",
+    "url": "http://ris.g0v.tw",
+    "source": "https://github.com/g0v/TWDoorplates"
+  }],
+  "dependencies": []
+}
