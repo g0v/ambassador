@@ -1,0 +1,21 @@
+{
+  "g0v_json": "2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:g0v/Logbot.git",
+    "licenses": ["MIT"]
+  },
+  "products": [{
+    "type": "website",
+    "name": "Logbot",
+    "url": "https://logbot.g0v.tw",
+    "source": "https://github.com/g0v/Logbot"
+  }, {
+    "type": "dev",
+    "subtype": "api",
+    "name": "Logbot API",
+    "url": "https://logbot.g0v.tw/channel/g0v.tw/today/json",
+    "source": "https://github.com/g0v/Logbot"
+  }],
+  "group": "https://github.com/g0v/Logbot"
+}
