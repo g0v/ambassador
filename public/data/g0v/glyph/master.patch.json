@@ -1,0 +1,19 @@
+{
+  "g0v_json": "v2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/glyph"
+  },
+  "contributors": [
+    "shulusama",
+    "c9s"
+  ],
+  "group": "https://github.com/g0v/glyph",
+  "products": [{
+    "type": "website",
+    "name": "g0v 符號",
+    "url": "https://g0v.github.com/glyph",
+    "source": "https://github.com/g0v/glyph"
+  }],
+  "dependencies": []
+}
