@@ -1,0 +1,17 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/g0v.tw",
+  "contributors": [
+    "Claire"
+  ],
+  "products": [{
+    "type": "website",
+    "name": "g0v.tw",
+    "url": "http://g0v.tw",
+    "source": "https://github.com/g0v/g0v.tw"
+  }],
+  "dependencies": [],
+  "needs": [
+    "txt"
+  ]
+}
