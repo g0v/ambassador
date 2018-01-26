@@ -1,14 +1,18 @@
 /* @flow */
 
 // g0v.json 2.0
-//   * old spec: https://g0v.hackpad.tw/g0v.json-spec-c07sSfauWSc
+//   * old spec:
+//     * https://g0v.hackpad.tw/g0v.json-spec-c07sSfauWSc
+//     * https://github.com/g0v/g0v.json
 // 這個版本新增了 `group` 和 `dependencies` 欄位，移除了 `projects` 欄位。
 // 詳情請見 `Product` 和 `Dependency` types 。
 export type Project = {
-  // g0v.json 版本，省略時視為 1.0 版
-  g0v_json?: '2.0',
+  // g0v.json 版本，省略時視為 v1 版
+  g0v_json?: 'v1' | 'v2',
   // 主要作者
   author: string,
+  // 作者群，少用
+  authors: string[],
   // 專案狀況
   status: ProjectStatus,
   // 英文名, 一般為簡短的代號 (不含 .#$[] 等符號)
@@ -67,7 +71,7 @@ export type ProjectStatus
 
 export type RepoType = 'git' | 'hg' | 'svn' | 'cvs' | 'svk'
 
-export type Audience = 'contributor' | 'public'
+export type Audience = 'contributor' | 'public' | 'developer'
 
 export type License = {
   // TODO: should be one of the SPDX listed licenses: https://spdx.org/licenses/
