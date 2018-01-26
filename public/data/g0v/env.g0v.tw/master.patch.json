@@ -1,0 +1,19 @@
+{
+  "g0v_json": "v2",
+  "status": "alpha",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "env.g0v.tw",
+    "url": "http://env.g0v.tw",
+    "source": "https://github.com/g0v/env.g0v.tw"
+  }, {
+    "type": "dev",
+    "subtype": "data",
+    "name": "env.g0v.tw data"
+  }],
+  "dependencies": []
+}
