@@ -1,0 +1,11 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/i64885",
+  "products": [{
+    "type": "website",
+    "name": "i64885 公益律師呼叫平台",
+    "url": "http://i64885.tw",
+    "source": "https://github.com/g0v/i64885"
+  }],
+  "dependencies": []
+}
