@@ -1,0 +1,18 @@
+{
+  "g0v_json": "2.0",
+  "licenses": [{ "type": "CC0-1.0" }],
+  "group": "https://github.com/g0v/councilor-voter-guide",
+  "products": [{
+    "type": "website",
+    "name": "議員投票指南",
+    "url": "http://councils.g0v.tw",
+    "source": "https://github.com/g0v/councilor-voter-guide"
+  }, {
+    "type": "dev",
+    "subtype": "api",
+    "name": "議員投票指南 API",
+    "url": "https://councils.g0v.tw/api",
+    "source": "https://github.com/g0v/councilor-voter-guide"
+  }],
+  "dependencies": []
+}
