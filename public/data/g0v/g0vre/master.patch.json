@@ -1,0 +1,15 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/g0vre",
+  "products": [{
+    "type": "dev",
+    "subtype": "api",
+    "name": "g0vre API",
+    "url": "https://g0vre.herokuapp.com",
+    "source": "https://github.com/g0v/g0vre"
+  }],
+  "dependencies": []
+}
