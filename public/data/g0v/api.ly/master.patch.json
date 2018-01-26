@@ -1,0 +1,12 @@
+{
+  "g0v_json": "2,0",
+  "group": "https://github.com/g0v/ly.g0v.tw",
+  "products": [{
+    "type": "dev",
+    "subtype": "api",
+    "name": "g0v 立法院資料 API",
+    "url": "http://api.ly.g0v.tw",
+    "source": "https://github.com/g0v/api.ly"
+  }],
+  "dependencies": []
+}
