@@ -144,7 +144,7 @@ export type Dependency = {
 }
 
 // 需求清單，最好和尚未決定的「通用 GitHub issue labels」通用，才有機會以 needs 列表找出重要的 issues 。
-export type Skill = 'designer' | 'writer' | 'programmer' | 'money'
+export type Skill = 'designer' | 'writer' | 'programmer' | 'money' | 'txt'
 
 export type SPDXLicense
   // https://spdx.org/licenses/
