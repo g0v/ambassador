@@ -1,0 +1,12 @@
+{
+  "g0v_json": "2.0",
+  "licenses": [{ "type": "MIT" }],
+  "group": "https://github.com/g0v/congress-vote-analytics",
+  "products": [{
+    "type": "website",
+    "name": "選票成份分析",
+    "url": "http://va.twbbs.org",
+    "source": "https://github.com/g0v/congress-vote-analytics-beta"
+  }],
+  "dependencies": []
+}
