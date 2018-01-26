@@ -1,0 +1,25 @@
+{
+  "g0v_json": "2.0",
+  "status": "beta",
+  "name": "g0v.json editor",
+  "description": "g0v.json editor for every g0v project",
+  "description_zh": "線上 JSON Editor，可透過 GET 參數預先填入初始值。Github 登入後可自動發 Fork + create Pull Request",
+  "homepage": "https://g0v.github.io/editor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/editor"
+  },
+  "licenses": [],
+  "keywords": ["g0v.json", "metadata"],
+  "audience": ["contributor"],
+  "group": "https://github.com/g0v/g0v.json",
+  "products": [{
+    "type": "website",
+    "name": "g0v.json editor",
+    "url": "https://g0v.github.io/editor",
+    "source": "https://github.com/g0v/editor"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/g0v.json"
+  }]
+}
