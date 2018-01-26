@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/g0v.json"
+  },
+  "contributors": [
+    "shelling",
+    "zbryikt",
+    "ronnywang"
+  ],
+  "group": "https://github.com/g0v/g0v.json",
+  "dependencies": []
+}
