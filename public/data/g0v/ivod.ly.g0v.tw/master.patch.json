@@ -1,0 +1,11 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/ly.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "立院影城",
+    "url": "http://ivod.ly.g0v.tw",
+    "source": "https://github.com/g0v/ivod.ly.g0v.tw"
+  }],
+  "dependencies": []
+}
