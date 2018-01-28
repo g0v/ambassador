@@ -1,0 +1,20 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "group": "https://github.com/g0v/hack.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "Issues Aggregator",
+    "url": "http://g0vissues.jmehsieh.com",
+    "source": "https://github.com/g0v/issue_aggregator"
+  }, {
+    "type": "dev",
+    "subtype": "api",
+    "name": "Issues Aggregator API",
+    "url": "http://g0vissues.jmehsieh.com/api",
+    "source": "https://github.com/g0v/issue_aggregator"
+  }],
+  "dependencies": []
+}
