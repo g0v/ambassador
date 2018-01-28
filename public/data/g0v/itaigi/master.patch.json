@@ -1,0 +1,16 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/itaigi",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "proudcts": [{
+    "type": "website",
+    "name": "新台語運動 iTaiGi",
+    "url": "https://itaigi.tw/",
+    "source": "https://github.com/g0v/itaigi"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/sih4sing5hong5/tai5-uan5_gian5-gi2_phing5-tai5"
+  }]
+}
