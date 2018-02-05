@@ -1,0 +1,25 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/laweasyread",
+  "products": [{
+    "type": "website",
+    "name": "法規亦毒氣",
+    "url": "http://g0v.github.io/laweasyread-front/",
+    "source": "https://github.com/g0v/laweasyread-front"
+  }, {
+    "type": "extension",
+    "subtype": "chrome",
+    "name": "法規亦毒氣 Chrome 擴充套件",
+    "url": "https://chrome.google.com/webstore/detail/法規亦毒氣/iedodmlnmhobigohbkalkkjlbmdkjalj?hl=zh-TW",
+    "source": "https://github.com/g0v/laweasyread-front"
+  }, {
+    "type": "extension",
+    "subtype": "firefox",
+    "name": "法規亦毒氣 Firefox 擴充套件",
+    "url": "https://addons.mozilla.org/zh-TW/firefox/addon/laweasyread/",
+    "source": "https://github.com/g0v/laweasyread-front"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/laweasyread"
+  }]
+}

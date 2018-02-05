@@ -1,0 +1,31 @@
+{
+  "g0v_json": "v2",
+  "author": "czchen",
+  "status": "alpha",
+  "name": "lawEasyRead Data",
+  "description": "Data for Taiwan Law",
+  "description_zh": "台灣法規的資料",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/laweasyread-data"
+  },
+  "licenses": {
+    "type": "MIT"
+  },
+  "keywords": [
+    "law"
+  ],
+  "audience": [
+    "developer"
+  ],
+  "group": "https://github.com/g0v/laweasyread-data",
+  "products": [],
+  "dependencies": [{
+    "url": "https://github.com/g0v/twlaw"
+  }],
+  "contributors": [
+    "rschiang",
+    "kcliu"
+  ],
+  "needs": []
+}

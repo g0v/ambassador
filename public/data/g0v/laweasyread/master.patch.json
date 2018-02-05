@@ -1,0 +1,13 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/laweasyread",
+  "products": [{
+    "type": "dev",
+    "subtype": "api",
+    "name": "法規亦毒氣 API",
+    "url": "http://laweasyread.herokuapp.com/"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/laweasyread-data"
+  }]
+}
