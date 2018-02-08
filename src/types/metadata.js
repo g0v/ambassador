@@ -68,6 +68,7 @@ export type ProjectStatus
   | 'stable'
   | 'mature'
   | 'inactive'
+  | 'magic'
 
 export type RepoType = 'git' | 'hg' | 'svn' | 'cvs' | 'svk'
 

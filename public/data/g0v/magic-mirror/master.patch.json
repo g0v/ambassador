@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/magic-mirror",
+  "products": [{
+    "type": "website",
+    "name": "g0v-data mirror",
+    "url": "http://g0v-data-mirror.gugod.org/",
+    "source": "https://github.com/g0v/magic-mirror"
+  }],
+  "dependencies": []
+}

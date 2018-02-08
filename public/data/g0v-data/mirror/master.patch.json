@@ -1,0 +1,28 @@
+{
+  "g0v_json": "v2",
+  "author": "gugod",
+  "status": "magic",
+  "name": "mirror",
+  "description": "local mirror of *.gov.tw data.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v-data/mirror"
+  },
+  "audience": [
+    "developer"
+  ],
+  "group": "https://github.com/g0v/magic-mirror",
+  "products": [{
+    "type": "dev",
+    "subtype": "data",
+    "name": "mirror",
+    "url": "https://github.com/g0v-data/mirror"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v-data/mirror"
+  }],
+  "contributors": [
+    "yashikno"
+  ],
+  "needs": []
+}
