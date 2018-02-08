@@ -1,0 +1,16 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "group": "https://github.com/g0v/ly.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "國會大代誌",
+    "url": "http://ly.g0v.tw",
+    "source": "https://github.com/g0v/ly.g0v.tw"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/api.ly"
+  }]
+}
