@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "Apache-2.0"
+  }],
+  "group": "https://github.com/g0v/ly.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "話筒式的公共參與",
+    "url": "https://billy3321.github.io/lytel/",
+    "source": "https://github.com/g0v/ly-tel"
+  }],
+  "dependencies": []
+}
