@@ -1,0 +1,31 @@
+{
+  "g0v_json": "v2",
+  "status": "alpha",
+  "name": "g0v submit",
+  "name_zh": "揪松團電子報投稿平台",
+  "description_zh": "揪松團電子報投稿平台",
+  "homepage": "http://submit.g0v.tw/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/submit"
+  },
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "keywords": [],
+  "audience": [
+    "contributor"
+  ],
+  "group": "https://github.com/g0v/jothon-net",
+  "products": [{
+    "type": "website",
+    "name": "自己的稿自己投",
+    "url": "http://submit.g0v.tw/",
+    "source": "https://github.com/g0v/submit"
+  }],
+  "dependencies": [],
+  "contributors": [
+    "shelling"
+  ],
+  "needs": []
+}
