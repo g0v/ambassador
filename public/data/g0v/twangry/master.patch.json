@@ -1,0 +1,17 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/twangry",
+  "products": [{
+    "type": "website",
+    "name": "政誌",
+    "url": "http://fact.g0v.tw/",
+    "source": "https://github.com/g0v/twangry"
+  }, {
+    "type": "dev",
+    "subtype": "api",
+    "name": "政誌 API",
+    "url": "http://fact.g0v.tw/index.json",
+    "source": "https://github.com/g0v/twangry"
+  }],
+  "dependencies": []
+}
