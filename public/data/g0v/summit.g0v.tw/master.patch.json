@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC-BY-4.0"
+  }],
+  "group": "https://github.com/g0v/summit.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "啥咪零時政府官網",
+    "url": "http://summit.g0v.tw/",
+    "source": "https://github.com/g0v/summit.g0v.tw"
+  }],
+  "dependencies": []
+}
