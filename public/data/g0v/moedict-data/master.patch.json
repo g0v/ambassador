@@ -1,0 +1,16 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [{
+    "type": "dev",
+    "subtype": "data",
+    "name": "教育部重編國語辭典 資料檔",
+    "url": "https://github.com/g0v/moedict-data"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/moedict-process"
+  }]
+}
