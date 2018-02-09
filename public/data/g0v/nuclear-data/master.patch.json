@@ -1,0 +1,11 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC-BY-SA-4.0"
+  }],
+  "group": "https://github.com/g0v/nuclear-data",
+  "products": [],
+  "dependencies": [{
+    "url": "https://github.com/g0v-data/mirror"
+  }]
+}
