@@ -1,0 +1,13 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/sunflower",
+  "products": [{
+    "type": "website",
+    "name": "Sunflower",
+    "url": "http://g0v.github.io/sunflower/",
+    "source": "https://github.com/g0v/sunflower"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/SunflowerDocumentaryAPI"
+  }]
+}
