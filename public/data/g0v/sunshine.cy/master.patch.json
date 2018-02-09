@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/sunshine.cy",
+  "products": [{
+    "type": "website",
+    "name": "金錢報",
+    "url": "http://sunshine.cy.g0v.tw/",
+    "source": "https://github.com/g0v/sunshine.cy"
+  }],
+  "dependencies": []
+}
