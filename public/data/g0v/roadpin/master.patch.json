@@ -1,0 +1,15 @@
+{
+  "g0v_json": "v2",
+  "name": "RoadPin",
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "group": "https://github.com/g0v/roadpin",
+  "products": [{
+    "type": "website",
+    "name": "RoadPin",
+    "url": "http://106.187.101.193",
+    "source": "https://github.com/g0v/roadpin"
+  }],
+  "dependencies": []
+}
