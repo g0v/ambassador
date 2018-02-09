@@ -1,0 +1,11 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/moer.g0v.tw",
+  "products": [{
+    "type": "website",
+    "name": "Environmen Dashboard",
+    "url": "http://moer.g0v.tw",
+    "source": "https://github.com/g0v/moer.g0v.tw"
+  }],
+  "dependencies": []
+}
