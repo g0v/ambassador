@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC-BY-4.0"
+  }],
+  "group": "https://github.com/g0v/twstat",
+  "products": [{
+    "type": "website",
+    "name": "twstat",
+    "url": "http://g0v.github.io/twstat/",
+    "source": "https://github.com/g0v/twstat"
+  }],
+  "dependencies": []
+}
