@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "BSD-3-Clause"
+  }],
+  "group": "https://github.com/ronnywang/taiwan-cabinet",
+  "products": [{
+    "type": "website",
+    "name": "台灣內閣變化",
+    "url": "https://ronnywang.github.io/taiwan-cabinet/",
+    "source": "https://github.com/ronnywang/taiwan-cabinet"
+  }],
+  "dependencies": []
+}
