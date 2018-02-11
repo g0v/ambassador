@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "BSD-3-Clause"
+  }],
+  "group": "https://github.com/ronnywang/lagnews",
+  "products": [{
+    "type": "website",
+    "name": "歷史四大報",
+    "url": "http://oldpaper.g0v.ronny.tw/",
+    "source": "https://github.com/ronnywang/lagnews"
+  }],
+  "dependencies": []
+}
