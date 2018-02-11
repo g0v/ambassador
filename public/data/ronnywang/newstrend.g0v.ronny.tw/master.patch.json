@@ -1,0 +1,16 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "MIT"
+  }],
+  "group": "https://github.com/ronnywang/newsdiff",
+  "products": [{
+    "type": "website",
+    "name": "新聞趨勢統計",
+    "url": "http://newstrend.g0v.ronny.tw/",
+    "source": "https://github.com/ronnywang/newstrend.g0v.ronny.tw"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/ronnywang/newsdiff"
+  }]
+}
