@@ -1,0 +1,14 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "BSD-3-Clause"
+  }],
+  "group": "https://github.com/ronnywang/newsdiff",
+  "products": [{
+    "type": "website",
+    "name": "NewsDiff",
+    "url": "http://newsdiff.g0v.ronny.tw/",
+    "source": "https://github.com/ronnywang/newsdiff"
+  }],
+  "dependencies": []
+}
