@@ -1,0 +1,17 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [{
+    "type": "dev",
+    "subtype": "data",
+    "name": "常用國字標準字體筆劃資料檔",
+    "url": "https://github.com/g0v/zh-stroke-data",
+    "source": "https://github.com/g0v/zh-stroke-data"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/c9s/zh-stroke-data"
+  }]
+}
