@@ -1,0 +1,11 @@
+{
+  "g0v_json": "v2",
+  "group": "https://github.com/g0v/urbancode-commission",
+  "products": [{
+    "type": "website",
+    "name": "都市計畫委員會資料庫",
+    "url": "http://commission.urbancode.tw/",
+    "source": "https://github.com/g0v/urbancode-commission"
+  }],
+  "dependencies": []
+}
