@@ -46,8 +46,13 @@ rl.on('close', async () => {
   const input = lines.join(' ')
   const ast = RepoList.List.tryParse(input)
 
-  const { value: token } =
-    await db.test(pool).then(_ => db.config.get(pool, 'access token'))
+  let token
+  try {
+    const pair = await db.test(pool).then(_ => db.config.get(pool, 'access token'))
+    token = pair.value
+  } catch (err) {
+    console.error(err)
+  }
   const gh = new GitHub({ token })
 
   let repos = []
