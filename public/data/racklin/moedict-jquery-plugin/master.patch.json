@@ -1,0 +1,22 @@
+{
+  "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
+  "group": "https://github.com/g0v/moedict-webkit",
+  "products": [{
+    "type": "website",
+    "name": "moedict-jquery-plugin test",
+    "url": "http://racklin.github.io/moedict-jquery-plugin/",
+    "source": "https://github.com/racklin/moedict-jquery-plugin"
+  }, {
+    "type": "dev",
+    "subtype": "library",
+    "name": "moedict for jquery plugin",
+    "url": "http://racklin.github.io/moedict-jquery-plugin/jquery.moedict.min.js",
+    "source": "https://github.com/racklin/moedict-jquery-plugin"
+  }],
+  "dependencies": [{
+    "url": "https://github.com/g0v/moedict-webkit"
+  }]
+}
