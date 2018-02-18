@@ -1,0 +1,42 @@
+{
+  "author": "",
+  "status": "planning",
+  "name": "Looknuke Map Web",
+  "description": "Looknuke Map Web",
+  "description_zh": "輻射地圖網頁版",
+  "homepage": "https://g0v.hackpad.com/91ZImrFjGvx",
+  "document": "https://g0v.hackpad.com/91ZImrFjGvx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shihta/Ushahidi_Web.git"
+  },
+  "licenses": [
+    {
+      "type": "CC:BY-SA"
+    }
+  ],
+  "keywords": [
+    "Nuke",
+    "Map"
+  ],
+  "audience": [
+    "contributor"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [],
+  "contributors": [
+    "Angela 怡",
+    "Celine Liang",
+    "Charles 呂",
+    "Chih Wei",
+    "Jimi Chen",
+    "Kent Huang",
+    "Shihta"
+  ],
+  "needs": [
+    "designer",
+    "programmer"
+  ]
+}

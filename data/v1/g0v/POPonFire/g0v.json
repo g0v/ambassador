@@ -1,0 +1,42 @@
+{
+  "author": "dz1984",
+  "status": "pre-alpha",
+  "name": "POPonFire",
+  "name_zh": "公有地大行動",
+  "description": "To know all POP is our power.",
+  "description_zh": "公有土地資料公開，全民監督守護！",
+  "homepage": "http://poponfire.herokuapp.com",
+  "document": "http://hackfoldr.org/POPonFire",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/POPonFire"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    },
+    {
+      "type": "CC0"
+    }
+  ],
+  "keywords": [
+    "公有地"
+  ],
+  "audience": [
+    "contributor"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [],
+  "contributors": [
+    "Hoskiss",
+    "pm5",
+    "ronnywang"
+  ],
+  "needs": [
+    "programmer",
+    "designer",
+    "writer"
+  ]
+}

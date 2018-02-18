@@ -99,10 +99,10 @@ const groupCleanup = () => {
 
 // main
 ;(async () => {
-  const users = await fs.readdir(paths.metadata)
+  const users = await fs.readdir(paths.v1)
 
   for (const user of users) {
-    const repopath = path.resolve(paths.metadata, user)
+    const repopath = path.resolve(paths.v1, user)
     const stats = await fs.stat(repopath)
     if (!stats.isDirectory()) continue
     const repos = await fs.readdir(repopath)
@@ -126,13 +126,13 @@ const groupCleanup = () => {
       } else {
         console.log(`${user}/${repo}: x`)
         const errorpath = path.resolve(repopath, repo, 'errors.json')
-        await fs.writeJson(errorpath, validator.v1.errors, { spaces: 2 })
+        await fs.outputJson(errorpath, validator.v1.errors, { spaces: 2 })
       }
 
       ++result.v1.total
 
       // v2
-      filepath = path.resolve(paths.publicData, user, repo, 'master.patch.json')
+      filepath = path.resolve(paths.patch, user, repo, 'master.patch.json')
       try {
         const patch = await fs.readJson(filepath)
         data = { ...data, ...patch }
@@ -154,12 +154,12 @@ const groupCleanup = () => {
   console.log('')
 
   let filepath
-  filepath = path.resolve(paths.metadata, 'group.v1.json')
-  await fs.writeJson(filepath, result.v1.group, { spaces: 2 })
+  filepath = path.resolve(paths.group, 'v1.json')
+  await fs.outputJson(filepath, result.v1.group, { spaces: 2 })
   console.log(`${result.v1.valid}/${result.v1.total} v1 g0v.json are valid`)
 
-  filepath = path.resolve(paths.metadata, 'group.v2.json')
-  await fs.writeJson(filepath, result.v2.group, { spaces: 2 })
+  filepath = path.resolve(paths.group, 'v2.json')
+  await fs.outputJson(filepath, result.v2.group, { spaces: 2 })
   console.log(`${result.v2.valid}/${result.v2.total} v2 g0v.json are valid`)
 })()
   .catch(err => {

@@ -1,0 +1,36 @@
+{
+  "author": "理查(monaludao)",
+  "status": "in progress",
+  "name": "urbancode-commission",
+  "name_zh": "開放都市-委員會會議記錄資料庫",
+  "description": "Data-lisation of urban plan commission notes. To search, share and enhance transparency.",
+  "description_zh": "將都市計畫委員會會議紀錄資料庫化，提供檢索跟分享功能，讓資訊更透明",
+  "homepage": "https://github.com/g0v/urbancode-commission",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/urbancode-commission"
+  },
+  "keywords": [
+    "urban plan",
+    "commission notes",
+    "text datalisation"
+  ],
+  "audience": [
+    "public",
+    "spatial-oriented professions"
+  ],
+  "products": [
+    "https://commission.urbancode.tw"
+  ],
+  "projects": [
+    "開放都市計畫"
+  ],
+  "contributors": [
+    "理查(monaludao)",
+    "catding"
+  ],
+  "needs": [
+    "data structure",
+    "front-end progammer"
+  ]
+}

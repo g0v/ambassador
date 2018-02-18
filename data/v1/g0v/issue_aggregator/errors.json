@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "type",
+    "dataPath": ".repository",
+    "schemaPath": "#/properties/repository/type",
+    "params": {
+      "type": "object"
+    },
+    "message": "should be object"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "status": "alpha",
+  "name": "moer.g0v.tw",
+  "name_zh": "環境儀表板",
+  "description": "Visualize environmental information about Taiwan.",
+  "description_zh": "環境資訊視覺化",
+  "document": "",
+  "homepage": "http://moer.g0v.tw/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/moer.g0v.tw"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "javascript",
+    "angularjs",
+    "d3js",
+    "bootstrap",
+    "data visualization"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "environment"
+  ],
+  "needs": [
+    "designer",
+    "programmer"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "repo": "g0v/twangry",
+  "author": "jimmyhuang",
+  "contributors": [
+    "pm5",
+    "chilijung",
+    "onlinemad",
+    "FumiMiyabe",
+    "JimCCC",
+    "WeitingTseng"
+  ],
+  "status": "beta",
+  "name": "twangry",
+  "name_zh": "政誌",
+  "description": "The fact of politics event made in Taiwan.",
+  "description_zh": "一眼看出，我們的政府做(錯)過什麼事情",
+  "homepage": "http://fact.g0v.tw/",
+  "document": "https://g0v.hackpad.com/nGRHg4knibC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/twangry"
+  },
+  "licenses": [
+    {
+      "type": "WTFPL"
+    }
+  ],
+  "keywords": [
+    "javascript",
+    "timelinejs"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "truth"
+  ],
+  "thumbnail": "http://fact.g0v.tw/screenshot.png",
+  "scripts": {
+    "prepublish": "node tools/prepublish"
+  },
+  "needs": [
+    "designer",
+    "wikipedia writer",
+    "writer"
+  ]
+}

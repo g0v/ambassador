@@ -1,0 +1,38 @@
+{
+  "author": "thewayiam",
+  "status": "alpha",
+  "name": "sunshine.cy",
+  "description": "sunshine cy",
+  "description_zh": "金錢報-公職人員財產申報",
+  "homepage": "http://sunshine.cy.g0v.tw/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/sunshine.cy"
+  },
+  "licenses": [
+    {
+      "type": "CC0 1.0 Universal"
+    }
+  ],
+  "keywords": [
+    "cy",
+    "sunshine",
+    "公職人員財產申報"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website",
+    "api"
+  ],
+  "projects": [],
+  "contributors": [
+    "thewayiam"
+  ],
+  "needs": [
+    "writer",
+    "programmer",
+    "designer"
+  ]
+}

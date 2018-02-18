@@ -1,0 +1,42 @@
+{
+  "repo": "JmeHsieh/issue_aggregator",
+  "author": "JmeHsieh",
+  "status": "Beta",
+  "name": "Issue Aggregator",
+  "name_zh": "Issue 搜集器",
+  "description": "Search g0v repo issues by language & labels",
+  "homepage": "http://g0vissues.jmehsieh.com/",
+  "thumbnail": "",
+  "document": "",
+  "repository": "https://github.com/JmeHsieh/issue_aggregator",
+  "licenses": [
+    "MIT"
+  ],
+  "keywords": [
+    "g0v",
+    "issue",
+    "label",
+    "language",
+    "search",
+    "人",
+    "坑",
+    "介面",
+    "基礎",
+    "infras"
+  ],
+  "audience": [
+    ""
+  ],
+  "products": [
+    ""
+  ],
+  "partOf": "",
+  "contributors": [
+    "gaga978",
+    "kcliu",
+    "roth1002"
+  ],
+  "needs": [
+    ""
+  ]
+}

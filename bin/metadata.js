@@ -38,7 +38,7 @@ Promise.resolve(repos)
     }
 
     console.log(`#${name}: OK`)
-    const filepath = path.resolve(paths.metadata, name, 'g0v.json')
+    const filepath = path.resolve(paths.v1, name, 'g0v.json')
     return fs.outputJson(filepath, json, { spaces: 2 })
   }))
   .catch(error => console.error(error))

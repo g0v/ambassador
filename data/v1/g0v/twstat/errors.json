@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "required",
+    "dataPath": "",
+    "schemaPath": "#/required",
+    "params": {
+      "missingProperty": "author"
+    },
+    "message": "should have required property 'author'"
+  }
+]

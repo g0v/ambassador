@@ -1,0 +1,37 @@
+{
+  "author": "kewang",
+  "status": "alpha",
+  "name": "Typo Resolver",
+  "description": "Help you to feedback some typo in web page",
+  "description_zh": "協助你回報在網頁上的錯字",
+  "homepage": "https://chrome.google.com/webstore/detail/typo-resolver/kpmhpplainkjokabdbjkfdkohacblnlo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/typo-resolver"
+  },
+  "licenses": [
+    {
+      "type": "CC0"
+    }
+  ],
+  "keywords": [
+    "chrome extension",
+    "javascript",
+    "jquery"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "extension"
+  ],
+  "projects": [
+    "Typo Resolver"
+  ],
+  "contributors": [],
+  "needs": [
+    "designer",
+    "writer",
+    "tech"
+  ]
+}

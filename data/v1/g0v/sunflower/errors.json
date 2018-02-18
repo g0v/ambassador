@@ -1,0 +1,34 @@
+[
+  {
+    "keyword": "enum",
+    "dataPath": ".status",
+    "schemaPath": "#/properties/status/enum",
+    "params": {
+      "allowedValues": [
+        "Planning",
+        "planning",
+        "Pre-alpha",
+        "pre-alpha",
+        "Alpha",
+        "alpha",
+        "Beta",
+        "beta",
+        "Production",
+        "production",
+        "Released",
+        "released",
+        "Archived",
+        "archived",
+        "Stable",
+        "stable",
+        "Mature",
+        "mature",
+        "Inactive",
+        "inactive",
+        "Magic",
+        "magic"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  }
+]

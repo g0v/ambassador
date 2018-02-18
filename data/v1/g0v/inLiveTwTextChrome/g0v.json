@@ -1,0 +1,38 @@
+{
+  "author": "miaoski",
+  "contributors": [
+    "白凜希"
+  ],
+  "status": "alpha",
+  "name": "inLiveTwTextChrome",
+  "name_zh": "Chromecast用的inLiveTW",
+  "description": "Play inLiveTW on Chromecast from Chrome browser extension.",
+  "description_zh": "透過 Chrome 瀏覽器的 Google Cast 擴充套件，在 ChromeCast 上播放 InLiveTw 的事件、報導、直播。",
+  "homepage": "http://miaoski.idv.tw/inLiveTw-ChromeCast/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miaoski/inLiveTwTextChrome"
+  },
+  "licenses": [
+    {
+      "type": "Apache2"
+    }
+  ],
+  "keywords": [
+    "inlivetw"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "inLiveTw"
+  ],
+  "thumbnail": "https://avatars0.githubusercontent.com/u/7513555?s=200",
+  "needs": [
+    "designer",
+    "programmer"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "author": "poga",
+  "contributors": [
+    "a",
+    "b",
+    "c"
+  ],
+  "status": "alpha",
+  "name": "datasmith",
+  "name_zh": "datasmith",
+  "description": "test",
+  "description_zh": "test",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/datasmith"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "i64885"
+  ]
+}

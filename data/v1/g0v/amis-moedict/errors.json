@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "type",
+    "dataPath": ".thumbnail",
+    "schemaPath": "#/properties/thumbnail/type",
+    "params": {
+      "type": "string"
+    },
+    "message": "should be string"
+  }
+]

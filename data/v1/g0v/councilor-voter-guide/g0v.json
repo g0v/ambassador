@@ -1,0 +1,55 @@
+{
+  "author": "thewayiam",
+  "status": "alpha",
+  "name": "councilor-voter-guide",
+  "description": "Taiwan Councilorss Voting Guide",
+  "description_zh": "議員投票指南",
+  "homepage": "http://councils.g0v.tw/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/councilor-voter-guide"
+  },
+  "licenses": [
+    {
+      "type": "CC0 1.0 Universal"
+    }
+  ],
+  "keywords": [
+    "councilor",
+    "議員",
+    "投票指南"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "website",
+    "api"
+  ],
+  "projects": [],
+  "contributors": [
+    "thewayiam",
+    "c3h3",
+    "x4base",
+    "ipaaa",
+    "theacat",
+    "Swind",
+    "chhsiao1981",
+    "daikeren",
+    "y12studio",
+    "s890081tonyhsu",
+    "seadog007",
+    "walkingice",
+    "pcchou",
+    "rz12345",
+    "Kinvil",
+    "asika",
+    "AlcHawk",
+    "slashtu"
+  ],
+  "needs": [
+    "writer",
+    "programmer",
+    "designer"
+  ]
+}

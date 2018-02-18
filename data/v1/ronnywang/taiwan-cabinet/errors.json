@@ -1,0 +1,15 @@
+[
+  {
+    "keyword": "enum",
+    "dataPath": ".audience[0]",
+    "schemaPath": "#/properties/audience/items/enum",
+    "params": {
+      "allowedValues": [
+        "contributor",
+        "public",
+        "developer"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  }
+]

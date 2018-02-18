@@ -1,0 +1,44 @@
+{
+  "author": "dannvix",
+  "status": "stable",
+  "name": "Logbot",
+  "name_zh": "Logbot",
+  "description": "Simple IRC logger with realtime web-based viewer",
+  "description_zh": "會即時更新的簡易 IRC 記錄",
+  "homepage": "http://logbot.g0v.tw/",
+  "thumbnail": "https://raw.github.com/g0v/Logbot/master/screenshot-1.png",
+  "repository": "git@github.com:g0v/Logbot.git",
+  "license": "MIT",
+  "keywords": [
+    "irc",
+    "logger",
+    "ruby",
+    "rails"
+  ],
+  "audience": "public",
+  "products": [
+    "website",
+    "api"
+  ],
+  "project": "Logbot",
+  "contributors": [
+    "godfat",
+    "zhusee2",
+    "audreyt",
+    "caasi",
+    "mmis1000",
+    "wildjcrt",
+    "zbryikt",
+    "ifTNT",
+    "itszero",
+    "darbychang",
+    "poga",
+    "miaout17",
+    "yhsiang",
+    "MnO2"
+  ],
+  "needs": [
+    "designer",
+    "programmer"
+  ]
+}

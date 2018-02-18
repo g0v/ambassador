@@ -1,0 +1,52 @@
+{
+  "author": [
+    "Charles Lu",
+    "Kent Huang"
+  ],
+  "status": "pre-alpha",
+  "name": "Looknuke-Map-iOS",
+  "name_zh": "台灣輻射地圖iOS",
+  "description": "Taiwan Looknuke Map iOS Client",
+  "description_zh": "民間版輻射偵測地圖 iOS App",
+  "homepage": "https://g0v.hackpad.com/91ZImrFjGvx",
+  "document": "https://g0v.hackpad.com/91ZImrFjGvx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/TWRadiationApp/"
+  },
+  "licenses": [
+    {
+      "type": "CC:BY-SA"
+    }
+  ],
+  "keywords": [
+    "Taiwan",
+    "nuke",
+    "map",
+    "radiation",
+    "report",
+    "iOS"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "iOS App"
+  ],
+  "projects": [
+    "Looknuke Map"
+  ],
+  "contributors": [
+    "Angela 怡",
+    "Celine Liang",
+    "Charles Lu",
+    "Chih Wei",
+    "Jimi Chen",
+    "Kent Huang",
+    "Shihta"
+  ],
+  "needs": [
+    "designer",
+    "programmer"
+  ]
+}

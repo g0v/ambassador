@@ -1,0 +1,39 @@
+{
+  "author": "ShivaHuang",
+  "status": "alpha",
+  "name": "TWDoorplates",
+  "name_zh": "內政部戶政司地址查詢工具",
+  "description": "The interface of doorplate searching system from Department of Household Registration, M.O.I. sucks, so we build our own.",
+  "description_zh": "鑑於內政部戶政司官方的地址查詢網站使用介面不人性，因此建構一個易於使用的查詢工具。方便連署書整理志工查詢補完連署人地址。",
+  "homepage": "http://ris.g0v.tw",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/TWDoorplates"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "Ruby on Rails",
+    "連署",
+    "地址"
+  ],
+  "audience": [
+    "contributor",
+    "public"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [
+    "Tools"
+  ],
+  "contributors": [
+    "ShivaHuang"
+  ],
+  "needs": [
+    "designer"
+  ]
+}

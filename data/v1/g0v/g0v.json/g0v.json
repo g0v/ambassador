@@ -1,0 +1,26 @@
+{
+  "repo": "g0v/g0v.json",
+  "author": "shelling",
+  "status": "Beta",
+  "name": "g0v.json schema",
+  "name_zh": "g0v.json 格式",
+  "description": "g0v.json schema definition",
+  "description_zh": "g0v.json 格式定義",
+  "thumbnail": "https://raw.githubusercontent.com/g0v/g0v.json/master/thumbnail.png",
+  "repository": "https://github.com/g0v/g0v.json",
+  "licenses": [
+    "MIT"
+  ],
+  "keywords": [
+    "schema",
+    "g0v",
+    "project"
+  ],
+  "audience": [
+    "contributor"
+  ],
+  "products": [],
+  "partOf": "",
+  "contributors": [],
+  "needs": []
+}

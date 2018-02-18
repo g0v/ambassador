@@ -51,6 +51,8 @@ module.exports = {
   serverBuildJs: resolveApp('index.js'),
   serverIndexJs: resolveApp('server/index.js'),
   serverSrc: resolveApp('server'),
+  metadata: resolveApp('data/v1'),
+  patch: resolveApp('data/patch'),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveApp('src/setupTests.js'),
   appNodeModules: resolveApp('node_modules'),

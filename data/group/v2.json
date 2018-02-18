@@ -1,0 +1,1487 @@
+{
+  "https://github.com/g0v/ly.g0v.tw": {
+    "children": [
+      "https://github.com/g0v/ly-tel",
+      "https://github.com/g0v/api.ly",
+      "https://github.com/g0v/ivod.ly.g0v.tw",
+      "https://github.com/g0v/ly-tel",
+      "https://github.com/g0v/ly.g0v.tw"
+    ],
+    "thumbnails": [
+      "http://billy3321.github.io/lytel/banner_s.jpg"
+    ],
+    "keywords": [
+      "javascript",
+      "jquery",
+      "css",
+      "livescript",
+      "postgresql",
+      "pgrest"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "123 打到掛",
+        "url": "http://123.g0v.today",
+        "source": "https://github.com/chilijung/ly-tel"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "g0v 立法院資料 API",
+        "url": "http://api.ly.g0v.tw",
+        "source": "https://github.com/g0v/api.ly"
+      },
+      {
+        "type": "website",
+        "name": "立院影城",
+        "url": "http://ivod.ly.g0v.tw",
+        "source": "https://github.com/g0v/ivod.ly.g0v.tw"
+      },
+      {
+        "type": "website",
+        "name": "話筒式的公共參與",
+        "url": "https://billy3321.github.io/lytel/",
+        "source": "https://github.com/g0v/ly-tel"
+      },
+      {
+        "type": "website",
+        "name": "國會大代誌",
+        "url": "http://ly.g0v.tw",
+        "source": "https://github.com/g0v/ly.g0v.tw"
+      }
+    ],
+    "contributors": [
+      "joy hsu",
+      "kris chu",
+      "walkingice",
+      "clkao",
+      "yhsiang",
+      "zbryikt",
+      "ETBlue",
+      "audreyt",
+      "AliceWei",
+      "s89008",
+      "billy3321",
+      "victorhsieh",
+      "ethantw",
+      "chilijung",
+      "jimyhuang",
+      "lyanchih"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/Logbot": {
+    "children": [
+      "git@github.com:g0v/Logbot.git"
+    ],
+    "thumbnails": [
+      "https://raw.github.com/g0v/Logbot/master/screenshot-1.png"
+    ],
+    "keywords": [
+      "irc",
+      "logger",
+      "ruby",
+      "rails"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "Logbot",
+        "url": "https://logbot.g0v.tw",
+        "source": "https://github.com/g0v/Logbot"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "Logbot API",
+        "url": "https://logbot.g0v.tw/channel/g0v.tw/today/json",
+        "source": "https://github.com/g0v/Logbot"
+      }
+    ],
+    "contributors": [
+      "godfat",
+      "zhusee2",
+      "audreyt",
+      "caasi",
+      "mmis1000",
+      "wildjcrt",
+      "zbryikt",
+      "ifTNT",
+      "itszero",
+      "darbychang",
+      "poga",
+      "miaout17",
+      "yhsiang",
+      "MnO2"
+    ],
+    "needs": [
+      "designer",
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/POPonFire": {
+    "children": [
+      "https://github.com/g0v/POPonFire"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "公有地"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "公有地大行動",
+        "url": "http://g0v.github.io/POPonFire/",
+        "source": "https://github.com/g0v/POPonFire"
+      }
+    ],
+    "contributors": [
+      "Hoskiss",
+      "pm5",
+      "ronnywang"
+    ],
+    "needs": [
+      "programmer",
+      "designer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/TWDoorplates": {
+    "children": [
+      "https://github.com/g0v/TWDoorplates"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "Ruby on Rails",
+      "連署",
+      "地址"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "台灣內政部戶政司地址查詢器",
+        "url": "http://ris.g0v.tw",
+        "source": "https://github.com/g0v/TWDoorplates"
+      }
+    ],
+    "contributors": [
+      "ShivaHuang"
+    ],
+    "needs": [
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/TWRadiationApp": {
+    "children": [
+      "https://github.com/g0v/TWRadiationApp/",
+      "https://github.com/Shihta/Ushahidi_Web.git"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "Taiwan",
+      "nuke",
+      "map",
+      "radiation",
+      "report",
+      "iOS",
+      "Nuke",
+      "Map"
+    ],
+    "products": [
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "台灣輻射地圖"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "台灣輻射地圖APP backend",
+        "source": "https://github.com/g0v/TWRadiationApp-backend"
+      }
+    ],
+    "contributors": [
+      "Angela 怡",
+      "Celine Liang",
+      "Charles Lu",
+      "Chih Wei",
+      "Jimi Chen",
+      "Kent Huang",
+      "Shihta",
+      "Charles 呂"
+    ],
+    "needs": [
+      "designer",
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/abroadplay": {
+    "children": [
+      "https://github.com/g0v/abroadplay"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "abroad"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "公務員出國考察追蹤網",
+        "url": "http://report.nat.g0v.tw",
+        "source": "https://github.com/g0v/abroadplay"
+      }
+    ],
+    "contributors": [
+      "Bert Wang"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/kuansim": {
+    "children": [
+      "https://github.com/g0v/addressbook.parser",
+      "https://github.com/g0v/kuansim",
+      "https://github.com/g0v/kuansim-frontend"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "addressbook",
+      "contant",
+      "python",
+      "json",
+      "json-ld",
+      "popolo",
+      "organization",
+      "angularjs",
+      "livescript",
+      "sass",
+      "bootstrap"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "政府公開通訊錄",
+        "url": "http://addressbook.g0v.mlwmlw.org",
+        "source": "https://github.com/g0v/react.addressbook"
+      },
+      {
+        "type": "website",
+        "name": "",
+        "url": "https://kuansim.org",
+        "source": "https://github.com/g0v/kuansim"
+      },
+      {
+        "type": "website",
+        "name": "鄉民關心你 - 事件追蹤分析系統",
+        "url": "https://kuansim.org",
+        "source": "https://github.com/g0v/kuansim"
+      }
+    ],
+    "contributors": [
+      "superbil",
+      "iamll1",
+      "hychen",
+      "billy3321",
+      "Brecht",
+      "ipa",
+      "kcliu"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/amis-moedict": {
+    "children": [
+      "https://github.com/g0v/amis-moedict"
+    ],
+    "thumbnails": [
+      [
+        "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
+      ]
+    ],
+    "keywords": [
+      "livescript",
+      "sass",
+      "bootstrap"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "阿美語萌典",
+        "url": "https://amis.moedict.tw"
+      },
+      {
+        "type": "app",
+        "subtype": "android",
+        "name": "萌典-蔡中涵阿美語大辭典",
+        "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_s"
+      },
+      {
+        "type": "app",
+        "subtype": "android",
+        "name": "萌典-方敏英阿美語字典",
+        "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_p"
+      },
+      {
+        "type": "app",
+        "subtype": "android",
+        "name": "萌典-潘世光阿美語法語字典",
+        "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe_m"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "阿美語萌典",
+        "url": "https://itunes.apple.com/tw/app/%E9%98%BF%E7%BE%8E%E8%AA%9E%E8%90%8C%E5%85%B8/id963236813?mt=8"
+      },
+      {
+        "type": "bot",
+        "subtype": "line",
+        "name": "阿美語萌典 LINE BOT",
+        "url": "https://github.com/miaoski/amis-linebot"
+      },
+      {
+        "type": "bot",
+        "subtype": "telegram",
+        "name": "阿美語萌典 Telegram BOT",
+        "url": "https://github.com/miaoski/amis-tgbot"
+      }
+    ],
+    "contributors": [
+      "clkao",
+      "hlb",
+      "a-tsioh",
+      "pektiong",
+      "c9s",
+      "miaout17",
+      "racklin",
+      "poga",
+      "caasi"
+    ],
+    "needs": [
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/congress-vote-analytics": {
+    "children": [
+      "https://github.com/g0v-tw-congress-vote-analytics/congress-vote-analytics-beta"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "bater",
+      "立法院"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "選票成份分析",
+        "url": "http://va.twbbs.org",
+        "source": "https://github.com/g0v/congress-vote-analytics-beta"
+      }
+    ],
+    "contributors": [
+      "bater",
+      "fntsrlike"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/councilor-voter-guide": {
+    "children": [
+      "https://github.com/g0v/councilor-voter-guide"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "councilor",
+      "議員",
+      "投票指南"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "議員投票指南",
+        "url": "http://councils.g0v.tw",
+        "source": "https://github.com/g0v/councilor-voter-guide"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "議員投票指南 API",
+        "url": "https://councils.g0v.tw/api",
+        "source": "https://github.com/g0v/councilor-voter-guide"
+      }
+    ],
+    "contributors": [
+      "thewayiam",
+      "c3h3",
+      "x4base",
+      "ipaaa",
+      "theacat",
+      "Swind",
+      "chhsiao1981",
+      "daikeren",
+      "y12studio",
+      "s890081tonyhsu",
+      "seadog007",
+      "walkingice",
+      "pcchou",
+      "rz12345",
+      "Kinvil",
+      "asika",
+      "AlcHawk",
+      "slashtu"
+    ],
+    "needs": [
+      "writer",
+      "programmer",
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/i64885": {
+    "children": [
+      "https://github.com/g0v/datasmith",
+      "https://github.com/g0v/i64885"
+    ],
+    "thumbnails": [
+      "https://raw.github.com/g0v/i64885/master/thumbnail.png"
+    ],
+    "keywords": [
+      "pgrest"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "i64885 公益律師呼叫平台",
+        "url": "http://i64885.tw",
+        "source": "https://github.com/g0v/i64885"
+      }
+    ],
+    "contributors": [
+      "poga",
+      "isabel.hou",
+      "zoe",
+      "cpyang"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/react.vtaiwan.tw": {
+    "children": [
+      "https://github.com/g0v/dc.vtaiwan.tw",
+      "https://github.com/g0v/react.vtaiwan.tw.git"
+    ],
+    "thumbnails": [
+      "https://github.com/g0v/dc.vtaiwan.tw/blob/master/favicon.png"
+    ],
+    "keywords": [
+      "vtaiwan",
+      "g0v"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "匯流五法：線上徵詢",
+        "url": "https://dc.vtaiwan.tw",
+        "source": "https://github.com/g0v/dc.vtaiwan.tw"
+      },
+      {
+        "type": "website",
+        "name": "vTaiwan.tw — 數位經濟法規線上諮詢",
+        "url": "https://vtaiwan.tw/",
+        "source": "https://github.com/g0v/react.vtaiwan.tw"
+      }
+    ],
+    "contributors": [
+      "audreyt",
+      "soidid",
+      "pm5",
+      "yhsiang",
+      "appleboy",
+      "transedward",
+      "SamSSY",
+      "cchungmin"
+    ],
+    "needs": [
+      ""
+    ]
+  },
+  "https://github.com/g0v/g0v.json": {
+    "children": [
+      "https://github.com/g0v/editor",
+      "https://github.com/g0v/g0v.json"
+    ],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/g0v.json/master/thumbnail.png"
+    ],
+    "keywords": [
+      "g0v.json",
+      "metadata",
+      "schema",
+      "g0v",
+      "project"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "g0v.json editor",
+        "url": "https://g0v.github.io/editor",
+        "source": "https://github.com/g0v/editor"
+      }
+    ],
+    "contributors": [
+      "shelling",
+      "zbryikt",
+      "ronnywang"
+    ],
+    "needs": []
+  },
+  "https://github.com/g0v/g0v.tw": {
+    "children": [
+      "https://github.com/g0v/env.g0v.tw",
+      "https://github.com/g0v/g0v.tw"
+    ],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/zbryikt/g0v.tw/master/thumbnail.png"
+    ],
+    "keywords": [
+      "community",
+      "g0v.tw",
+      "communication"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "env.g0v.tw",
+        "url": "http://env.g0v.tw",
+        "source": "https://github.com/g0v/env.g0v.tw"
+      },
+      {
+        "type": "dev",
+        "subtype": "data",
+        "name": "env.g0v.tw data"
+      },
+      {
+        "type": "website",
+        "name": "g0v.tw",
+        "url": "http://g0v.tw",
+        "source": "https://github.com/g0v/g0v.tw"
+      }
+    ],
+    "contributors": [
+      "clkao",
+      "zbryikt",
+      "ttcat",
+      "audreyt",
+      "dannvix",
+      "yllan",
+      "MIND0S",
+      "yhsiang",
+      "Claire"
+    ],
+    "needs": [
+      "programmer",
+      "designer",
+      "txt"
+    ]
+  },
+  "https://github.com/g0v/g0vre": {
+    "children": [
+      "https://github.com/g0v/g0vre"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "livescript"
+    ],
+    "products": [
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "g0vre API",
+        "url": "https://g0vre.herokuapp.com",
+        "source": "https://github.com/g0v/g0vre"
+      }
+    ],
+    "contributors": [
+      "au",
+      "clkao",
+      "EragonJ",
+      "gugod"
+    ],
+    "needs": [
+      "developer"
+    ]
+  },
+  "https://github.com/g0v/glyph": {
+    "children": [
+      "https://github.com/g0v/glyph"
+    ],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "g0v 符號",
+        "url": "https://g0v.github.com/glyph",
+        "source": "https://github.com/g0v/glyph"
+      }
+    ],
+    "contributors": [
+      "shulusama",
+      "c9s"
+    ],
+    "needs": []
+  },
+  "https://github.com/g0v/inLiveTwTextChrome": {
+    "children": [
+      "https://github.com/miaoski/inLiveTwTextChrome"
+    ],
+    "thumbnails": [
+      "https://avatars0.githubusercontent.com/u/7513555?s=200"
+    ],
+    "keywords": [
+      "inlivetw"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "InLiveTw",
+        "url": "http://miaoski.idv.tw/inLiveTw-ChromeCast",
+        "source": "https://github.com/g0v/inLiveTwTextChrome"
+      },
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "InLiveTw 擴充套件",
+        "source": "https://github.com/g0v/inLiveTwTextChrome"
+      }
+    ],
+    "contributors": [
+      "白凜希"
+    ],
+    "needs": [
+      "designer",
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/hack.g0v.tw": {
+    "children": [],
+    "thumbnails": [],
+    "keywords": [
+      "g0v",
+      "issue",
+      "label",
+      "language",
+      "search",
+      "人",
+      "坑",
+      "介面",
+      "基礎",
+      "infras"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "Issues Aggregator",
+        "url": "http://g0vissues.jmehsieh.com",
+        "source": "https://github.com/g0v/issue_aggregator"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "Issues Aggregator API",
+        "url": "http://g0vissues.jmehsieh.com/api",
+        "source": "https://github.com/g0v/issue_aggregator"
+      }
+    ],
+    "contributors": [
+      "gaga978",
+      "kcliu",
+      "roth1002"
+    ],
+    "needs": [
+      ""
+    ]
+  },
+  "https://github.com/g0v/itaigi": {
+    "children": [
+      "https://github.com/g0v/itaigi"
+    ],
+    "thumbnails": [
+      [
+        "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
+      ]
+    ],
+    "keywords": [
+      "reactjs",
+      "semantic-ui"
+    ],
+    "products": [
+      "website"
+    ],
+    "contributors": [
+      "au",
+      "pm5",
+      "sih4sing5hong5",
+      "a-tsioh",
+      "thewayiam",
+      "hankkk",
+      "aweimeow",
+      "glll4678",
+      "mhshih",
+      "ellen",
+      "grass"
+    ],
+    "needs": [
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/laweasyread": {
+    "children": [
+      "https://github.com/g0v/laweasyread",
+      "https://github.com/g0v/laweasyread-front"
+    ],
+    "thumbnails": [
+      "https://raw.github.com/g0v/laweasyread-front/master/icon.png"
+    ],
+    "keywords": [
+      "law",
+      "LiveScript",
+      "JavaScript"
+    ],
+    "products": [
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "法規亦毒氣 API",
+        "url": "http://laweasyread.herokuapp.com/"
+      },
+      {
+        "type": "website",
+        "name": "法規亦毒氣",
+        "url": "http://g0v.github.io/laweasyread-front/",
+        "source": "https://github.com/g0v/laweasyread-front"
+      },
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "法規亦毒氣 Chrome 擴充套件",
+        "url": "https://chrome.google.com/webstore/detail/法規亦毒氣/iedodmlnmhobigohbkalkkjlbmdkjalj?hl=zh-TW",
+        "source": "https://github.com/g0v/laweasyread-front"
+      },
+      {
+        "type": "extension",
+        "subtype": "firefox",
+        "name": "法規亦毒氣 Firefox 擴充套件",
+        "url": "https://addons.mozilla.org/zh-TW/firefox/addon/laweasyread/",
+        "source": "https://github.com/g0v/laweasyread-front"
+      }
+    ],
+    "contributors": [
+      "czchen",
+      "kcliu",
+      "kong0107"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/magic-mirror": {
+    "children": [
+      "https://github.com/g0v/magic-mirror"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "perl",
+      "json",
+      "kml",
+      "data"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "g0v-data mirror",
+        "url": "http://g0v-data-mirror.gugod.org/",
+        "source": "https://github.com/g0v/magic-mirror"
+      }
+    ],
+    "contributors": [],
+    "needs": [
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/moedict-webkit": {
+    "children": [
+      "https://github.com/g0v/moedict-data",
+      "https://github.com/g0v/moedict-process",
+      "https://github.com/audreyt/moedict-webkit",
+      "https://github.com/g0v/zh-stroke-data",
+      "https://github.com/racklin/moedict-jquery-plugin"
+    ],
+    "thumbnails": [
+      [
+        "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
+      ]
+    ],
+    "keywords": [
+      "dictionary",
+      "json",
+      "python",
+      "parser",
+      "livescript",
+      "sass",
+      "bootstrap",
+      "Go",
+      "Perl",
+      "LiveScript",
+      "stroke",
+      "animation",
+      "jquery",
+      "dictioanary",
+      "javascript"
+    ],
+    "products": [
+      {
+        "type": "dev",
+        "subtype": "data",
+        "name": "教育部重編國語辭典 資料檔",
+        "url": "https://github.com/g0v/moedict-data"
+      },
+      {
+        "type": "website",
+        "name": "萌典網站",
+        "url": "https://www.moedict.tw/"
+      },
+      {
+        "type": "app",
+        "subtype": "android",
+        "name": "萌典 Android app",
+        "url": "https://play.google.com/store/apps/details?id=org.audreyt.dict.moe"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "萌典 iOS app",
+        "url": "https://itunes.apple.com/tw/app/meng-dian/id599429224"
+      },
+      {
+        "type": "app",
+        "subtype": "firefox",
+        "name": "萌典 Firefox OS app",
+        "url": "https://marketplace.firefox.com/app/%E8%90%8C%E5%85%B8/"
+      },
+      {
+        "type": "app",
+        "subtype": "desktop",
+        "name": "萌典桌面版",
+        "url": "https://racklin.github.io/moedict-desktop/download.html"
+      },
+      {
+        "type": "app",
+        "subtype": "desktop",
+        "name": "萌典 Mac 原生辭典",
+        "url": "https://github.com/yllan/moedict-mac"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "iPhone Client App for 3du.tw",
+        "url": "https://github.com/tomjpsun/3du.tw-ios"
+      },
+      {
+        "type": "website",
+        "name": "MoeDict Web Client and REST API",
+        "url": "https://github.com/viirya/moedict-web"
+      },
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "教育部重編國語辭典修訂本 Chrome 離線版",
+        "url": "https://github.com/tonytonyjan/hahadict"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "萌字典 iOS App",
+        "url": "https://github.com/pct/moedict-ios-app"
+      },
+      {
+        "type": "extension",
+        "subtype": "visualstudio",
+        "name": "萌典 WinRT Component",
+        "url": "https://github.com/ericsk/moedict-rt"
+      },
+      {
+        "type": "extension",
+        "subtype": "sublime",
+        "name": "Sublime MOE Dict",
+        "url": "https://github.com/zonble/sublime_moedict"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "3 Piggies (三隻小豬) for iOS",
+        "url": "https://github.com/zonble/MOEDict"
+      },
+      {
+        "type": "extension",
+        "subtype": "emacs",
+        "name": "moedict.el",
+        "url": "https://github.com/kuanyui/moedict.el"
+      },
+      {
+        "type": "app",
+        "subtype": "desktop",
+        "name": "萌典 @ Windows Store App (Windows 8/8.1)",
+        "url": "https://github.com/SarsTW/moedict-win8-app"
+      },
+      {
+        "type": "app",
+        "subtype": "ios",
+        "name": "MoeDict",
+        "url": "https://github.com/jamessa/MoeDict"
+      },
+      {
+        "type": "website",
+        "name": "萌典字宙反應爐",
+        "url": "https://github.com/audreyt/moe"
+      },
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "萌典 Chrome 延伸套件",
+        "url": "https://chrome.google.com/webstore/detail/%E8%90%8C%E5%85%B8-moedict/aihifbidnaepclhnfppjnpbmeonhhloa"
+      },
+      {
+        "type": "website",
+        "name": "萌典啄木鳥",
+        "url": "https://github.com/g0v/moedict-dodo"
+      },
+      {
+        "type": "dev",
+        "subtype": "data",
+        "name": "常用國字標準字體筆劃資料檔",
+        "url": "https://github.com/g0v/zh-stroke-data",
+        "source": "https://github.com/g0v/zh-stroke-data"
+      },
+      {
+        "type": "website",
+        "name": "moedict-jquery-plugin test",
+        "url": "http://racklin.github.io/moedict-jquery-plugin/",
+        "source": "https://github.com/racklin/moedict-jquery-plugin"
+      },
+      {
+        "type": "dev",
+        "subtype": "library",
+        "name": "moedict for jquery plugin",
+        "url": "http://racklin.github.io/moedict-jquery-plugin/jquery.moedict.min.js",
+        "source": "https://github.com/racklin/moedict-jquery-plugin"
+      }
+    ],
+    "contributors": [
+      "au",
+      "kcwu",
+      "poga",
+      "albb0920",
+      "pingooo",
+      "viirya",
+      "clkao",
+      "hlb",
+      "a-tsioh",
+      "pektiong",
+      "c9s",
+      "miaout17",
+      "racklin",
+      "caasi"
+    ],
+    "needs": [
+      "designer",
+      "programmer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/moer.g0v.tw": {
+    "children": [
+      "https://github.com/g0v/moer.g0v.tw"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "javascript",
+      "angularjs",
+      "d3js",
+      "bootstrap",
+      "data visualization"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "Environmen Dashboard",
+        "url": "http://moer.g0v.tw",
+        "source": "https://github.com/g0v/moer.g0v.tw"
+      }
+    ],
+    "contributors": [],
+    "needs": [
+      "designer",
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/news-diff": {
+    "children": [
+      "https://github.com/g0v/news-diff"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "python",
+      "data",
+      "news",
+      "crawler"
+    ],
+    "products": [],
+    "contributors": [],
+    "needs": [
+      "programmer",
+      "server",
+      "consumer"
+    ]
+  },
+  "https://github.com/g0v/newshelper-extension": {
+    "children": [
+      "https://github.com/g0v/newshelper-backend",
+      "https://github.com/g0v/newshelper-extension"
+    ],
+    "thumbnails": [
+      "http://newshelper.g0v.tw/images/newshelper-facebook.png"
+    ],
+    "keywords": [
+      "javascript",
+      "jquery",
+      "php",
+      "bootstrap"
+    ],
+    "products": [
+      {
+        "type": "dev",
+        "subtype": "api",
+        "source": "https://github.com/g0v/newshelper-backend"
+      },
+      {
+        "type": "website",
+        "name": "新聞小幫手",
+        "url": "http://newshelper.g0v.tw/",
+        "source": "https://github.com/g0v/newshelper-extension"
+      },
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "新聞小幫手 Chrome 擴充套件",
+        "url": "https://chrome.google.com/webstore/detail/%E6%96%B0%E8%81%9E%E5%B0%8F%E5%B9%AB%E6%89%8B/hkenpfplphndcndhhhldecaammpmopoc?hl=zh-TW",
+        "source": "https://github.com/g0v/newshelper-extension"
+      },
+      {
+        "type": "extension",
+        "subtype": "firefox",
+        "name": "新聞小幫手 Firefox 擴充套件",
+        "url": "https://addons.mozilla.org/zh-TW/firefox/addon/newshelper/",
+        "source": "https://github.com/g0v/newshelper-extension"
+      }
+    ],
+    "contributors": [
+      "ronnywang",
+      "Wonder",
+      "dannvix",
+      "Kirsten",
+      "Wahaho",
+      "Natata",
+      "kcwu",
+      "Lois",
+      "Miaout17",
+      "Michael LI",
+      "wychi",
+      "zhusee2",
+      "wildsky"
+    ],
+    "needs": [
+      "designer",
+      "writer",
+      "progammer",
+      "內容管理"
+    ]
+  },
+  "https://github.com/g0v/nuclear-data": {
+    "children": [
+      "https://github.com/g0v/nuclear-data.git"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "angularjs",
+      "python"
+    ],
+    "products": [],
+    "contributors": [
+      "蔡雅瀅",
+      "Chang Shu-Huai",
+      "Ginger Chen",
+      "Jeff Hung",
+      "Johnson Liang",
+      "nchild",
+      "Tom Chen",
+      "Tzu-Sheng Wu",
+      "Stark"
+    ],
+    "needs": [
+      "designer",
+      "writer",
+      "programmer"
+    ]
+  },
+  "https://github.com/g0v/roadpin": {
+    "children": [
+      "https://github.com/g0v/roadpin"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "angularjs",
+      "livescript",
+      "sass",
+      "bootstrap"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "RoadPin",
+        "url": "http://106.187.101.193",
+        "source": "https://github.com/g0v/roadpin"
+      }
+    ],
+    "contributors": [
+      "Monjour Chen",
+      "Willy Kuo",
+      "Zoe Peng",
+      "Manic",
+      "Brecht",
+      "Jyun-Fan Tsai",
+      "Pei-Lun Lee",
+      "aha",
+      "A-Han",
+      "yangppp"
+    ],
+    "needs": [
+      "designer",
+      "developer"
+    ]
+  },
+  "https://github.com/g0v/jothon-net": {
+    "children": [
+      "https://github.com/g0v/submit"
+    ],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "自己的稿自己投",
+        "url": "http://submit.g0v.tw/",
+        "source": "https://github.com/g0v/submit"
+      }
+    ],
+    "contributors": [
+      "shelling"
+    ],
+    "needs": []
+  },
+  "https://github.com/g0v/summit.g0v.tw": {
+    "children": [
+      "https://github.com/g0v/summit.g0v.tw"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "community",
+      "g0v.tw",
+      "summit",
+      "conference",
+      "unconferen"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "啥咪零時政府官網",
+        "url": "http://summit.g0v.tw/",
+        "source": "https://github.com/g0v/summit.g0v.tw"
+      }
+    ],
+    "contributors": [],
+    "needs": []
+  },
+  "https://github.com/g0v/sunflower": {
+    "children": [],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "Sunflower",
+        "url": "http://g0v.github.io/sunflower/",
+        "source": "https://github.com/g0v/sunflower"
+      }
+    ],
+    "contributors": [],
+    "needs": []
+  },
+  "https://github.com/g0v/sunshine.cy": {
+    "children": [
+      "https://github.com/g0v/sunshine.cy"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "cy",
+      "sunshine",
+      "公職人員財產申報"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "金錢報",
+        "url": "http://sunshine.cy.g0v.tw/",
+        "source": "https://github.com/g0v/sunshine.cy"
+      }
+    ],
+    "contributors": [
+      "thewayiam"
+    ],
+    "needs": [
+      "writer",
+      "programmer",
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/twangry": {
+    "children": [
+      "https://github.com/g0v/twangry"
+    ],
+    "thumbnails": [
+      "http://fact.g0v.tw/screenshot.png"
+    ],
+    "keywords": [
+      "javascript",
+      "timelinejs"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "政誌",
+        "url": "http://fact.g0v.tw/",
+        "source": "https://github.com/g0v/twangry"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "政誌 API",
+        "url": "http://fact.g0v.tw/index.json",
+        "source": "https://github.com/g0v/twangry"
+      }
+    ],
+    "contributors": [
+      "pm5",
+      "chilijung",
+      "onlinemad",
+      "FumiMiyabe",
+      "JimCCC",
+      "WeitingTseng"
+    ],
+    "needs": [
+      "designer",
+      "wikipedia writer",
+      "writer"
+    ]
+  },
+  "https://github.com/g0v/twly-voter-guide": {
+    "children": [
+      "https://github.com/g0v/twly-voter-guide"
+    ],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "立委投票指南",
+        "url": "https://vote.ly.g0v.tw/",
+        "source": "https://github.com/g0v/twly-voter-guide"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "立委投票指南 API"
+      },
+      {
+        "type": "app",
+        "subtype": "android",
+        "name": "投票指南",
+        "url": "https://play.google.com/store/apps/details?id=g0v.ly.android.voterguide",
+        "source": "https://github.com/VoterGuide/VoterGuide"
+      }
+    ],
+    "contributors": [
+      "wildjcrt",
+      "yhsiang",
+      "audreyt",
+      "thewayiam"
+    ],
+    "needs": [
+      "writer",
+      "programmer",
+      "designer"
+    ]
+  },
+  "https://github.com/g0v/twstat": {
+    "children": [
+      "https://github.com/g0v/twstat"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "community",
+      "g0v.tw",
+      "communication"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "twstat",
+        "url": "http://g0v.github.io/twstat/",
+        "source": "https://github.com/g0v/twstat"
+      }
+    ],
+    "contributors": [],
+    "needs": []
+  },
+  "https://github.com/g0v/typo-resolver": {
+    "children": [
+      "https://github.com/g0v/typo-resolver"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "chrome extension",
+      "javascript",
+      "jquery"
+    ],
+    "products": [
+      {
+        "type": "extension",
+        "subtype": "chrome",
+        "name": "Typo Resolver",
+        "url": "https://chrome.google.com/webstore/detail/typo-resolver/kpmhpplainkjokabdbjkfdkohacblnlo",
+        "source": "https://github.com/g0v/typo-resolver"
+      }
+    ],
+    "contributors": [],
+    "needs": [
+      "designer",
+      "writer",
+      "tech"
+    ]
+  },
+  "https://github.com/g0v/urbancode-commission": {
+    "children": [
+      "https://github.com/g0v/urbancode-commission"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "urban plan",
+      "commission notes",
+      "text datalisation"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "都市計畫委員會資料庫",
+        "url": "http://commission.urbancode.tw/",
+        "source": "https://github.com/g0v/urbancode-commission"
+      }
+    ],
+    "contributors": [
+      "理查(monaludao)",
+      "catding"
+    ],
+    "needs": [
+      "data structure",
+      "front-end progammer"
+    ]
+  },
+  "https://github.com/ronnywang/lagnews": {
+    "children": [],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "歷史四大報",
+        "url": "http://oldpaper.g0v.ronny.tw/",
+        "source": "https://github.com/ronnywang/lagnews"
+      }
+    ],
+    "contributors": [],
+    "needs": []
+  },
+  "https://github.com/ronnywang/newsdiff": {
+    "children": [],
+    "thumbnails": [],
+    "keywords": [],
+    "products": [
+      {
+        "type": "website",
+        "name": "NewsDiff",
+        "url": "http://newsdiff.g0v.ronny.tw/",
+        "source": "https://github.com/ronnywang/newsdiff"
+      },
+      {
+        "type": "website",
+        "name": "新聞趨勢統計",
+        "url": "http://newstrend.g0v.ronny.tw/",
+        "source": "https://github.com/ronnywang/newstrend.g0v.ronny.tw"
+      }
+    ],
+    "contributors": [],
+    "needs": []
+  },
+  "https://github.com/ronnywang/taiwan-cabinet": {
+    "children": [
+      "https://github.com/ronnywang/taiwan-cabinet"
+    ],
+    "thumbnails": [],
+    "keywords": [
+      "cabinet"
+    ],
+    "products": [
+      {
+        "type": "website",
+        "name": "台灣內閣變化",
+        "url": "https://ronnywang.github.io/taiwan-cabinet/",
+        "source": "https://github.com/ronnywang/taiwan-cabinet"
+      }
+    ],
+    "contributors": [
+      "ronnywang",
+      "ihower"
+    ],
+    "needs": [
+      ""
+    ]
+  }
+}

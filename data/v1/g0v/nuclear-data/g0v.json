@@ -1,0 +1,45 @@
+{
+  "author": "",
+  "status": "planning",
+  "name": "nuclear-data",
+  "description": "Nuclear translate & Watch",
+  "description_zh": "將原能會轉譯成容易理解的圖表",
+  "homepage": "https://g0v.hackpad.com/-Nuclear-Data-8sYMW30othK",
+  "document": "https://g0v.hackpad.com/-Nuclear-Data-8sYMW30othK",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0v/nuclear-data.git"
+  },
+  "licenses": [
+    {
+      "type": "CC:BY-SA"
+    }
+  ],
+  "keywords": [
+    "angularjs",
+    "python"
+  ],
+  "audience": [
+    "contributor"
+  ],
+  "products": [
+    "website"
+  ],
+  "projects": [],
+  "contributors": [
+    "蔡雅瀅",
+    "Chang Shu-Huai",
+    "Ginger Chen",
+    "Jeff Hung",
+    "Johnson Liang",
+    "nchild",
+    "Tom Chen",
+    "Tzu-Sheng Wu",
+    "Stark"
+  ],
+  "needs": [
+    "designer",
+    "writer",
+    "programmer"
+  ]
+}

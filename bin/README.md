@@ -8,7 +8,11 @@ Here are some scripts to process logs and metadata.
 
 ## metadata
 
-`metadata.js` fetches `g0v.json` from generated repo list. If the result is found and well-formed, it will be saved to its own directory for later analysis.
+`metadata.js` fetches `g0v.json` from generated repo list. If the result is found and well-formed, it will be saved to its own directory(`/data/v1/*`) for later analysis.
+
+## group
+
+`group.js` validate v1 and patched(v2) `g0v.json` files which are fetched by `metadata.js` and group them a better entry point.
 
 ## keywords
 

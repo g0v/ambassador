@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 // logger
 import winston from 'winston'
@@ -23,6 +23,8 @@ import { DatabaseError, AdminError } from './error'
 import paths from '../config/paths.js'
 import env from './env.js'
 import repos from '../data/repos.json'
+import groupV1 from '../data/group/v1.json'
+import groupV2 from '../data/group/v2.json'
 
 // database
 // Try to remove old `database.js` before requiring `database/index.js`.
@@ -581,23 +583,42 @@ app
       res.status(400).send()
     }
   })
-  // Proxy g0v.json@GitHub
-  .get('/api/github/:name/:repo/g0v.json', (req, res, next) => {
-    const { name, repo } = req.params
+  .get('/api/group/v1.json', (req, res, next) => {
+    if (groupV1) {
+      res.json(groupV1)
+    } else {
+      res.status(404).send()
+    }
+  })
+  .get('/api/group/v2.json', (req, res, next) => {
+    if (groupV2) {
+      res.json(groupV2)
+    } else {
+      res.status(404).send()
+    }
+  })
+  .get('/api/metadata/:version/:name/:repo/g0v.json', async (req, res, next) => {
+    const { version, name, repo } = req.params
 
-    winston.verbose(`Fetch https://github.com/${name}/${repo}/master/g0v.json`)
+    if (version !== 'v1' && version !== 'v2') {
+      return res.status(400).send()
+    }
 
-    axios.get(`https://raw.githubusercontent.com/${name}/${repo}/master/g0v.json`)
-      .then(({ data }) => {
-        winston.info(`https://github.com/${name}/${repo}/master/g0v.json fetched`)
+    const metadataPath = path.resolve(paths.metadata, name, repo, 'g0v.json')
+    const metadata = await fs.readJson(metadataPath)
 
-        res.json(data)
-      })
-      .catch(error => {
-        console.error(error)
+    if (version === 'v1') {
+      winston.info(`Serve ${name}/${repo}/g0v.json`)
+      res.json(metadata)
+    }
 
-        res.status(404).send()
-      })
+    if (version === 'v2') {
+      const patchPath = path.resolve(paths.patch, name, repo, 'master.patch.json')
+      const patch = await fs.readJson(patchPath)
+
+      winston.info(`Serve patched ${name}/${repo}/g0v.json`)
+      res.json({ ...metadata, ...patch })
+    }
   })
   // Serve client scripts
   .use(express.static(paths.appBuild))

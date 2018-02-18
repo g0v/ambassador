@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "type",
+    "dataPath": ".contributors",
+    "schemaPath": "#/properties/contributors/type",
+    "params": {
+      "type": "array"
+    },
+    "message": "should be array"
+  }
+]
