@@ -3,9 +3,14 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "required": [
+    "g0v_json",
     "author"
   ],
   "properties": {
+    "g0v_json": {
+      "type": "string",
+      "enum": ["v2"]
+    },
     "author": {
       "title": "專案作者",
       "description": "Project author",
