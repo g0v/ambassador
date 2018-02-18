@@ -1,5 +1,5 @@
 {
-  "id": "https://raw.githubusercontent.com/g0v/g0v.json/master/schemas/v1.json",
+  "id": "https://raw.githubusercontent.com/g0v/ambassador/master/bin/schema/v1.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "required": [
@@ -66,17 +66,20 @@
     "homepage": {
       "title": "網頁",
       "description": "Homepage url",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     },
     "thumbnail": {
       "title": "縮圖",
       "description": "Thumbnail",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     },
     "document": {
       "title": "文件",
       "description": "Document",
-      "type": "string"
+      "type": "string",
+      "format": "uri"
     },
     "repository": {
       "title": "Repo 工作資料區",
@@ -85,17 +88,18 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": ["git", "hg"]
+          "enum": ["git", "hg", "svn", "cvs", "svk"]
         },
         "url": {
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         }
       },
       "required": ["type", "url"]
     },
     "licenses": {
       "title": "專案授權",
-      "description": "licenses",
+      "description": "Licenses",
       "type": "array",
       "items": {
         "type": "object",
@@ -115,7 +119,7 @@
     },
     "audience": {
       "title": "目標受眾",
-      "description": "Target Audience",
+      "description": "Target audience",
       "type": "array",
       "items": {
         "type": "string",
@@ -135,7 +139,7 @@
       "description": "Parent project",
       "type": "string"
     },
-    "products": {
+    "projects": {
       "title": "Projects",
       "description": "Parent projects",
       "type": "array",
@@ -156,7 +160,8 @@
       "description": "Needs",
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "string",
+        "enum": ["designer", "writer", "programmer", "money", "txt"]
       }
     }
   }
