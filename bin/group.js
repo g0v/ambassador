@@ -3,12 +3,13 @@ import path from 'path'
 import * as paths from './paths'
 import Ajv from 'ajv'
 import v1 from './schema/v1.json'
+import v2 from './schema/v2.json'
 import { forEach, uniq } from 'ramda'
 
 const ajv = new Ajv()
 const validator = {
   v1: ajv.compile(v1),
-  v2: undefined
+  v2: ajv.compile(v2)
 }
 
 let result = {
@@ -108,7 +109,7 @@ const groupCleanup = () => {
     const repos = await fs.readdir(repopath)
 
     for (const repo of repos) {
-      let filepath = path.resolve(repopath, repo, 'g0v.json')
+      let filepath = path.resolve(paths.v1, user, repo, 'g0v.json')
       let data = await fs.readJson(filepath)
 
       // v1
@@ -120,12 +121,13 @@ const groupCleanup = () => {
       }
 
       const valid = validator.v1(data)
+      const errorpath = path.resolve(paths.v1, user, repo, 'errors.json')
+      await fs.remove(errorpath)
       if (valid) {
-        ++result.v1.valid
         console.log(`${user}/${repo}: o`)
+        ++result.v1.valid
       } else {
         console.log(`${user}/${repo}: x`)
-        const errorpath = path.resolve(repopath, repo, 'errors.json')
         await fs.outputJson(errorpath, validator.v1.errors, { spaces: 2 })
       }
 
@@ -141,7 +143,16 @@ const groupCleanup = () => {
           groupConcat('v2', data)(data.group)
         }
 
-        // TODO: validation
+        const valid = validator.v2(data)
+        const errorpath = path.resolve(paths.patch, user, repo, 'errors.json')
+        await fs.remove(errorpath)
+        if (valid) {
+          console.log(`${user}/${repo}: oo`)
+          ++result.v2.valid
+        } else {
+          console.log(`${user}/${repo}: xx`)
+          await fs.outputJson(errorpath, validator.v2.errors, { spaces: 2 })
+        }
       } catch (err) {
         console.log(`can't patch ${user}/${repo}!`)
       }

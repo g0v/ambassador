@@ -1,15 +1,11 @@
 [
   {
-    "keyword": "enum",
-    "dataPath": ".audience[0]",
-    "schemaPath": "#/properties/audience/items/enum",
+    "keyword": "format",
+    "dataPath": ".thumbnail",
+    "schemaPath": "#/properties/thumbnail/format",
     "params": {
-      "allowedValues": [
-        "contributor",
-        "public",
-        "developer"
-      ]
+      "format": "uri"
     },
-    "message": "should be equal to one of the allowed values"
+    "message": "should match format \"uri\""
   }
 ]

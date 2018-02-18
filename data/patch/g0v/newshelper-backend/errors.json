@@ -1,0 +1,64 @@
+[
+  {
+    "keyword": "enum",
+    "dataPath": ".products[0].type",
+    "schemaPath": "#/definitions/product/website/properties/type/enum",
+    "params": {
+      "allowedValues": [
+        "website"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  },
+  {
+    "keyword": "enum",
+    "dataPath": ".products[0].type",
+    "schemaPath": "#/definitions/product/app/properties/type/enum",
+    "params": {
+      "allowedValues": [
+        "app"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  },
+  {
+    "keyword": "enum",
+    "dataPath": ".products[0].type",
+    "schemaPath": "#/definitions/product/bot/properties/type/enum",
+    "params": {
+      "allowedValues": [
+        "bot"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  },
+  {
+    "keyword": "enum",
+    "dataPath": ".products[0].type",
+    "schemaPath": "#/definitions/product/extension/properties/type/enum",
+    "params": {
+      "allowedValues": [
+        "extension"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  },
+  {
+    "keyword": "required",
+    "dataPath": ".products[0]",
+    "schemaPath": "#/definitions/product/dev/required",
+    "params": {
+      "missingProperty": "name"
+    },
+    "message": "should have required property 'name'"
+  },
+  {
+    "keyword": "oneOf",
+    "dataPath": ".products[0]",
+    "schemaPath": "#/properties/products/items/oneOf",
+    "params": {
+      "passingSchemas": null
+    },
+    "message": "should match exactly one schema in oneOf"
+  }
+]

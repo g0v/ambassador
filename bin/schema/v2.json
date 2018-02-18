@@ -502,14 +502,17 @@
     "products": {
       "title": "專案產出",
       "description": "Project products",
-      "type": "object",
-      "oneOf": [
-        { "$ref": "#/definitions/product/website" },
-        { "$ref": "#/definitions/product/app" },
-        { "$ref": "#/definitions/product/bot" },
-        { "$ref": "#/definitions/product/extension" },
-        { "$ref": "#/definitions/product/dev" }
-      ]
+      "type": "array",
+      "items": {
+        "type": "object",
+        "oneOf": [
+          { "$ref": "#/definitions/product/website" },
+          { "$ref": "#/definitions/product/app" },
+          { "$ref": "#/definitions/product/bot" },
+          { "$ref": "#/definitions/product/extension" },
+          { "$ref": "#/definitions/product/dev" }
+        ]
+      }
     },
     "dependencies": {
       "title": "專案相依性",

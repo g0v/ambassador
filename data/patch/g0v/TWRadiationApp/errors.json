@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "type",
+    "dataPath": ".author",
+    "schemaPath": "#/properties/author/type",
+    "params": {
+      "type": "string"
+    },
+    "message": "should be string"
+  }
+]

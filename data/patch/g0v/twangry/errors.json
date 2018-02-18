@@ -1,0 +1,17 @@
+[
+  {
+    "keyword": "enum",
+    "dataPath": ".needs[1]",
+    "schemaPath": "#/properties/needs/items/enum",
+    "params": {
+      "allowedValues": [
+        "designer",
+        "writer",
+        "programmer",
+        "money",
+        "txt"
+      ]
+    },
+    "message": "should be equal to one of the allowed values"
+  }
+]

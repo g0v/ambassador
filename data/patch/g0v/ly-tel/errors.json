@@ -1,8 +1,8 @@
 [
   {
     "keyword": "format",
-    "dataPath": ".thumbnail",
-    "schemaPath": "#/properties/thumbnail/format",
+    "dataPath": ".document",
+    "schemaPath": "#/properties/document/format",
     "params": {
       "format": "uri"
     },

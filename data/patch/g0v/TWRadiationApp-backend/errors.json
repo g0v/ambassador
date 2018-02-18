@@ -1,0 +1,11 @@
+[
+  {
+    "keyword": "minLength",
+    "dataPath": ".author",
+    "schemaPath": "#/properties/author/minLength",
+    "params": {
+      "limit": 1
+    },
+    "message": "should NOT be shorter than 1 characters"
+  }
+]
