@@ -31,10 +31,7 @@ import {
   IntroFailure,
   g0vJsonRequest,
   g0vJsonSuccess,
-  g0vJsonFailure,
-  g0vPatchRequest,
-  g0vPatchSuccess,
-  g0vPatchFailure
+  g0vJsonFailure
 } from '~/types/github'
 
 // XXX: should use getUser action with no user name
@@ -196,11 +193,9 @@ export const g0vJson: RawAction<[string, string], any> = store => async (name, r
 
   dispatch(g0vJsonRequest(name, repo))
   try {
-    const { data: json } = await axios.get(`${apiUrl}/api/github/${name}/${repo}/g0v.json`)
+    const { data: result } = await axios.get(`${apiUrl}/api/metadata/v2/${name}/${repo}`)
     // $FlowFixMe
-    const patch = await dispatch(g0vPatch)(name, repo).catch(() => ({}))
     const userMap = G.getUserMap(getState())
-    const result = { ...json, ...patch }
 
     dispatch(g0vJsonSuccess(name, repo, result))
 
@@ -215,23 +210,6 @@ export const g0vJson: RawAction<[string, string], any> = store => async (name, r
     return result
   } catch (error) {
     dispatch(g0vJsonFailure(name, repo, error))
-    throw error
-  }
-}
-
-export const g0vPatch: RawAction<[string, string, string], any> = store => async (name, repo, branch = 'master') => {
-  const { dispatch } = store
-
-  dispatch(g0vPatchRequest(name, repo, branch))
-  try {
-    const { data: json } = await axios.get(`${url}/data/${name}/${repo}/${branch}.patch.json`)
-
-    dispatch(g0vPatchSuccess(name, repo, branch, json))
-
-    return json
-  } catch (error) {
-    dispatch(g0vPatchFailure(name, repo, branch, error))
-    console.error(error)
     throw error
   }
 }

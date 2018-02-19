@@ -583,21 +583,21 @@ app
       res.status(400).send()
     }
   })
-  .get('/api/group/v1.json', (req, res, next) => {
+  .get('/api/group/v1', (req, res, next) => {
     if (groupV1) {
       res.json(groupV1)
     } else {
       res.status(404).send()
     }
   })
-  .get('/api/group/v2.json', (req, res, next) => {
+  .get('/api/group/v2', (req, res, next) => {
     if (groupV2) {
       res.json(groupV2)
     } else {
       res.status(404).send()
     }
   })
-  .get('/api/metadata/:version/:name/:repo/g0v.json', async (req, res, next) => {
+  .get('/api/metadata/:version/:name/:repo', async (req, res, next) => {
     const { version, name, repo } = req.params
 
     if (version !== 'v1' && version !== 'v2') {

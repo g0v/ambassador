@@ -110,18 +110,6 @@ export type G0vJsonFailureAction = { type: 'G0V_JSON_FAILURE', name: string, rep
 export const G0V_JSON_FAILURE = 'G0V_JSON_FAILURE'
 export const g0vJsonFailure = (name: string, repo: string, error: Error): G0vJsonFailureAction => ({ type: G0V_JSON_FAILURE, name, repo, error })
 
-export type G0vPatchRequestAction = { type: 'G0V_PATCH_REQUEST', name: string, repo: string, branch: string }
-export const G0V_PATCH_REQUEST = 'G0V_PATCH_REQUEST'
-export const g0vPatchRequest = (name: string, repo: string, branch: string): G0vPatchRequestAction => ({ type: G0V_PATCH_REQUEST, name, repo, branch })
-
-export type G0vPatchSuccessAction = { type: 'G0V_PATCH_SUCCESS', name: string, repo: string, branch: string, json: Project }
-export const G0V_PATCH_SUCCESS = 'G0V_PATCH_SUCCESS'
-export const g0vPatchSuccess = (name: string, repo: string, branch: string, json: Project): G0vPatchSuccessAction => ({ type: G0V_PATCH_SUCCESS, name, repo, branch, json })
-
-export type G0vPatchFailureAction = { type: 'G0V_PATCH_FAILURE', name: string, repo: string, branch: string, error: Error }
-export const G0V_PATCH_FAILURE = 'G0V_PATCH_FAILURE'
-export const g0vPatchFailure = (name: string, repo: string, branch: string, error: Error): G0vPatchFailureAction => ({ type: G0V_PATCH_FAILURE, name, repo, branch, error })
-
 // functions
 export const getLoginName = (state: State): string => {
   return (state && state.github && state.github.profile && state.github.profile.login) || ''
