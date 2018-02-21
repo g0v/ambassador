@@ -3,8 +3,11 @@
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
+process.env.HTTPS = 'true';
 process.env.HOST = 'amb.g0v.tw';
+process.env.PORT = '443';
 process.env.API_HOST = 'amb.g0v.tw';
+process.env.API_PORT = '443';
 process.env.DDAY = '2013-07-26';
 
 // Makes the script crash on unhandled rejections instead of silently
