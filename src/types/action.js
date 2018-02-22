@@ -36,7 +36,10 @@ import type {
   IntroFailureAction,
   G0vJsonRequestAction,
   G0vJsonSuccessAction,
-  G0vJsonFailureAction
+  G0vJsonFailureAction,
+  GroupRequestAction,
+  GroupSuccessAction,
+  GroupFailureAction
 } from './github'
 import type {
   LogRequestAction,
@@ -109,6 +112,7 @@ export type PlainAction
   | HintRequestAction | HintSuccessAction | HintFailureAction
   | SearchRequestAction | SearchSuccessAction | SearchFailureAction
   | G0vSearchRequestAction | G0vSearchSuccessAction | G0vSearchFailureAction
+  | GroupRequestAction | GroupSuccessAction | GroupFailureAction
   | SearchPageAction
   | ResourceListRequestAction | ResourceListSuccessAction | ResourceListFailureAction
   | ResourceRequestAction | ResourceSuccessAction | ResourceFailureAction

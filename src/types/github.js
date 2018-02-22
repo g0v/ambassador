@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { State } from '~/reducers'
-import type { Project } from './metadata'
+import type { Project, GroupMap } from './metadata'
 
 // type
 type EMail = {
@@ -109,6 +109,18 @@ export const g0vJsonSuccess = (name: string, repo: string, json: Project): G0vJs
 export type G0vJsonFailureAction = { type: 'G0V_JSON_FAILURE', name: string, repo: string, error: Error }
 export const G0V_JSON_FAILURE = 'G0V_JSON_FAILURE'
 export const g0vJsonFailure = (name: string, repo: string, error: Error): G0vJsonFailureAction => ({ type: G0V_JSON_FAILURE, name, repo, error })
+
+export type GroupRequestAction = { type: 'GROUP_REQUEST' }
+export const GROUP_REQUEST = 'GROUP_REQUEST'
+export const GroupRequest = (): GroupRequestAction => ({ type: GROUP_REQUEST })
+
+export type GroupSuccessAction = { type: 'GROUP_SUCCESS', groups: GroupMap }
+export const GROUP_SUCCESS = 'GROUP_SUCCESS'
+export const GroupSuccess = (groups: GroupMap): GroupSuccessAction => ({ type: GROUP_SUCCESS, groups })
+
+export type GroupFailureAction = { type: 'GROUP_FAILURE', error: Error }
+export const GROUP_FAILURE = 'GROUP_FAILURE'
+export const GroupFailure = (error: Error): GroupFailureAction => ({ type: GROUP_FAILURE, error })
 
 // functions
 export const getLoginName = (state: State): string => {

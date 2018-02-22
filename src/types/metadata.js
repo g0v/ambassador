@@ -57,6 +57,19 @@ export type Project = {
   needs: Skill[]
 }
 
+export type Group = {
+  children: Url[],
+  thumbnails: Url[],
+  keywords: string[],
+  products: Product[],
+  contributors: string[],
+  needs: Skill[]
+}
+
+export type GroupMap = {
+  [key: Url]: Group
+}
+
 export type Url = string
 
 export type ProjectStatus
