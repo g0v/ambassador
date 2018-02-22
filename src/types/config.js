@@ -5,7 +5,7 @@ import type { State } from '~/reducers'
 // data
 export type ConfigTokenRequestAction = { type: 'CONFIG_TOKEN_REQUEST', token: string }
 export const CONFIG_TOKEN_REQUEST = 'CONFIG_TOKEN_REQUEST'
-export const ConfigTokenRequest = (token: string): ConfigTokenRequestAciton => ({ type: CONFIG_TOKEN_REQUEST, token })
+export const ConfigTokenRequest = (token: string): ConfigTokenRequestAction => ({ type: CONFIG_TOKEN_REQUEST, token })
 
 export type ConfigTokenSuccessAction = { type: 'CONFIG_TOKEN_SUCCESS', token: string }
 export const CONFIG_TOKEN_SUCCESS = 'CONFIG_TOKEN_SUCCESS'

@@ -49,7 +49,7 @@ function create(token /*: Token */) /*: Promise<Session> */ {
     })
 }
 
-function findFirstValidMail(emails /*: Email[] */) /*: ?string */ {
+function findFirstValidMail(emails /*: EMail[] */) /*: ?string */ {
   for (let i = 0; i < emails.length; i++) {
     const m = emails[i]
     if (m.email && m.primary && m.verified && m.visibility === 'public') {
