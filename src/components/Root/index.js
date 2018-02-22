@@ -6,6 +6,7 @@ import LogbotPage from '~/components/LogbotPage'
 import RepoListPage from '~/components/RepoListPage'
 //import IssueListPage from '~/components/IssueListPage'
 import GroupListPage from '~/components/GroupListPage'
+import GroupPage from '~/components/GroupPage'
 import RepoPage from '~/components/RepoPage'
 //import SearchPage from '~/components/SearchPage'
 import G0vSearchPage from '~/components/G0vSearchPage'
@@ -43,6 +44,7 @@ class Root extends PureComponent {
           <Route exact path="/logbot/:channel" render={redirectToLogbot} />
           <Route exact path="/logbot/:channel/:date" component={LogbotPage} />
           <Route exact path="/groups" component={GroupListPage} />
+          <Route exact path="/groups/:group" component={GroupPage} />
           <Route exact path="/repos" component={RepoListPage} />
           <Route exact path="/repos/:repo" component={RepoPage} />
           <Route exact path="/search" component={G0vSearchPage} />

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import * as G from '~/types/github'
 import { mapDispatchToProps } from '~/types/action'
@@ -26,7 +27,11 @@ class GroupListPage extends PureComponent {
       <Container text id={id} className={cx(styles.main, className)}>
         <List>{
           compose(
-            map(url => <List.Item key={url}>{ url }</List.Item>),
+            map(url =>
+              <List.Item key={url} as={Link} to={`/groups/${encodeURIComponent(url)}`}>
+                { url }
+              </List.Item>
+            ),
             keys
           )(groups)
         }</List>
