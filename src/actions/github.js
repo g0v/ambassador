@@ -1,6 +1,7 @@
 /* @flow */
 
 import type { RawAction } from '~/types/action'
+import type { GroupMap } from '~/types/metadata'
 
 import axios from 'axios'
 import GitHub from 'github-api'
@@ -31,7 +32,10 @@ import {
   IntroFailure,
   g0vJsonRequest,
   g0vJsonSuccess,
-  g0vJsonFailure
+  g0vJsonFailure,
+  GroupRequest,
+  GroupSuccess,
+  GroupFailure
 } from '~/types/github'
 
 // XXX: should use getUser action with no user name
@@ -210,6 +214,25 @@ export const g0vJson: RawAction<[string, string], any> = store => async (name, r
     return result
   } catch (error) {
     dispatch(g0vJsonFailure(name, repo, error))
+    throw error
+  }
+}
+
+export const getGroups: RawAction<[string], GroupMap> = store => async (version) => {
+  const { dispatch } = store
+
+  if (version !== 'v1' && version !== 'v2') {
+    throw Error(`Invalid group version: ${version}`)
+  }
+
+  dispatch(GroupRequest())
+  try {
+    const { data: groups } = await axios.get(`${apiUrl}/api/group/${version}`)
+    dispatch(GroupSuccess(groups))
+
+    return groups
+  } catch (error) {
+    dispatch(GroupFailure(error))
     throw error
   }
 }

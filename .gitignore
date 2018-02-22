@@ -19,7 +19,7 @@ import-keywords.sh
 # prebuild for middle2
 #/build
 /build/static/js/manifest.*
-index.js
+./index.js
 index.js.map
 
 # misc

@@ -98,6 +98,7 @@ export type IntroFailureAction = { type: 'INTRO_FAILURE', user: string, repo: st
 export const INTRO_FAILURE = 'INTRO_FAILURE'
 export const IntroFailure = (user: string, repo: string, branch: string, error: Error): IntroFailureAction => ({ type: INTRO_FAILURE, user, repo, branch, error })
 
+// XXX: should move to metadata
 export type G0vJsonRequestAction = { type: 'G0V_JSON_REQUEST', name: string, repo: string }
 export const G0V_JSON_REQUEST = 'G0V_JSON_REQUEST'
 export const g0vJsonRequest = (name: string, repo: string): G0vJsonRequestAction => ({ type: G0V_JSON_REQUEST, name, repo })
@@ -176,6 +177,14 @@ export const getIntroMap = (state: State): any => {
 
 export const g0vJsonMap = (state: State, name:string, repo: string): { [key: string]: any } => {
   return (state && state.github && state.github.g0v) || {}
+}
+
+export const isGroupsLoading = (state: State): boolean => {
+  return !!(state && state.ui && state.ui.github && state.ui.github.groups && state.ui.github.groups.isLoading)
+}
+
+export const getGroupMap = (state: State): GroupMap => {
+  return (state && state.github && state.github.groups) || {}
 }
 
 // XXX: duplicated

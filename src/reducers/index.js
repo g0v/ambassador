@@ -5,6 +5,7 @@ import type { Log } from '~/types/logbot'
 import type { Hashtag } from '~/types/hashtag'
 import type { Resource } from '~/types/resource'
 import type { G0vSearchResult } from '~/types/search'
+import type { GroupMap } from '~/types/metadata'
 
 import {
   CONFIG_TOKEN_REQUEST,
@@ -39,6 +40,9 @@ import {
   G0V_JSON_REQUEST,
   G0V_JSON_SUCCESS,
   G0V_JSON_FAILURE,
+  GROUP_REQUEST,
+  GROUP_SUCCESS,
+  GROUP_FAILURE,
   fullName
 } from '~/types/github'
 import {
@@ -117,6 +121,11 @@ export type State = {
       value: string,
       total: number,
       page: number
+    },
+    github: {
+      groups: {
+        isLoading: boolean
+      }
     }
   },
   auth: ?any,
@@ -126,7 +135,8 @@ export type State = {
     repos: any[],
     users: { [key: string]: any },
     issues: { [key: string]: any[] },
-    g0v: { [key: string]: any }
+    g0v: { [key: string]: any },
+    groups: GroupMap
   },
   intros: { [key: string]: string },
   logbot: {
@@ -163,6 +173,11 @@ export const initialState: State = {
       value: '',
       total: 0,
       page: 0
+    },
+    github: {
+      groups: {
+        isLoading: false
+      }
     }
   },
   auth: undefined,
@@ -172,7 +187,8 @@ export const initialState: State = {
     repos: [],
     users: {},
     issues: {},
-    g0v: {}
+    g0v: {},
+    groups: {}
   },
   intros: {},
   logbot: {
@@ -487,6 +503,61 @@ export default (state: State = initialState, action: PlainAction): State => {
     }
     case G0V_JSON_FAILURE: {
       return state
+    }
+    case GROUP_REQUEST: {
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          github: {
+            ...state.ui.github,
+            groups: {
+              ...state.ui.github.groups,
+              isLoading: true
+            }
+          }
+        }
+      }
+    }
+    case GROUP_SUCCESS: {
+      const { groups } = action
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          github: {
+            ...state.ui.github,
+            groups: {
+              ...state.ui.github.groups,
+              isLoading: false
+            }
+          }
+        },
+        github: {
+          ...state.github,
+          groups
+        }
+      }
+    }
+    case GROUP_FAILURE: {
+      const { error } = action
+
+      console.error(error)
+
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          github: {
+            ...state.ui.github,
+            groups: {
+              ...state.ui.github.groups,
+              isLoading: false
+            }
+          }
+        }
+      }
     }
 
     case LOG_STORE: {
