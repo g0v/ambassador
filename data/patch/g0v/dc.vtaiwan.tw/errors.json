@@ -1,17 +1,11 @@
 [
   {
-    "keyword": "enum",
-    "dataPath": ".needs[0]",
-    "schemaPath": "#/properties/needs/items/enum",
+    "keyword": "type",
+    "dataPath": ".thumbnail",
+    "schemaPath": "#/properties/thumbnail/type",
     "params": {
-      "allowedValues": [
-        "designer",
-        "writer",
-        "programmer",
-        "money",
-        "txt"
-      ]
+      "type": "array"
     },
-    "message": "should be equal to one of the allowed values"
+    "message": "should be array"
   }
 ]

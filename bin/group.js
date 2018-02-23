@@ -78,7 +78,6 @@ const groupConcat = (version, o) => name => {
     let url = o && o.repository && o.repository.url
     if (url) g.children.push(url)
     if ((url === name) && o.name) g.name = o.name
-    console.log(url === name, o.name)
     if (o.thumbnail) {
       if (is(Array, o.thumbnail)) {
         g.thumbnails = g.thumbnails.concat(o.thumbnail)

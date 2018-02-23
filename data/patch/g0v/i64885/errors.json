@@ -4,8 +4,8 @@
     "dataPath": ".thumbnail",
     "schemaPath": "#/properties/thumbnail/type",
     "params": {
-      "type": "string"
+      "type": "array"
     },
-    "message": "should be string"
+    "message": "should be array"
   }
 ]

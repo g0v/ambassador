@@ -1,5 +1,8 @@
 {
   "g0v_json": "v2",
+  "licenses": [{
+    "type": "CC0-1.0"
+  }],
   "products": [{
     "type": "website",
     "name": "阿美語萌典",

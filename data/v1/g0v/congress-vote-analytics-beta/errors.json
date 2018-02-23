@@ -2,10 +2,28 @@
   {
     "keyword": "format",
     "dataPath": ".thumbnail",
-    "schemaPath": "#/properties/thumbnail/format",
+    "schemaPath": "#/properties/thumbnail/oneOf/0/format",
     "params": {
       "format": "uri"
     },
     "message": "should match format \"uri\""
+  },
+  {
+    "keyword": "type",
+    "dataPath": ".thumbnail",
+    "schemaPath": "#/properties/thumbnail/oneOf/1/type",
+    "params": {
+      "type": "array"
+    },
+    "message": "should be array"
+  },
+  {
+    "keyword": "oneOf",
+    "dataPath": ".thumbnail",
+    "schemaPath": "#/properties/thumbnail/oneOf",
+    "params": {
+      "passingSchemas": null
+    },
+    "message": "should match exactly one schema in oneOf"
   }
 ]

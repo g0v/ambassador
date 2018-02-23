@@ -72,8 +72,10 @@
     "thumbnail": {
       "title": "縮圖",
       "description": "Thumbnail",
-      "type": "string",
-      "format": "uri"
+      "oneOf": [
+        { "type": "string", "format": "uri" },
+        { "type": "array", "items": { "type": "string", "format": "uri" } }
+      ]
     },
     "document": {
       "title": "文件",

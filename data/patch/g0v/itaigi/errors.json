@@ -1,11 +1,11 @@
 [
   {
     "keyword": "type",
-    "dataPath": ".thumbnail",
-    "schemaPath": "#/properties/thumbnail/type",
+    "dataPath": ".products[0]",
+    "schemaPath": "#/properties/products/items/type",
     "params": {
-      "type": "string"
+      "type": "object"
     },
-    "message": "should be string"
+    "message": "should be object"
   }
 ]
