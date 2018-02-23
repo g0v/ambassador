@@ -44,26 +44,41 @@ class GroupPage extends PureComponent {
                 <UserList users={group.contributors} />
               </Segment>
 
+              <Rail close="very" position="left">
+                <h1>{ group.name || group.url }</h1>
+                <List>{
+                  map(
+                    thumb =>
+                      <List.Item
+                        key={thumb}
+                        className={styles.thumbnail}
+                        style={{ backgroundImage: `url(${thumb})` }}
+                      />,
+                    group.thumbnails || []
+                  )
+                }</List>
+              </Rail>
+
               <Rail close="very" position="right">
                 <Segment>
-                <h2>相關 repos</h2>
-                  <List>{
-                    map(
-                      url => {
-                        const { repo, name } = G.repoNameFromURL(url)
+                  <h2>相關 repos</h2>
+                    <List>{
+                      map(
+                        url => {
+                          const { repo, name } = G.repoNameFromURL(url)
 
-                        // TODO: add repo to the repo path
-                        return (
-                          <List.Item key={url}>{
-                            (repo && name)
-                              ? <Link to={`/repos/${name}`}>{ `${repo}/${name}` }</Link>
-                              : <a href="url" target="_blank">{ url }</a>
-                          }</List.Item>
-                        )
-                      },
-                      group.children || []
-                    )
-                  }</List>
+                          // TODO: add repo to the repo path
+                          return (
+                            <List.Item key={url}>{
+                              (repo && name)
+                                ? <Link to={`/repos/${name}`}>{ `${repo}/${name}` }</Link>
+                                : <a href="url" target="_blank">{ url }</a>
+                            }</List.Item>
+                          )
+                        },
+                        group.children || []
+                      )
+                    }</List>
                 </Segment>
               </Rail>
             </Grid.Column>

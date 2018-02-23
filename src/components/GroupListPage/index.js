@@ -29,7 +29,7 @@ class GroupListPage extends PureComponent {
           compose(
             map(url =>
               <List.Item key={url} as={Link} to={`/groups/${encodeURIComponent(url)}`}>
-                { url }
+                { `${groups[url].name || url} 相關專案` }
               </List.Item>
             ),
             keys

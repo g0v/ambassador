@@ -4,7 +4,7 @@ import * as paths from './paths'
 import Ajv from 'ajv'
 import v1 from './schema/v1.json'
 import v2 from './schema/v2.json'
-import { forEach, uniq } from 'ramda'
+import { forEach, uniq, is } from 'ramda'
 
 const ajv = new Ajv()
 const validator = {
@@ -35,6 +35,7 @@ const groupConcat = (version, o) => name => {
 
     if (!g) {
       g = result.v1.group[name] = {
+        name,
         children: [],
         thumbnails: [],
         keywords: [],
@@ -45,7 +46,14 @@ const groupConcat = (version, o) => name => {
     }
 
     g.children.push(o.name)
-    if (o.thumbnail) g.thumbnails.push(o.thumbnail)
+    // XXX: should fix the schema
+    if (o.thumbnail) {
+      if (is(Array, o.thumbnail)) {
+        g.thumbnails = g.thumbnails.concat(o.thumbnail)
+      } else {
+        g.thumbnails.push(o.thumbnail)
+      }
+    }
     if (o.keywords) g.keywords = g.keywords.concat(o.keywords)
     if (o.products) g.products = g.products.concat(o.products)
     if (o.contributors) g.contributors = g.contributors.concat(o.contributors)
@@ -57,6 +65,7 @@ const groupConcat = (version, o) => name => {
 
     if (!g) {
       g = result.v2.group[name] = {
+        url: name,
         children: [],
         thumbnails: [],
         keywords: [],
@@ -68,7 +77,15 @@ const groupConcat = (version, o) => name => {
 
     let url = o && o.repository && o.repository.url
     if (url) g.children.push(url)
-    if (o.thumbnail) g.thumbnails.push(o.thumbnail)
+    if ((url === name) && o.name) g.name = o.name
+    console.log(url === name, o.name)
+    if (o.thumbnail) {
+      if (is(Array, o.thumbnail)) {
+        g.thumbnails = g.thumbnails.concat(o.thumbnail)
+      } else {
+        g.thumbnails.push(o.thumbnail)
+      }
+    }
     if (o.keywords) g.keywords = g.keywords.concat(o.keywords)
     if (o.products) g.products = g.products.concat(o.products)
     if (o.contributors) g.contributors = g.contributors.concat(o.contributors)

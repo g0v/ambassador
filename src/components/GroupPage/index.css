@@ -1,2 +1,12 @@
 .main {
+  // XXX: duplicated
+  .thumbnail {
+    background-color: #16161d;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 1em;
+  }
 }

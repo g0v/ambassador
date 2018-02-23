@@ -1,5 +1,6 @@
 {
   "https://github.com/g0v/ly.g0v.tw": {
+    "url": "https://github.com/g0v/ly.g0v.tw",
     "children": [
       "https://github.com/g0v/ly-tel",
       "https://github.com/g0v/api.ly",
@@ -73,9 +74,11 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "ly.g0v.tw"
   },
   "https://github.com/g0v/Logbot": {
+    "url": "https://github.com/g0v/Logbot",
     "children": [
       "git@github.com:g0v/Logbot.git"
     ],
@@ -125,6 +128,7 @@
     ]
   },
   "https://github.com/g0v/POPonFire": {
+    "url": "https://github.com/g0v/POPonFire",
     "children": [
       "https://github.com/g0v/POPonFire"
     ],
@@ -149,9 +153,11 @@
       "programmer",
       "designer",
       "writer"
-    ]
+    ],
+    "name": "POPonFire"
   },
   "https://github.com/g0v/TWDoorplates": {
+    "url": "https://github.com/g0v/TWDoorplates",
     "children": [
       "https://github.com/g0v/TWDoorplates"
     ],
@@ -174,9 +180,11 @@
     ],
     "needs": [
       "designer"
-    ]
+    ],
+    "name": "TWDoorplates"
   },
   "https://github.com/g0v/TWRadiationApp": {
+    "url": "https://github.com/g0v/TWRadiationApp",
     "children": [
       "https://github.com/g0v/TWRadiationApp/",
       "https://github.com/Shihta/Ushahidi_Web.git"
@@ -221,6 +229,7 @@
     ]
   },
   "https://github.com/g0v/abroadplay": {
+    "url": "https://github.com/g0v/abroadplay",
     "children": [
       "https://github.com/g0v/abroadplay"
     ],
@@ -243,9 +252,11 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "abroadplay"
   },
   "https://github.com/g0v/kuansim": {
+    "url": "https://github.com/g0v/kuansim",
     "children": [
       "https://github.com/g0v/addressbook.parser",
       "https://github.com/g0v/kuansim",
@@ -274,7 +285,7 @@
       },
       {
         "type": "website",
-        "name": "",
+        "name": "鄉民關心你",
         "url": "https://kuansim.org",
         "source": "https://github.com/g0v/kuansim"
       },
@@ -298,16 +309,16 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "kuansim"
   },
   "https://github.com/g0v/amis-moedict": {
+    "url": "https://github.com/g0v/amis-moedict",
     "children": [
       "https://github.com/g0v/amis-moedict"
     ],
     "thumbnails": [
-      [
-        "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
-      ]
+      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
     ],
     "keywords": [
       "livescript",
@@ -370,9 +381,11 @@
     ],
     "needs": [
       "designer"
-    ]
+    ],
+    "name": "moedict"
   },
   "https://github.com/g0v/congress-vote-analytics": {
+    "url": "https://github.com/g0v/congress-vote-analytics",
     "children": [
       "https://github.com/g0v-tw-congress-vote-analytics/congress-vote-analytics-beta"
     ],
@@ -400,6 +413,7 @@
     ]
   },
   "https://github.com/g0v/councilor-voter-guide": {
+    "url": "https://github.com/g0v/councilor-voter-guide",
     "children": [
       "https://github.com/g0v/councilor-voter-guide"
     ],
@@ -448,9 +462,11 @@
       "writer",
       "programmer",
       "designer"
-    ]
+    ],
+    "name": "councilor-voter-guide"
   },
   "https://github.com/g0v/i64885": {
+    "url": "https://github.com/g0v/i64885",
     "children": [
       "https://github.com/g0v/datasmith",
       "https://github.com/g0v/i64885"
@@ -479,9 +495,11 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "i64885"
   },
   "https://github.com/g0v/react.vtaiwan.tw": {
+    "url": "https://github.com/g0v/react.vtaiwan.tw",
     "children": [
       "https://github.com/g0v/dc.vtaiwan.tw",
       "https://github.com/g0v/react.vtaiwan.tw.git"
@@ -522,6 +540,7 @@
     ]
   },
   "https://github.com/g0v/g0v.json": {
+    "url": "https://github.com/g0v/g0v.json",
     "children": [
       "https://github.com/g0v/editor",
       "https://github.com/g0v/g0v.json"
@@ -549,9 +568,11 @@
       "zbryikt",
       "ronnywang"
     ],
-    "needs": []
+    "needs": [],
+    "name": "g0v.json schema"
   },
   "https://github.com/g0v/g0v.tw": {
+    "url": "https://github.com/g0v/g0v.tw",
     "children": [
       "https://github.com/g0v/env.g0v.tw",
       "https://github.com/g0v/g0v.tw"
@@ -598,9 +619,11 @@
       "programmer",
       "designer",
       "txt"
-    ]
+    ],
+    "name": "g0vsite"
   },
   "https://github.com/g0v/g0vre": {
+    "url": "https://github.com/g0v/g0vre",
     "children": [
       "https://github.com/g0v/g0vre"
     ],
@@ -625,9 +648,11 @@
     ],
     "needs": [
       "developer"
-    ]
+    ],
+    "name": "g0vre"
   },
   "https://github.com/g0v/glyph": {
+    "url": "https://github.com/g0v/glyph",
     "children": [
       "https://github.com/g0v/glyph"
     ],
@@ -645,9 +670,11 @@
       "shulusama",
       "c9s"
     ],
-    "needs": []
+    "needs": [],
+    "name": "g0v glyph"
   },
   "https://github.com/g0v/inLiveTwTextChrome": {
+    "url": "https://github.com/g0v/inLiveTwTextChrome",
     "children": [
       "https://github.com/miaoski/inLiveTwTextChrome"
     ],
@@ -680,6 +707,7 @@
     ]
   },
   "https://github.com/g0v/hack.g0v.tw": {
+    "url": "https://github.com/g0v/hack.g0v.tw",
     "children": [],
     "thumbnails": [],
     "keywords": [
@@ -719,13 +747,12 @@
     ]
   },
   "https://github.com/g0v/itaigi": {
+    "url": "https://github.com/g0v/itaigi",
     "children": [
       "https://github.com/g0v/itaigi"
     ],
     "thumbnails": [
-      [
-        "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
-      ]
+      "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
     ],
     "keywords": [
       "reactjs",
@@ -749,9 +776,11 @@
     ],
     "needs": [
       "designer"
-    ]
+    ],
+    "name": "iTaigi"
   },
   "https://github.com/g0v/laweasyread": {
+    "url": "https://github.com/g0v/laweasyread",
     "children": [
       "https://github.com/g0v/laweasyread",
       "https://github.com/g0v/laweasyread-front"
@@ -801,9 +830,11 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "lawEasyRead"
   },
   "https://github.com/g0v/magic-mirror": {
+    "url": "https://github.com/g0v/magic-mirror",
     "children": [
       "https://github.com/g0v/magic-mirror"
     ],
@@ -825,20 +856,20 @@
     "contributors": [],
     "needs": [
       "programmer"
-    ]
+    ],
+    "name": "magic-mirror"
   },
   "https://github.com/g0v/moedict-webkit": {
+    "url": "https://github.com/g0v/moedict-webkit",
     "children": [
       "https://github.com/g0v/moedict-data",
       "https://github.com/g0v/moedict-process",
-      "https://github.com/audreyt/moedict-webkit",
+      "https://github.com/g0v/moedict-webkit",
       "https://github.com/g0v/zh-stroke-data",
       "https://github.com/racklin/moedict-jquery-plugin"
     ],
     "thumbnails": [
-      [
-        "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
-      ]
+      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
     ],
     "keywords": [
       "dictionary",
@@ -1015,9 +1046,11 @@
       "designer",
       "programmer",
       "writer"
-    ]
+    ],
+    "name": "moedict"
   },
   "https://github.com/g0v/moer.g0v.tw": {
+    "url": "https://github.com/g0v/moer.g0v.tw",
     "children": [
       "https://github.com/g0v/moer.g0v.tw"
     ],
@@ -1041,9 +1074,11 @@
     "needs": [
       "designer",
       "programmer"
-    ]
+    ],
+    "name": "moer.g0v.tw"
   },
   "https://github.com/g0v/news-diff": {
+    "url": "https://github.com/g0v/news-diff",
     "children": [
       "https://github.com/g0v/news-diff"
     ],
@@ -1060,9 +1095,11 @@
       "programmer",
       "server",
       "consumer"
-    ]
+    ],
+    "name": "news-diff"
   },
   "https://github.com/g0v/newshelper-extension": {
+    "url": "https://github.com/g0v/newshelper-extension",
     "children": [
       "https://github.com/g0v/newshelper-backend",
       "https://github.com/g0v/newshelper-extension"
@@ -1123,9 +1160,11 @@
       "writer",
       "progammer",
       "內容管理"
-    ]
+    ],
+    "name": "newshelper-extension"
   },
   "https://github.com/g0v/nuclear-data": {
+    "url": "https://github.com/g0v/nuclear-data",
     "children": [
       "https://github.com/g0v/nuclear-data.git"
     ],
@@ -1153,6 +1192,7 @@
     ]
   },
   "https://github.com/g0v/roadpin": {
+    "url": "https://github.com/g0v/roadpin",
     "children": [
       "https://github.com/g0v/roadpin"
     ],
@@ -1186,9 +1226,11 @@
     "needs": [
       "designer",
       "developer"
-    ]
+    ],
+    "name": "RoadPin"
   },
   "https://github.com/g0v/jothon-net": {
+    "url": "https://github.com/g0v/jothon-net",
     "children": [
       "https://github.com/g0v/submit"
     ],
@@ -1208,6 +1250,7 @@
     "needs": []
   },
   "https://github.com/g0v/summit.g0v.tw": {
+    "url": "https://github.com/g0v/summit.g0v.tw",
     "children": [
       "https://github.com/g0v/summit.g0v.tw"
     ],
@@ -1228,9 +1271,11 @@
       }
     ],
     "contributors": [],
-    "needs": []
+    "needs": [],
+    "name": "summit.g0v.tw"
   },
   "https://github.com/g0v/sunflower": {
+    "url": "https://github.com/g0v/sunflower",
     "children": [],
     "thumbnails": [],
     "keywords": [],
@@ -1246,6 +1291,7 @@
     "needs": []
   },
   "https://github.com/g0v/sunshine.cy": {
+    "url": "https://github.com/g0v/sunshine.cy",
     "children": [
       "https://github.com/g0v/sunshine.cy"
     ],
@@ -1270,9 +1316,11 @@
       "writer",
       "programmer",
       "designer"
-    ]
+    ],
+    "name": "sunshine.cy"
   },
   "https://github.com/g0v/twangry": {
+    "url": "https://github.com/g0v/twangry",
     "children": [
       "https://github.com/g0v/twangry"
     ],
@@ -1310,9 +1358,11 @@
       "designer",
       "wikipedia writer",
       "writer"
-    ]
+    ],
+    "name": "twangry"
   },
   "https://github.com/g0v/twly-voter-guide": {
+    "url": "https://github.com/g0v/twly-voter-guide",
     "children": [
       "https://github.com/g0v/twly-voter-guide"
     ],
@@ -1348,9 +1398,11 @@
       "writer",
       "programmer",
       "designer"
-    ]
+    ],
+    "name": "twly-voter-guide"
   },
   "https://github.com/g0v/twstat": {
+    "url": "https://github.com/g0v/twstat",
     "children": [
       "https://github.com/g0v/twstat"
     ],
@@ -1369,9 +1421,11 @@
       }
     ],
     "contributors": [],
-    "needs": []
+    "needs": [],
+    "name": "twstat"
   },
   "https://github.com/g0v/typo-resolver": {
+    "url": "https://github.com/g0v/typo-resolver",
     "children": [
       "https://github.com/g0v/typo-resolver"
     ],
@@ -1395,9 +1449,11 @@
       "designer",
       "writer",
       "tech"
-    ]
+    ],
+    "name": "Typo Resolver"
   },
   "https://github.com/g0v/urbancode-commission": {
+    "url": "https://github.com/g0v/urbancode-commission",
     "children": [
       "https://github.com/g0v/urbancode-commission"
     ],
@@ -1422,9 +1478,11 @@
     "needs": [
       "data structure",
       "front-end progammer"
-    ]
+    ],
+    "name": "urbancode-commission"
   },
   "https://github.com/ronnywang/lagnews": {
+    "url": "https://github.com/ronnywang/lagnews",
     "children": [],
     "thumbnails": [],
     "keywords": [],
@@ -1440,6 +1498,7 @@
     "needs": []
   },
   "https://github.com/ronnywang/newsdiff": {
+    "url": "https://github.com/ronnywang/newsdiff",
     "children": [],
     "thumbnails": [],
     "keywords": [],
@@ -1461,6 +1520,7 @@
     "needs": []
   },
   "https://github.com/ronnywang/taiwan-cabinet": {
+    "url": "https://github.com/ronnywang/taiwan-cabinet",
     "children": [
       "https://github.com/ronnywang/taiwan-cabinet"
     ],
@@ -1482,6 +1542,7 @@
     ],
     "needs": [
       ""
-    ]
+    ],
+    "name": "taiwan-cabinet"
   }
 }

@@ -1,5 +1,6 @@
 {
   "ly": {
+    "name": "ly",
     "children": [
       "ly-tel",
       "api.ly",
@@ -44,6 +45,7 @@
     ]
   },
   "Tools": {
+    "name": "Tools",
     "children": [
       "TWDoorplates"
     ],
@@ -64,6 +66,7 @@
     ]
   },
   "Looknuke Map": {
+    "name": "Looknuke Map",
     "children": [
       "Looknuke-Map-iOS"
     ],
@@ -94,6 +97,7 @@
     ]
   },
   "abroadplay": {
+    "name": "abroadplay",
     "children": [
       "abroadplay"
     ],
@@ -114,6 +118,7 @@
     ]
   },
   "addressbook": {
+    "name": "addressbook",
     "children": [
       "政府公開通訊錄"
     ],
@@ -142,6 +147,7 @@
     ]
   },
   "kuansim": {
+    "name": "kuansim",
     "children": [
       "政府公開通訊錄",
       "kuansim",
@@ -182,6 +188,7 @@
     ]
   },
   "3du": {
+    "name": "3du",
     "children": [
       "moedict",
       "iTaigi",
@@ -192,12 +199,8 @@
       "moedict-jquery-plugin"
     ],
     "thumbnails": [
-      [
-        "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
-      ],
-      [
-        "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
-      ]
+      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png",
+      "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
     ],
     "keywords": [
       "livescript",
@@ -257,6 +260,7 @@
     ]
   },
   "立法院小組": {
+    "name": "立法院小組",
     "children": [
       "VotesAnalysis"
     ],
@@ -279,6 +283,7 @@
     ]
   },
   "i64885": {
+    "name": "i64885",
     "children": [
       "datasmith",
       "i64885"
@@ -307,6 +312,7 @@
     ]
   },
   "visualization": {
+    "name": "visualization",
     "children": [
       "env.g0v.tw"
     ],
@@ -332,6 +338,7 @@
     ]
   },
   "g0v hub": {
+    "name": "g0v hub",
     "children": [
       "g0vsite"
     ],
@@ -352,6 +359,7 @@
     ]
   },
   "inLiveTw": {
+    "name": "inLiveTw",
     "children": [
       "inLiveTwTextChrome"
     ],
@@ -373,6 +381,7 @@
     ]
   },
   "meta": {
+    "name": "meta",
     "children": [
       "ivod.ly"
     ],
@@ -397,6 +406,7 @@
     ]
   },
   "laweasyread": {
+    "name": "laweasyread",
     "children": [
       "lawEasyRead",
       "LawEasyRead client"
@@ -427,6 +437,7 @@
     ]
   },
   "environment": {
+    "name": "environment",
     "children": [
       "moer.g0v.tw"
     ],
@@ -448,6 +459,7 @@
     ]
   },
   "news-center": {
+    "name": "news-center",
     "children": [
       "news-diff"
     ],
@@ -470,6 +482,7 @@
     ]
   },
   "新聞小幫手": {
+    "name": "新聞小幫手",
     "children": [
       "newshelper-backend",
       "newshelper-extension"
@@ -510,6 +523,7 @@
     ]
   },
   "??": {
+    "name": "??",
     "children": [
       "react.vtaiwan.tw"
     ],
@@ -536,6 +550,7 @@
     ]
   },
   "truth": {
+    "name": "truth",
     "children": [
       "twangry"
     ],
@@ -564,6 +579,7 @@
     ]
   },
   "twly-voter-guide": {
+    "name": "twly-voter-guide",
     "children": [
       "twly-voter-guide"
     ],
@@ -586,6 +602,7 @@
     ]
   },
   "twly_crawler": {
+    "name": "twly_crawler",
     "children": [
       "twly-voter-guide"
     ],
@@ -608,6 +625,7 @@
     ]
   },
   "Typo Resolver": {
+    "name": "Typo Resolver",
     "children": [
       "Typo Resolver"
     ],
@@ -628,6 +646,7 @@
     ]
   },
   "開放都市計畫": {
+    "name": "開放都市計畫",
     "children": [
       "urbancode-commission"
     ],
@@ -650,6 +669,7 @@
     ]
   },
   "moe": {
+    "name": "moe",
     "children": [
       "zh-stroke-data"
     ],
@@ -676,6 +696,7 @@
     ]
   },
   "moedict-webkit": {
+    "name": "moedict-webkit",
     "children": [
       "zh-stroke-data"
     ],
