@@ -16,13 +16,22 @@ class UserList extends PureComponent {
     users: []
   }
 
+  componentDidMount() {
+    this.fetchUsers()
+  }
+
   componentDidUpdate(prevProps) {
+    if (prevProps.users === this.users) return
+
+    this.fetchUsers()
+  }
+
+  fetchUsers() {
     const { actions, userMap, users } = this.props
 
-    if (prevProps.users === users) return
-
     for (const user of users) {
-      if (!userMap[user]) {
+      // XXX: null is the waiting state
+      if (userMap[user] === undefined) {
         actions.github.getUser(user)
           .catch(err => console.error(err))
       }

@@ -133,7 +133,7 @@ export type State = {
     profile: ?any,
     isMember: ?boolean,
     repos: any[],
-    users: { [key: string]: any },
+    users: { [key: string]: ?any },
     issues: { [key: string]: any[] },
     g0v: { [key: string]: any },
     groups: GroupMap
@@ -330,6 +330,7 @@ export default (state: State = initialState, action: PlainAction): State => {
           ...state.github,
           users: {
             ...state.github.users,
+            // use null as the waiting state
             [user]: null
           }
         }
