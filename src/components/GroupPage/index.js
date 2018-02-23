@@ -7,6 +7,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Container, Grid, Segment } from 'semantic-ui-react'
 import ProductList from '~/components/ProductList'
+import UserList from '~/components/UserList'
 import { compose, keys } from 'ramda'
 import styles from './index.css'
 
@@ -17,8 +18,6 @@ class GroupPage extends PureComponent {
 
   async componentDidMount() {
     const { actions, groups } = this.props
-
-    console.log(groups)
 
     if (keys(groups).length === 0) {
       await actions.github.getGroups('v2')
@@ -39,6 +38,10 @@ class GroupPage extends PureComponent {
               <Segment>
                 <h2>專案成果</h2>
                 <ProductList products={group.products} />
+              </Segment>
+              <Segment>
+                <h2>參與者</h2>
+                <UserList users={group.contributors} />
               </Segment>
             </Grid.Column>
           </Grid.Row>

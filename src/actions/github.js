@@ -193,23 +193,13 @@ export const getIntro: RawAction<[string, string, string], string> = store => as
 const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 export const g0vJson: RawAction<[string, string], any> = store => async (name, repo) => {
-  const { dispatch, getState } = store
+  const { dispatch } = store
 
   dispatch(g0vJsonRequest(name, repo))
   try {
     const { data: result } = await axios.get(`${apiUrl}/api/metadata/v2/${name}/${repo}`)
-    // $FlowFixMe
-    const userMap = G.getUserMap(getState())
 
     dispatch(g0vJsonSuccess(name, repo, result))
-
-    if (result.contributors) {
-      for (const u of result.contributors) {
-        if (userMap[u] === undefined) {
-          dispatch(getUser)(u)
-        }
-      }
-    }
 
     return result
   } catch (error) {

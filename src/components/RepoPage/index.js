@@ -5,13 +5,13 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, List, Grid, Segment, Rail, Image } from 'semantic-ui-react'
+import { Container, List, Grid, Segment, Rail } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
 import ProductList from '~/components/ProductList'
 import ProductListItem from '~/components/ProductListItem'
+import UserList from '~/components/UserList'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
-import thumbnail from '~/images/thumbnail.png'
 
 class RepoPage extends PureComponent {
   static defaultProps = {
@@ -39,7 +39,7 @@ class RepoPage extends PureComponent {
   }
 
   render() {
-    const { id, className, match, repos, intros, g0vJsonMap, issueMap, userMap } = this.props
+    const { id, className, match, repos, intros, g0vJsonMap, issueMap } = this.props
     const { params: { repo } } = match
     const fullname = G.fullName('g0v', repo)
     const g0vJson = g0vJsonMap[fullname] || {}
@@ -86,24 +86,7 @@ class RepoPage extends PureComponent {
               </Segment>
               <Segment>
                 <h2>參與者</h2>
-                <List>{
-                  map(
-                    user =>
-                      <List.Item key={user}>
-                        <Image avatar src={(userMap[user] && userMap[user].avatar_url) || thumbnail} />
-                        <List.Content>
-                          <List.Header>{ user }</List.Header>
-                          {
-                            userMap[user] && userMap[user].html_url &&
-                              <a href={userMap[user].html_url || '#'} target="_blank">
-                                { userMap[user].html_url }
-                              </a>
-                          }
-                        </List.Content>
-                      </List.Item>,
-                    g0vJson.contributors || []
-                  )
-                }</List>
+                <UserList users={g0vJson.contributors} />
               </Segment>
               {
                 intro &&
@@ -181,9 +164,8 @@ export default compose(
       const intros = G.getIntroMap(state)
       const g0vJsonMap = G.g0vJsonMap(state)
       const issueMap = G.getIssueMap(state)
-      const userMap = G.getUserMap(state)
 
-      return { isLoading, repos, intros, g0vJsonMap, issueMap, userMap }
+      return { isLoading, repos, intros, g0vJsonMap, issueMap }
     },
     mapDispatchToProps(actions)
   )
