@@ -1,7 +1,9 @@
 /* @flow */
 
 import type { State } from '~/reducers'
-import type { Project, GroupMap } from './metadata'
+import type { Url, Project, GroupMap } from './metadata'
+
+import { matchPath } from 'react-router-dom'
 
 // type
 type EMail = {
@@ -195,4 +197,12 @@ export const findFirstValidMail = (emails: EMail[]): ?string => {
       return m.email
     }
   }
+}
+
+export const repoNameFromURL = (url: Url): { repo: string, name: string } => {
+  const match = matchPath(url, { path: 'http(s?)://github.com/:repo/:name' })
+
+  if (!match) return { repo: null, name: null }
+
+  return { repo: match.params.repo, name: match.params.name }
 }

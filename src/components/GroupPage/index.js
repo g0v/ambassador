@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, Grid, Segment } from 'semantic-ui-react'
+import { Container, Grid, Segment, Rail, List } from 'semantic-ui-react'
 import ProductList from '~/components/ProductList'
 import UserList from '~/components/UserList'
-import { compose, keys } from 'ramda'
+import { compose, keys, map } from 'ramda'
 import styles from './index.css'
 
 class GroupPage extends PureComponent {
@@ -43,6 +43,29 @@ class GroupPage extends PureComponent {
                 <h2>參與者</h2>
                 <UserList users={group.contributors} />
               </Segment>
+
+              <Rail close="very" position="right">
+                <Segment>
+                <h2>相關 repos</h2>
+                  <List>{
+                    map(
+                      url => {
+                        const { repo, name } = G.repoNameFromURL(url)
+
+                        // TODO: add repo to the repo path
+                        return (
+                          <List.Item key={url}>{
+                            (repo && name)
+                              ? <Link to={`/repos/${name}`}>{ `${repo}/${name}` }</Link>
+                              : <a href="url" target="_blank">{ url }</a>
+                          }</List.Item>
+                        )
+                      },
+                      group.children || []
+                    )
+                  }</List>
+                </Segment>
+              </Rail>
             </Grid.Column>
           </Grid.Row>
         </Grid>
