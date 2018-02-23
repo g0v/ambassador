@@ -7,7 +7,8 @@ import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Container, List, Grid, Segment, Rail, Image } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
-import ProductListItem from '../ProductListItem'
+import ProductList from '~/components/ProductList'
+import ProductListItem from '~/components/ProductListItem'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
 import thumbnail from '~/images/thumbnail.png'
@@ -56,15 +57,7 @@ class RepoPage extends PureComponent {
             <Grid.Column>
               <Segment>
                 <h2>專案成果</h2>
-                <List className="url-list">{
-                  g0vJson && g0vJson.products &&
-                    map(
-                      p => typeof p === 'string'
-                        ? <List.Item key={p} content={p} />
-                        : <ProductListItem key={p.url} data={p} />,
-                      g0vJson.products
-                    )
-                }</List>
+                <ProductList className="url-list" products={g0vJson.products}/>
               </Segment>
               <Segment>
                 <h2>重要文件和資訊</h2>

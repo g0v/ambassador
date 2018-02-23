@@ -25,6 +25,7 @@ let result = {
   }
 }
 
+// TODO: save the group name
 const groupConcat = (version, o) => name => {
   // could be ""
   if (!name) return
