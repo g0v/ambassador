@@ -8,6 +8,7 @@ import * as G from '~/types/github'
 import { Container, Grid, Segment, Rail, List } from 'semantic-ui-react'
 import ProductList from '~/components/ProductList'
 import UserList from '~/components/UserList'
+import KeywordList from '~/components/KeywordList'
 import NeedList from '~/components/NeedList'
 import { compose, keys, map } from 'ramda'
 import styles from './index.css'
@@ -84,6 +85,10 @@ class GroupPage extends PureComponent {
                 <Segment>
                   <h2>徵求支援</h2>
                   <NeedList needs={group.needs} />
+                </Segment>
+                <Segment>
+                  <h2>關鍵字</h2>
+                  <KeywordList keywords={group.keywords} />
                 </Segment>
               </Rail>
             </Grid.Column>

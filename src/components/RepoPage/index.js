@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown'
 import ProductList from '~/components/ProductList'
 import ProductListItem from '~/components/ProductListItem'
 import UserList from '~/components/UserList'
+import KeywordList from '~/components/KeywordList'
 import NeedList from '~/components/NeedList'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
@@ -132,6 +133,10 @@ class RepoPage extends PureComponent {
                 <Segment>
                   <h2>徵求支援</h2>
                   <NeedList needs={g0vJson.needs} />
+                </Segment>
+                <Segment>
+                  <h2>關鍵字</h2>
+                  <KeywordList keywords={g0vJson.keywords} />
                 </Segment>
                 <Segment>
                   <h2>相關 issues</h2>
