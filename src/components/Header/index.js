@@ -44,17 +44,14 @@ class Header extends PureComponent {
         >
           機器大使
         </Menu.Item>
-        {
-          !unauthed &&
-          <Menu.Item
-            as={Link}
-            to="/groups"
-            name="groups"
-            active={location.pathname.startsWith('/groups')}
-          >
-            專案群組
-          </Menu.Item>
-        }
+        <Menu.Item
+          as={Link}
+          to="/groups"
+          name="groups"
+          active={location.pathname.startsWith('/groups')}
+        >
+          專案群組
+        </Menu.Item>
         {
           !unauthed &&
           <Menu.Item

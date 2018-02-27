@@ -1,2 +1,45 @@
 .main {
+  line-height: 1.5rem;
+
+  #jumbotron {
+  }
+
+  .status,
+  .features,
+  .description {
+    width: 960px;
+    margin: 120px auto;
+  }
+
+  .status {
+  }
+
+  .features {
+  }
+
+  .description {
+  }
+
+  .footer {
+    background-color: #1b1c1d;
+    color: #fff;
+    padding: 40px 0;
+
+    &__content {
+      position: relative;
+      width: 960px;
+      margin: 0 auto;
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .g0v {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
 }
