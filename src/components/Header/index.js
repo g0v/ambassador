@@ -36,38 +36,66 @@ class Header extends PureComponent {
 
     return (
       <Menu id={id} className={cx(styles.main, className)} inverted fixed="top">
-        <Menu.Item>YA0H</Menu.Item>
-        <CalendarModal
-          trigger={
-            <Menu.Item
-              as={Link}
-              to={`/logbot/${channel}/${date}`}
-              name="logbot"
-              active={location.pathname.startsWith('/logbot')}
-            >
-              <Icon name="calendar" />
-              Logbot
-            </Menu.Item>
-          }
-          date={date}
-          onSelect={date => history.push((moment(date).format(L.DATE_FORMAT)))}
-        />
         <Menu.Item
           as={Link}
-          to="/repos"
-          name="issues"
-          active={location.pathname === '/repos'}
+          to="/"
+          name="index"
+          active={location.pathname === '/'}
         >
-          Repositories
+          機器大使
         </Menu.Item>
-        <Menu.Item
-          as={Link}
-          to="/resources"
-          name="resources"
-          active={location.pathname === '/resources'}
-        >
-          Resources
-        </Menu.Item>
+        {
+          !unauthed &&
+          <Menu.Item
+            as={Link}
+            to="/groups"
+            name="groups"
+            active={location.pathname.startsWith('/groups')}
+          >
+            專案群組
+          </Menu.Item>
+        }
+        {
+          !unauthed &&
+          <Menu.Item
+            as={Link}
+            to="/repos"
+            name="issues"
+            active={location.pathname === '/repos'}
+          >
+            專案列表
+          </Menu.Item>
+        }
+        {
+          !unauthed &&
+          <Dropdown item text="標記工具">
+            <Dropdown.Menu>
+              <CalendarModal
+                trigger={
+                  <Dropdown.Item
+                    as={Link}
+                    to={`/logbot/${channel}/${date}`}
+                    name="logbot"
+                    active={location.pathname.startsWith('/logbot')}
+                  >
+                    <Icon name="calendar" />
+                    Logbot
+                  </Dropdown.Item>
+                }
+                date={date}
+                onSelect={date => history.push((moment(date).format(L.DATE_FORMAT)))}
+              />
+              <Dropdown.Item
+                as={Link}
+                to="/resources"
+                name="resources"
+                active={location.pathname === '/resources'}
+              >
+                外部資源
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        }
         <Menu.Menu position="right">
           <Menu.Item>
             <Search
@@ -92,7 +120,7 @@ class Header extends PureComponent {
                   await actions.github.getProfile()
                 }}
               >
-                Sign In
+                登入
               </Menu.Item>
             : <Dropdown item text={ loginName || '...' }>
                 <Dropdown.Menu>
@@ -101,14 +129,14 @@ class Header extends PureComponent {
                     to="/config"
                     name="config"
                   >
-                    Config
+                    設定
                   </Dropdown.Item>
                   <Dropdown.Item
                     name="sign-out"
                     disabled={!loginName}
                     onClick={() => actions.auth.logout()}
                   >
-                    Sign Out
+                    登出
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

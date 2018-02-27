@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import cx from 'classnames'
 import { Route, Redirect } from 'react-router-dom'
 import Header from '~/components/Header'
+import LandingPage from '~/components/LandingPage'
 import LogbotPage from '~/components/LogbotPage'
 import RepoListPage from '~/components/RepoListPage'
 //import IssueListPage from '~/components/IssueListPage'
@@ -39,7 +40,7 @@ class Root extends PureComponent {
       <div id={id} className={cx(styles.main, className)}>
         <Header />
         <div className={styles.container}>
-          <Route exact path="/" render={redirectToLogbot} />
+          <Route exact path="/" component={LandingPage} />
           <Route exact path="/logbot" render={redirectToLogbot} />
           <Route exact path="/logbot/:channel" render={redirectToLogbot} />
           <Route exact path="/logbot/:channel/:date" component={LogbotPage} />
