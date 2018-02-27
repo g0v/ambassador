@@ -26,7 +26,7 @@ class CalendarModal extends PureComponent {
         size="tiny"
         closeOnDocumentClick
       >
-        <Modal.Header>Pick a date</Modal.Header>
+        <Modal.Header>選個日期</Modal.Header>
         <Modal.Content className={styles.content}>
           <InfiniteCalendar
             width={540}

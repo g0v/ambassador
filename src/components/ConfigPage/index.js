@@ -34,15 +34,15 @@ class ConfigPage extends PureComponent {
         onClick={this.onSetToken}
         disabled={isLoading || !token || !email}
       >
-        Use my token to access GitHub
+        用我的 GitHub token 抓資料
       </Button>
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
-        <h1>Config</h1>
+        <h1>設定</h1>
         <Form>
           <Form.Field>
-            <label>Email </label>
+            <label>電子郵件</label>
             <input value={email} disabled />
           </Form.Field>
           <Form.Field>
@@ -53,7 +53,7 @@ class ConfigPage extends PureComponent {
             position="bottom left"
             trigger={btn}
           >
-            Let the backend service uses your token to access GitHub APIs. Only works when you are the administrator.
+            讓後台用這個帳號的 GitHub token 來存取 GitHub API 。只有管理員可以使用此功能。
           </Popup>
         </Form>
       </Container>

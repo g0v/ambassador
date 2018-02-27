@@ -43,8 +43,8 @@ class ResourcePage extends PureComponent {
     let btn
     if (error) {
       const content = error.response.status === 409
-        ? 'URI exists!'
-        : 'Something is wrong!'
+        ? '重複的 URI ！'
+        : '有什麼出錯了！'
       btn =
         <Button
           negative
@@ -54,7 +54,7 @@ class ResourcePage extends PureComponent {
             await actions.resource.dismiss()
           }}
         >
-          Error
+          錯誤
         </Button>
       btn =
         <Popup
@@ -74,7 +74,7 @@ class ResourcePage extends PureComponent {
             await actions.resource.create(uri, value)
           }}
         >
-          Submit
+          新增
         </Button>
     }
 
@@ -99,9 +99,10 @@ class ResourcePage extends PureComponent {
 
     return (
       <Container text id={id} className={cx(styles.main, className)}>
+        <h1>外部資源標記工具</h1>
         <Form>
           <Form.Field>
-            <label>Resource URI</label>
+            <label>外部資源 URI</label>
             <Input
               label="http(s)://"
               value={uri}
@@ -129,7 +130,7 @@ class ResourcePage extends PureComponent {
           </Form.Field>
           { btn }
         </Form>
-        <Divider horizontal>Resources</Divider>
+        <Divider horizontal>外部資源列表</Divider>
         <Grid columns={COLUMN_NUM}>{
           idxMap(
             (a, i) =>
