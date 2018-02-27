@@ -1,12 +1,12 @@
 {
-  "bundle.css": "static/css/bundle.3e40a6fb.css",
-  "bundle.css.map": "static/css/bundle.3e40a6fb.css.map",
-  "bundle.js": "static/js/bundle.d2509885.js",
-  "bundle.js.map": "static/js/bundle.d2509885.js.map",
-  "manifest.js": "static/js/manifest.8f59e484.js",
-  "manifest.js.map": "static/js/manifest.8f59e484.js.map",
+  "bundle.css": "static/css/bundle.f598c569.css",
+  "bundle.css.map": "static/css/bundle.f598c569.css.map",
+  "bundle.js": "static/js/bundle.672a656d.js",
+  "bundle.js.map": "static/js/bundle.672a656d.js.map",
+  "manifest.js": "static/js/manifest.59d9a2b6.js",
+  "manifest.js.map": "static/js/manifest.59d9a2b6.js.map",
   "static/media/g0v.jump.l.gif": "static/media/g0v.jump.l.1476e4fb.gif",
   "static/media/thumbnail.png": "static/media/thumbnail.89f276ae.png",
-  "vendor.js": "static/js/vendor.679700d2.js",
-  "vendor.js.map": "static/js/vendor.679700d2.js.map"
+  "vendor.js": "static/js/vendor.92ddd9a4.js",
+  "vendor.js.map": "static/js/vendor.92ddd9a4.js.map"
 }
