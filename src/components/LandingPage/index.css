@@ -1,44 +1,79 @@
 .main {
   line-height: 1.5rem;
 
-  #jumbotron {
-  }
-
-  .status,
-  .features,
-  .description {
-    width: 960px;
-    margin: 120px auto;
-  }
-
-  .status {
-  }
-
-  .features {
-  }
-
-  .description {
-  }
-
-  .footer {
-    background-color: #1b1c1d;
+  .splash {
+    position: fixed;
+    background: #1b1c1d;
     color: #fff;
-    padding: 40px 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 91%;
 
     &__content {
       position: relative;
       width: 960px;
-      margin: 0 auto;
+      margin-top: 256px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-      ul {
-        list-style: none;
-        padding: 0;
+    &__brand {
+      h1 {
+        font-size: 4rem;
       }
 
-      .g0v {
-        position: absolute;
-        right: 0;
-        bottom: 0;
+      p {
+        front-size: 2rem;
+      }
+    }
+
+    .status {
+      position: absolute;
+      top: -64px;
+      right: 0;
+      margin: 0;
+
+      &__value {
+        height: 200px;
+        line-height: 200px !important;
+      }
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 90%;
+    width: 100%;
+    background-color: #fff;
+
+    .features,
+    .description {
+      width: 960px;
+      margin: 120px auto;
+    }
+
+    .features {
+    }
+
+    .description {
+    }
+
+    .footer {
+      background-color: #1b1c1d;
+      color: #fff;
+      padding: 40px 0;
+
+      &__content {
+        position: relative;
+        width: 960px;
+        margin: 0 auto;
+
+        .g0v {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
       }
     }
   }

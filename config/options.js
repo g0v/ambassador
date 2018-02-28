@@ -25,6 +25,7 @@ const vendor = [
   'react-redux',
   'react-router-dom',
   'react-visibility-sensor',
+  'recharts',
   'redux',
   'semantic-ui-react',
   'store',
