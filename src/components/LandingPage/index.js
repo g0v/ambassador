@@ -5,62 +5,12 @@ import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import { Statistic, List } from 'semantic-ui-react'
-import { PieChart, Pie, Cell, Sector } from 'recharts'
+import MetadataStatistic from '~/components/MetadataStatistic'
 import styles from './index.css'
-
-const renderActiveShape = (props) => {
-  const {
-    cx, cy, innerRadius, outerRadius,
-    startAngle, endAngle,
-    fill, payload
-  } = props
-
-  return (
-    <g>
-      <text
-        x={cx} y={cy}
-        dy={24 - 8}
-        fontSize={48}
-        textAnchor="middle"
-        fill={fill}
-      >
-        { payload.value }
-      </text>
-      <text
-        x={cx} y={cy}
-        dy={24 + 8}
-        textAnchor="middle"
-        fill="#fff"
-      >
-        { payload.name }
-      </text>
-      <Sector
-        cx={cx}
-        cy={cy}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        innerRadius={innerRadius}
-        outerRadius={outerRadius + 10}
-        fill={fill}
-      />
-    </g>
-  )
-}
 
 class LandingPage extends PureComponent {
   static defaultProps = {
     className: ''
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      activeIndex: 0
-    }
-  }
-
-  onPieEnter = (data, activeIndex) => {
-    this.setState({ activeIndex })
   }
 
   render() {
@@ -76,29 +26,12 @@ class LandingPage extends PureComponent {
             </div>
             <Statistic.Group className={styles.status}>
               <Statistic inverted>
-                <PieChart width={200} height={200}>
-                  <Pie
-                    activeIndex={this.state.activeIndex}
-                    activeShape={renderActiveShape}
-                    data={[{
-                      name: '格式正確',
-                      value: 19
-                    }, {
-                      name: '格式不正確',
-                      value: 41
-                    }, {
-                      name: '未填寫',
-                      value: 200
-                    }]}
-                    innerRadius={60}
-                    outerRadius={80}
-                    onMouseEnter={this.onPieEnter}
-                  >
-                    <Cell fill="#2ecc71" />
-                    <Cell fill="#f1c40f" />
-                    <Cell fill="#ecf0f1" />
-                  </Pie>
-                </PieChart>
+                <MetadataStatistic
+                  side={200}
+                  valid={19}
+                  invalid={41}
+                  missing={200}
+                />
                 <Statistic.Label>g0v.json</Statistic.Label>
               </Statistic>
               <Statistic inverted>
