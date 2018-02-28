@@ -543,8 +543,11 @@ export type GroupMap = {
   status: GroupStatus
 }
 
+// data
 export const EmptyGroupStatus = {
   valid: 0,
   invalid: 0,
   missing: 0
 }
+
+// functions

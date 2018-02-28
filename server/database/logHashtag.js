@@ -17,6 +17,10 @@ const getLogs = (db, hashtag) =>
   )
     .then(r => r && r.rows)
 
+const getLogCount = (db) =>
+  db.query('SELECT 1 FROM logHashtag lh LEFT JOIN log l ON lh.log = l.id;')
+    .then(r => r && r.rows && r.rows.length) // XXX
+
 const link = (db, log, hashtag) =>
   db.query(
     'INSERT INTO logHashtag (log, hashtag) VALUES ($1, $2) RETURNING *;',
@@ -35,6 +39,7 @@ module.exports = {
   prepare,
   drop,
   getLogs,
+  getLogCount,
   list,
   link,
   unlink

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
+import * as S from '~/types'
 import * as G from '~/types/github'
 import { EmptyGroupStatus } from '~/types/metadata'
 import { Statistic, List } from 'semantic-ui-react'
@@ -13,11 +14,12 @@ import styles from './index.css'
 class LandingPage extends PureComponent {
   static defaultProps = {
     className: '',
+    statistics: S.EmptyStatistics,
     status: EmptyGroupStatus
   }
 
   render() {
-    const { id, className, status } = this.props
+    const { id, className, statistics, status } = this.props
 
     return (
       <div id={id} className={cx(styles.main, className)}>
@@ -37,13 +39,17 @@ class LandingPage extends PureComponent {
                 />
                 <Statistic.Label>g0v.json</Statistic.Label>
               </Statistic>
-              <Statistic inverted>
-                <Statistic.Value className={styles.status__value}>2,000</Statistic.Value>
-                <Statistic.Label>Logbot</Statistic.Label>
+              <Statistic inverted color="violet">
+                <Statistic.Value className={styles.status__value}>
+                  { statistics.taggedLogs }
+                </Statistic.Value>
+                <Statistic.Label>已標記的聊天記錄</Statistic.Label>
               </Statistic>
-              <Statistic inverted>
-                <Statistic.Value className={styles.status__value}>20</Statistic.Value>
-                <Statistic.Label>外部資源</Statistic.Label>
+              <Statistic inverted color="pink">
+                <Statistic.Value className={styles.status__value}>
+                  { statistics.taggedResources }
+                </Statistic.Value>
+                <Statistic.Label>已標記的外部資源</Statistic.Label>
               </Statistic>
             </Statistic.Group>
           </div>
@@ -105,9 +111,10 @@ class LandingPage extends PureComponent {
 
 export default connect(
   state => {
+    const statistics = S.getStatistics(state)
     const status = G.getGroupStatus(state)
 
-    return { status }
+    return { statistics, status }
   },
   mapDispatchToProps(actions)
 )(LandingPage)

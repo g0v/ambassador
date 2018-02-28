@@ -1,5 +1,6 @@
 /* @flow */
 
+import type { Statistics } from '~/types'
 import type { PlainAction } from '~/types/action'
 import type { Log } from '~/types/logbot'
 import type { Hashtag } from '~/types/hashtag'
@@ -7,6 +8,12 @@ import type { Resource } from '~/types/resource'
 import type { G0vSearchResult } from '~/types/search'
 import type { GroupMap } from '~/types/metadata'
 
+import {
+  STATISTICS_REQUEST,
+  STATISTICS_SUCCESS,
+  STATISTICS_FAILURE,
+  EmptyStatistics
+} from '~/types'
 import {
   CONFIG_TOKEN_REQUEST,
   CONFIG_TOKEN_SUCCESS,
@@ -129,6 +136,7 @@ export type State = {
     }
   },
   auth: ?any,
+  statistics: Statistics,
   github: {
     profile: ?any,
     isMember: ?boolean,
@@ -181,6 +189,7 @@ export const initialState: State = {
     }
   },
   auth: undefined,
+  statistics: EmptyStatistics,
   github: {
     profile: undefined,
     isMember: undefined,
@@ -206,6 +215,21 @@ export const initialState: State = {
 
 export default (state: State = initialState, action: PlainAction): State => {
   switch(action.type) {
+    case STATISTICS_REQUEST: {
+      return state
+    }
+    case STATISTICS_SUCCESS: {
+      const { statistics } = action
+
+      return {
+        ...state,
+        statistics
+      }
+    }
+    case STATISTICS_FAILURE: {
+      return state
+    }
+
     case CONFIG_TOKEN_REQUEST: {
       return {
         ...state,

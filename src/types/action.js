@@ -2,6 +2,11 @@
 
 import type { StoreAPI } from '~/store/app'
 import type {
+  StatisticsRequestAction,
+  StatisticsSuccessAction,
+  StatisticsFailureAction,
+} from './'
+import type {
   ConfigTokenRequestAction,
   ConfigTokenSuccessAction,
   ConfigTokenFailureAction
@@ -91,7 +96,8 @@ import type {
 import { map as _map } from 'ramda'
 
 export type PlainAction
-  = ConfigTokenRequestAction | ConfigTokenSuccessAction | ConfigTokenFailureAction
+  = StatisticsRequestAction | StatisticsSuccessAction | StatisticsFailureAction
+  | ConfigTokenRequestAction | ConfigTokenSuccessAction | ConfigTokenFailureAction
   | LoginRequestAction | LoginSuccessAction | LoginFailureAction
   | LogoutAction
   | ProfileRequestAction | ProfileSuccessAction | ProfileFailureAction

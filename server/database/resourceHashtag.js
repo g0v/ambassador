@@ -17,6 +17,10 @@ const getResources = (db, hashtag) =>
   )
     .then(r => r && r.rows)
 
+const getResourceCount = (db) =>
+  db.query('SELECT 1 FROM resourceHashtag rh LEFT JOIN resource r ON rh.resource = r.id;')
+    .then(r => r && r.rows && r.rows.length)
+
 const link = (db, resource, hashtag) =>
   db.query(
     'INSERT INTO resourceHashtag (resource, hashtag) VALUES ($1, $2) RETURNING *;',
@@ -55,6 +59,7 @@ module.exports = {
   prepare,
   drop,
   getResources,
+  getResourceCount,
   list,
   link,
   unlink,

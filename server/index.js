@@ -42,7 +42,9 @@ winston.level = 'silly'
 
 // service status
 const status = {
-  database: false
+  database: false,
+  taggedLogCount: 0,
+  taggedResourceCount: 0
 }
 
 const logs = {}
@@ -152,6 +154,23 @@ app
   // API status
   .get('/api/status', (req, res, next) => {
     res.json(status)
+  })
+  .get('/api/statistics', async (req, res, next) => {
+    if (!status.database) throw new DatabaseError()
+
+    winston.verbose('Get statistics')
+
+    try {
+      const taggedLogs = await db.logHashtag.getLogCount(pool)
+      const taggedResources = await db.resourceHashtag.getResourceCount(pool)
+
+      winston.info(`Tagged logs: ${taggedLogs}`)
+      winston.info(`Tagged resources: ${taggedResources}`)
+
+      res.json({ taggedLogs, taggedResources })
+    } catch (err) {
+      next(err)
+    }
   })
   // Setup the admin token for GitHub API
   .put('/api/config/token', async (req, res, next) => {

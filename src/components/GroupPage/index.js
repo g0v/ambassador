@@ -10,7 +10,7 @@ import ProductList from '~/components/ProductList'
 import UserList from '~/components/UserList'
 import KeywordList from '~/components/KeywordList'
 import NeedList from '~/components/NeedList'
-import { compose, keys, map } from 'ramda'
+import { compose, map } from 'ramda'
 import styles from './index.css'
 
 class GroupPage extends PureComponent {

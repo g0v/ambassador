@@ -9,9 +9,24 @@ import OAuthCallbackPage from '~/components/OAuthCallbackPage'
 
 import styles from './index.css'
 
+const RETRY_TIMEOUT = 100000
+
 class App extends PureComponent {
   static defaultProps = {
     className: '',
+  }
+
+  getStatistics = () => {
+    const { store } = this.props
+
+    // TODO: notify the user when fetching failed
+    return actions.getStatistics(store)()
+      .catch(err => {
+        console.error(err)
+        return Promise.resolve()
+          .then(T.delay(RETRY_TIMEOUT))
+          .then(this.getStatistics)
+      })
   }
 
   getHashtags = () => {
@@ -22,7 +37,7 @@ class App extends PureComponent {
       .catch(err => {
         console.error(err)
         return Promise.resolve()
-          .then(T.delay(100000))
+          .then(T.delay(RETRY_TIMEOUT))
           .then(this.getHashtags)
       })
   }
@@ -34,13 +49,17 @@ class App extends PureComponent {
       .catch(err => {
         console.error(err)
         return Promise.resolve()
-          .then(T.delay(100000))
+          .then(T.delay(RETRY_TIMEOUT))
           .then(this.getGroups)
       })
   }
 
   async componentDidMount() {
-    return [await this.getHashtags(), await this.getGroups()]
+    return [
+      await this.getStatistics(),
+      await this.getHashtags(),
+      await this.getGroups()
+    ]
   }
 
   render() {
