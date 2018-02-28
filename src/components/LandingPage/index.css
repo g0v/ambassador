@@ -18,14 +18,10 @@
       margin-right: auto;
     }
 
-    &__brand {
-      h1 {
-        font-size: 4rem;
-      }
-
-      p {
-        front-size: 2rem;
-      }
+    &__ambassador {
+      position: absolute;
+      top: -128px;
+      left: 0;
     }
 
     .status {
@@ -46,6 +42,7 @@
     top: 90%;
     width: 100%;
     background-color: #fff;
+    padding-top: 120px;
 
     .features,
     .description {

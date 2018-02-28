@@ -147,11 +147,15 @@ npm run flow
 
 ## License
 
-[CC0][CC0]
+[CC0-1.0][CC0]
 
 [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
 
 ## References
 
-* 讀取圖示 `g0v.jump.l.gif` 取自 [g0v/style-guide](https://github.com/g0v/style-guide) ，以[ MIT 授權](https://github.com/g0v/style-guide/blob/gh-pages/LICENSE)釋出。
+* 讀取圖示 `g0v.jump.l.gif` 取自 [g0v/style-guide][style-guide] ，以[ MIT 授權][style-guide-license]釋出。
+* g0v logo `g0v-2line-transparent-darkbackground-s.png` 改作自 [g0v/style-guide][style-guide] ，以[ MIT 授權][style-guide-license]釋出。
+
+[style-guide]: https://github.com/g0v/style-guide
+[style-guide-license]: https://github.com/g0v/style-guide/blob/gh-pages/LICENSE
 
