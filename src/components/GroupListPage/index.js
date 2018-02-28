@@ -14,12 +14,6 @@ class GroupListPage extends PureComponent {
     className: ''
   }
 
-  async componentDidMount() {
-    const { actions } = this.props
-
-    await actions.github.getGroups('v2')
-  }
-
   render() {
     const { id, className, groups } = this.props
 

@@ -721,5 +721,10 @@
       "programmer",
       "writer"
     ]
+  },
+  "status": {
+    "valid": 24,
+    "invalid": 36,
+    "missing": 428
   }
 }

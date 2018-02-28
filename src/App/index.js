@@ -27,8 +27,20 @@ class App extends PureComponent {
       })
   }
 
+  getGroups = () => {
+    const { store } = this.props
+
+    return actions.github.getGroups(store)('v2')
+      .catch(err => {
+        console.error(err)
+        return Promise.resolve()
+          .then(T.delay(100000))
+          .then(this.getGroups)
+      })
+  }
+
   async componentDidMount() {
-    this.getHashtags()
+    return [await this.getHashtags(), await this.getGroups()]
   }
 
   render() {

@@ -4,17 +4,20 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
+import * as G from '~/types/github'
+import { EmptyGroupStatus } from '~/types/metadata'
 import { Statistic, List } from 'semantic-ui-react'
 import MetadataStatistic from '~/components/MetadataStatistic'
 import styles from './index.css'
 
 class LandingPage extends PureComponent {
   static defaultProps = {
-    className: ''
+    className: '',
+    status: EmptyGroupStatus
   }
 
   render() {
-    const { id, className } = this.props
+    const { id, className, status } = this.props
 
     return (
       <div id={id} className={cx(styles.main, className)}>
@@ -28,9 +31,9 @@ class LandingPage extends PureComponent {
               <Statistic inverted>
                 <MetadataStatistic
                   side={200}
-                  valid={19}
-                  invalid={41}
-                  missing={200}
+                  valid={status.valid}
+                  invalid={status.invalid}
+                  missing={status.missing}
                 />
                 <Statistic.Label>g0v.json</Statistic.Label>
               </Statistic>
@@ -101,6 +104,10 @@ class LandingPage extends PureComponent {
 }
 
 export default connect(
-  state => ({}),
+  state => {
+    const status = G.getGroupStatus(state)
+
+    return { status }
+  },
   mapDispatchToProps(actions)
 )(LandingPage)

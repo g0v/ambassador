@@ -18,14 +18,6 @@ class GroupPage extends PureComponent {
     className: ''
   }
 
-  async componentDidMount() {
-    const { actions, groups } = this.props
-
-    if (keys(groups).length === 0) {
-      await actions.github.getGroups('v2')
-    }
-  }
-
   render() {
     const { id, className, match, groups } = this.props
     const { params: { group: name } } = match

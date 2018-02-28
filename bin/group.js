@@ -15,13 +15,15 @@ const validator = {
 let result = {
   v1: {
     group: {},
-    total: 0,
-    valid: 0
+    valid: 0,
+    invalid: 0,
+    missing: 0
   },
   v2: {
     group: {},
-    total: 0,
-    valid: 0
+    valid: 0,
+    invalid: 0,
+    missing: 0
   }
 }
 
@@ -117,6 +119,8 @@ const groupCleanup = () => {
 
 // main
 ;(async () => {
+  const allpath = path.resolve(paths.data, 'repos.json')
+  const all = await fs.readJson(allpath)
   const users = await fs.readdir(paths.v1)
 
   for (const user of users) {
@@ -145,10 +149,9 @@ const groupCleanup = () => {
         ++result.v1.valid
       } else {
         console.log(`${user}/${repo}: x`)
+        ++result.v1.invalid
         await fs.outputJson(errorpath, validator.v1.errors, { spaces: 2 })
       }
-
-      ++result.v1.total
 
       // v2
       filepath = path.resolve(paths.patch, user, repo, 'master.patch.json')
@@ -168,27 +171,38 @@ const groupCleanup = () => {
           ++result.v2.valid
         } else {
           console.log(`${user}/${repo}: xx`)
+          ++result.v2.invalid
           await fs.outputJson(errorpath, validator.v2.errors, { spaces: 2 })
         }
       } catch (err) {
         console.log(`can't patch ${user}/${repo}!`)
       }
-
-      ++result.v2.total
     }
   }
 
   groupCleanup()
+  result.v1.missing = all.length - result.v1.valid - result.v1.invalid
+  result.v1.group.status = {
+    valid: result.v1.valid,
+    invalid: result.v1.invalid,
+    missing: result.v1.missing
+  }
+  result.v2.missing = all.length - result.v2.valid - result.v2.invalid
+  result.v2.group.status = {
+    valid: result.v2.valid,
+    invalid: result.v2.invalid,
+    missing: result.v2.missing
+  }
   console.log('')
 
   let filepath
   filepath = path.resolve(paths.group, 'v1.json')
   await fs.outputJson(filepath, result.v1.group, { spaces: 2 })
-  console.log(`${result.v1.valid}/${result.v1.total} v1 g0v.json are valid`)
+  console.log(`v1: ${result.v1.valid}/${result.v1.invalid}/${result.v1.missing}`)
 
   filepath = path.resolve(paths.group, 'v2.json')
   await fs.outputJson(filepath, result.v2.group, { spaces: 2 })
-  console.log(`${result.v2.valid}/${result.v2.total} v2 g0v.json are valid`)
+  console.log(`v2: ${result.v2.valid}/${result.v2.invalid}/${result.v2.missing}`)
 })()
   .catch(err => {
     console.error(err)

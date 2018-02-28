@@ -1544,5 +1544,10 @@
       ""
     ],
     "name": "taiwan-cabinet"
+  },
+  "status": {
+    "valid": 14,
+    "invalid": 44,
+    "missing": 430
   }
 }

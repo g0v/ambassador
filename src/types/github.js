@@ -3,6 +3,7 @@
 import type { State } from '~/reducers'
 import type { Url, Project, GroupMap } from './metadata'
 
+import { EmptyGroupStatus } from './metadata'
 import { matchPath } from 'react-router-dom'
 
 // type
@@ -187,6 +188,10 @@ export const isGroupsLoading = (state: State): boolean => {
 
 export const getGroupMap = (state: State): GroupMap => {
   return (state && state.github && state.github.groups) || {}
+}
+
+export const getGroupStatus = (state: State): GroupMap => {
+  return (state && state.github && state.github.groups && state.github.groups.status) || EmptyGroupStatus
 }
 
 // XXX: duplicated
