@@ -66,7 +66,7 @@ class MetadataStatistic extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: 0
+      activeIndex: 2
     }
   }
 
