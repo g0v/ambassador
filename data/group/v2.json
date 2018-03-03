@@ -333,12 +333,13 @@
       "https://github.com/g0v/amis-moedict"
     ],
     "thumbnails": [
-      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
+      "https://amis.moedict.tw/2017-Amis-Logo.png"
     ],
     "keywords": [
-      "livescript",
-      "sass",
-      "bootstrap"
+      "nodejs",
+      "react",
+      "scss",
+      "bootstrap3"
     ],
     "products": [
       {
@@ -384,22 +385,28 @@
       }
     ],
     "contributors": [
-      "clkao",
-      "hlb",
+      "wildjcrt",
+      "miaoski",
+      "audreyt",
+      "leo424y",
+      "moon_c",
+      "misscs",
       "a-tsioh",
-      "pektiong",
-      "c9s",
-      "miaout17",
-      "racklin",
-      "poga",
-      "caasi"
+      "PeterDaveHello",
+      "yhsiang",
+      "caasi",
+      "viirya",
+      "gugod",
+      "ethantw"
     ],
     "needs": [
-      "designer"
+      "前端工程師",
+      "後端工程師",
+      "設計師"
     ],
     "name": "moedict",
-    "description": "moedict: Dictionaries from Ministry of Education",
-    "description_zh": "萌典: 教育部字典匯總"
+    "description": "'Amis moedict: Dictionaries from Safolu Kacaw Lalanges, Virginia Fey, Louis Pourrias, Maurice Poinsot",
+    "description_zh": "阿美語萌典，目前有蔡中涵、方敏英、博利亞、潘世光字典"
   },
   "https://github.com/g0v/congress-vote-analytics": {
     "url": "https://github.com/g0v/congress-vote-analytics",
@@ -1618,8 +1625,8 @@
     "description_zh": "透過 wikipedia 的資料，找出中華民國歷年來的閣員名單、性別、生日等，以便計算歷年的性別比例和平均年齡變化比較"
   },
   "status": {
-    "valid": 14,
-    "invalid": 44,
+    "valid": 13,
+    "invalid": 45,
     "missing": 430
   }
 }

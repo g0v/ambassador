@@ -199,19 +199,24 @@
       "moedict-jquery-plugin"
     ],
     "thumbnails": [
-      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png",
-      "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg"
+      "https://amis.moedict.tw/2017-Amis-Logo.png",
+      "https://itaigi.tw/121c4ed080e9127a72d31ae85d1458fc.svg",
+      "https://pbs.twimg.com/media/BQMX_oGCEAIaAEQ.png"
     ],
     "keywords": [
-      "livescript",
-      "sass",
-      "bootstrap",
+      "nodejs",
+      "react",
+      "scss",
+      "bootstrap3",
       "reactjs",
       "semantic-ui",
       "dictionary",
       "json",
       "python",
       "parser",
+      "livescript",
+      "sass",
+      "bootstrap",
       "Go",
       "Perl",
       "LiveScript",
@@ -229,15 +234,19 @@
       "dictionary"
     ],
     "contributors": [
-      "clkao",
-      "hlb",
+      "wildjcrt",
+      "miaoski",
+      "audreyt",
+      "leo424y",
+      "moon_c",
+      "misscs",
       "a-tsioh",
-      "pektiong",
-      "c9s",
-      "miaout17",
-      "racklin",
-      "poga",
+      "PeterDaveHello",
+      "yhsiang",
       "caasi",
+      "viirya",
+      "gugod",
+      "ethantw",
       "au",
       "pm5",
       "sih4sing5hong5",
@@ -249,11 +258,20 @@
       "ellen",
       "grass",
       "kcwu",
+      "poga",
       "albb0920",
       "pingooo",
-      "viirya"
+      "clkao",
+      "hlb",
+      "pektiong",
+      "c9s",
+      "miaout17",
+      "racklin"
     ],
     "needs": [
+      "前端工程師",
+      "後端工程師",
+      "設計師",
       "designer",
       "programmer",
       "writer"
@@ -723,8 +741,8 @@
     ]
   },
   "status": {
-    "valid": 24,
-    "invalid": 36,
+    "valid": 23,
+    "invalid": 37,
     "missing": 428
   }
 }
