@@ -75,7 +75,10 @@
       "programmer",
       "writer"
     ],
-    "name": "ly.g0v.tw"
+    "name": "ly.g0v.tw",
+    "name_zh": "國會大代誌",
+    "description": "ly.g0v.tw",
+    "description_zh": "揭露立法院資訊、立委質詢、立院院會議程、法案審理等等"
   },
   "https://github.com/g0v/Logbot": {
     "url": "https://github.com/g0v/Logbot",
@@ -154,7 +157,10 @@
       "designer",
       "writer"
     ],
-    "name": "POPonFire"
+    "name": "POPonFire",
+    "name_zh": "公有地大行動",
+    "description": "To know all POP is our power.",
+    "description_zh": "公有土地資料公開，全民監督守護！"
   },
   "https://github.com/g0v/TWDoorplates": {
     "url": "https://github.com/g0v/TWDoorplates",
@@ -181,7 +187,10 @@
     "needs": [
       "designer"
     ],
-    "name": "TWDoorplates"
+    "name": "TWDoorplates",
+    "name_zh": "內政部戶政司地址查詢工具",
+    "description": "The interface of doorplate searching system from Department of Household Registration, M.O.I. sucks, so we build our own.",
+    "description_zh": "鑑於內政部戶政司官方的地址查詢網站使用介面不人性，因此建構一個易於使用的查詢工具。方便連署書整理志工查詢補完連署人地址。"
   },
   "https://github.com/g0v/TWRadiationApp": {
     "url": "https://github.com/g0v/TWRadiationApp",
@@ -253,7 +262,10 @@
       "programmer",
       "writer"
     ],
-    "name": "abroadplay"
+    "name": "abroadplay",
+    "name_zh": "公務員出國考察追蹤網",
+    "description": "tracking abroad - stroke, the number",
+    "description_zh": "追蹤公務員出國考察的-行程、人數"
   },
   "https://github.com/g0v/kuansim": {
     "url": "https://github.com/g0v/kuansim",
@@ -310,7 +322,10 @@
       "programmer",
       "writer"
     ],
-    "name": "kuansim"
+    "name": "kuansim",
+    "name_zh": "鄉民關心你 - 社會議題追蹤分析網站",
+    "description": "society issue tracking system",
+    "description_zh": "追蹤各議題狀態以做決策"
   },
   "https://github.com/g0v/amis-moedict": {
     "url": "https://github.com/g0v/amis-moedict",
@@ -382,7 +397,9 @@
     "needs": [
       "designer"
     ],
-    "name": "moedict"
+    "name": "moedict",
+    "description": "moedict: Dictionaries from Ministry of Education",
+    "description_zh": "萌典: 教育部字典匯總"
   },
   "https://github.com/g0v/congress-vote-analytics": {
     "url": "https://github.com/g0v/congress-vote-analytics",
@@ -463,7 +480,9 @@
       "programmer",
       "designer"
     ],
-    "name": "councilor-voter-guide"
+    "name": "councilor-voter-guide",
+    "description": "Taiwan Councilorss Voting Guide",
+    "description_zh": "議員投票指南"
   },
   "https://github.com/g0v/i64885": {
     "url": "https://github.com/g0v/i64885",
@@ -496,7 +515,10 @@
       "programmer",
       "writer"
     ],
-    "name": "i64885"
+    "name": "i64885",
+    "name_zh": "i64885公益律師呼叫平台",
+    "description": "A request tracking and notification system for legal aid.  Helping political victims in emergency situation.",
+    "description_zh": "公益律師呼叫平台"
   },
   "https://github.com/g0v/react.vtaiwan.tw": {
     "url": "https://github.com/g0v/react.vtaiwan.tw",
@@ -569,7 +591,10 @@
       "ronnywang"
     ],
     "needs": [],
-    "name": "g0v.json schema"
+    "name": "g0v.json schema",
+    "name_zh": "g0v.json 格式",
+    "description": "g0v.json schema definition",
+    "description_zh": "g0v.json 格式定義"
   },
   "https://github.com/g0v/g0v.tw": {
     "url": "https://github.com/g0v/g0v.tw",
@@ -620,7 +645,10 @@
       "designer",
       "txt"
     ],
-    "name": "g0vsite"
+    "name": "g0vsite",
+    "name_zh": "零時政府官網--",
+    "description": "g0v.tw site-- Code for Better Society!  Hack Projects of g0v community with us.",
+    "description_zh": "g0v 官網 --了解社群最新動態與專案，一同寫程式改造社會！"
   },
   "https://github.com/g0v/g0vre": {
     "url": "https://github.com/g0v/g0vre",
@@ -649,7 +677,10 @@
     "needs": [
       "developer"
     ],
-    "name": "g0vre"
+    "name": "g0vre",
+    "name_zh": "g0vre",
+    "description": "Generic reader/extractor for *.gov.tw websites.",
+    "description_zh": "*.gov.tw 網站泛用型解讀器"
   },
   "https://github.com/g0v/glyph": {
     "url": "https://github.com/g0v/glyph",
@@ -671,7 +702,8 @@
       "c9s"
     ],
     "needs": [],
-    "name": "g0v glyph"
+    "name": "g0v glyph",
+    "name_zh": "g0v 符號"
   },
   "https://github.com/g0v/inLiveTwTextChrome": {
     "url": "https://github.com/g0v/inLiveTwTextChrome",
@@ -777,7 +809,9 @@
     "needs": [
       "designer"
     ],
-    "name": "iTaigi"
+    "name": "iTaigi",
+    "description": "iTaigi",
+    "description_zh": "想知道一個詞的台語怎麼說，來這裡查就對了！"
   },
   "https://github.com/g0v/laweasyread": {
     "url": "https://github.com/g0v/laweasyread",
@@ -831,7 +865,9 @@
       "programmer",
       "writer"
     ],
-    "name": "lawEasyRead"
+    "name": "lawEasyRead",
+    "description": "API for Taiwan Law",
+    "description_zh": "台灣法規的API"
   },
   "https://github.com/g0v/magic-mirror": {
     "url": "https://github.com/g0v/magic-mirror",
@@ -857,7 +893,9 @@
     "needs": [
       "programmer"
     ],
-    "name": "magic-mirror"
+    "name": "magic-mirror",
+    "description": "Periodically mirror data from *.gov.tw to a git repository.",
+    "description_zh": "定時 mirror *.gov.tw 上有時效性的資料到 git repository."
   },
   "https://github.com/g0v/moedict-webkit": {
     "url": "https://github.com/g0v/moedict-webkit",
@@ -1047,7 +1085,9 @@
       "programmer",
       "writer"
     ],
-    "name": "moedict"
+    "name": "moedict",
+    "description": "moedict: Dictionaries from Ministry of Education",
+    "description_zh": "萌典: 教育部字典匯總"
   },
   "https://github.com/g0v/moer.g0v.tw": {
     "url": "https://github.com/g0v/moer.g0v.tw",
@@ -1075,7 +1115,10 @@
       "designer",
       "programmer"
     ],
-    "name": "moer.g0v.tw"
+    "name": "moer.g0v.tw",
+    "name_zh": "環境儀表板",
+    "description": "Visualize environmental information about Taiwan.",
+    "description_zh": "環境資訊視覺化"
   },
   "https://github.com/g0v/news-diff": {
     "url": "https://github.com/g0v/news-diff",
@@ -1096,7 +1139,10 @@
       "server",
       "consumer"
     ],
-    "name": "news-diff"
+    "name": "news-diff",
+    "name_zh": "新聞監控",
+    "description": "A news crawler (framework) that revisit known entries for latest pages and detect modification.",
+    "description_zh": "新聞爬蟲，會重爬看過的連結以維持內容更新，並偵測內容變動。"
   },
   "https://github.com/g0v/newshelper-extension": {
     "url": "https://github.com/g0v/newshelper-extension",
@@ -1161,7 +1207,10 @@
       "progammer",
       "內容管理"
     ],
-    "name": "newshelper-extension"
+    "name": "newshelper-extension",
+    "name_zh": "新聞小幫手",
+    "description": "newshelper-extension: a chrome extension helps you to identify incorrect news",
+    "description_zh": "newshelper-extension: 告訴你你正受到有害新聞所害"
   },
   "https://github.com/g0v/nuclear-data": {
     "url": "https://github.com/g0v/nuclear-data",
@@ -1227,7 +1276,9 @@
       "designer",
       "developer"
     ],
-    "name": "RoadPin"
+    "name": "RoadPin",
+    "description": "RoadPin: information about road construction",
+    "description_zh": "RoadPin: 道路施工相關資訊"
   },
   "https://github.com/g0v/jothon-net": {
     "url": "https://github.com/g0v/jothon-net",
@@ -1272,7 +1323,10 @@
     ],
     "contributors": [],
     "needs": [],
-    "name": "summit.g0v.tw"
+    "name": "summit.g0v.tw",
+    "name_zh": "啥咪零時政府官網",
+    "description": "summit g0v.tw website",
+    "description_zh": "啥咪零時政府官網"
   },
   "https://github.com/g0v/sunflower": {
     "url": "https://github.com/g0v/sunflower",
@@ -1317,7 +1371,9 @@
       "programmer",
       "designer"
     ],
-    "name": "sunshine.cy"
+    "name": "sunshine.cy",
+    "description": "sunshine cy",
+    "description_zh": "金錢報-公職人員財產申報"
   },
   "https://github.com/g0v/twangry": {
     "url": "https://github.com/g0v/twangry",
@@ -1359,7 +1415,10 @@
       "wikipedia writer",
       "writer"
     ],
-    "name": "twangry"
+    "name": "twangry",
+    "name_zh": "政誌",
+    "description": "The fact of politics event made in Taiwan.",
+    "description_zh": "一眼看出，我們的政府做(錯)過什麼事情"
   },
   "https://github.com/g0v/twly-voter-guide": {
     "url": "https://github.com/g0v/twly-voter-guide",
@@ -1399,7 +1458,10 @@
       "programmer",
       "designer"
     ],
-    "name": "twly-voter-guide"
+    "name": "twly-voter-guide",
+    "name_zh": "立委投票指南",
+    "description": "Taiwan Legislators Voter Guide",
+    "description_zh": "立委投票指南"
   },
   "https://github.com/g0v/twstat": {
     "url": "https://github.com/g0v/twstat",
@@ -1422,7 +1484,10 @@
     ],
     "contributors": [],
     "needs": [],
-    "name": "twstat"
+    "name": "twstat",
+    "name_zh": "台灣統計資訊",
+    "description": "tstat",
+    "description_zh": "twstat"
   },
   "https://github.com/g0v/typo-resolver": {
     "url": "https://github.com/g0v/typo-resolver",
@@ -1450,7 +1515,9 @@
       "writer",
       "tech"
     ],
-    "name": "Typo Resolver"
+    "name": "Typo Resolver",
+    "description": "Help you to feedback some typo in web page",
+    "description_zh": "協助你回報在網頁上的錯字"
   },
   "https://github.com/g0v/urbancode-commission": {
     "url": "https://github.com/g0v/urbancode-commission",
@@ -1479,7 +1546,10 @@
       "data structure",
       "front-end progammer"
     ],
-    "name": "urbancode-commission"
+    "name": "urbancode-commission",
+    "name_zh": "開放都市-委員會會議記錄資料庫",
+    "description": "Data-lisation of urban plan commission notes. To search, share and enhance transparency.",
+    "description_zh": "將都市計畫委員會會議紀錄資料庫化，提供檢索跟分享功能，讓資訊更透明"
   },
   "https://github.com/ronnywang/lagnews": {
     "url": "https://github.com/ronnywang/lagnews",
@@ -1543,7 +1613,9 @@
     "needs": [
       ""
     ],
-    "name": "taiwan-cabinet"
+    "name": "taiwan-cabinet",
+    "name_zh": "台灣內閣變化",
+    "description_zh": "透過 wikipedia 的資料，找出中華民國歷年來的閣員名單、性別、生日等，以便計算歷年的性別比例和平均年齡變化比較"
   },
   "status": {
     "valid": 14,
