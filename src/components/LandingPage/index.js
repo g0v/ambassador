@@ -108,14 +108,9 @@ class LandingPage extends PureComponent {
               機器大使
               <Header.Subheader>Yet Another g0v Hub</Header.Subheader>
             </Header>
-            <p>機器大使是<a href="https://grants.g0v.tw"> g0v 公民科技創新獎助金</a>於<a href="https://grants.g0v.tw/projects/5969ed35d60a0d001ed1f7f6"> 2017 年秋季</a>的獲獎提案之一，旨在建立一個專案資料平台，讓坑主與跳坑者們更容易暸解一個專案，並掌握專案脈絡。</p>
-            <p>在開發過程中嘗試了：</p>
-            <ul>
-              <li>將 Logbot 上的聊天記錄與專案關聯起來。</li>
-              <li>對專案進行線上訪談。</li>
-              <li>標記外部資源，將他們和專案關聯起來。</li>
-              <li>更新 g0v.json 的格式，統計 g0v.json 內記載的資訊。</li>
-            </ul>
+            <p>機器大使是<a href="https://grants.g0v.tw"> g0v 公民科技創新獎助金</a>於<a href="https://grants.g0v.tw/projects/5969ed35d60a0d001ed1f7f6"> 2017 年秋季</a>的獲獎提案之一。</p>
+            <p>2013 和 2014 年的 g0v 專案給我很多回憶，但是這些專案不見得繼續維護，也看過很多專案開了坑卻無法繼續下去。我想整理這些專案，為他們多添加一些脈絡，也許會有更多人填坑。</p>
+            <p>我希望將整理資料的工具，視為整理資料的人的延伸。本來打算以貢獻者的社群動態為中心，將貢獻者在社群網站、 GitHub 、 Slack 的活動情況整理在獨立的儀表板上。也在<a href="https://g0v.hackpad.tw/ep/group/HIGzdedxyd4">線上訪問過專案</a>。目前與揪松團<a href="https://hackmd.io/s/Bk8yOCv-M">討論</a>後，修正了方向，以整理與呈現 g0v.json 記載的專案內容為主，標記外部資源為輔。</p>
             <p>本計畫於 2018 年春季結案後，將繼續開發下去。</p>
           </div>
           <div className={styles.footer}>
