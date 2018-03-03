@@ -400,9 +400,9 @@
       "ethantw"
     ],
     "needs": [
-      "前端工程師",
-      "後端工程師",
-      "設計師"
+      "programmer",
+      "designer",
+      "txt"
     ],
     "name": "moedict",
     "description": "'Amis moedict: Dictionaries from Safolu Kacaw Lalanges, Virginia Fey, Louis Pourrias, Maurice Poinsot",
@@ -1625,8 +1625,8 @@
     "description_zh": "透過 wikipedia 的資料，找出中華民國歷年來的閣員名單、性別、生日等，以便計算歷年的性別比例和平均年齡變化比較"
   },
   "status": {
-    "valid": 13,
-    "invalid": 45,
+    "valid": 14,
+    "invalid": 44,
     "missing": 430
   }
 }

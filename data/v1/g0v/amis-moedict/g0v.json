@@ -49,8 +49,8 @@
     "https://amis.moedict.tw/2017-Amis-Logo.png"
   ],
   "needs": [
-    "前端工程師",
-    "後端工程師",
-    "設計師"
+    "programmer",
+    "designer",
+    "txt"
   ]
 }

@@ -269,11 +269,9 @@
       "racklin"
     ],
     "needs": [
-      "前端工程師",
-      "後端工程師",
-      "設計師",
-      "designer",
       "programmer",
+      "designer",
+      "txt",
       "writer"
     ]
   },
@@ -741,8 +739,8 @@
     ]
   },
   "status": {
-    "valid": 23,
-    "invalid": 37,
+    "valid": 24,
+    "invalid": 36,
     "missing": 428
   }
 }
