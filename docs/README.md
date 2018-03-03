@@ -4,7 +4,19 @@
 
 是不是直接改名叫機器大使就好？ XD
 
-## we b logs
+## Logs
+
+### 2018-03-01
+
+今天才做完 landing page ，還要做的有：
+
+* 不需要登入就可以看到專案列表
+* 專案群組和專案列表的差異要做出來
+  * 參考官網的中文名稱，看看 name_zh 該怎麼補
+  * 手動補上專案群組的介紹
+* 將 about 寫得更完整，例如緣起、目標、成果
+* 手機版看不到統計結果
+* 尚未列出 JSON APIs
 
 ### 2018-02-11
 
@@ -281,7 +293,9 @@ poga [曾經提過][minimum-viable-ownership]他不喜歡「擁有」這個概�
 [C4]: https://rfc.zeromq.org/spec:42/C4/
 [libz-blitz]: https://blog.rust-lang.org/2017/05/05/libz-blitz.html
 
-## 基礎建設松討論過的想法
+## 參考資料
+
+### 基礎建設松討論過的想法
 
 * [awesome g0v][awesome-g0v]
 * g0v hub
@@ -335,7 +349,7 @@ poga [曾經提過][minimum-viable-ownership]他不喜歡「擁有」這個概�
 [projects-backup]: https://docs.google.com/spreadsheets/d/1MGPMjlEr6qdFLmATShlaXhjjhSwApJvMil5R-xMVyoM/edit#gid=0
 [e04]: https://github.com/g0v/e04
 
-## 實體活動經驗
+### 實體活動經驗
 
 * [g0v.tw 台灣零時政府 @ COSCUP 2014 網路攤位](https://g0v.hackpad.tw/g0v.tw-COSCUP-2014--gVkOW9b3FU8)
 
