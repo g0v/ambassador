@@ -114,14 +114,14 @@ export const isMember: RawAction<[string], boolean> = store => async (name) => {
   }
 }
 
-export const getRepos: RawAction<[string], any[]> = store => async (name) => {
+const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
+
+export const getRepos: RawAction<[], any[]> = store => async () => {
   const { dispatch } = store
 
   dispatch(RepoListRequest())
   try {
-    const gh = new GitHub()
-    const org = gh.getOrganization(name)
-    const { data: repos } = await org.getRepos()
+    const { data: repos } = await axios.get(`${apiUrl}/api/repo`)
     dispatch(RepoListSuccess(repos))
 
     return repos
@@ -189,8 +189,6 @@ export const getIntro: RawAction<[string, string, string], string> = store => as
     throw error
   }
 }
-
-const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 export const g0vJson: RawAction<[string, string], any> = store => async (name, repo) => {
   const { dispatch } = store

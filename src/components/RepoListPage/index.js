@@ -5,13 +5,22 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, Dimmer, Segment, Header, Grid } from 'semantic-ui-react'
-import RepoItem from '../RepoItem'
-import { compose, map, addIndex } from 'ramda'
+import { Container, Dimmer, Segment, Header, Card } from 'semantic-ui-react'
+import { compose, map } from 'ramda'
 import styles from './index.css'
 
-const COLUMN_NUM = 4
-const idxMap = addIndex(map)
+const RepoCard = (props) => {
+  const { name } = props
+
+  return (
+    <Card>
+      <Card.Content>
+        <Card.Header>{ name }</Card.Header>
+        <Card.Description>沒有人寫介紹！</Card.Description>
+      </Card.Content>
+    </Card>
+  )
+}
 
 class RepoListPage extends PureComponent {
   static defaultProps = {
@@ -40,25 +49,6 @@ class RepoListPage extends PureComponent {
       repos = G.dummyRepoList
     }
 
-    const rowCount = Math.floor(repos.length / COLUMN_NUM)
-    const r = repos.length % COLUMN_NUM
-    let as = []
-    let i
-    let j
-    for (i = 0; i < rowCount; i++) {
-      let xs = []
-      for (j = 0; j < COLUMN_NUM; j++) {
-        xs.push(repos[i * COLUMN_NUM + j])
-      }
-      as.push(xs)
-    }
-    j = i * COLUMN_NUM
-    let bs = []
-    for (i = 0; i < r; i++) {
-      bs.push(repos[j + i])
-    }
-    if (bs.length) as.push(bs)
-
     return (
       <Dimmer.Dimmable className={styles.dimmable} as={Segment} blurring dimmed={dimmed}>
         <Dimmer active={dimmed}>
@@ -68,21 +58,9 @@ class RepoListPage extends PureComponent {
         </Dimmer>
 
         <Container id={id} className={cx(styles.main, className)}>
-          <Grid columns={COLUMN_NUM}>{
-            idxMap(
-              (a, i) =>
-                <Grid.Row key={i}>{
-                  idxMap(
-                    (aa, j) =>
-                      <Grid.Column key={j}>
-                        <RepoItem data={aa} />
-                      </Grid.Column>,
-                    a
-                  )
-                }</Grid.Row>,
-              as
-            )
-          }</Grid>
+          <Card.Group itemsPerRow={3}>{
+            map(repo => <RepoCard key={repo} name={repo} />, repos)
+          }</Card.Group>
         </Container>
       </Dimmer.Dimmable>
     )

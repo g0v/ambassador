@@ -52,17 +52,14 @@ class Header extends PureComponent {
         >
           專案群組
         </Menu.Item>
-        {
-          !unauthed &&
-          <Menu.Item
-            as={Link}
-            to="/repos"
-            name="issues"
-            active={location.pathname === '/repos'}
-          >
-            專案列表
-          </Menu.Item>
-        }
+        <Menu.Item
+          as={Link}
+          to="/repos"
+          name="issues"
+          active={location.pathname === '/repos'}
+        >
+          專案列表
+        </Menu.Item>
         {
           !unauthed &&
           <Dropdown item text="標記工具">

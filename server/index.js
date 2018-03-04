@@ -616,6 +616,9 @@ app
       res.status(404).send()
     }
   })
+  .get('/api/repo', (req, res, next) => {
+    res.json(repos)
+  })
   .get('/api/metadata/:version/:name/:repo', async (req, res, next) => {
     const { version, name, repo } = req.params
 
