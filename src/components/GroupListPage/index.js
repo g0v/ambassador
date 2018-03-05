@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import * as G from '~/types/github'
 import { mapDispatchToProps } from '~/types/action'
-import { Container, Card, Image, Icon } from 'semantic-ui-react'
+import { Container, Card, Icon } from 'semantic-ui-react'
 import { compose, map, keys, filter } from 'ramda'
+import AnyImage from '~/components/AnyImage'
 import styles from './index.css'
 
 const GroupCard = ({ group, url }) => {
   // TODO: add a placeholder image
-  const thumbnail = group && group.thumbnails && group.thumbnails[0]
   let groupName = group.name_zh || group.name
   if (!groupName) {
     const { repo, name } = G.repoNameFromURL(url)
@@ -23,7 +23,7 @@ const GroupCard = ({ group, url }) => {
 
   return (
     <Card>
-      { thumbnail && <Image src={thumbnail} /> }
+      <AnyImage images={group.thumbnails} />
       <Card.Content>
         <Card.Header
           as={Link}

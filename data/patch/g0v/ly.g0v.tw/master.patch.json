@@ -3,6 +3,7 @@
   "licenses": [{
     "type": "MIT"
   }],
+  "thumbnail": "https://raw.githubusercontent.com/g0v/ly.g0v.tw/master/lyg0v_large.jpg",
   "group": "https://github.com/g0v/ly.g0v.tw",
   "products": [{
     "type": "website",
