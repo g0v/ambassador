@@ -1,8 +1,13 @@
 {
+  "name": "amis-moedict",
+  "name_zh": "阿美語萌典",
   "g0v_json": "v2",
   "licenses": [{
     "type": "CC0-1.0"
   }],
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/amis-moedict/master/2017-Amis-Logo.png"
+  ],
   "products": [{
     "type": "website",
     "name": "阿美語萌典",

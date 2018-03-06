@@ -1,5 +1,8 @@
 {
   "g0v_json": "v2",
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/POPonFire.png"
+  ],
   "products": [{
     "type": "website",
     "name": "公有地大行動",

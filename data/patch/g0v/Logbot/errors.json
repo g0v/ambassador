@@ -1,11 +1,11 @@
 [
   {
-    "keyword": "type",
-    "dataPath": ".thumbnail",
-    "schemaPath": "#/properties/thumbnail/type",
+    "keyword": "format",
+    "dataPath": ".repository.url",
+    "schemaPath": "#/properties/repository/properties/url/format",
     "params": {
-      "type": "array"
+      "format": "uri"
     },
-    "message": "should be array"
+    "message": "should match format \"uri\""
   }
 ]

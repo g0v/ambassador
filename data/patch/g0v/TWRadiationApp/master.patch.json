@@ -1,5 +1,8 @@
 {
   "g0v_json": "v2",
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/TWRadiationApp/master/luncher.png"
+  ],
   "group": "https://github.com/g0v/TWRadiationApp",
   "licenses": [{ "type": "CC-BY-SA-3.0" }],
   "products": [{

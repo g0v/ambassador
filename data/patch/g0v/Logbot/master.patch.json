@@ -5,6 +5,9 @@
     "url": "git@github.com:g0v/Logbot.git",
     "licenses": ["MIT"]
   },
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/Logbot/master/screenshot.png"
+  ],
   "products": [{
     "type": "website",
     "name": "Logbot",

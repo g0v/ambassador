@@ -1,11 +1,11 @@
 [
   {
-    "keyword": "type",
-    "dataPath": ".thumbnail",
-    "schemaPath": "#/properties/thumbnail/type",
+    "keyword": "format",
+    "dataPath": ".document",
+    "schemaPath": "#/properties/document/format",
     "params": {
-      "type": "array"
+      "format": "uri"
     },
-    "message": "should be array"
+    "message": "should match format \"uri\""
   }
 ]

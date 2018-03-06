@@ -1,6 +1,9 @@
 {
   "g0v_json": "v2",
   "licenses": [{ "type": "MIT" }],
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/VotesAnalysis.jpg"
+  ],
   "group": "https://github.com/g0v/congress-vote-analytics",
   "products": [{
     "type": "website",
