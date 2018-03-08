@@ -1,5 +1,8 @@
 {
   "g0v_json": "v2",
+  "thumbnail":[
+    "https://vtaiwan.tw/vTaiwan_logo_2017.png"
+  ],
   "group": "https://github.com/g0v/react.vtaiwan.tw",
   "products": [{
     "type": "website",

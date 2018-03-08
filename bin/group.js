@@ -21,6 +21,7 @@ let result = {
   },
   v2: {
     group: {},
+    groupMap: {},
     valid: 0,
     invalid: 0,
     missing: 0
@@ -123,11 +124,17 @@ const groupCleanup = () => {
   }
 }
 
+const getRepoUrl = o =>
+  o && o.repository && o.repository.url
+
 // main
 ;(async () => {
   const allpath = path.resolve(paths.data, 'repos.json')
   const all = await fs.readJson(allpath)
   const users = await fs.readdir(paths.v1)
+
+  const groupList = []
+  const groupMap = {}
 
   for (const user of users) {
     const repopath = path.resolve(paths.v1, user)
@@ -164,10 +171,8 @@ const groupCleanup = () => {
       try {
         const patch = await fs.readJson(filepath)
         data = { ...data, ...patch }
-
-        if (data.group) {
-          groupConcat('v2', data)(data.group)
-        }
+        groupList.push(data)
+        groupMap[getRepoUrl(data)] = data
 
         const valid = validator.v2(data)
         const errorpath = path.resolve(paths.patch, user, repo, 'errors.json')
@@ -183,6 +188,21 @@ const groupCleanup = () => {
       } catch (err) {
         console.log(`can't patch ${user}/${repo}!`)
       }
+    }
+  }
+
+  // v2
+  for (const data of groupList) {
+    if (data.group) {
+      let root = data
+      while (root.group !== getRepoUrl(root)) {
+        const g = groupMap[root.group]
+        if (g)
+          root = g
+        else
+          break
+      }
+      groupConcat('v2', data)(root.group)
     }
   }
 

@@ -8,6 +8,9 @@
     "shulusama",
     "c9s"
   ],
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/glyph/master/icons.png"
+  ],
   "group": "https://github.com/g0v/glyph",
   "products": [{
     "type": "website",

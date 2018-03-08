@@ -3,6 +3,9 @@
   "licenses": [{
     "type": "CC0-1.0"
   }],
+  "thumbnail": [
+    "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/sunshine.cy.png"
+  ],
   "group": "https://github.com/g0v/sunshine.cy",
   "products": [{
     "type": "website",

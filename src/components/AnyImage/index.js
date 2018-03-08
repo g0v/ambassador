@@ -30,7 +30,6 @@ class AnyImage extends Component {
       })
     })
 
-    img.crossOrigin = 'Anonymous'
     img.src = src
 
     return p
@@ -57,7 +56,13 @@ class AnyImage extends Component {
     const { src, images, ...props } = this.props
     const { url } = this.state
 
-    return <UIImage {...props} src={url || placeholder} />
+    return (
+      <UIImage
+        {...props}
+        src={url || placeholder}
+        style={{ backgroundColor: "#fff" }}
+      />
+    )
   }
 }
 

@@ -16,6 +16,9 @@
   "audience": [
     "contributor"
   ],
+  "thumbnail": [
+    "http://submit.g0v.tw/img/logo.png"
+  ],
   "group": "https://github.com/g0v/jothon-net",
   "products": [{
     "type": "website",

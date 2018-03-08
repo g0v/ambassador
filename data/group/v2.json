@@ -455,7 +455,9 @@
     "children": [
       "https://github.com/g0v/councilor-voter-guide"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/councilor.png"
+    ],
     "keywords": [
       "councilor",
       "議員",
@@ -548,7 +550,8 @@
       "https://github.com/g0v/react.vtaiwan.tw.git"
     ],
     "thumbnails": [
-      "https://github.com/g0v/dc.vtaiwan.tw/blob/master/favicon.png"
+      "https://github.com/g0v/dc.vtaiwan.tw/blob/master/favicon.png",
+      "https://vtaiwan.tw/vTaiwan_logo_2017.png"
     ],
     "keywords": [
       "vtaiwan",
@@ -621,15 +624,31 @@
     "url": "https://github.com/g0v/g0v.tw",
     "children": [
       "https://github.com/g0v/env.g0v.tw",
-      "https://github.com/g0v/g0v.tw"
+      "https://github.com/g0v/g0v.tw",
+      "https://github.com/g0v/hack.g0v.tw"
     ],
     "thumbnails": [
-      "https://raw.githubusercontent.com/zbryikt/g0v.tw/master/thumbnail.png"
+      "https://raw.githubusercontent.com/zbryikt/g0v.tw/master/thumbnail.png",
+      "https://hack.g0v.tw/assets/img/jothon-bg-dark.svg"
     ],
     "keywords": [
       "community",
       "g0v.tw",
-      "communication"
+      "communication",
+      "angularjs",
+      "livescript",
+      "sass",
+      "bootstrap",
+      "g0v",
+      "issue",
+      "label",
+      "language",
+      "search",
+      "人",
+      "坑",
+      "介面",
+      "基礎",
+      "infras"
     ],
     "products": [
       {
@@ -648,6 +667,25 @@
         "name": "g0v.tw",
         "url": "http://g0v.tw",
         "source": "https://github.com/g0v/g0v.tw"
+      },
+      {
+        "type": "website",
+        "name": "揪松網",
+        "url": "https://hack.g0v.tw",
+        "source": "https://github.com/g0v/hack.g0v.tw"
+      },
+      {
+        "type": "website",
+        "name": "Issues Aggregator",
+        "url": "http://g0vissues.jmehsieh.com",
+        "source": "https://github.com/g0v/issue_aggregator"
+      },
+      {
+        "type": "dev",
+        "subtype": "api",
+        "name": "Issues Aggregator API",
+        "url": "http://g0vissues.jmehsieh.com/api",
+        "source": "https://github.com/g0v/issue_aggregator"
       }
     ],
     "contributors": [
@@ -659,12 +697,25 @@
       "yllan",
       "MIND0S",
       "yhsiang",
-      "Claire"
+      "Claire",
+      "au",
+      "dirty",
+      "fukuball",
+      "lis186",
+      "小蟹",
+      "FourDollars",
+      "hlb",
+      "ETBlue",
+      "gaga978",
+      "kcliu",
+      "roth1002"
     ],
     "needs": [
       "programmer",
       "designer",
-      "txt"
+      "txt",
+      "writer",
+      ""
     ],
     "name": "g0vsite",
     "name_zh": "零時政府官網--",
@@ -708,7 +759,9 @@
     "children": [
       "https://github.com/g0v/glyph"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/glyph/master/icons.png"
+    ],
     "keywords": [],
     "products": [
       {
@@ -757,46 +810,6 @@
     "needs": [
       "designer",
       "programmer"
-    ]
-  },
-  "https://github.com/g0v/hack.g0v.tw": {
-    "url": "https://github.com/g0v/hack.g0v.tw",
-    "children": [],
-    "thumbnails": [],
-    "keywords": [
-      "g0v",
-      "issue",
-      "label",
-      "language",
-      "search",
-      "人",
-      "坑",
-      "介面",
-      "基礎",
-      "infras"
-    ],
-    "products": [
-      {
-        "type": "website",
-        "name": "Issues Aggregator",
-        "url": "http://g0vissues.jmehsieh.com",
-        "source": "https://github.com/g0v/issue_aggregator"
-      },
-      {
-        "type": "dev",
-        "subtype": "api",
-        "name": "Issues Aggregator API",
-        "url": "http://g0vissues.jmehsieh.com/api",
-        "source": "https://github.com/g0v/issue_aggregator"
-      }
-    ],
-    "contributors": [
-      "gaga978",
-      "kcliu",
-      "roth1002"
-    ],
-    "needs": [
-      ""
     ]
   },
   "https://github.com/g0v/itaigi": {
@@ -1115,7 +1128,9 @@
     "children": [
       "https://github.com/g0v/moer.g0v.tw"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/moer.png"
+    ],
     "keywords": [
       "javascript",
       "angularjs",
@@ -1238,7 +1253,9 @@
     "children": [
       "https://github.com/g0v/nuclear-data.git"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/nuclear-data.png"
+    ],
     "keywords": [
       "angularjs",
       "python"
@@ -1306,7 +1323,9 @@
     "children": [
       "https://github.com/g0v/submit"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "http://submit.g0v.tw/img/logo.png"
+    ],
     "keywords": [],
     "products": [
       {
@@ -1326,7 +1345,9 @@
     "children": [
       "https://github.com/g0v/summit.g0v.tw"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/summit2018/gh-pages/static/img/g0v-summit-2018.png"
+    ],
     "keywords": [
       "community",
       "g0v.tw",
@@ -1370,7 +1391,9 @@
     "children": [
       "https://github.com/g0v/sunshine.cy"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://raw.githubusercontent.com/g0v/ambassador/master/src/images/sunshine.cy.png"
+    ],
     "keywords": [
       "cy",
       "sunshine",
@@ -1446,7 +1469,9 @@
     "children": [
       "https://github.com/g0v/twly-voter-guide"
     ],
-    "thumbnails": [],
+    "thumbnails": [
+      "https://s3.amazonaws.com/vote.ly.g0v.tw/facebook-og-image.png"
+    ],
     "keywords": [],
     "products": [
       {
@@ -1639,8 +1664,8 @@
     "description_zh": "透過 wikipedia 的資料，找出中華民國歷年來的閣員名單、性別、生日等，以便計算歷年的性別比例和平均年齡變化比較"
   },
   "status": {
-    "valid": 15,
-    "invalid": 43,
+    "valid": 16,
+    "invalid": 42,
     "missing": 430
   }
 }

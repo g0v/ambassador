@@ -3,6 +3,9 @@
   "licenses": [{
     "type": "CC0-1.0"
   }],
+  "thumbnail": [
+    "https://s3.amazonaws.com/vote.ly.g0v.tw/facebook-og-image.png"
+  ],
   "group": "https://github.com/g0v/twly-voter-guide",
   "products": [{
     "type": "website",

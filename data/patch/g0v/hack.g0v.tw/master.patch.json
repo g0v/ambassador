@@ -3,7 +3,10 @@
   "licenses": [{
     "type": "CC0-1.0"
   }],
-  "groups": "https://github.com/g0v/g0v.tw",
+  "thumbnail": [
+    "https://hack.g0v.tw/assets/img/jothon-bg-dark.svg"
+  ],
+  "group": "https://github.com/g0v/g0v.tw",
   "products": [{
     "type": "website",
     "name": "揪松網",

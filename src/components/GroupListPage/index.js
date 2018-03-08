@@ -56,7 +56,7 @@ class GroupListPage extends PureComponent {
         <Card.Group itemsPerRow={3}>{
           compose(
             map(url => <GroupCard key={url} group={groups[url]} url={url} />),
-            filter(k => k !== 'status'),
+            filter(k => k !== 'status' && groups[k].children.length),
             keys
           )(groups)
         }</Card.Group>
