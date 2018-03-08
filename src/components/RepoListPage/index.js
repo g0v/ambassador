@@ -7,20 +7,8 @@ import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Container, Dimmer, Segment, Header, Card } from 'semantic-ui-react'
 import { compose, map } from 'ramda'
+import RepoCard from '~/components/RepoCard'
 import styles from './index.css'
-
-const RepoCard = (props) => {
-  const { name } = props
-
-  return (
-    <Card>
-      <Card.Content>
-        <Card.Header>{ name }</Card.Header>
-        <Card.Description>沒有人寫介紹！</Card.Description>
-      </Card.Content>
-    </Card>
-  )
-}
 
 class RepoListPage extends PureComponent {
   static defaultProps = {
@@ -46,7 +34,7 @@ class RepoListPage extends PureComponent {
     const dimmed = isLoading
     let repos = this.props.repos
     if (dimmed && repos.length === 0) {
-      repos = G.dummyRepoList
+      repos = []
     }
 
     return (
@@ -58,8 +46,17 @@ class RepoListPage extends PureComponent {
         </Dimmer>
 
         <Container id={id} className={cx(styles.main, className)}>
-          <Card.Group itemsPerRow={3}>{
-            map(repo => <RepoCard key={repo} name={repo} />, repos)
+          <Card.Group itemsPerRow={4}>{
+            map(
+              fullname => {
+                const [repo, name] = fullname.split('/')
+
+                return (
+                  <RepoCard key={fullname} repo={repo} name={name} />
+                )
+              },
+              repos
+            )
           }</Card.Group>
         </Container>
       </Dimmer.Dimmable>

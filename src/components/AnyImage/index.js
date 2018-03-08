@@ -35,11 +35,25 @@ class AnyImage extends Component {
     return p
   }
 
-  async componentDidMount() {
-    const { src, images } = this.props
+  componentDidMount() {
+    let { src, images = [] } = this.props
 
     if (src) images.unshift(src)
 
+    this.loadImages(images)
+  }
+
+  componentDidUpdate(prev) {
+    let { src, images = [] } = this.props
+
+    if (prev.src !== src || prev.images !== images) {
+      if (src) images.unshift(src)
+
+      this.loadImages(images)
+    }
+  }
+
+  loadImages = async (images) => {
     // test images one by one until we find an accessible image
     for (const image of images) {
       try {

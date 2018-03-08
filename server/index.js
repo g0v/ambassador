@@ -184,7 +184,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     if (email !== env.ADMIN_EMAIL) {
@@ -279,7 +279,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     winston.verbose(`Check hashtag #${tag}`)
@@ -364,7 +364,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     winston.verbose(`Check log ${date}#${index}`)
@@ -403,7 +403,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     winston.verbose(`Link log ${log} with hashtag ${hashtag}`)
@@ -442,7 +442,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     winston.verbose(`Unlink log ${log} with hashtag ${hashtag}`)
@@ -507,7 +507,7 @@ app
       ({ email, login } = await S.query(token))
     } catch (err) {
       winston.error(err)
-      return res.status(500)
+      return res.status(500).send()
     }
 
     let { uri } = req.body
@@ -627,20 +627,25 @@ app
     }
 
     const metadataPath = path.resolve(paths.metadata, name, repo, 'g0v.json')
-    const metadata = await fs.readJson(metadataPath)
+    try {
+      const metadata = await fs.readJson(metadataPath)
 
-    if (version === 'v1') {
-      winston.info(`Serve ${name}/${repo}/g0v.json`)
-      res.json(metadata)
+      if (version === 'v1') {
+        winston.info(`Serve ${name}/${repo}/g0v.json`)
+        res.json(metadata)
+      }
+
+      if (version === 'v2') {
+        const patchPath = path.resolve(paths.patch, name, repo, 'master.patch.json')
+        const patch = await fs.readJson(patchPath)
+
+        winston.info(`Serve patched ${name}/${repo}/g0v.json`)
+        res.json({ ...metadata, ...patch })
+      }
+    } catch (err) {
+      return res.status(404).send()
     }
 
-    if (version === 'v2') {
-      const patchPath = path.resolve(paths.patch, name, repo, 'master.patch.json')
-      const patch = await fs.readJson(patchPath)
-
-      winston.info(`Serve patched ${name}/${repo}/g0v.json`)
-      res.json({ ...metadata, ...patch })
-    }
   })
   // Serve client scripts
   .use(express.static(paths.appBuild))
