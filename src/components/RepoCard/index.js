@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Card } from 'semantic-ui-react'
+import VisibilitySensor from 'react-visibility-sensor'
 import AnyImage from '~/components/AnyImage'
 import styles from './index.css'
 
@@ -15,11 +17,15 @@ class RepoCard extends Component {
     name: ''
   }
 
-  componentDidMount() {
-    const { actions, repo, name } = this.props
+  handleVisibility = (isVisible) => {
+    const { actions, g0vJsonMap, repo, name } = this.props
+    const fullname = G.fullName(repo, name)
+    const data = g0vJsonMap[fullname]
 
-    actions.github.g0vJson(repo, name)
-      .catch(err => console.warn(err))
+    if (!data && isVisible) {
+      actions.github.g0vJson(repo, name)
+        .catch(err => console.warn(err))
+    }
   }
 
   render() {
@@ -29,9 +35,16 @@ class RepoCard extends Component {
 
     return (
       <Card id={id} className={cx(styles.main, className)}>
+        <VisibilitySensor onChange={this.handleVisibility} />
         <AnyImage images={data.thumbnail} />
         <Card.Content>
-          <Card.Header>{ data.name_zh || data.name || fullname }</Card.Header>
+          {
+            repo === 'g0v'
+              ? <Card.Header as={Link} to={`/repos/${name}`}>
+                  { data.name_zh || data.name || fullname }
+                </Card.Header>
+              : <Card.Header>{ data.name_zh || data.name || fullname }</Card.Header>
+          }
           <Card.Description>{ data.description_zh || data.description || '沒有人寫介紹！' }</Card.Description>
         </Card.Content>
       </Card>
