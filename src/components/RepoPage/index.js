@@ -3,9 +3,10 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
+import { getUrl } from '~/types'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, List, Grid, Segment, Rail } from 'semantic-ui-react'
+import { Container, List, Grid, Segment, Rail, Button } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
 import ProductList from '~/components/ProductList'
 import ProductListItem from '~/components/ProductListItem'
@@ -14,6 +15,8 @@ import KeywordList from '~/components/KeywordList'
 import NeedList from '~/components/NeedList'
 import { compose, find, map } from 'ramda'
 import styles from './index.css'
+
+const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 class RepoPage extends PureComponent {
   static defaultProps = {
@@ -115,6 +118,13 @@ class RepoPage extends PureComponent {
                   g0vJson && g0vJson.description_zh &&
                     <p className="g0v-description_zh">{ g0vJson.description_zh }</p>
                 }
+                <Button
+                  as="a"
+                  href={`${apiUrl}/api/metadata/v2/g0v/${repo}`}
+                  target="_blank"
+                >
+                  JSON
+                </Button>
               </Rail>
 
               <Rail close="very" position="right">

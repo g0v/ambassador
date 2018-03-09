@@ -4,11 +4,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as actions from '~/actions'
 import * as G from '~/types/github'
+import { getUrl } from '~/types'
 import { mapDispatchToProps } from '~/types/action'
-import { Container, Card, Icon } from 'semantic-ui-react'
+import { Container, Card, Icon, Button } from 'semantic-ui-react'
 import { compose, map, keys, filter } from 'ramda'
 import AnyImage from '~/components/AnyImage'
 import styles from './index.css'
+
+const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 const GroupCard = ({ group, url }) => {
   // TODO: add a placeholder image
@@ -53,6 +56,14 @@ class GroupListPage extends PureComponent {
 
     return (
       <Container id={id} className={cx(styles.main, className)}>
+        <Button
+          floated="right"
+          as="a"
+          href={`${apiUrl}/api/group/v2`}
+          target="_blank"
+        >
+          JSON
+        </Button>
         <Card.Group itemsPerRow={3}>{
           compose(
             map(url => <GroupCard key={url} group={groups[url]} url={url} />),

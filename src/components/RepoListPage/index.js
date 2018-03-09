@@ -3,12 +3,15 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import * as actions from '~/actions'
+import { getUrl } from '~/types'
 import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
-import { Container, Dimmer, Segment, Header, Card } from 'semantic-ui-react'
+import { Container, Dimmer, Segment, Header, Card, Button } from 'semantic-ui-react'
 import { compose, map } from 'ramda'
 import RepoCard from '~/components/RepoCard'
 import styles from './index.css'
+
+const apiUrl = getUrl(process.env.PROTOCOL, process.env.API_HOST, process.env.API_PORT)
 
 class RepoListPage extends PureComponent {
   static defaultProps = {
@@ -46,6 +49,14 @@ class RepoListPage extends PureComponent {
         </Dimmer>
 
         <Container id={id} className={cx(styles.main, className)}>
+          <Button
+            floated="right"
+            as="a"
+            href={`${apiUrl}/api/repo`}
+            target="_blank"
+          >
+            JSON
+          </Button>
           <Card.Group itemsPerRow={4}>{
             map(
               fullname => {
