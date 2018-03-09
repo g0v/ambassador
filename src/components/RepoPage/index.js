@@ -8,6 +8,7 @@ import { mapDispatchToProps } from '~/types/action'
 import * as G from '~/types/github'
 import { Container, List, Grid, Segment, Rail, Button } from 'semantic-ui-react'
 import ReactMarkdown from 'react-markdown'
+import AnyImage from '~/components/AnyImage'
 import ProductList from '~/components/ProductList'
 import ProductListItem from '~/components/ProductListItem'
 import UserList from '~/components/UserList'
@@ -104,7 +105,7 @@ class RepoPage extends PureComponent {
                 <h1>{ repo }</h1>
                 {
                   g0vJson && g0vJson.thumbnail && g0vJson.thumbnail[0] &&
-                    <div className={styles.thumbnail} style={{ backgroundImage: `url(${g0vJson.thumbnail[0]})` }} />
+                    <AnyImage className={styles.thumbnail} src={g0vJson.thumbnail[0]} />
                 }
                 {
                   r &&

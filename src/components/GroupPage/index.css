@@ -1,4 +1,6 @@
 .main {
+  padding-top: 14px;
+
   // XXX: duplicated
   .thumbnail {
     background-color: #16161d;
