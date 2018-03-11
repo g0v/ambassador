@@ -128,7 +128,7 @@ class LandingPage extends PureComponent {
                       size="mini"
                       src="https://avatars2.githubusercontent.com/u/1164470?s=460&v=4"
                     />
-                    <Card.Header as="a" href="https://github.com/caasi" target="_blank">
+                    <Card.Header as="a" href="https://github.com/caasi" target="_blank" rel="noopener noreferrer">
                       caasi
                     </Card.Header>
                     <Card.Meta>卡西</Card.Meta>
@@ -137,10 +137,10 @@ class LandingPage extends PureComponent {
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>
-                    <a href="https://twitter.com/caasih" target="_blank">
+                    <a href="https://twitter.com/caasih" target="_blank" rel="noopener noreferrer">
                       <Icon name="twitter" />
                     </a>
-                    <a href="https://facebook.com/caasihuang" target="_blank">
+                    <a href="https://facebook.com/caasihuang" target="_blank" rel="noopener noreferrer">
                       <Icon name="facebook" />
                     </a>
                   </Card.Content>
@@ -154,7 +154,7 @@ class LandingPage extends PureComponent {
                       size="mini"
                       src="https://avatars1.githubusercontent.com/u/2672307?s=460&v=4"
                     />
-                    <Card.Header as="a" href="https://github.com/zbryikt" target="_blank">
+                    <Card.Header as="a" href="https://github.com/zbryikt" target="_blank" rel="noopener noreferrer">
                       zbryikt
                     </Card.Header>
                     <Card.Meta>科比</Card.Meta>
@@ -170,7 +170,7 @@ class LandingPage extends PureComponent {
                       size="mini"
                       src="https://avatars1.githubusercontent.com/u/5170081?s=460&v=4"
                     />
-                    <Card.Header as="a" href="https://github.com/jbytw" target="_blank">
+                    <Card.Header as="a" href="https://github.com/jbytw" target="_blank" rel="noopener noreferrer">
                       jackie
                     </Card.Header>
                     <Card.Meta>jbytw</Card.Meta>
@@ -186,7 +186,7 @@ class LandingPage extends PureComponent {
                 授權
                 <Header.Subheader>License</Header.Subheader>
               </Header>
-              <p>本專案產出的程式碼與相關圖片以 <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0-1.0</a> 「公眾領域貢獻宣告」釋出。</p>
+              <p>本專案產出的程式碼與相關圖片以 <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">CC0-1.0</a> 「公眾領域貢獻宣告」釋出。</p>
               <p>本專案改作的 g0v.json 按其原專案授權釋出</p>
               <p>本專案使用到的、來自其他專案的圖片按其原授權釋出</p>
             </div>
@@ -209,7 +209,7 @@ class LandingPage extends PureComponent {
                   </List.Content>
                 </List.Item>
               </List>
-              <a className={styles.g0v} href="https://grants.g0v.tw" target="_blank">
+              <a className={styles.g0v} href="https://grants.g0v.tw" target="_blank" rel="noopener noreferrer">
                 <Image size="tiny" src={imageG0V} title="powered by g0v" />
               </a>
             </Container>
