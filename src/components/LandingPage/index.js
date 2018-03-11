@@ -209,7 +209,9 @@ class LandingPage extends PureComponent {
                   </List.Content>
                 </List.Item>
               </List>
-              <Image className={styles.g0v} size="tiny" src={imageG0V} />
+              <a className={styles.g0v} href="https://grants.g0v.tw" target="_blank">
+                <Image size="tiny" src={imageG0V} title="powered by g0v" />
+              </a>
             </Container>
           </div>
         </div>
