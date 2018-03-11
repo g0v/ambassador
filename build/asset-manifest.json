@@ -1,10 +1,10 @@
 {
-  "bundle.css": "static/css/bundle.afd4cde8.css",
-  "bundle.css.map": "static/css/bundle.afd4cde8.css.map",
-  "bundle.js": "static/js/bundle.865f7967.js",
-  "bundle.js.map": "static/js/bundle.865f7967.js.map",
-  "manifest.js": "static/js/manifest.c3a1304f.js",
-  "manifest.js.map": "static/js/manifest.c3a1304f.js.map",
+  "bundle.css": "static/css/bundle.5b95102e.css",
+  "bundle.css.map": "static/css/bundle.5b95102e.css.map",
+  "bundle.js": "static/js/bundle.4b9bab78.js",
+  "bundle.js.map": "static/js/bundle.4b9bab78.js.map",
+  "manifest.js": "static/js/manifest.f363f757.js",
+  "manifest.js.map": "static/js/manifest.f363f757.js.map",
   "static/media/flags.svg": "static/media/flags.566da000.svg",
   "static/media/funnel.svg": "static/media/funnel.63f744fe.svg",
   "static/media/g0v-2line-transparent-darkbackground-s.png": "static/media/g0v-2line-transparent-darkbackground-s.f0c0326f.png",
@@ -13,6 +13,6 @@
   "static/media/placeholder.png": "static/media/placeholder.ad2d7d6f.png",
   "static/media/robot-ambassador.svg": "static/media/robot-ambassador.8757f162.svg",
   "static/media/thumbnail.png": "static/media/thumbnail.89f276ae.png",
-  "vendor.js": "static/js/vendor.98fdba1b.js",
-  "vendor.js.map": "static/js/vendor.98fdba1b.js.map"
+  "vendor.js": "static/js/vendor.195d1513.js",
+  "vendor.js.map": "static/js/vendor.195d1513.js.map"
 }
