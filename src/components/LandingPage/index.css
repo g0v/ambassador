@@ -12,7 +12,6 @@
 
     &__content {
       position: relative;
-      width: 960px;
       margin-top: 256px;
       margin-left: auto;
       margin-right: auto;
@@ -24,16 +23,13 @@
       left: 0;
     }
 
-    .status {
+    &__status {
       position: absolute;
       top: -64px;
       right: 0;
       margin: 0;
-
-      &__value {
-        height: 200px;
-        line-height: 200px !important;
-      }
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
@@ -46,8 +42,7 @@
 
     .features,
     .description {
-      width: 960px;
-      margin: 120px auto;
+      margin: 80px auto;
     }
 
     .features {
@@ -63,8 +58,6 @@
 
       &__content {
         position: relative;
-        width: 960px;
-        margin: 0 auto;
 
         .g0v {
           position: absolute;
@@ -72,6 +65,53 @@
           bottom: 0;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .splash {
+      height: 308px;
+
+      &__content {
+        margin-top: 58px;
+      }
+
+      &__ambassador {
+        position: static;
+        display: none !important;
+      }
+
+      &__status {
+        position: static;
+        top: 0;
+        height: 100%;
+      }
+    }
+
+    .content {
+      top: 308px;
+    }
+  }
+
+  @media screen and (max-width: 414px) {
+    .splash {
+      height: 87%;
+
+      &__content {
+        height: 100%;
+      }
+
+      &__status {
+        flex-direction: column;
+
+        :global(.statistic) {
+          margin: 0 !important;
+        }
+      }
+    }
+
+    .content {
+      top: 88%;
     }
   }
 }
