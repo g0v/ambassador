@@ -41,15 +41,19 @@
     padding-top: 120px;
 
     .features,
-    .description {
-      margin: 80px auto;
+    .description,
+    .contributors,
+    .license {
+      margin: 120px auto;
     }
 
-    .features {
-    }
+    .features {}
 
-    .description {
-    }
+    .description {}
+
+    .contributors {}
+
+    .license {}
 
     .footer {
       background-color: #1b1c1d;

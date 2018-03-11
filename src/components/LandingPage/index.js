@@ -8,7 +8,7 @@ import * as S from '~/types'
 import * as A from '~/types/auth'
 import * as G from '~/types/github'
 import { EmptyGroupStatus } from '~/types/metadata'
-import { Container, Image, Statistic, Header, Item, List } from 'semantic-ui-react'
+import { Container, Image, Statistic, Header, Item, List, Card, Icon } from 'semantic-ui-react'
 import MetadataStatistic from '~/components/MetadataStatistic'
 import styles from './index.css'
 import imageFunnel from '~/images/funnel.svg'
@@ -107,13 +107,88 @@ class LandingPage extends PureComponent {
             </Item.Group>
             <div className={styles.description}>
               <Header as="h2">
-                機器大使
+                關於機器大使
                 <Header.Subheader>Yet Another g0v Hub</Header.Subheader>
               </Header>
-              <p>機器大使是<a href="https://grants.g0v.tw"> g0v 公民科技創新獎助金</a>於<a href="https://grants.g0v.tw/projects/5969ed35d60a0d001ed1f7f6"> 2017 年秋季</a>的獲獎提案之一。</p>
+              <p>機器大使原計畫名為 Yet Another g0v Hub ，是<a href="https://grants.g0v.tw"> g0v 公民科技創新獎助金</a>於<a href="https://grants.g0v.tw/projects/5969ed35d60a0d001ed1f7f6"> 2017 年秋季</a>的獲獎提案之一。</p>
               <p>2013 和 2014 年的 g0v 專案給我很多回憶，但是這些專案不見得繼續維護，也看過很多專案開了坑卻無法繼續下去。我想整理這些專案，為他們多添加一些脈絡，也許會有更多人填坑。</p>
               <p>我希望將整理資料的工具，視為整理資料的人的延伸。本來打算以貢獻者的社群動態為中心，將貢獻者在社群網站、 GitHub 、 Slack 的活動情況整理在獨立的儀表板上。也在<a href="https://g0v.hackpad.tw/ep/group/HIGzdedxyd4">線上訪問過專案</a>。目前與揪松團<a href="https://hackmd.io/s/Bk8yOCv-M">討論</a>後，修正了方向，以整理與呈現 g0v.json 記載的專案內容為主，標記外部資源為輔。</p>
               <p>本計畫於 2018 年春季結案後，將繼續開發下去。</p>
+            </div>
+            <div className={styles.contributors}>
+              <Header as="h2">
+                開發者
+                <Header.Subheader>Contributors</Header.Subheader>
+              </Header>
+              <Card.Group centered>
+                <Card>
+                  <Card.Content>
+                    <Image
+                      floated="right"
+                      size="mini"
+                      src="https://avatars2.githubusercontent.com/u/1164470?s=460&v=4"
+                    />
+                    <Card.Header as="a" href="https://github.com/caasi" target="_blank">
+                      caasi
+                    </Card.Header>
+                    <Card.Meta>卡西</Card.Meta>
+                    <Card.Description>
+                      主要開發者，計畫發起人，打算一直整理資料的倒霉鬼 XD
+                    </Card.Description>
+                  </Card.Content>
+                  <Card.Content extra>
+                    <a href="https://twitter.com/caasih" target="_blank">
+                      <Icon name="twitter" />
+                    </a>
+                    <a href="https://facebook.com/caasihuang" target="_blank">
+                      <Icon name="facebook" />
+                    </a>
+                  </Card.Content>
+                </Card>
+              </Card.Group>
+              <Card.Group centered>
+                <Card>
+                  <Card.Content>
+                    <Image
+                      floated="right"
+                      size="mini"
+                      src="https://avatars1.githubusercontent.com/u/2672307?s=460&v=4"
+                    />
+                    <Card.Header as="a" href="https://github.com/zbryikt" target="_blank">
+                      zbryikt
+                    </Card.Header>
+                    <Card.Meta>科比</Card.Meta>
+                    <Card.Description>
+                      感謝科比大大贊助了 brounce, breath, rubber 這些可愛的動畫圖。
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+                <Card>
+                  <Card.Content>
+                    <Image
+                      floated="right"
+                      size="mini"
+                      src="https://avatars1.githubusercontent.com/u/5170081?s=460&v=4"
+                    />
+                    <Card.Header as="a" href="https://github.com/jbytw" target="_blank">
+                      jackie
+                    </Card.Header>
+                    <Card.Meta>jbytw</Card.Meta>
+                    <Card.Description>
+                      感謝 jbytw 改錯字。
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              </Card.Group>
+            </div>
+            <div className={styles.license}>
+              <Header as="h2">
+                授權
+                <Header.Subheader>License</Header.Subheader>
+              </Header>
+              <p>本專案產出的程式碼與相關圖片以 <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank">CC0-1.0</a> 「公眾領域貢獻宣告」釋出。</p>
+              <p>本專案改作的 g0v.json 按其原專案授權釋出</p>
+              <p>本專案使用到的、來自其他專案的圖片按其原授權釋出</p>
             </div>
           </Container>
 
