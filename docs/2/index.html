@@ -29,7 +29,7 @@
       }
 
       .remark-slide-content {
-        background-color: #1B1C1D;
+        background-color: #202020;
         color: white;
       }
 
@@ -93,45 +93,66 @@
         bottom: -25%;
       }
 
-      .remark-slide-content .statistics {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-      }
-
       .remark-slide-content .static-image {
         position: absolute;
         background-repeat: no-repeat;
       }
 
+      .remark-slide-content .centered {
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-position: center;
+      }
+
+      .remark-slide-content #metadata-as-repo {
+        background-image: url('./img/metadata-as-repo.png');
+        background-size: 66%;
+      }
+
+      .remark-slide-content #metadata-upgrade {
+        background-image: url('./img/metadata-upgrade.png');
+      }
+
+      .remark-slide-content #metadata-group {
+        background-image: url('./img/metadata-group.png');
+        background-size: 50%;
+      }
+
       .remark-slide-content #metadata-group-list {
         left: 0;
         top: 0;
-        width: 69%;
+        width: 100%;
         height: 100%;
         background-image: url('./img/metadata-group-list.png');
-        background-position: -130px -58px;
+        background-position: center;
+        background-size: contain;
+      }
+
+      .remark-slide-content #tagging {
+        background-image: url('./img/tagging.png');
+        background-size: 33%;
       }
 
       .remark-slide-content #metadata-group-0 {
         top: 0;
-        right: 0;
-        width: 29%;
-        height: 49%;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('./img/metadata-group-0.png');
-        background-size: cover;
+        background-position: center;
+        background-size: contain;
       }
 
       .remark-slide-content #metadata-group-1 {
-        right: 0;
-        bottom: 0;
-        width: 29%;
-        height: 49%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-image: url('./img/metadata-group-1.png');
-        background-size: cover;
+        background-position: center;
+        background-size: contain;
       }
 
       .remark-slide-content #metadata-schema {
@@ -146,10 +167,11 @@
       .remark-slide-content #metadata-pr {
         top: 0;
         right: 0;
-        width: 59%;
+        width: 100%;
         height: 100%;
         background-image: url('./img/metadata-pr.png');
-        background-size: cover;
+        background-size: contain;
+        background-position: center;
       }
 
       .remark-slide-content #tagging-0 {
@@ -160,6 +182,15 @@
         background-image: url('./img/tagging-0.png');
         background-size: 100% auto;
         background-position: 0 50%;
+      }
+
+      .remark-slide-content .statistics {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
       }
 
       .inverse {
