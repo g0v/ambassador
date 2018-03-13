@@ -9,7 +9,7 @@ class: inverse, center, middle
 
 ---
 
-<img class="robot-hide" src="./img/robot-only.svg" />
+<img class="robot" src="./img/robot-only.svg" />
 
 # 初衷 
 
@@ -69,7 +69,7 @@ class: inverse, center, middle
 
 ---
 
-<img class="robot-hide" src="./img/robot-only.svg" />
+<img class="robot" src="./img/robot-only.svg" />
 
 # 統計
 
