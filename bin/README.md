@@ -23,3 +23,7 @@ It requires `LOGBOT_URL` and `DDAY` to fetch chat logs.
 ## indices
 
 `indicies.js` builds reverse indices from `data/logs/*.json` and save it to `data/logs/index.json`. 
+
+## count
+
+`count.js` counts fetched logs.
