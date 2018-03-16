@@ -57,6 +57,7 @@ class GroupListPage extends PureComponent {
     return (
       <Container id={id} className={cx(styles.main, className)}>
         <Button
+          className={styles.json}
           floated="right"
           as="a"
           href={`${apiUrl}/api/group/v2`}
@@ -64,7 +65,7 @@ class GroupListPage extends PureComponent {
         >
           JSON
         </Button>
-        <Card.Group itemsPerRow={3}>{
+        <Card.Group stackable itemsPerRow={3}>{
           compose(
             map(url => <GroupCard key={url} group={groups[url]} url={url} />),
             filter(k => k !== 'status' && groups[k].children.length),

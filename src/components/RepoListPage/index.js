@@ -50,6 +50,7 @@ class RepoListPage extends PureComponent {
 
         <Container id={id} className={cx(styles.main, className)}>
           <Button
+            className={styles.json}
             floated="right"
             as="a"
             href={`${apiUrl}/api/repo`}
@@ -57,7 +58,7 @@ class RepoListPage extends PureComponent {
           >
             JSON
           </Button>
-          <Card.Group itemsPerRow={4}>{
+          <Card.Group stackable itemsPerRow={4}>{
             map(
               fullname => {
                 const [repo, name] = fullname.split('/')
