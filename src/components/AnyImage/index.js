@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Image as UIImage } from 'semantic-ui-react'
 import placeholder from '~/images/placeholder.png'
+import { is } from 'ramda'
 
 class AnyImage extends Component {
   static defaultPorps = {
@@ -54,8 +55,15 @@ class AnyImage extends Component {
   }
 
   loadImages = async (images) => {
+    let imgs = images
+
+    // fallback for ill-formed thumbnails
+    if (is(String, imgs)) {
+      imgs = [imgs]
+    }
+
     // test images one by one until we find an accessible image
-    for (const image of images) {
+    for (const image of imgs) {
       try {
         const url = await this.testImage(image)
         this.setState({ url })
