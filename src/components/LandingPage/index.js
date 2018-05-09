@@ -15,7 +15,7 @@ import imageFunnel from '~/images/funnel.svg'
 import imageFlags from '~/images/flags.svg'
 import imageNetwork from '~/images/network.svg'
 import imageAmbassador from '~/images/robot-ambassador.svg'
-import imageG0V from '~/images/g0v-2line-transparent-darkbackground-s.png'
+import imageG0V from '~/images/powered-by-g0v.svg'
 
 class LandingPage extends PureComponent {
   static defaultProps = {
@@ -209,8 +209,8 @@ class LandingPage extends PureComponent {
                   </List.Content>
                 </List.Item>
               </List>
-              <a className={styles.g0v} href="https://grants.g0v.tw" target="_blank" rel="noopener noreferrer">
-                <Image size="tiny" src={imageG0V} title="powered by g0v" />
+              <a className={styles.g0v} href="https://grants.g0v.tw/power/" target="_blank" rel="noopener noreferrer">
+                <Image size="small" src={imageG0V} title="powered by g0v" />
               </a>
             </Container>
           </div>
